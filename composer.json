@@ -1,6 +1,8 @@
 {
 	"name": "robindort/preorder-timer",
 	"type": "contao-bundle",
+	"description": "A bundle to add a preorder functionality to Contao Isotope eCommerce checkout",
+	"homepage": "https://github.com/RobinDort/preorder-timer",
 	"license": "LGPL-3.0-or-later",
 	"autoload": {
 		"psr-4": {
@@ -9,7 +11,8 @@
 	},
 	"authors": [
 		{
-			"name": "Robin Dort"
+			"name": "Robin Dort",
+			"homepage": "www.alexanderdort.com"
 		}
 	],
 	"require": {
