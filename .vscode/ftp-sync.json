@@ -1,0 +1,21 @@
+{
+	"remotePath": "./httpdocs/extensions/robindort/preorder-timer",
+	"host": "www.dorji.de",
+	"username": "dorji_admin",
+	"password": "DorjiFTPSecret1!",
+	"port": 21,
+	"secure": false,
+	"protocol": "ftp",
+	"uploadOnSave": false,
+	"passive": false,
+	"debug": false,
+	"privateKeyPath": null,
+	"passphrase": null,
+	"agent": null,
+	"allow": [],
+	"ignore": ["\\.vscode", "\\.git", "\\.DS_Store"],
+	"generatedFiles": {
+		"extensionsToInclude": [""],
+		"path": ""
+	}
+}

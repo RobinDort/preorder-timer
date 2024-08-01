@@ -1,0 +1,24 @@
+{
+	"name": "robindort/preorder-timer",
+	"type": "contao-bundle",
+	"version": "1.0",
+	"license": "LGPL-3.0-or-later",
+	"autoload": {
+		"psr-4": {
+			"Robindort\\PreorderTimer\\": "src/"
+		}
+	},
+	"authors": [
+		{
+			"name": "Robin Dort"
+		}
+	],
+	"require": {
+		"php": "^8.2",
+		"contao/core-bundle": "^4.13",
+		"isotope/isotope-core": "^2.9.0"
+	},
+	"extra": {
+		"contao-manager-plugin": "RobinDort\\PreorderTimer\\ContaoManager\\Plugin"
+	}
+}

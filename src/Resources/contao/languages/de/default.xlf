@@ -1,0 +1,18 @@
+<?xml version="1.0" ?><xliff version="1.1">
+    <file datatype="php" source-language="en" target-language="de">
+        <body>
+            <trans-unit id="MSC.checkout_preorder_time">
+                <source>Preorder</source>
+                <target>Vorbestellung</target>
+            </trans-unit>
+            <trans-unit id="MSC.preorder_time">
+                <source>Preorder</source>
+                <target>Vorbestellung</target>
+            </trans-unit>
+            <trans-unit id="MSC.preorder_time_message">
+                <source>Enter your desired order period.</source>
+                <target>Geben Sie Ihren gewünschten Bestellungszeitraum ein.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
