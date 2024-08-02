@@ -12,6 +12,7 @@ class CollectionLabelCallback extends Callback {
      */
     public function getOrderLabel($row, $label, \DataContainer $dc, $args):array {
         $args = parent::getOrderLabel($row, $label, $dc, $args);
+        array_pop($args);
 
         $objOrder = Order::findByPk($row['id']);
         $labelMarkup = '<span style="display: block; text-align: center;"><img src="system/themes/flexible/icons/ICONNAME.svg" width="16" height="16"></span>';
