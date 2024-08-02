@@ -1,13 +1,9 @@
 <?xml version="1.0" ?><xliff version="1.1">
     <file datatype="php" source-language="en" target-language="de">
         <body>
-            <trans-unit id="tl_iso_product_collection.customer_notes.0">
+            <trans-unit id="tl_iso_product_collection.preorder_time">
                 <source>Preorder time</source>
                 <target>Vorbestellung</target>
-            </trans-unit>
-            <trans-unit id="tl_iso_product_collection.customer_notes.1">
-                <source></source>
-                <target></target>
             </trans-unit>
         </body>
     </file>

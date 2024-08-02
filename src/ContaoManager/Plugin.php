@@ -20,4 +20,4 @@ class Plugin implements BundlePluginInterface {
     }
 }
 
-?>
+?>  
