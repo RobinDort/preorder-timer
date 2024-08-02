@@ -36,23 +36,25 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
 
 
     public function generate() {
-        $strClass  = $GLOBALS['TL_FFL']['text'];
+        $strClass = $GLOBALS['TL_FFL']['date'];
 
         /** @var \Contao\FormText $objWidget */
         $objWidget = new $strClass([
             'id'            => $this->getStepClass(),
             'name'          => $this->getStepClass(),
             'mandatory'     => FALSE,
-            'value'         => Isotope::getCart()->preorder_time,
+            'value'         => sotope::getCart()->preorder_time ? date('Y-m-d', Isotope::getCart()->preorder_time) : '',
             'storeValues'   => TRUE,
             'tableless'     => TRUE,
+            'rgxp'          => 'date', // This ensures the date format is validated
         ]);
 
         if (Input::post('FORM_SUBMIT') == $this->objModule->getFormId()) {
             $objWidget->validate();
 
             if (!$objWidget->hasErrors()) {
-                Isotope::getCart()->preorder_time = $objWidget->value;
+                $date = \DateTime::createFromFormat('Y-m-d', $objWidget->value);
+                Isotope::getCart()->preorder_time = $date ? $date->getTimestamp() : null;
                 Isotope::getCart()->save();
                 $this->addNoteToOrder();
             }
@@ -81,9 +83,7 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
     }
 
     private function addNoteToOrder(): void {
-        /** @var string $customerNotes */
         $preorderTime = Isotope::getCart()->preorder_time;
-        /** @var \Isotope\Interfaces\IsotopeProductCollection $draftOrder */
         $draftOrder = Isotope::getCart()->getDraftOrder();
         if (!empty($preorderTime) && $draftOrder instanceof IsotopeProductCollection) {
             $draftOrder->preorder_time = $preorderTime;
