@@ -8,7 +8,7 @@ use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
 use Contao\CoreBundle\ContaoCoreBundle;
 use Somevendor\ContaoExampleBundle\ContaoExampleBundle;
 
-class Plugin extends BundlePluginInterface {
+class Plugin implements BundlePluginInterface {
     public function getBundles(ParserInterface $parser): array {
         return [
             BundleConfig::create(IsotopePreorderTimerBundle::class)
