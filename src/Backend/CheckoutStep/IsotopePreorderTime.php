@@ -43,7 +43,7 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
             'id'            => $this->getStepClass(),
             'name'          => $this->getStepClass(),
             'mandatory'     => FALSE,
-            'value'         => Isotope::getCart()->preorder_time ? date('Y-m-d', Isotope::getCart()->preorder_time) : '',
+            'value'         => Isotope::getCart()->preorder_time,
             'storeValues'   => TRUE,
             'tableless'     => TRUE,
             'rgxp'          => 'date', // This ensures the date format is validated
@@ -53,8 +53,7 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
             $objWidget->validate();
 
             if (!$objWidget->hasErrors()) {
-                $date = \DateTime::createFromFormat('Y-m-d', $objWidget->value);
-                Isotope::getCart()->preorder_time = $date ? $date->getTimestamp() : null;
+                Isotope::getCart()->preorder_time = $objWidget->value;
                 Isotope::getCart()->save();
                 $this->addNoteToOrder();
             }
