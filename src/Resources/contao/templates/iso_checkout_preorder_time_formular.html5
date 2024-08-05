@@ -9,10 +9,11 @@
     <p class="error"><?= $this->getErrorAsString(); ?></p>
   <?php endif; ?>
 
-  <input 
+<input 
     type="datetime-local" 
     name="<?= $this->name ?>" 
     id="ctrl_<?= $this->id ?>" 
     class="text<?php if ($this->class): ?> <?= $this->class ?><?php endif; ?>" 
+    value="<?= htmlspecialchars($this->value) ?>" <!-- Ensure the value is properly set -->
   >
 <?php $this->endblock(); ?>
