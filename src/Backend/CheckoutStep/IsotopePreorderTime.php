@@ -50,7 +50,7 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
         ]);
 
         if (Input::post('FORM_SUBMIT') == $this->objModule->getFormId()) {
-            dump($objWidget->value);
+            $this->logger->debug($objWidget->value);
             $objWidget->validate();
 
             if (!$objWidget->hasErrors()) {
