@@ -13,6 +13,14 @@
                 <source>Enter your desired order period.</source>
                 <target>Geben Sie Ihren gewünschten Bestellungszeitraum ein.</target>
             </trans-unit>
+            <trans-unit id="FFL.preorder_formular.0">
+                <source>Preorder formular</source>
+                <traget>Vorbestellungs Formular</traget>
+            </trans-unit>
+            <trans-unit id="FFL.preorder_formular.1">
+                <source>A formular to enter a preorder date time for contao isotope checkout.</source>
+                <target>Ein Formular welches das Eintragen eines Vorbestellungsdatums in Contao Isotope Checkout ermöglicht.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

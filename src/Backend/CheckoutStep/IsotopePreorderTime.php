@@ -36,14 +36,14 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
 
 
     public function generate() {
-        $strClass = $GLOBALS['TL_FFL']['date'];
+        $strClass = $GLOBALS['TL_FFL']['preorder_formular'];
 
         /** @var \Contao\FormText $objWidget */
         $objWidget = new $strClass([
             'id'            => $this->getStepClass(),
             'name'          => $this->getStepClass(),
             'mandatory'     => FALSE,
-            'value'         => sotope::getCart()->preorder_time ? date('Y-m-d', Isotope::getCart()->preorder_time) : '',
+            'value'         => Isotope::getCart()->preorder_time ? date('Y-m-d', Isotope::getCart()->preorder_time) : '',
             'storeValues'   => TRUE,
             'tableless'     => TRUE,
             'rgxp'          => 'date', // This ensures the date format is validated

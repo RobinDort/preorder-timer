@@ -1,5 +1,8 @@
 <?php
 use RobinDort\PreorderTimer\Backend\CheckoutStep\IsotopePreorderTime;
+use RobinDort\PreorderTimer\Widget\Frontend\PreorderFormular;
+
+$GLOBALS['TL_FFL']['preorder_formular'] = PreorderFormular::class;  
 
 // Add customer notes before the last step (review).
 $checkoutStepCount = count($GLOBALS['ISO_CHECKOUTSTEP']);
