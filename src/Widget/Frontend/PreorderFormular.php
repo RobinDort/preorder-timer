@@ -17,35 +17,31 @@ class PreorderFormular extends Widget {
 
 
     protected function validator($varInput) {
-        $this->blnSubmitInput = false;
+        
+        if ($this->rgxp === "date") {
     
-        // Define the formats
-        $germanDateTimeFormat = 'd.m.Y H:i';
-        $html5DateTimeFormat = 'Y-m-d\TH:i';
-    
-        // Check and handle the German datetime format
-        $date = \DateTime::createFromFormat($germanDateTimeFormat, $varInput);
-    
-        if ($date && $date->format($germanDateTimeFormat) === $varInput) {
-            // Convert to HTML5 datetime-local format
-            $varInput = $date->format($html5DateTimeFormat);
-        } else {
-            // Validate the input as HTML5 datetime-local format
-            $date = \DateTime::createFromFormat($html5DateTimeFormat, $varInput);
-            if (!$date || $date->format($html5DateTimeFormat) !== $varInput) {
-                $this->addError('Please enter a valid date and time in the correct format.');
+            // Define the formats
+            $germanDateTimeFormat = 'd.m.Y H:i';
+            $html5DateTimeFormat = 'Y-m-d\TH:i';
+        
+            // Check and handle the German datetime format
+            $date = \DateTime::createFromFormat($germanDateTimeFormat, $varInput);
+        
+            if ($date && $date->format($germanDateTimeFormat) === $varInput) {
+                // Convert to HTML5 datetime-local format
+                $varInput = $date->format($html5DateTimeFormat);
+            } else {
+                // Validate the input as HTML5 datetime-local format
+                $date = \DateTime::createFromFormat($html5DateTimeFormat, $varInput);
+                if (!$date || $date->format($html5DateTimeFormat) !== $varInput) {
+                    $this->addError('Please enter a valid date and time in the correct format.');
+                }
             }
+        
+            // Call parent validator
+            return parent::validator($varInput);
+            
         }
-    
-        // Call parent validator
-        $varInput = parent::validator($varInput);
-    
-        if (!$this->hasErrors()) {
-            $this->blnSubmitInput = true;
-            return $varInput;
-        }
-    
-        return '';
     }
 
     /**
