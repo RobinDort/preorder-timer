@@ -5,7 +5,7 @@ use Contao\Widget;
 class PreorderFormular extends Widget {
     protected $blnSubmitInput = true;
     protected $blnForAttribute = true;
-    protected $strTemplate = 'iso_chekout_preorder_time_formular';
+    protected $strTemplate = 'iso_checkout_preorder_time_formular';
     protected $strPrefix = 'widget widget-preorder-formular';
 
     public function generate(): string
