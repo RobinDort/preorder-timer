@@ -2,7 +2,7 @@
 namespace RobinDort\PreorderTimer\Widget\Frontend;
 use Contao\Widget;
 use Haste\DateTime\DateTime;
-use SimplePie\Parse\Date;
+use Contao\Date;
 
 class PreorderFormular extends Widget {
     protected $blnSubmitInput = true;
