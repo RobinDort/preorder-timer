@@ -18,22 +18,73 @@ class PreorderFormular extends Widget {
 
     protected function validator($varInput) {
         $this->blnSubmitInput = false;
-
-        // Validate if the input is a valid datetime
-        $date = DateTime::createFromFormat('Y-m-d\TH:i', $varInput);
-        if (!$date || $date->format('Y-m-d\TH:i') !== $varInput) {
-            $this->addError('Please enter a valid date and time.');
+    
+        // Define the formats
+        $germanDateTimeFormat = 'd.m.Y H:i';
+        $html5DateTimeFormat = 'Y-m-d\TH:i';
+    
+        // Check and handle the German datetime format
+        $date = \DateTime::createFromFormat($germanDateTimeFormat, $varInput);
+    
+        if ($date && $date->format($germanDateTimeFormat) === $varInput) {
+            // Convert to HTML5 datetime-local format
+            $varInput = $date->format($html5DateTimeFormat);
+        } else {
+            // Validate the input as HTML5 datetime-local format
+            $date = \DateTime::createFromFormat($html5DateTimeFormat, $varInput);
+            if (!$date || $date->format($html5DateTimeFormat) !== $varInput) {
+                $this->addError('Please enter a valid date and time in the correct format.');
+            }
         }
-
+    
+        // Call parent validator
         $varInput = parent::validator($varInput);
-
+    
         if (!$this->hasErrors()) {
             $this->blnSubmitInput = true;
-
             return $varInput;
         }
-
+    
         return '';
+    }
+
+    /**
+	 * Convert date values into the HTML5 date format
+	 */
+    protected function convertDate($varValue)
+    {
+        if (!$varValue || $this->rgxp != 'date')
+        {
+            return $varValue;
+        }
+    
+        // Define the German date format
+        $germanDateFormat = 'd.m.Y';
+        $html5DateFormat = 'Y-m-d\TH:i';
+    
+        // Check if the value matches the German date format
+        if (preg_match('~^' . Date::getRegexp($germanDateFormat) . '$~i', $varValue))
+        {
+            // Transform from German date format to HTML5 datetime-local format
+            $date = \DateTimeImmutable::createFromFormat($germanDateFormat, $varValue);
+            
+            if ($date)
+            {
+                return $date->format($html5DateFormat);
+            }
+    
+            // Return the original value if conversion fails
+            return $varValue;
+        }
+    
+        // If the value is already in HTML5 datetime-local format, return it as is
+        if (preg_match('~^' . Date::getRegexp($html5DateFormat) . '$~i', $varValue))
+        {
+            return $varValue;
+        }
+    
+        // Return the original value if no format matches
+        return $varValue;
     }
 }
 

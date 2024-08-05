@@ -14,6 +14,6 @@
     name="<?= $this->name ?>" 
     id="ctrl_<?= $this->id ?>" 
     class="text<?php if ($this->class): ?> <?= $this->class ?><?php endif; ?>" 
-    value="<?= htmlspecialchars($this->value) ?>"
+    value="<?= Contao\StringUtil::specialchars($this->convertDate($this->value)) ?>"
   >
 <?php $this->endblock(); ?>
