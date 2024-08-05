@@ -13,6 +13,27 @@ class PreorderFormular extends Widget {
         // Not actually used
         return '';
     }
+
+
+    protected function validator($varInput) {
+        $this->blnSubmitInput = false;
+
+        // Validate if the input is a valid datetime
+        $date = DateTime::createFromFormat('Y-m-d\TH:i', $varInput);
+        if (!$date || $date->format('Y-m-d\TH:i') !== $varInput) {
+            $this->addError('Please enter a valid date and time.');
+        }
+
+        $varInput = parent::validator($varInput);
+
+        if (!$this->hasErrors()) {
+            $this->blnSubmitInput = true;
+
+            return $varInput;
+        }
+
+        return '';
+    }
 }
 
 ?>
