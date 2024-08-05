@@ -52,6 +52,7 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
         if (Input::post('FORM_SUBMIT') == $this->objModule->getFormId()) {
             $objWidget->validate();
 
+            dump($objWidget);
             if (!$objWidget->hasErrors()) {
                 $date = \DateTime::createFromFormat('Y-m-d\TH:i', $objWidget->value);
                 Isotope::getCart()->preorder_time = $date ? $date->getTimestamp() : null;
