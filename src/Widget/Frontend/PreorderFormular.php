@@ -1,6 +1,7 @@
 <?php
 namespace RobinDort\PreorderTimer\Widget\Frontend;
 use Contao\Widget;
+use Haste\DateTime\DateTime;
 
 class PreorderFormular extends Widget {
     protected $blnSubmitInput = true;
