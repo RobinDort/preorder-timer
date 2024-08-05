@@ -56,27 +56,19 @@ class PreorderFormular extends Widget {
         }
     
         // Define the German date format
-        $germanDateFormat = 'd.m.Y';
+        $germanDateFormat = 'd.m.Y H:i';
         $html5DateFormat = 'Y-m-d\TH:i';
+
+        $date = \DateTimeImmutable::createFromFormat($germanDateFormat, $varValue);
     
-        // Check if the value matches the German date format
-        if (preg_match('~^' . Date::getRegexp($germanDateFormat) . '$~i', $varValue))
-        {
+        if ($date && $date->format($germanDateFormat) === $varValue) {
             // Transform from German date format to HTML5 datetime-local format
-            $date = \DateTimeImmutable::createFromFormat($germanDateFormat, $varValue);
-            
-            if ($date)
-            {
-                return $date->format($html5DateFormat);
-            }
-    
-            // Return the original value if conversion fails
-            return $varValue;
+            return $date->format($html5DateFormat);
         }
     
-        // If the value is already in HTML5 datetime-local format, return it as is
-        if (preg_match('~^' . Date::getRegexp($html5DateFormat) . '$~i', $varValue))
-        {
+        // Check if the value matches the HTML5 datetime-local format (manual regex)
+        $html5DateRegex = '~^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$~';
+        if (preg_match($html5DateRegex, $varValue)) {
             return $varValue;
         }
     
