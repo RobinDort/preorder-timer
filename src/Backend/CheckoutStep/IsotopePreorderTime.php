@@ -58,6 +58,9 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
             if (!$objWidget->hasErrors()) {
                 $dateValue = Input::post($this->getStepClass() . '_date');
                 $timeValue = Input::post($this->getStepClass() . '_time');
+                dump($dateValue);
+                dump($timeValue);
+                
                 $combinedValue = $dateValue . ' ' . $timeValue;
 
                 $date = \DateTime::createFromFormat('d.m.Y H:i', $combinedValue);
