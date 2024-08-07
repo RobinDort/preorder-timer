@@ -13,18 +13,45 @@
     type="text" 
     name="<?= $this->name ?>" 
     id="preorder-formular" 
-    class="text<?php if ($this->class): ?> <?= $this->class ?><?php endif; ?>" 
+    class="text col-md-6 col-sm-12 col-6<?php if ($this->class): ?> <?= $this->class ?><?php endif; ?>"
     value="<?= htmlspecialchars($this->value) ?>"
   >
+
+<input
+    type="text"
+    name="time-picker"
+    id="time-picker"
+    class="text col-md-6 col-sm-12 col-6"
+    value="<?= htmlspecialchars($this->value) ?>"
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const dateInput = document.getElementById("preorder-formular");
+        const timerPicker = document.getElementById("time-picker");
         flatpickr(dateInput, {
             dateFormat: "d.m.Y",
             locale: "de",
             minDate: "today",
             maxDate: new Date().fp_incr(7)
+        });
+
+        flatpickr(timePicker, {
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: "H:i",
+            minuteIncrement: 15, // Optional: set to adjust the minute increments
+            enable: [
+                // Enable times between 12:00 and 14:00
+                { from: "12:00", to: "14:00" },
+                // Enable times between 17:00 and 21:00
+                { from: "17:00", to: "21:00" }
+            ],
+            disable: [
+                // Disable times outside the above ranges
+                { from: "00:00", to: "11:59" },
+                { from: "14:00", to: "16:59" },
+                { from: "21:01", to: "24:00" }
+            ],
         });
     });
 </script>
