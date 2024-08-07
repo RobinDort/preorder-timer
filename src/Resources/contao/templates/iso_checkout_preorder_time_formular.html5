@@ -14,7 +14,7 @@
     <input 
         type="text" 
         name="<?= $this->name ?>" 
-        id="preorder-formular" 
+        id="preorder-formular-date" 
         class="text col-md-6 col-sm-12 col-6<?php if ($this->class): ?> <?= $this->class ?><?php endif; ?>"
         value="<?= htmlspecialchars($this->value) ?>"
     >
@@ -22,7 +22,7 @@
     <input
         type="text"
         name="time-picker"
-        id="time-picker"
+        id="preorder-formular-time"
         class="text col-md-6 col-sm-12 col-6"
         value="<?= htmlspecialchars($this->value) ?>"
     >
@@ -30,8 +30,8 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const dateInput = document.getElementById("preorder-formular");
-        const timePicker = document.getElementById("time-picker");
+        const dateInput = document.getElementById("preorder-formular-date");
+        const timePicker = document.getElementById("preorder-formular-time");
 
         flatpickr(dateInput, {
             dateFormat: "d.m.Y",

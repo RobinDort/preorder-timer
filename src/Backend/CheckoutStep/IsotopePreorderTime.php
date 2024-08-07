@@ -43,7 +43,10 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
             'id'            => $this->getStepClass(),
             'name'          => $this->getStepClass(),
             'mandatory'     => FALSE,
-            'value'         => Isotope::getCart()->preorder_time ? date('d.m.Y H:i', Isotope::getCart()->preorder_time) : '',
+            'value'         => [
+                'date' => Isotope::getCart()->preorder_time ? date('d.m.Y', Isotope::getCart()->preorder_time) : '',
+                'time' => Isotope::getCart()->preorder_time ? date('H:i', Isotope::getCart()->preorder_time) : ''
+            ],
             'storeValues'   => TRUE,
             'tableless'     => TRUE,
             'rgxp'          => 'date', // This ensures the date format is validated
@@ -53,7 +56,11 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
             $objWidget->validate();
 
             if (!$objWidget->hasErrors()) {
-                $date = \DateTime::createFromFormat('d.m.Y H:i', $objWidget->value);
+                $dateValue = Input::post($this->getStepClass() . '_date');
+                $timeValue = Input::post($this->getStepClass() . '_time');
+                $combinedValue = $dateValue . ' ' . $timeValue;
+
+                $date = \DateTime::createFromFormat('d.m.Y H:i', $combinedValue);
                 Isotope::getCart()->preorder_time = $date ? $date->getTimestamp() : null;
                 Isotope::getCart()->save();
                 $this->addNoteToOrder();
@@ -68,13 +75,11 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
     }
 
     public function review(): array {
-        \System::log('Preorder Time: ' . print_r(Isotope::getCart()->preorder_time, true), __METHOD__, TL_GENERAL);
-        $preorderTime = Isotope::getCart()->preorder_time;
-        $formattedTime = $preorderTime ? date('d.m.Y H:i', $preorderTime) : '';
+
         return [
             'preorder_time' => [
                 'headline' => $GLOBALS['TL_LANG']['MSC']['preorder_time'],
-                'info'     => $formattedTime,
+                'info'     => Isotope::getCart()->preorder_time ? date('d.m.Y H:i', Isotope::getCart()->preorder_time) : '',
                 'note'     => '',
                 'edit'     => Checkout::generateUrlForStep('preorder_time'),
             ],
