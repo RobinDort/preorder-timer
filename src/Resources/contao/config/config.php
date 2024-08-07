@@ -2,8 +2,11 @@
 use RobinDort\PreorderTimer\Backend\CheckoutStep\IsotopePreorderTime;
 use RobinDort\PreorderTimer\Widget\Frontend\PreorderFormular;
 
-$GLOBALS['TL_CSS'][] = "bundles/preorder-timer/flatpickr.css|static";
-$GLOBALS['TL_JAVASCRIPT'][] = "bundles/preorder-timer/flatpickr.js|static";
+$GLOBALS['TL_CSS'][] = "bundles/robindortpreordertimer/flatpickr.css|static";
+$GLOBALS['TL_JAVASCRIPT'][] = "bundles/robindortpreordertimer/flatpickr.js|static";
+
+
+
 $GLOBALS['TL_FFL']['preorder_formular'] = PreorderFormular::class;  
 
 // Add customer notes before the last step (review).
