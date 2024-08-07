@@ -79,7 +79,7 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
         return [
             'preorder_time' => [
                 'headline' => $GLOBALS['TL_LANG']['MSC']['preorder_time'],
-                'info'     => Isotope::getCart()->preorder_time ? date('d.m.Y H:i', Isotope::getCart()->preorder_time) : '',
+                'info'     => Isotope::getCart()->preorder_time ? date('d.m.Y H:i', Isotope::getCart()->preorder_time) : 'No order time',
                 'note'     => '',
                 'edit'     => Checkout::generateUrlForStep('preorder_time'),
             ],
