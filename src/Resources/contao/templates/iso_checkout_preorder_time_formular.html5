@@ -21,9 +21,11 @@
 
 <script>
 
-flatpickr("#preorder-formular", {
-    enableTime: true,
-    dateFormat: "d.m.Y H:i"
-})
+document.addEventListener('DOMContentLoaded', function() {
+    flatpickr("#preorder-formular", {
+        enableTime: true,
+        dateFormat: "d.m.Y H:i"
+    })
+});
 
 </script>
