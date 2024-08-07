@@ -10,7 +10,7 @@
   <?php endif; ?>
 
 <input 
-    type="datetime-local" 
+    type="text" 
     name="<?= $this->name ?>" 
     id="preorder-formular" 
     class="text<?php if ($this->class): ?> <?= $this->class ?><?php endif; ?>" 
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
     flatpickr("#preorder-formular", {
         enableTime: true,
         dateFormat: "d.m.Y H:i"
-    })
+    });
 });
 
 </script>
