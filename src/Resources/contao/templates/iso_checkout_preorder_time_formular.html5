@@ -19,7 +19,7 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const dateInput = document.getElementById("preorder-formular);
+        const dateInput = document.getElementById("preorder-formular");
         flatpickr(dateInput, {
             enableTime: true,
             dateFormat: "Y-m-d H:i"
