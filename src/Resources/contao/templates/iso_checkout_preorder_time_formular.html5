@@ -15,7 +15,7 @@
     id="preorder-formular" 
     class="text col-md-6 col-sm-12 col-6<?php if ($this->class): ?> <?= $this->class ?><?php endif; ?>"
     value="<?= htmlspecialchars($this->value) ?>"
-  >
+>
 
 <input
     type="text"
@@ -23,11 +23,13 @@
     id="time-picker"
     class="text col-md-6 col-sm-12 col-6"
     value="<?= htmlspecialchars($this->value) ?>"
+>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const dateInput = document.getElementById("preorder-formular");
         const timerPicker = document.getElementById("time-picker");
+
         flatpickr(dateInput, {
             dateFormat: "d.m.Y",
             locale: "de",
