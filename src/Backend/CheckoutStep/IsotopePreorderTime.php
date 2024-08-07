@@ -53,11 +53,12 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
         ]);
 
         if (Input::post('FORM_SUBMIT') == $this->objModule->getFormId()) {
+            $dateValue = Input::post($this->getStepClass() . '_date');
+            $timeValue = Input::post($this->getStepClass() . '_time');
+
             $objWidget->validate();
 
             if (!$objWidget->hasErrors()) {
-                $dateValue = Input::post($this->getStepClass() . '_date');
-                $timeValue = Input::post($this->getStepClass() . '_time');
 
                 var_dump($dateValue);
                 var_dump($timeValue);
@@ -76,6 +77,8 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
 
         $this->Template->headline = $GLOBALS['TL_LANG']['MSC']['preorder_time'];
         $this->Template->message = $GLOBALS['TL_LANG']['MSC']['preorder_time_message'];
+        $this->Template->dateValue = $dateValue;
+        $this->Template->timeValue = $timeValue;
         $this->Template->form = $objWidget->parse();
 
         return $this->Template->parse();
