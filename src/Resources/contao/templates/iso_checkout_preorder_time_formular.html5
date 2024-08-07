@@ -21,9 +21,10 @@
     document.addEventListener('DOMContentLoaded', function() {
         const dateInput = document.getElementById("preorder-formular");
         flatpickr(dateInput, {
-            enableTime: true,
-            dateFormat: "d.m.Y H:i",
-            locale: "de"
+            dateFormat: "d.m.Y",
+            locale: "de",
+            minDate: "today",
+            maxDate: new Date().fp_incr(7)
         });
     });
 </script>
