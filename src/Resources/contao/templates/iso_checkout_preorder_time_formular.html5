@@ -32,7 +32,7 @@
             dateFormat: "d.m.Y",
             locale: "de",
             minDate: "today",
-            maxDate: new Date().fp_incr(7)
+            maxDate: new Date().fp_incr(28)
         });
 
         flatpickr(timePicker, {
