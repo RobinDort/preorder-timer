@@ -68,10 +68,12 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
     }
 
     public function review(): array {
+        $preorderTime = Isotope::getCart()->preorder_time;
+        $formattedTime = $preorderTime ? date('d.m.Y H:i', $preorderTime) : '';
         return [
             'preorder_time' => [
                 'headline' => $GLOBALS['TL_LANG']['MSC']['preorder_time'],
-                'info'     => Isotope::getCart()->preorder_time,
+                'info'     => $formattedTime,
                 'note'     => '',
                 'edit'     => Checkout::generateUrlForStep('preorder_time'),
             ],
