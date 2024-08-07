@@ -4,6 +4,8 @@ use RobinDort\PreorderTimer\Widget\Frontend\PreorderFormular;
 
 $GLOBALS['TL_CSS'][] = "bundles/robindortpreordertimer/flatpickr.css|static";
 $GLOBALS['TL_JAVASCRIPT'][] = "bundles/robindortpreordertimer/flatpickr.js|static";
+$GLOBALS['TL_JAVASCRIPT'][] = "bundles/robindortpreordertimer/flatpickr_de.js|static";
+
 
 
 
