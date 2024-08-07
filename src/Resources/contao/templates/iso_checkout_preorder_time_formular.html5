@@ -17,15 +17,13 @@
     value="<?= Contao\StringUtil::specialchars($this->convertDate($this->value)) ?>"
   >
 
-<?php $this->endblock(); ?>
-
 <script>
-
-document.addEventListener('DOMContentLoaded', function() {
-    flatpickr("#preorder-formular", {
-        enableTime: true,
-        dateFormat: "d.m.Y H:i"
+    document.addEventListener('DOMContentLoaded', function() {
+        flatpickr("#preorder-formular", {
+            enableTime: true,
+            dateFormat: "d.m.Y H:i"
+        });
     });
-});
-
 </script>
+
+<?php $this->endblock(); ?>
