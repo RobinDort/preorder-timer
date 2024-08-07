@@ -18,8 +18,8 @@
   >
 
 
-<link rel="stylesheet" href="bundles/preorder-timer/flatpickr.css">
-<script src="bundles/preorder-timer/flatpickr.js"></script>
+<link rel="stylesheet" href="public/bundles/preorder-timer/flatpickr.css">
+<script src="public/bundles/preorder-timer/flatpickr.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const dateInput = document.getElementById("preorder-formular);
