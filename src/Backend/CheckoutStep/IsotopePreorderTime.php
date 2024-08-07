@@ -52,6 +52,9 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
             'rgxp'          => 'date', // This ensures the date format is validated
         ]);
 
+        $dateValue = "";
+        $timeValue = "";
+
         if (Input::post('FORM_SUBMIT') == $this->objModule->getFormId()) {
             $dateValue = Input::post($this->getStepClass() . '_date');
             $timeValue = Input::post($this->getStepClass() . '_time');
