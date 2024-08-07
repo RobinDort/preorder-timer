@@ -8,7 +8,7 @@ $GLOBALS['TL_JAVASCRIPT'][] = "bundles/robindortpreordertimer/flatpickr_de.js|st
 
 
 
-
+$GLOBALS['FE_MOD']['isotope']['iso_orderdetails'] = 'RobinDort\PreorderTimer\Module\OrderDetails';
 $GLOBALS['TL_FFL']['preorder_formular'] = PreorderFormular::class;  
 
 // Add customer notes before the last step (review).

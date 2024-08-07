@@ -69,9 +69,6 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
                 Isotope::getCart()->preorder_time = $date ? $date->getTimestamp() : null;
                 Isotope::getCart()->save();
                 $this->addNoteToOrder();
-            } else {
-                echo "ERROR";
-                var_dump($objWidget);
             }
         }
 
