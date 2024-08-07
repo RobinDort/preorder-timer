@@ -63,9 +63,6 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
 
             if (!$objWidget->hasErrors()) {
 
-                var_dump($dateValue);
-                var_dump($timeValue);
-
                 $combinedValue = $dateValue . ' ' . $timeValue;
 
                 $date = \DateTime::createFromFormat('d.m.Y H:i', $combinedValue);
@@ -80,8 +77,6 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
 
         $this->Template->headline = $GLOBALS['TL_LANG']['MSC']['preorder_time'];
         $this->Template->message = $GLOBALS['TL_LANG']['MSC']['preorder_time_message'];
-        $this->Template->dateValue = $dateValue;
-        $this->Template->timeValue = $timeValue;
         $this->Template->form = $objWidget->parse();
 
         return $this->Template->parse();
