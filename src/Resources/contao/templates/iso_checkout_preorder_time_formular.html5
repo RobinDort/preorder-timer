@@ -46,9 +46,7 @@
             locale: "de",
             dateFormat: "H:i",
             minuteIncrement: 15, // Optional: set to adjust the minute increments
-            onChange: function(selectedDates, dateStr, instance) {
-
-                if (instance.isOpen) return;
+            onClose: function(selectedDates, dateStr, instance) {
 
                 console.log("instance closed");
 
