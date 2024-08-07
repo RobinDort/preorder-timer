@@ -13,7 +13,7 @@
 <div class="d-flex justify-content-center align-items-center">
     <input 
         type="text" 
-        name="<?= $this->name ?>" 
+        "<?= $this->getStepClass() ?>_date" 
         id="preorder-formular-date" 
         class="text col-md-6 col-sm-12 col-6<?php if ($this->class): ?> <?= $this->class ?><?php endif; ?>"
         value="<?= htmlspecialchars($this->value['date'] ?? '') ?>"
@@ -21,7 +21,7 @@
 
     <input
         type="text"
-        name="time-picker"
+       "<?= $this->getStepClass() ?>_date"
         id="preorder-formular-time"
         class="text col-md-6 col-sm-12 col-6"
         value="<?= htmlspecialchars($this->value['time'] ?? '') ?>"
