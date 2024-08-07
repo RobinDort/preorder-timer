@@ -17,9 +17,6 @@
     value="<?= Contao\StringUtil::specialchars($this->convertDate($this->value)) ?>"
   >
 
-
-<link rel="stylesheet" href="public/bundles/preorder-timer/flatpickr.css">
-<script src="public/bundles/preorder-timer/flatpickr.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const dateInput = document.getElementById("preorder-formular);
