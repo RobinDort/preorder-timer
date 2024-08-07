@@ -69,7 +69,7 @@
                if (!isValid) {
                     // Clear the input if not valid
                     instance.clear();
-                    alert('Please select a time between 12:00 - 14:00 or a time between 17:30 - 21:00.');
+                    alert('Bitte wählen Sie einen Zeitraum zwischen 12:00 - 14:00 Uhr oder einen Zeitraum zwischen 17:30 - 21:00 Uhr.');
                }
             }
         });
