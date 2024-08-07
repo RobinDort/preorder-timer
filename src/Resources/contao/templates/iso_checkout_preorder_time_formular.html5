@@ -43,6 +43,7 @@
         flatpickr(timePicker, {
             enableTime: true,
             noCalendar: true,
+            locale: "de",
             dateFormat: "H:i",
             minuteIncrement: 15, // Optional: set to adjust the minute increments
             enable: [
