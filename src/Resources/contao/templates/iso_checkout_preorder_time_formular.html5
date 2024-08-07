@@ -28,7 +28,7 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const dateInput = document.getElementById("preorder-formular");
-        const timerPicker = document.getElementById("time-picker");
+        const timePicker = document.getElementById("time-picker");
 
         flatpickr(dateInput, {
             dateFormat: "d.m.Y",
