@@ -14,7 +14,7 @@
     name="<?= $this->name ?>" 
     id="preorder-formular" 
     class="text<?php if ($this->class): ?> <?= $this->class ?><?php endif; ?>" 
-    value="<?= Contao\StringUtil::specialchars($this->convertDate($this->value)) ?>"
+    value="<?= htmlspecialchars($this->value) ?>"
   >
 
 <script>
