@@ -59,12 +59,18 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
                 $dateValue = Input::post($this->getStepClass() . '_date');
                 $timeValue = Input::post($this->getStepClass() . '_time');
 
+                var_dump($dateValue);
+                var_dump($timeValue);
+
                 $combinedValue = $dateValue . ' ' . $timeValue;
 
                 $date = \DateTime::createFromFormat('d.m.Y H:i', $combinedValue);
                 Isotope::getCart()->preorder_time = $date ? $date->getTimestamp() : null;
                 Isotope::getCart()->save();
                 $this->addNoteToOrder();
+            } else {
+                echo "ERROR";
+                var_dump($objWidget);
             }
         }
 
@@ -77,7 +83,7 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
 
     public function review(): array {
 
-        dump(Isotope::getCart()->preorder_time);
+        var_dump(Isotope::getCart()->preorder_time);
 
         return [
             'preorder_time' => [
