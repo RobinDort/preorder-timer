@@ -15,8 +15,8 @@ class PreorderLimiter {
 		->execute($dateTime)
 		->fetchAssoc();
 
-		\System::log("preordersResult" . $preordersResult, __METHOD__, TL_ERROR);
 		\System::log("preordersResultInt" . $preordersResult['total_count'], __METHOD__, TL_ERROR);
+		\System::log("preordersResult" . $preordersResult[0], __METHOD__, TL_ERROR);
 
 		throw new \Exception("preordersResult" . $preordersResult);
 
