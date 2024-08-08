@@ -10,12 +10,12 @@
   <?php endif; ?>
 
 
-<div id="preorder-container" class="d-flex justify-content-start align-items-center">
+<div id="preorder-container">
     <input 
         type="text" 
         name="date-input" 
         id="preorder-formular-date" 
-        class="text col-md-6 col-sm-12 col-6<?php if ($this->class): ?> <?= $this->class ?><?php endif; ?>"
+        class="text <?php if ($this->class): ?> <?= $this->class ?><?php endif; ?>"
         value="<?= htmlspecialchars($this->value['date'] ?? '') ?>"
     >
 
@@ -23,7 +23,7 @@
         type="text"
         name="time-input"
         id="preorder-formular-time"
-        class="text col-md-6 col-sm-12 col-6"
+        class="text"
         value="<?= htmlspecialchars($this->value['time'] ?? '') ?>"
     >
 </div>
