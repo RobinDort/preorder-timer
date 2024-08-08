@@ -13,10 +13,9 @@ class PreorderLimiter {
 		$preordersResult = Database::getInstance()
 		->prepare(self::PREORDER_STMT)
 		->execute($dateTime)
-		->fetch();
+		->fetchField();
 
-		\System::log("preordersResult" . $preordersResult[0], __METHOD__, TL_ERROR);
-		\System::log("preordersResultInt" . $preordersResult['total_count'], __METHOD__, TL_ERROR);
+		\System::log("preordersResult" . $preordersResult, __METHOD__, TL_ERROR);
 
 		throw new \Exception("preordersResult" . $preordersResult);
 
