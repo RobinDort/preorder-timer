@@ -13,6 +13,7 @@ class PreorderFormular extends Widget {
     protected $blnForAttribute = true;
     protected $strTemplate = 'iso_checkout_preorder_time_formular';
     protected $strPrefix = 'widget widget-preorder-formular';
+    protected $strName = 'widget-preorder-formular';
 
 
 
