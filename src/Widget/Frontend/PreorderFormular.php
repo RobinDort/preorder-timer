@@ -66,7 +66,10 @@ class PreorderFormular extends Widget {
         if($preorderCountForDateTime > self::MAX_AMOUNT_SHIPPING_ORDERS) {
             $errorMessage = "Wir bedauern, Ihnen mitteilen zu müssen, dass für den von Ihnen gewünschten Zeitraum bereits zu viele Vorbestellungen eingegangen sind. Wir bitten Sie daher einen anderen Zeitraum für Ihre Bestellung auszuwählen.";
             $this->addError($errorMessage);
-            return $varInput;
+            \System::log($errorMessage . ' - Date input: ' . $varInput, __METHOD__, TL_ERROR);
+
+            throw new \Exception($errorMessage);
+
         }
 
         return $dateTime->getTimestamp();
@@ -76,7 +79,9 @@ class PreorderFormular extends Widget {
     public function validate()
     {
        
-        $combinedValue = $this->getPost($this->strName);
+        $dateValue = $this->getPost("date-input");
+        $timeValue = $this->getPost("time-input");
+        $combinedValue = $dateValue . ' ' . $timeValue;
 
         // Call the validator to perform validation and store the result
         $varValue = $this->validator($combinedValue);
