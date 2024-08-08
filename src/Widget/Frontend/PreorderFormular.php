@@ -74,12 +74,11 @@ class PreorderFormular extends Widget {
 
     public function validate()
     {
-        $dateValue = $this->getPost("date-input");
-        $timeValue = $this->getPost("time-input");
-        $dateTimeString = $dateValue . ' ' . $timeValue;
+       
+        $combinedValue = $this->getPost($this->strName);
 
         // Call the validator to perform validation and store the result
-        $varValue = $this->validator($dateTimeString);
+        $varValue = $this->validator($combinedValue);
 
         // Check if there are any errors
         if ($this->hasErrors()) {
