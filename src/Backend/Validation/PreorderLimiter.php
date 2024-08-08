@@ -10,13 +10,14 @@ class PreorderLimiter {
 	public function countPreordersForDateTime($dateTime) {
 		$preorderStmt = "SELECT COUNT(*) FROM `tl_iso_product_collection` AS total_count WHERE type='order' AND shipping_id != 28 AND preorder_time = ?";
 
+		\System::log("dateTime" . $dateTime, __METHOD__, TL_ERROR);
+		
 		$preordersResult = Database::getInstance()
 		->prepare($preorderStmt)
 		->execute($dateTime)
 		->fetchField();
 
 		\System::log("preordersResult" . $preordersResult, __METHOD__, TL_ERROR);
-		\System::log("dateTime" . $dateTime, __METHOD__, TL_ERROR);
 
 
 		throw new \Exception("preordersResult" . $preordersResult);
