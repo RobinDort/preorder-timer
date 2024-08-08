@@ -15,11 +15,13 @@ class PreorderLimiter {
 		->execute($dateTime)
 		->fetchAssoc();
 
+		// Check if the result is not empty and retrieve the count
 		if (!empty($preordersResult) && isset($preordersResult['total_count'])) {
 			return (int) $preordersResult['total_count'];
 		}
-
-		return -1;
+	
+		// Return 0 if no result is found
+		return 0;
 	}
 }
 ?>
