@@ -22,3 +22,13 @@
 .numInputWrapper .numInput::selection {
 	background-color: #000;
 }
+
+.steps li::before {
+	content: counter(step);
+	counter-increment: step;
+}
+
+/* Initialize the counter */
+.steps {
+	counter-reset: step;
+}
