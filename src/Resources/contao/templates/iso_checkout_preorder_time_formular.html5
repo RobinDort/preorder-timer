@@ -10,7 +10,7 @@
   <?php endif; ?>
 
 
-<div class="d-flex justify-content-center align-items-center">
+<div id="preorder-container" class="d-flex justify-content-start align-items-center">
     <input 
         type="text" 
         name="date-input" 

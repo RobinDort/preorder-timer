@@ -3,6 +3,7 @@ use RobinDort\PreorderTimer\Backend\CheckoutStep\IsotopePreorderTime;
 use RobinDort\PreorderTimer\Widget\Frontend\PreorderFormular;
 
 $GLOBALS['TL_CSS'][] = "bundles/robindortpreordertimer/flatpickr.css|static";
+$GLOBALS['TL_CSS'][] = "bundles/robindortpreordertimer/css/preorder.css|static";
 $GLOBALS['TL_JAVASCRIPT'][] = "bundles/robindortpreordertimer/flatpickr.js|static";
 $GLOBALS['TL_JAVASCRIPT'][] = "bundles/robindortpreordertimer/flatpickr_de.js|static";
 

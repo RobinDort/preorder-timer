@@ -1,0 +1,17 @@
+#preorder-container {
+	width: 100%;
+	gap: 20px;
+}
+
+#preorder-formular-date,
+#preorder-formular-time {
+	border-radius: 10px;
+}
+
+#preorder-formular-date {
+	width: 20%;
+}
+
+#preorder-formular-time {
+	width: 10%;
+}
