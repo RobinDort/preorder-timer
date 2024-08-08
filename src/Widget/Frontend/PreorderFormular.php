@@ -66,6 +66,21 @@ class PreorderFormular extends Widget {
         return $dateTime->getTimestamp();
     }
 
+
+    public function validate()
+    {
+        // Call the validator to perform validation and store the result
+        $varValue = $this->validator(null);
+
+        // Check if there are any errors
+        if ($this->hasErrors()) {
+            $this->class = 'error';
+        }
+
+        // Set the validated value
+        $this->varValue = $varValue;
+    }
+
 }
 
 ?>
