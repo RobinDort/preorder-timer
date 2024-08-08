@@ -99,7 +99,6 @@ class DayValidator {
     }
     
 
-
     public function getWeekDay() {
     	$current_day_of_week = date("w"); // get as short number -> 1,2,3,4,5,6,0. 0 is sunday.
     	return $current_day_of_week;

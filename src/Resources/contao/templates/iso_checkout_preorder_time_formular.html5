@@ -37,7 +37,15 @@
             dateFormat: "d.m.Y",
             locale: "de",
             minDate: "today",
-            maxDate: new Date().fp_incr(28)
+            maxDate: new Date().fp_incr(28),
+            disable: [
+                function(date) {
+                    // Disable all Mondays
+                    return date.getDay() === 1;
+                },
+                "25.12.2024", // Disable 25th December
+                "26.12.2024"  // Disable 26th December
+            ]
         });
 
         flatpickr(timePicker, {
