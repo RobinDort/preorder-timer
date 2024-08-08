@@ -45,11 +45,13 @@ class PreorderFormular extends Widget {
         $dateTime = \DateTime::createFromFormat($expectedFormat, $dateTimeString);
         $errors = \DateTime::getLastErrors();
 
-        if ($dateTime === false || $errors['warning_count'] > 0 || $errors['error_count'] > 0) {
-            $errorMessage = 'Invalid date or time format. Please use the format: ' . $expectedFormat;
-            \System::log($errorMessage . ' - Date input: ' . $dateValue . ', Time input: ' . $timeValue, __METHOD__, TL_ERROR);
-            return $varInput;
-        }
+        if ($errors !== false) { // ensures the function did not return false and thus an error of errors
+            if ($dateTime === false || $errors['warning_count'] > 0 || $errors['error_count'] > 0) {
+                $errorMessage = 'Invalid date or time format. Please use the format: ' . $expectedFormat;
+                \System::log($errorMessage . ' - Date input: ' . $dateValue . ', Time input: ' . $timeValue, __METHOD__, TL_ERROR);
+                return $varInput;
+            }
+        }   
 
         //datetime is in valid format
         $dateTimeTimestamp = $dateTime->getTimestamp();
