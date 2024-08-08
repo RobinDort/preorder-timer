@@ -13,6 +13,7 @@ class PreorderLimiter {
 		
 		$preordersResult = Database::getInstance()
 		->prepare($preorderStmt)
+		->bind_param("i", $dateTime)
 		->execute($dateTime);
 		
 		
@@ -27,4 +28,4 @@ class PreorderLimiter {
 		return $preorderCount;
 	}
 }
-?>
+?>	
