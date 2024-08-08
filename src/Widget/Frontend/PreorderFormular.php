@@ -68,6 +68,7 @@ class PreorderFormular extends Widget {
             $this->addError($errorMessage);
             \System::log($errorMessage . ' - Date input: ' . $dateTimeTimestamp, __METHOD__, TL_ERROR);
             \System::log('MAX AMOUNT SHIPPING ORDERS: ' . self::MAX_AMOUNT_SHIPPING_ORDERS, __METHOD__, TL_ERROR);
+            \System::log('preorderCountForDateTime: ' . $preorderCountForDateTime, __METHOD__, TL_ERROR);
 
             throw new \Exception($errorMessage);
 
