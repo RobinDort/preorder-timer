@@ -15,3 +15,7 @@
 #preorder-formular-time {
 	width: 10%;
 }
+
+.numInputWrapper .numInput::selection {
+	background-color: #000;
+}
