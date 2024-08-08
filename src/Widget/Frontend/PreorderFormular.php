@@ -14,7 +14,16 @@ class PreorderFormular extends Widget {
     protected $strTemplate = 'iso_checkout_preorder_time_formular';
     protected $strPrefix = 'widget widget-preorder-formular';
 
+
+
     private $preorderLimiter;
+
+
+	/**
+	 * Value
+	 * @var mixed
+	 */
+	protected $varValue;
 
     private const MAX_AMOUNT_SHIPPING_ORDERS = 2;
 
@@ -36,19 +45,15 @@ class PreorderFormular extends Widget {
      * {@inheritdoc}.
      */
     protected function validator($varInput) {
-        $dateValue = Input::post("date-input");
-        $timeValue = Input::post("time-input");
-
-        $dateTimeString = $dateValue . ' ' . $timeValue;
         $expectedFormat = 'd.m.Y H:i';
 
-        $dateTime = \DateTime::createFromFormat($expectedFormat, $dateTimeString);
+        $dateTime = \DateTime::createFromFormat($expectedFormat, $varInput);
         $errors = \DateTime::getLastErrors();
 
         if ($errors !== false) { // ensures the function did not return false and thus an error of errors
             if ($dateTime === false || $errors['warning_count'] > 0 || $errors['error_count'] > 0) {
                 $errorMessage = 'Invalid date or time format. Please use the format: ' . $expectedFormat;
-                \System::log($errorMessage . ' - Date input: ' . $dateValue . ', Time input: ' . $timeValue, __METHOD__, TL_ERROR);
+                \System::log($errorMessage . ' - Date input: ' . $varInput, __METHOD__, TL_ERROR);
                 return $varInput;
             }
         }   
@@ -69,8 +74,12 @@ class PreorderFormular extends Widget {
 
     public function validate()
     {
+        $dateValue = $this->getPost("date-input");
+        $timeValue = $this->getPost("time-input");
+        $dateTimeString = $dateValue . ' ' . $timeValue;
+
         // Call the validator to perform validation and store the result
-        $varValue = $this->validator(null);
+        $varValue = $this->validator($dateTimeString);
 
         // Check if there are any errors
         if ($this->hasErrors()) {
