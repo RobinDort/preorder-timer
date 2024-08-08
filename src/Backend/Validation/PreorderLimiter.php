@@ -8,13 +8,10 @@ use Contao\Database;
 class PreorderLimiter {
 
 	public function countPreordersForDateTime($dateTime) {
-		$preorderStmt = "SELECT COUNT(*) FROM `tl_iso_product_collection` AS total_count WHERE type='order' AND shipping_id != 28 AND preorder_time = ?";
-
 		
 		$preordersResult = Database::getInstance()
-		->prepare($preorderStmt)
-		->bind_param("i", $dateTime)
-		->execute($dateTime);
+		->prepare("SELECT COUNT(*) FROM `tl_iso_product_collection` AS total_count WHERE type='order' AND shipping_id != 28 AND preorder_time = " . $dateTime)
+		->execute();
 		
 		
 		$preorderCount = $preordersResult->fetchField();
