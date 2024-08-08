@@ -54,7 +54,7 @@ class PreorderFormular extends Widget {
             if ($dateTime === false || $errors['warning_count'] > 0 || $errors['error_count'] > 0) {
                 $errorMessage = 'Invalid date or time format. Please use the format: ' . $expectedFormat;
                 \System::log($errorMessage . ' - Date input: ' . $varInput, __METHOD__, TL_ERROR);
-                return $varInput;
+                throw new \Exception($errorMessage);
             }
         }   
 
