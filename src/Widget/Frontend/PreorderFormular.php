@@ -1,7 +1,7 @@
 <?php
 namespace RobinDort\PreorderTimer\Widget\Frontend;
 
-use RobinDort\PreorderTimer\Backend\Validation\DayValidator;
+use RobinDort\PreorderTimer\Backend\Validation\PreorderLimiter;
 use Haste\DateTime\DateTime;
 use Contao\Widget;
 use Contao\Date;
