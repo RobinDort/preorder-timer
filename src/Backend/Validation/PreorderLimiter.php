@@ -15,6 +15,11 @@ class PreorderLimiter {
 		->execute($dateTime)
 		->fetchAssoc();
 
+		\System::log("preordersResult" . $preordersResult, __METHOD__, TL_ERROR);
+		\System::log("preordersResultInt" . $preordersResult['total_count'], __METHOD__, TL_ERROR);
+
+		throw new \Exception("preordersResult" . $preordersResult);
+
 		// Check if the result is not empty and retrieve the count
 		if (!empty($preordersResult) && isset($preordersResult['total_count'])) {
 			return (int) $preordersResult['total_count'];
