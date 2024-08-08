@@ -43,8 +43,12 @@
                     // Disable all Mondays
                     return date.getDay() === 1;
                 },
-                "25.12.2024", // Disable 25th December
-                "26.12.2024"  // Disable 26th December
+                function(date) {
+                    // Disable 25th December and 26th December for any year
+                    const day = date.getDate();
+                    const month = date.getMonth() + 1; // getMonth() is zero-based
+                    return (day === 25 && month === 12) || (day === 26 && month === 12);
+                }
             ]
         });
 
