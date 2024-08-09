@@ -5,6 +5,9 @@ use Isotope\Model\OrderStatus;
 
 class PreorderStatus extends OrderStatus {
 
+    protected $name;
+    protected $color;
+
     /** 
      * Set the color property and name
      *
@@ -18,8 +21,6 @@ class PreorderStatus extends OrderStatus {
 
         // Set the name property
         $this->title = $name;
-
-        $this->save();
     }
 }
 
