@@ -34,7 +34,7 @@
 	counter-reset: step;
 }
 
-.error {
+div.widget-preorder-formular.error {
 	position: relative;
 	left: 0;
 	margin: 0 0 2em 0;
