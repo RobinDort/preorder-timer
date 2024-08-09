@@ -46,11 +46,12 @@ class PreorderFormular extends Widget {
      * {@inheritdoc}.
      */
     protected function validator($varInput) {
+        throw new \Exception($varInput);
         if (empty($varInput)) {
             // If the input is empty, return immediately without validation
             return null;
         }
-        
+
         $expectedFormat = 'd.m.Y H:i';
 
         $dateTime = \DateTime::createFromFormat($expectedFormat, $varInput);
