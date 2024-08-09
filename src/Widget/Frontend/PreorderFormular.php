@@ -89,17 +89,24 @@ class PreorderFormular extends Widget {
             return;
         }
 
-        // Call the validator to perform validation and store the result
-        $varValue = $this->validator($combinedValue);
-
-        // Check if there are any errors
-        if ($this->hasErrors()) {
+        try {
+            // Call the validator to perform validation and store the result
+            $varValue = $this->validator($combinedValue);
+    
+            // If there are any errors, handle them
+            if ($this->hasErrors()) {
+                $this->blnSubmitInput = false;
+                $this->class = 'error';
+            } else {
+                // Set the validated value
+                $this->varValue = $varValue;
+            }
+        } catch (\Exception $e) {
+            // Log the exception and prevent form submission
+            \System::log($e->getMessage(), __METHOD__, TL_ERROR);
             $this->blnSubmitInput = false;
             $this->class = 'error';
         }
-
-        // Set the validated value
-        $this->varValue = $varValue;
     }
 
 }
