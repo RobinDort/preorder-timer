@@ -71,6 +71,7 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
                 $this->addNoteToOrder();
             } else {
                 \System::log("errors " . $objWidget->getErrorsAsString(), __METHOD__, TL_ERROR);
+                return $this->Template->parse(); // Stop and re-render the template if there are errors
             }
         }
 
