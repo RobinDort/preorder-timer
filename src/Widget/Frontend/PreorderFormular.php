@@ -84,6 +84,7 @@ class PreorderFormular extends Widget {
 
         // Check if there are any errors
         if ($this->hasErrors()) {
+            $this->blnSubmitInput = false;
             $this->class = 'error';
         }
 
