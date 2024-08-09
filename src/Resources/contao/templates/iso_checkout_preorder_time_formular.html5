@@ -6,7 +6,7 @@
 
 <?php $this->block('field'); ?>
   <?php if ($this->hasErrors()): ?>
-    <p class="error"><?= $this->getErrorAsString(); ?></p>
+    <p id="preorder-error" class="error"><?= $this->getErrorAsString(); ?></p>
   <?php endif; ?>
 
 

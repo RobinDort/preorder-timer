@@ -20,6 +20,12 @@
 	width: 10%;
 }
 
+#preorder-error {
+	position: relative;
+	left: 0;
+	margin: 0 0 2em 0;
+}
+
 .numInputWrapper .numInput::selection {
 	background-color: #000;
 }
@@ -32,10 +38,4 @@
 /* Initialize the counter */
 .steps {
 	counter-reset: step;
-}
-
-div.widget-preorder-formular.error {
-	position: relative;
-	left: 0;
-	margin: 0 0 2em 0;
 }
