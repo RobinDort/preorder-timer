@@ -13,6 +13,10 @@
                 <source>Dear customer, if you wish to receive your order at a later date, you can enter your desired date and time here. Please note that a valid reservation time requires both details (date including time).</source>
                 <target>Sehr geehrter Kunde, sollten Sie Ihre Bestellung zu einem späteren Zeitpunkt erhalten wollen, so können Sie hier Ihr gewünschtes Datum inklusive Uhrzeit angeben. Bitte beachten Sie dass eine gültige Vorbstellungszeit beide Angaben (Datum inklusive Zeit) benötigt.</target>
             </trans-unit>
+            <trans-unit id="MSC.preorder_status">
+            <source>Preorder</source>
+            <target>Vorbestellung</target>
+            </trans-unit>
             <trans-unit id="FFL.preorder_formular.0">
                 <source>Preorder formular</source>
                 <traget>Vorbestellungs Formular</traget>
