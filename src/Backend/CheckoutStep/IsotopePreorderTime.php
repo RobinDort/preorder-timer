@@ -69,17 +69,20 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
                 Isotope::getCart()->preorder_time = $date ? $date->getTimestamp() : null;
                 Isotope::getCart()->save();
                 $this->addNoteToOrder();
+
+
+                $this->Template->headline = $GLOBALS['TL_LANG']['MSC']['preorder_time'];
+                $this->Template->message = $GLOBALS['TL_LANG']['MSC']['preorder_time_message'];
+                $this->Template->form = $objWidget->parse();
+
+                return $this->Template->parse();
+
             } else {
                 \System::log("errors " . $objWidget->getErrorsAsString(), __METHOD__, TL_ERROR);
                 return $objWidget->generateWithError();
             }
         }
 
-        $this->Template->headline = $GLOBALS['TL_LANG']['MSC']['preorder_time'];
-        $this->Template->message = $GLOBALS['TL_LANG']['MSC']['preorder_time_message'];
-        $this->Template->form = $objWidget->parse();
-
-        return $this->Template->parse();
     }
 
     public function review(): array {
