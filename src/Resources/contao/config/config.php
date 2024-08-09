@@ -21,7 +21,7 @@ $GLOBALS['TL_FFL']['preorder_formular'] = PreorderFormular::class;
 
 // Init the new preorder status for the backend and save the new status into the database.
 $preorderStatus = new PreorderStatus();
-$preorderStatus->setProperties("#ff00ff",  $GLOBALS['TL_LANG']['MSC']['preorder_status']);
+$preorderStatus->setProperties("ff00ff",  $GLOBALS['TL_LANG']['MSC']['preorder_status']);
 $preorderStatus->save();
 
 // Add customer notes before the last step (review).
