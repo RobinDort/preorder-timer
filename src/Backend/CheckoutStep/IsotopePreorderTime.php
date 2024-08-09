@@ -70,6 +70,8 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
                 Isotope::getCart()->save();
                 $this->addNoteToOrder();
             } else {
+                \System::log("errors " . $objWidget->getErrorsAsString(), __METHOD__, TL_ERROR);
+                throw new \Exeption($objWidget->hasErrors());
                 return '';
             }
         }
