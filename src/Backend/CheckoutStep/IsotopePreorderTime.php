@@ -12,6 +12,7 @@ use Isotope\Module\Checkout;
 class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
 
     protected $Template;
+    protected $blnError = false;
 
     public function __construct(Checkout $objModule) {
         parent::__construct($objModule);
