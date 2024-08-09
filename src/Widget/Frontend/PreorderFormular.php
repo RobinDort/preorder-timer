@@ -47,7 +47,7 @@ class PreorderFormular extends Widget {
      */
     protected function validator($varInput) {
        
-        if (!$varInput || empty($varInput)) {
+        if ($varInput === null || $varInput === "" || empty($varInput)) {
             // If the input is empty, return immediately without validation
             return null;
         }
