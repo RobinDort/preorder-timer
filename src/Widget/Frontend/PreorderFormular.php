@@ -48,7 +48,7 @@ class PreorderFormular extends Widget {
     protected function validator($varInput) {
         \System::log("input: " . $varInput,__METHOD__, TL_ERROR);
         throw new \Exception($varInput);
-        if (empty($varInput)) {
+        if (!$varInput || empty($varInput)) {
             // If the input is empty, return immediately without validation
             return null;
         }
