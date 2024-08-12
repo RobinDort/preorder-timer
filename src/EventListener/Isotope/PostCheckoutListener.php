@@ -12,6 +12,8 @@ class PostCheckoutListener
  
     public function __invoke(Order $objOrder, array $tokens): void
     {
+        \System::log($objOrder->preorder_time,__METHOD__,TL_ERROR);
+        throw new \Exception($objOrder);
         // Check if preorder_time is set
         if ($objOrder->preorder_time) {
             // Find the "Vorbestellung" order status
