@@ -46,8 +46,4 @@ $newCheckoutSteps = array_merge($firstPart, $preorderTime, $secondPart);
 $GLOBALS['ISO_CHECKOUTSTEP'] = $newCheckoutSteps;
 
 
-// Register the hook to update the order status of a current order when the preorder time has been set.
-$GLOBALS['ISO_HOOKS']['postCheckout'][] = [CheckoutListener::class, 'onPostCheckout'];
-
-
 ?>
