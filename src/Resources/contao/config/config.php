@@ -22,7 +22,7 @@ $GLOBALS['TL_FFL']['preorder_formular'] = PreorderFormular::class;
 
 // Init the new preorder status for the backend and save the new status into the database.
 $preorderStatus = new OrderStatus();
-$preorderStatus->name = $GLOBALS['TL_LANG']['MSC']['preorder_status'];
+$preorderStatus->name = "Vorbestellung";
 $preorderStatus->color = "ff00ff";
 $preorderStatus->save();
 
