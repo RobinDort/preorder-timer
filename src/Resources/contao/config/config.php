@@ -20,12 +20,6 @@ $GLOBALS['FE_MOD']['isotope']['iso_orderdetails'] = 'RobinDort\PreorderTimer\Mod
 // Init the widgets class for the preorder formular. 
 $GLOBALS['TL_FFL']['preorder_formular'] = PreorderFormular::class;  
 
-// Init the new preorder status for the backend and save the new status into the database.
-$preorderStatus = new OrderStatus();
-$preorderStatus->name = "Vorbestellung";
-$preorderStatus->color = "ff00ff";
-$preorderStatus->save();
-
 // Add customer notes before the last step (review).
 $checkoutStepCount = count($GLOBALS['ISO_CHECKOUTSTEP']);
 $insertPosition = $checkoutStepCount - 2;
