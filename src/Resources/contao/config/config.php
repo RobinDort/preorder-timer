@@ -1,4 +1,5 @@
 <?php
+use Isotope\Model\OrderStatus;
 use RobinDort\PreorderTimer\Backend\CheckoutStep\IsotopePreorderTime;
 use RobinDort\PreorderTimer\Widget\Frontend\PreorderFormular;
 use RobinDort\PreorderTimer\Model\PreorderStatus;
@@ -20,8 +21,9 @@ $GLOBALS['FE_MOD']['isotope']['iso_orderdetails'] = 'RobinDort\PreorderTimer\Mod
 $GLOBALS['TL_FFL']['preorder_formular'] = PreorderFormular::class;  
 
 // Init the new preorder status for the backend and save the new status into the database.
-$preorderStatus = new PreorderStatus();
-$preorderStatus->setProperties("ff00ff",  $GLOBALS['TL_LANG']['MSC']['preorder_status']);
+$preorderStatus = new OrderStatus();
+$preorderStatus->name = $GLOBALS['TL_LANG']['MSC']['preorder_status'];
+$preorderStatus->color = "ff00ff";
 $preorderStatus->save();
 
 // Add customer notes before the last step (review).
