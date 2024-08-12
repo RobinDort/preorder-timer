@@ -3,6 +3,7 @@ use Isotope\Model\OrderStatus;
 use RobinDort\PreorderTimer\Backend\CheckoutStep\IsotopePreorderTime;
 use RobinDort\PreorderTimer\Widget\Frontend\PreorderFormular;
 use RobinDort\PreorderTimer\Model\PreorderStatus;
+ use RobinDort\PreorderTimer\Hooks\CheckoutListener;
 
 
 /**
@@ -22,6 +23,7 @@ $GLOBALS['TL_FFL']['preorder_formular'] = PreorderFormular::class;
 
 // Init the new preorder status for the backend and save the new status into the database.
 $preorderStatus = new OrderStatus();
+
 // First check if entry already exists
 $existingStatus = OrderStatus::findBy('name', 'Vorbestellung');
 if ($existingStatus === null) {
@@ -42,6 +44,10 @@ $preorderTime = ['preorder_time' => [IsotopePreorderTime::class]];
 
 $newCheckoutSteps = array_merge($firstPart, $preorderTime, $secondPart);
 $GLOBALS['ISO_CHECKOUTSTEP'] = $newCheckoutSteps;
+
+
+// Register the hook to update the order status of a current order when the preorder time has been set.
+$GLOBALS['ISO_HOOKS']['postCheckout'][] = [CheckoutListener::class, 'onPostCheckout'];
 
 
 ?>
