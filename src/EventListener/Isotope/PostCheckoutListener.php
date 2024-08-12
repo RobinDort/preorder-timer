@@ -10,7 +10,7 @@ class PostCheckoutListener
 {
     const PRE_ORDER_OBJ_STATUS_NAME = "Vorbestellung";
  
-    public function __invoke(Order $objOrder)
+    public function __invoke(Order $objOrder, array $tokens): void
     {
         // Check if preorder_time is set
         if ($objOrder->preorder_time) {
@@ -21,6 +21,8 @@ class PostCheckoutListener
                 // Update the order status
                 $objOrder->order_status = $preorderStatus->id;
                 $objOrder->save();
+            } else {
+                error_log("Not found preorder status");
             }
         }
     }

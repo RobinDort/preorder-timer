@@ -1,4 +1,0 @@
-services:
-  RobinDort\PreorderTimer\EventListener\Isotope\PostCheckoutListener:
-    tags:
-      - { name: contao.hook, hook: postCheckout }
