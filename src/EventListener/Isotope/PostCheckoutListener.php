@@ -18,7 +18,6 @@ class PostCheckoutListener
             $preorderStatus = OrderStatus::findOneBy('name', self::PRE_ORDER_OBJ_STATUS_NAME);
             
             \System::log($preorderStatus->id,__METHOD__,TL_ERROR);
-            \System::log(print_r($objOrder),__METHOD__,TL_ERROR);
             \System::log(print_r($objOrder->order_status),__METHOD__,TL_ERROR);
             throw new \Exception("ObjOrder " . $objOrder);
             
