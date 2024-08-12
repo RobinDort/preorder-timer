@@ -12,12 +12,15 @@ class PostCheckoutListener
  
     public function __invoke(Order $objOrder, array $tokens): void
     {
-        \System::log($objOrder->preorder_time,__METHOD__,TL_ERROR);
-        throw new \Exception($objOrder);
         // Check if preorder_time is set
         if ($objOrder->preorder_time) {
             // Find the "Vorbestellung" order status
             $preorderStatus = OrderStatus::findOneBy('name', self::PRE_ORDER_OBJ_STATUS_NAME);
+
+            \System::log($objOrder,__METHOD__,TL_ERROR);
+            \System::log($objOrder->order_status,__METHOD__,TL_ERROR);
+            \System::log($preorderStatus,__METHOD__,TL_ERROR);
+            throw new \Exception("ObjOrder " . $objOrder);
             
             if ($preorderStatus !== null) {
                 // Update the order status
