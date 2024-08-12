@@ -3,8 +3,6 @@ use Isotope\Model\OrderStatus;
 use RobinDort\PreorderTimer\Backend\CheckoutStep\IsotopePreorderTime;
 use RobinDort\PreorderTimer\Widget\Frontend\PreorderFormular;
 use RobinDort\PreorderTimer\Model\PreorderStatus;
- use RobinDort\PreorderTimer\Hooks\CheckoutListener;
-
 
 /**
  * Set all the public resources for javascript files and css files.
