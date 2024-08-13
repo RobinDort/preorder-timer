@@ -16,21 +16,15 @@ class PreOrderStatusUpdateListener
         // Check if preorder_time is set
         if ($order->preorder_time) {
             // Find the "Vorbestellung" order status
-            $preorderStatus = OrderStatus::findBy('name', self::PRE_ORDER_OBJ_STATUS_NAME);
-           
-                \System::log(var_dump($preorderStatus),__METHOD__,TL_ERROR);
-                \System::log(var_dump($newStatus),__METHOD__,TL_ERROR);
-                \System::log($order->order_status,__METHOD__,TL_ERROR);
-                \System::log($updates,__METHOD__,TL_ERROR);
-
-                throw new \Exception("order status: " . $newStatus);
+            $preorderStatus = OrderStatus::findOneBy('name', self::PRE_ORDER_OBJ_STATUS_NAME);
+        
             
             if ($preorderStatus !== null && $order->preorder_time) {
-                $newStatus = $preorderStatus;
                 // Update the order status
-                $order->order_status = $newStatus;
+                $order->order_status = $preorderStatus->id;
                 $order->save();
-                
+
+                return true;
             } 
 
         }
