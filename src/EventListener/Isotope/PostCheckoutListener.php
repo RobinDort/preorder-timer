@@ -21,8 +21,6 @@ class PostCheckoutListener
                 // Update the order status
                 $objOrder->order_status = $preorderStatus->id;
                 $objOrder->updateOrderStatus($preorderStatus->id);
-                \System::log($objOrder->order_status,__METHOD__,TL_ERROR);
-                throw new \Exception("Debug " . $objOrder);
             } 
         }
     }
