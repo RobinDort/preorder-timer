@@ -4,6 +4,7 @@ use RobinDort\PreorderTimer\Backend\CheckoutStep\IsotopePreorderTime;
 use RobinDort\PreorderTimer\Widget\Frontend\PreorderFormular;
 use RobinDort\PreorderTimer\Model\PreorderStatus;
 use RobinDort\PreorderTimer\EventListener\Isotope\PreOrderStatusUpdateListener;
+use RobinDort\PreorderTimer\Notification\PreorderTimeTokenProvider;
 
 /**
  * Set all the public resources for javascript files and css files.
@@ -25,6 +26,8 @@ $preorderStatus = new OrderStatus();
 
 // First check if entry already exists
 $existingStatus = OrderStatus::findBy('name', 'Vorbestellung');
+
+// Create a new order status with sorting 312. (Sorting can be changed according to the users database sorting order) 
 if ($existingStatus === null) {
     $preorderStatus->name = "Vorbestellung";
     $preorderStatus->color = "ff00ff";
@@ -45,7 +48,10 @@ $newCheckoutSteps = array_merge($firstPart, $preorderTime, $secondPart);
 $GLOBALS['ISO_CHECKOUTSTEP'] = $newCheckoutSteps;
 
 
-// Update the order status to preorder when the preorder_time has been set
+// Update the order status and call the hook to preorder when a preorder_time has been set
 $GLOBALS['ISO_HOOKS']['preOrderStatusUpdate'][] = [PreOrderStatusUpdateListener::class, '__invoke'];
+
+// Init a new notification center token that provides the preorder_time so it can be attached to the billings.
+$GLOBALS['TL_HOOKS']['notification_center_generateTokens'][] = [PreorderTimeTokenProvider::class, '__invoke'];
 
 ?>
