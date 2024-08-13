@@ -6,17 +6,17 @@ use Isotope\Model\ProductCollection\Order;
 
 class PreorderTimeTokenProvider {
 
-    
-    public function __invoke(array $arrTokens, Order $objOrder, array $arrConfig)
+
+    public function __invoke(Order $order, array $tokens)
     {
-        // Assuming preorder_time is stored as a timestamp
-        if ($objOrder->preorder_time) {
-            $arrTokens['preorder_time'] = date('d.m.Y H:i', $objOrder->preorder_time);
+        if ($order->preorder_time) {
+            // Convert the timestamp to a formatted date
+            $tokens['preorder_time'] = \Date::parse('d.m.Y H:i', $order->preorder_time);
         } else {
-            $arrTokens['preorder_time'] = ''; // or a default value if not set
+            $tokens['preorder_time'] = ''; // Or set to a default value
         }
 
-        return $arrTokens;
+        return $tokens;
     }
 }
 
