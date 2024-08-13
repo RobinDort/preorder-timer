@@ -20,9 +20,9 @@ class PostCheckoutListener
             if ($preorderStatus !== null && $order->preorder_time) {
                 // Update the order status
                 $objOrder->order_status = $preorderStatus->id;
-                $order->updateOrderStatus($preorderStatus->id);
-                \System::log($order->order_status,__METHOD__,TL_ERROR);
-                throw new \Exception("Debug " . $order);
+                $objOrder->updateOrderStatus($preorderStatus->id);
+                \System::log($objOrder->order_status,__METHOD__,TL_ERROR);
+                throw new \Exception("Debug " . $objOrder);
             } 
         }
     }
