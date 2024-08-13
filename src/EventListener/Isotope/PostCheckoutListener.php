@@ -17,13 +17,11 @@ class PostCheckoutListener
             // Find the "Vorbestellung" order status
             $preorderStatus = OrderStatus::findOneBy('name', self::PRE_ORDER_OBJ_STATUS_NAME);
             
-            if ($preorderStatus !== null) {
+            if ($preorderStatus !== null && $order->preorder_time) {
                 // Update the order status
                 $objOrder->order_status = $preorderStatus->id;
-                $objOrder->save();
-            } else {
-                error_log("Not found preorder status");
-            }
+                $order->updateOrderStatus($preorderStatus->id);
+            } 
         }
     }
 }
