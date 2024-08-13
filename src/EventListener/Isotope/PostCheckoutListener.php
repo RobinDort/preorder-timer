@@ -20,7 +20,7 @@ class PostCheckoutListener
             if ($preorderStatus !== null && $objOrder->preorder_time) {
                 // Update the order status
                 $objOrder->order_status = $preorderStatus->id;
-                $objOrder->updateOrderStatus($preorderStatus->id);
+                $objOrder->updateOrderStatus($objOrder);
             } 
         }
     }
