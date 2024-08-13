@@ -13,11 +13,6 @@ class PreOrderStatusUpdateListener
     public function __invoke(Order $order, OrderStatus $newStatus, array $updates): bool
     {
 
-        if (!$order->isPaid()) {
-            return true;
-        }
-
-
         // Check if preorder_time is set
         if ($order->preorder_time) {
             // Find the "Vorbestellung" order status
