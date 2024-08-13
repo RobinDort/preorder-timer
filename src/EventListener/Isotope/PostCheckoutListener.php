@@ -17,7 +17,7 @@ class PostCheckoutListener
             // Find the "Vorbestellung" order status
             $preorderStatus = OrderStatus::findOneBy('name', self::PRE_ORDER_OBJ_STATUS_NAME);
             
-            if ($preorderStatus !== null && $order->preorder_time) {
+            if ($preorderStatus !== null && $objOrder->preorder_time) {
                 // Update the order status
                 $objOrder->order_status = $preorderStatus->id;
                 $objOrder->updateOrderStatus($preorderStatus->id);
