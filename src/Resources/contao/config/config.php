@@ -3,7 +3,7 @@ use Isotope\Model\OrderStatus;
 use RobinDort\PreorderTimer\Backend\CheckoutStep\IsotopePreorderTime;
 use RobinDort\PreorderTimer\Widget\Frontend\PreorderFormular;
 use RobinDort\PreorderTimer\Model\PreorderStatus;
-use RobinDort\PreorderTimer\EventListener\Isotope\PostCheckoutListener;
+use RobinDort\PreorderTimer\EventListener\Isotope\PreOrderStatusUpdateListener;
 
 /**
  * Set all the public resources for javascript files and css files.
@@ -45,6 +45,7 @@ $newCheckoutSteps = array_merge($firstPart, $preorderTime, $secondPart);
 $GLOBALS['ISO_CHECKOUTSTEP'] = $newCheckoutSteps;
 
 
-$GLOBALS['ISO_HOOKS']['postCheckout'][] = [PostCheckoutListener::class, '__invoke'];
+// Update the order status to preorder when the preorder_time has been set
+$GLOBALS['ISO_HOOKS']['preOrderStatusUpdate'][] = [PreOrderStatusUpdateListener::class, '__invoke'];
 
 ?>

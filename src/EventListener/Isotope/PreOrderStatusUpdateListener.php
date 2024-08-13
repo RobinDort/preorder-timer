@@ -6,22 +6,32 @@ use Isotope\Model\ProductCollection\Order;
 use Isotope\Model\OrderStatus;
 
 
-class PostCheckoutListener
+class PreOrderStatusUpdateListener
 {
     const PRE_ORDER_OBJ_STATUS_NAME = "Vorbestellung";
  
-    public function __invoke(Order $objOrder, array $tokens): void
+    public function __invoke(Order $order, OrderStatus $newStatus, array $updates): bool
     {
+
+        if (!$order->isPaid()) {
+            return true;
+        }
+
+
         // Check if preorder_time is set
-        if ($objOrder->preorder_time) {
+        if ($order->preorder_time) {
             // Find the "Vorbestellung" order status
             $preorderStatus = OrderStatus::findOneBy('name', self::PRE_ORDER_OBJ_STATUS_NAME);
             
-            if ($preorderStatus !== null && $objOrder->preorder_time) {
+            if ($preorderStatus !== null && $order->preorder_time) {
                 // Update the order status
-                $objOrder->updateOrderStatus($preorderStatus->id);
+                $order->order_status = $preorderStatus->id;
+                $order->save();
             } 
+
         }
+
+        return false;
     }
 }
 
