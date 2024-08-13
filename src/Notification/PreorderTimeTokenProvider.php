@@ -2,21 +2,20 @@
 
 namespace RobinDort\PreorderTimer\Notification;
 
-use Isotope\Model\ProductCollection\Order;
+use Terminal42\NotificationCenterBundle\NotificationCenter;
 
 class PreorderTimeTokenProvider {
 
+    public function __construct(private NotificationCenter $notificationCenter) {}
 
-    public function __invoke(Order $order, array $tokens)
+    public function sendMessage(): void
     {
-        if ($order->preorder_time) {
-            // Convert the timestamp to a formatted date
-            $tokens['preorder_time'] = \Date::parse('d.m.Y H:i', $order->preorder_time);
-        } else {
-            $tokens['preorder_time'] = ''; // Or set to a default value
-        }
-
-        return $tokens;
+        $notificationId = 1; // Usually, some module setting of yours where the user can select the desired notification
+        $tokens = [
+            'TestToken' => 'TestValue',
+        ];
+        
+        $receipts = $this->notificationCenter->sendNotification($notificationId, $tokens);
     }
 }
 
