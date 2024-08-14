@@ -2,7 +2,6 @@
 use Isotope\Model\OrderStatus;
 use RobinDort\PreorderTimer\Backend\CheckoutStep\IsotopePreorderTime;
 use RobinDort\PreorderTimer\Widget\Frontend\PreorderFormular;
-use RobinDort\PreorderTimer\Model\PreorderStatus;
 use RobinDort\PreorderTimer\EventListener\Isotope\PreOrderStatusUpdateListener;
 use RobinDort\PreorderTimer\Notification\PreorderTimeTokenProvider;
 
