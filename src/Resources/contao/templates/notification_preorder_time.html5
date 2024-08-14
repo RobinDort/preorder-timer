@@ -1,2 +1,4 @@
-<p>Ihre Bestellung ist für den folgen Zeitpunkt vorbestellt:</p>
-<p>##preorder_time##</p>
+<?php if(!empty($tokens['preorder_time'])): ?>
+    <p><strong>Ihre Bestellung ist für den folgen Zeitpunkt vorbestellt:</strong></p>
+    <p><strong>##preorder_time##</strong></p>
+<php endif; ?>
