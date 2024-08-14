@@ -94,9 +94,6 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
     }
 
     public function review(): array {
-
-        var_dump(Isotope::getCart()->preorder_time);
-
         return [
             'preorder_time' => [
                 'headline' => $GLOBALS['TL_LANG']['MSC']['preorder_time'],

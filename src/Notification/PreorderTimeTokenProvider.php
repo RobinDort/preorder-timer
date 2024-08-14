@@ -1,5 +1,4 @@
 <?php
-
 namespace RobinDort\PreorderTimer\Notification;
 use Isotope\Model\ProductCollection\Order;
 
@@ -25,5 +24,4 @@ class PreorderTimeTokenProvider {
         return $tokens;
     }
 }
-
 ?>

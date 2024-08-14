@@ -1,5 +1,4 @@
 <?php
-
 namespace RobinDort\PreorderTimer\Backend\ProductCollection;
 
 use Isotope\Backend\ProductCollection\Callback;

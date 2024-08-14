@@ -1,5 +1,4 @@
 <?php
-
 namespace RobinDort\PreorderTimer\EventListener\Isotope;
 
 use Isotope\Model\ProductCollection\Order;

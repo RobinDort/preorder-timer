@@ -1,5 +1,4 @@
 <?php
-
 namespace RobinDort\PreorderTimer\ContaoManager;
 
 use Contao\ManagerPlugin\Bundle\BundlePluginInterface;

@@ -1,5 +1,4 @@
 <?php
-
 namespace RobinDort\PreorderTimer\Model;
 use Isotope\Model\OrderStatus;
 
@@ -23,5 +22,4 @@ class PreorderStatus extends OrderStatus {
         $this->title = $name;
     }
 }
-
 ?>

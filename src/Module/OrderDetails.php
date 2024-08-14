@@ -1,5 +1,4 @@
 <?php
-
 namespace RobinDort\PreorderTimer\Module;
 use Isotope\Module\OrderDetails as IsotopeOrderDetails;
 
@@ -21,5 +20,4 @@ class OrderDetails extends IsotopeOrderDetails {
         }
     }
 }
-
 ?>
