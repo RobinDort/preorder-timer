@@ -45,8 +45,10 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
             'name'          => $this->getStepClass(),
             'mandatory'     => FALSE,
             'value'         => [
-                'date' => Isotope::getCart()->preorder_time ? date('d.m.Y', Isotope::getCart()->preorder_time) : '',
-                'time' => Isotope::getCart()->preorder_time ? date('H:i', Isotope::getCart()->preorder_time) : ''
+                'date' => Isotope::getCart()->preorder_time ? 
+                (new \DateTime('@' . Isotope::getCart()->preorder_time, new \DateTimeZone('Europe/Berlin')))->format('d.m.Y') : '',
+                'time' => Isotope::getCart()->preorder_time ?
+                (new \DateTime('@' . Isotope::getCart()->preorder_time, new \DateTimeZone('Europe/Berlin')))->format('H:i') : ''
             ],
             'storeValues'   => TRUE,
             'tableless'     => TRUE,
