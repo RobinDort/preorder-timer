@@ -12,15 +12,12 @@ class PreorderTimeTokenProvider {
             // Create a DateTime object from the timestamp in UTC
             $dateTime = \DateTime::createFromFormat('U', $order->preorder_time, new \DateTimeZone('UTC'));
 
-            if ($dateTime) {
-                // Adjust to German timezone (Europe/Berlin) by adding 2 hours
-                $dateTime->modify('+2 hours');
+            // Adjust to German timezone (Europe/Berlin) by adding 2 hours
+            $dateTime->modify('+2 hours');
 
-                // Format the adjusted date and time for the token
-                $tokens['preorder_time'] = $dateTime->format('d.m.Y H:i');
-            } else {
-                $tokens['preorder_time'] = '';
-            }
+            // Format the adjusted date and time for the token
+            $tokens['preorder_time'] = $dateTime->format('d.m.Y H:i');
+            
         } else {
             $tokens['preorder_time'] = '';
         }
