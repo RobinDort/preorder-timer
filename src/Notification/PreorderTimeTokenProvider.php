@@ -18,7 +18,11 @@ class PreorderTimeTokenProvider {
 
                 // Format the adjusted date and time for the token
                 $tokens['preorder_time'] = $dateTime->format('d.m.Y H:i');
+            } else {
+                $tokens['preorder_time'] = '';
             }
+        } else {
+            $tokens['preorder_time'] = '';
         }
 
         return $tokens;
