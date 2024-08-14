@@ -52,4 +52,6 @@ $GLOBALS['ISO_CHECKOUTSTEP'] = $newCheckoutSteps;
 $GLOBALS['ISO_HOOKS']['preOrderStatusUpdate'][] = [PreOrderStatusUpdateListener::class, '__invoke'];
 
 // Init a new notification center token that provides the preorder_time so it can be attached to the billings.
+$GLOBALS['TL_HOOKS']['getOrderNotificationTokens'][] = [PreorderTimeTokenProvider::class,'__invoke'
+];
 ?>
