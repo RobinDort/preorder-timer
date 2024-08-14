@@ -1,4 +1,4 @@
-<?php if(!empty($tokens['preorder_time'])): ?>
+<?php if($this->preorder_time): ?>
     <p><strong>Ihre Bestellung ist für den folgen Zeitpunkt vorbestellt:</strong></p>
     <p><strong>##preorder_time##</strong></p>
 <?php endif; ?>
