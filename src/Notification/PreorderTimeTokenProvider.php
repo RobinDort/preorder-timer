@@ -9,7 +9,8 @@ class PreorderTimeTokenProvider {
     {
         // Assuming the preorder_time is stored as a timestamp in the order
         if ($order->preorder_time) {
-            $dateTime = \DateTime::createFromFormat('U', $order->preorder_time);
+            $timezone = new \DateTimeZone('Europe/Berlin');
+            $dateTime = \DateTime::createFromFormat('U', $order->preorder_time, $timezone);
             $tokens['preorder_time'] = $dateTime->format('d.m.Y H:i');
         }
 
