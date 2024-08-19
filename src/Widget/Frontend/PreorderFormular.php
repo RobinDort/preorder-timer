@@ -68,7 +68,7 @@ class PreorderFormular extends Widget {
         $dateTimeTimestamp = $dateTime->getTimestamp();
         $preorderCountForDateTime = $this->preorderLimiter->countPreordersForDateTime($dateTimeTimestamp);
 
-        if($preorderCountForDateTime > self::MAX_AMOUNT_SHIPPING_ORDERS) {
+        if($preorderCountForDateTime >= self::MAX_AMOUNT_SHIPPING_ORDERS) {
             $errorMessage = "Wir bedauern, Ihnen mitteilen zu müssen, dass für den von Ihnen gewünschten Zeitraum bereits zu viele Vorbestellungen eingegangen sind. Wir bitten Sie daher einen anderen Zeitraum für Ihre Bestellung auszuwählen.";
             $this->addError($errorMessage);
         }
