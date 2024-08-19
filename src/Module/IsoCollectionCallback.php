@@ -4,13 +4,13 @@ use Contao\Backend;
 
 class IsoCollectionCallback extends Backend {
 
-    public function formatPreorderTime($value, \Contao\DataContainer $dc)
+    public static function formatPreorderTime($value, \Contao\DataContainer $dc)
     {
         if ($value) {
-            // Format Unix timestamp to 'dd-mm-Y H:i'
-            return \Date::parse('d.m.Y H:i', $value);
+            $dateTime = \DateTime::createFromFormat('U', $value);
+            return $dateTime ? $dateTime->format('d.m.Y H:i') : 'Ungültiges Datum';
         }
-        return $value;
+        return 'Keine Vorbestellung';
     }
 }
 ?>

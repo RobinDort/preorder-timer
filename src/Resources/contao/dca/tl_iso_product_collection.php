@@ -24,9 +24,7 @@ $GLOBALS['TL_DCA']['tl_iso_product_collection']['fields']['preorder_time'] = [
         'tl_class'=>'clr',
         'help'=>false,
     ],
-        'load_callback' => [
-        [IsoCollectionCallback::class, 'formatPreorderTime']
-    ],
+    'formatter' => ['class' => IsoCollectionCallback::class, 'method' => 'formatPreorderTime'],
     'sql'=>"int(10) unsigned NULL",
 ];
 
