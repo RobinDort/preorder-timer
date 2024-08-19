@@ -18,4 +18,4 @@ class PreorderLimiter {
 		return (int) $preordersResult['total_count'];
 	}
 }
-?>	
+?>

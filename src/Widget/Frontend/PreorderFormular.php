@@ -60,7 +60,6 @@ class PreorderFormular extends Widget {
         if ($errors !== false) { // ensures the function did not return false and thus an error of errors
             if ($dateTime === false || $errors['warning_count'] > 0 || $errors['error_count'] > 0) {
                 $errorMessage = 'Invalid date or time format. Please use the format: ' . $expectedFormat;
-                \System::log($errorMessage . ' - Date input: ' . $varInput, __METHOD__, TL_ERROR);
                 throw new \Exception($errorMessage);
             }
         }   
@@ -103,7 +102,6 @@ class PreorderFormular extends Widget {
             }
         } catch (\Exception $e) {
             // Log the exception and prevent form submission
-            \System::log($e->getMessage(), __METHOD__, TL_ERROR);
             $this->blnSubmitInput = false;
             $this->class = 'error';
         }
