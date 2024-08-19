@@ -45,12 +45,4 @@ $preorderTime = ['preorder_time' => [IsotopePreorderTime::class]];
 
 $newCheckoutSteps = array_merge($firstPart, $preorderTime, $secondPart);
 $GLOBALS['ISO_CHECKOUTSTEP'] = $newCheckoutSteps;
-
-
-// Update the order status and call the hook to preorder when a preorder_time has been set
-$GLOBALS['ISO_HOOKS']['preOrderStatusUpdate'][] = [PreOrderStatusUpdateListener::class, '__invoke'];
-
-// Init a new notification center token that provides the preorder_time so it can be attached to the billings.
-$GLOBALS['ISO_HOOKS']['getOrderNotificationTokens'][] = [PreorderTimeTokenProvider::class,'__invoke'
-];
 ?>
