@@ -15,7 +15,7 @@ $GLOBALS['TL_DCA']['tl_iso_product_collection']['palettes']['default'] = str_rep
 
 
 $GLOBALS['TL_DCA']['tl_iso_product_collection']['fields']['preorder_time'] = [
-    'label'       => &$GLOBALS['TL_LANG']['tl_iso_product_collection']['preorder_time'],
+    'label'       => $GLOBALS['TL_LANG']['tl_iso_product_collection']['preorder_time'],
     'exclude'     => TRUE,
     'inputType'   => 'text', // Using text as it’s non-interactive
     'eval'        => [

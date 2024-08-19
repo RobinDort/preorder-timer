@@ -8,7 +8,7 @@ class IsoCollectionCallback extends Backend {
     {
         if ($value) {
             // Format Unix timestamp to 'dd-mm-Y H:i'
-            return \Date::parse('d-m-Y H:i', $value);
+            return \Date::parse('d.m.Y H:i', $value);
         }
         return $value;
     }
