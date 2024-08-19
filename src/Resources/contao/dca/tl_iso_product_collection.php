@@ -1,5 +1,6 @@
 <?php
 use RobinDort\PreorderTimer\Backend\ProductCollection\CollectionLabelCallback;
+use RobinDort\PreorderTimer\Module\IsoCollectionCallback;
 
 $GLOBALS['TL_DCA']['tl_iso_product_collection']['list']['label']['fields'][] = 'preorder_time';
 $GLOBALS['TL_DCA']['tl_iso_product_collection']['list']['label']['label_callback'] = [CollectionLabelCallback::class, 'getOrderLabel'];
@@ -18,6 +19,9 @@ $GLOBALS['TL_DCA']['tl_iso_product_collection']['fields']['preorder_time'] = [
     'exclude'     => TRUE,
     'inputType'   => 'text', // Using text as it’s non-interactive
     'eval'        => ['rgxp'=>'digit', 'readonly'=>true, 'tl_class'=>'clr'],
+    'load_callback' => [
+        ['IsoCollectionCallback', 'formatPreorderTime']
+    ],
     'sql'         => "int(10) unsigned NULL",
 ];
 
