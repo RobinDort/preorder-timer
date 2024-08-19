@@ -8,14 +8,14 @@ $GLOBALS['TL_DCA']['tl_iso_product_collection']['list']['label']['label_callback
 
 $GLOBALS['TL_DCA']['tl_iso_product_collection']['palettes']['default'] = str_replace
 (
-    'customer_notes',
-    'customer_notes,preorder_time',
+    'order_status',
+    'order_status,preorder_time',
     $GLOBALS['TL_DCA']['tl_iso_product_collection']['palettes']['default']
 );
 
 
 $GLOBALS['TL_DCA']['tl_iso_product_collection']['fields']['preorder_time'] = [
-    'label'       => $GLOBALS['TL_LANG']['tl_iso_product_collection']['preorder_time'],
+    'label'       => &$GLOBALS['TL_LANG']['tl_iso_product_collection']['preorder_time'],
     'exclude'     => TRUE,
     'inputType'   => 'text', // Using text as it’s non-interactive
     'eval'        => [

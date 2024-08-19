@@ -26,11 +26,6 @@
 	margin: 0 0 2em 0;
 }
 
-//hide the non needed tooltip inside the backends order overview
-#ctrl_preorder_time .tl_help {
-	display: none;
-}
-
 .numInputWrapper .numInput::selection {
 	background-color: #000;
 }
