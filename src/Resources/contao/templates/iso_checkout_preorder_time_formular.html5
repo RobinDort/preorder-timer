@@ -58,9 +58,8 @@ noCalendar: true,
 locale: "de",
 dateFormat: "H:i",
 minuteIncrement: 15, // Optional: set to adjust the minute increments
+allowInput: false,
 onClose: function(selectedDates, dateStr, instance) {
-
-console.log("instance closed");
 
 const allowedRanges = [
 { start: "12:00", end: "14:00" },
