@@ -23,7 +23,6 @@ $GLOBALS['TL_DCA']['tl_iso_product_collection']['fields']['preorder_time'] = [
         'readonly'=>true,
         'tl_class'=>'clr',
         'help'=>false,
-        'formatter' => ['class' => IsoCollectionCallback::class, 'method' => 'formatPreorderTime'],
     ],
     'load_callback' => [
         [IsoCollectionCallback::class, 'formatPreorderTime']
