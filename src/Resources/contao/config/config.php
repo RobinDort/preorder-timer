@@ -26,6 +26,15 @@ $preorderStatus = new OrderStatus();
 // First check if entry already exists
 $existingStatus = OrderStatus::findBy('name', 'Vorbestellung');
 
+// Create a new order status with sorting 312. (Sorting can be changed according to the users database sorting order) 
+if ($existingStatus === null) {
+    $preorderStatus->name = "Vorbestellung";
+    $preorderStatus->color = "ff00ff";
+    $preorderStatus->tstamp = time();
+    $preorderStatus->sorting = 312;
+    $preorderStatus->save();
+}
+
 // Add customer notes before the last step (review).
 $checkoutStepCount = count($GLOBALS['ISO_CHECKOUTSTEP']);
 $insertPosition = $checkoutStepCount - 2;
