@@ -2,6 +2,11 @@
 namespace RobinDort\PreorderTimer\Widget\Frontend;
 
 use RobinDort\PreorderTimer\Backend\Validation\PreorderLimiter;
+use Umulmrum\Holiday\HolidayCalculator;
+
+// This must be switched according to the region.
+use Umulmrum\Holiday\Provider\Germany\Saarland;
+
 use Haste\DateTime\DateTime;
 use Contao\Widget;
 use Contao\Date;
@@ -16,7 +21,7 @@ class PreorderFormular extends Widget {
     protected $strName;
 
 
-
+	private static $holidays;
     private $preorderLimiter;
 
 
@@ -105,6 +110,19 @@ class PreorderFormular extends Widget {
             $this->blnSubmitInput = false;
             $this->class = 'error';
         }
+    }
+
+
+    public static function initHolidaysForYear() {
+        $currentYear = (int) date('Y');
+    	$holidayCalculator = new HolidayCalculator();
+		self::$holidays = $holidayCalculator->calculate(Saarland::class, $currentYear);
+    }
+    
+
+    public static function isHolidayToday() {
+        $currentDay = date('Y-m-d');
+    	return $this->holidays->isHoliday(new \DateTime($currentDay));
     }
 
 }

@@ -1,3 +1,11 @@
+<?php
+
+use RobinDort\PreorderTimer\Widget\Frontend\PreorderFormular;
+
+PreorderFormular::initHolidaysForYear();
+$endTime = PreorderFormular::isHolidayToday() ? "22:00" : "21:00";
+?>
+
 <?php $this->extend('form_row'); ?>
 
 <?php $this->block('label'); ?>
@@ -32,6 +40,7 @@ value="<?= htmlspecialchars($this->value['time'] ?? '') ?>"
 document.addEventListener('DOMContentLoaded', function() {
 const dateInput = document.getElementById("preorder-formular-date");
 const timePicker = document.getElementById("preorder-formular-time");
+const dynamicEndTime = "<?php echo $endTime; ?>;
 
 flatpickr(dateInput, {
 dateFormat: "d.m.Y",
@@ -63,7 +72,7 @@ onClose: function(selectedDates, dateStr, instance) {
 
 const allowedRanges = [
 { start: "12:00", end: "14:00" },
-{ start: "17:30", end: "21:00" }
+{ start: "17:30", end: dynamicEndTime }
 ];
 
 // Check if the selected time is within any of the allowed ranges
