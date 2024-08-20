@@ -1,10 +1,10 @@
 <?php
 
-use RobinDort\PreorderTimer\Widget\Frontend\PreorderFormular;
+use RobinDort\PreorderTimer\Widget\Frontend\Helper\HolidayCalculation;
 
-$preorderFormular = new PreorderFormular();
-$isHoliday = $preorderFormular->isHolidayToday();
-$endTime = $preorderFormular->isHolidayToday() ? "22:00" : "21:00";
+$holidayCalculator = new HolidayCalculation();
+$isHoliday = $holidayCalculator->isHolidayToday();
+$endTime = $holidayCalculator->isHolidayToday() ? "22:00" : "21:00";
 ?>
 
 <?php $this->extend('form_row'); ?>
