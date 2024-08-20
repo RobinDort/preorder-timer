@@ -19,7 +19,8 @@
 	"require": {
 		"php": "^8.2",
 		"contao/core-bundle": "^4.13",
-		"isotope/isotope-core": "^2.9.0"
+		"isotope/isotope-core": "^2.9.0",
+		"umulmrum/holiday": "^0.11.0"
 	},
 	"require-dev": {
 		"contao/manager-plugin": "^2.0"
