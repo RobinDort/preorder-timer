@@ -20,11 +20,6 @@ $endTime = $holidayCalculator->isHolidayToday() ? "22:00" : "21:00";
 
 
 <div id="preorder-container">
-<?php if($holidayCalculator->isHolidayToday() === 1) :?>
-<?= "is holiday" ?>
-<?php else :?>
-<?= "No Holiday" ?>
-<?php endif; ?>
 <input 
 type="text" 
 name="date-input" 
@@ -98,7 +93,11 @@ break;
 if (!isValid) {
 // Clear the input if not valid
 instance.clear();
+if (dayOfWeek === 0 || dayOfWeek === 6 || isHoliday === 1) {
+alert('Bitte wählen Sie einen Zeitraum zwischen 17:30 - 22:00 Uhr.');
+} else {
 alert('Bitte wählen Sie einen Zeitraum zwischen 12:00 - 14:00 Uhr oder einen Zeitraum zwischen 17:30 - 21:00 Uhr.');
+}
 }
 }
 });
