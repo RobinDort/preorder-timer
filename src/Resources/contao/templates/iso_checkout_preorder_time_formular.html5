@@ -20,7 +20,7 @@ $endTime = $holidayCalculator->isHolidayToday() ? "22:00" : "21:00";
 
 
 <div id="preorder-container">
-<?php if($holidayCalculator->isHolidayToday()) :?>
+<?php if($holidayCalculator->isHolidayToday() === 1) :?>
 <?= "is holiday" ?>
 <?php else :?>
 <?= "No Holiday" ?>

@@ -23,8 +23,7 @@ class HolidayCalculation {
 
     public function isHolidayToday() {
         $currentDay = date('Y-m-d');
-        $isHoliday = $this->holidays->isHoliday(new \DateTime($currentDay));
-    	return $isHoliday;
+        return $this->holidays->isHoliday(new \DateTime($currentDay));
     }
 
     public function getHolidays() {
