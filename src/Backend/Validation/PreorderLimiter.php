@@ -23,9 +23,9 @@ class PreorderLimiter {
 	public function findNextAvailableBookingTime($dateTime) {
 		$fifteenMinutesAfter = $dateTime + 900;
 
-		$amountPreorders = countPreordersForDateTime($fifteenMinutesAfter);
+		$amountPreorders = $this->countPreordersForDateTime($fifteenMinutesAfter);
 		if ($amountPreorders > 1) {
-			$amountPreorder = findNextAvailableBookingTime($fifteenMinutesAfter);
+			return $this->findNextAvailableBookingTime($fifteenMinutesAfter);
 		}
 		
 		return $fifteenMinutesAfter;
