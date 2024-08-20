@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
 const dateInput = document.getElementById("preorder-formular-date");
 const timePicker = document.getElementById("preorder-formular-time");
 const dynamicEndTime = "<?php echo $endTime; ?>";
-const isHoliday = "<?php echo $isHoliday; ?>";
+const isHoliday = "<?= $isHoliday; ?>";
 console.log(isHoliday);
 console.log(isHoliday === true)
 const date = new Date();
