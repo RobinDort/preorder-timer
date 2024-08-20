@@ -28,6 +28,10 @@ class HolidayCalculation {
     	return $this->holidays->isHoliday(new DateTime('2024-01-01'));
     }
 
+    public function getHolidays() {
+        return $this->holidays;
+    }
+
 }
 
 ?>

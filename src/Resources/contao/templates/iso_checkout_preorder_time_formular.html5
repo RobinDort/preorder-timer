@@ -21,7 +21,7 @@ $endTime = $holidayCalculator->isHolidayToday() ? "22:00" : "21:00";
 
 <div id="preorder-container">
 <?= $holidayCalculator->isHolidayToday() ?>
-<?= $isHoliday ?>
+<?= print_r($holidayCalculator->getHolidays()); ?>
 <input 
 type="text" 
 name="date-input" 
