@@ -20,6 +20,8 @@ $endTime = $preorderFormular->isHolidayToday() ? "22:00" : "21:00";
 
 
 <div id="preorder-container">
+<?= $preorderFormular->isHolidayToday() ?>
+<?= $isHoliday ?>
 <input 
 type="text" 
 name="date-input" 
