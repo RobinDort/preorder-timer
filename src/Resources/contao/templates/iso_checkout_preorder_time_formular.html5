@@ -19,7 +19,6 @@ $endTime = PreorderFormular::isHolidayToday() ? "22:00" : "21:00";
 
 
 <div id="preorder-container">
-<?= $endTime ?>
 <input 
 type="text" 
 name="date-input" 
@@ -42,6 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
 const dateInput = document.getElementById("preorder-formular-date");
 const timePicker = document.getElementById("preorder-formular-time");
 const dynamicEndTime = "<?php echo $endTime; ?>;
+console.log(dynamicEndTime);
 
 flatpickr(dateInput, {
 dateFormat: "d.m.Y",
