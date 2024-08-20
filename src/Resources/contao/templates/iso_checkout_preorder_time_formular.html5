@@ -40,7 +40,7 @@ value="<?= htmlspecialchars($this->value['time'] ?? '') ?>"
 document.addEventListener('DOMContentLoaded', function() {
 const dateInput = document.getElementById("preorder-formular-date");
 const timePicker = document.getElementById("preorder-formular-time");
-const dynamicEndTime = "<?php echo $endTime; ?>;
+const dynamicEndTime = <?php echo $endTime; ?>;
 console.log(dynamicEndTime);
 
 flatpickr(dateInput, {
