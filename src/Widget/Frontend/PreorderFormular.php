@@ -21,7 +21,7 @@ class PreorderFormular extends Widget {
     protected $strName;
 
 
-	private static $holidays;
+	private $holidays;
     private $preorderLimiter;
 
 
@@ -35,6 +35,7 @@ class PreorderFormular extends Widget {
 
     public function __construct() {
 		$this->preorderLimiter = new PreorderLimiter();
+        $this->initHolidaysForYear();
 	}
 
     /**
@@ -113,16 +114,16 @@ class PreorderFormular extends Widget {
     }
 
 
-    public static function initHolidaysForYear() {
+    private function initHolidaysForYear() {
         $currentYear = (int) date('Y');
     	$holidayCalculator = new HolidayCalculator();
-		self::$holidays = $holidayCalculator->calculate(Saarland::class, $currentYear);
+		$this->holidays = $holidayCalculator->calculate(Saarland::class, $currentYear);
     }
     
 
-    public static function isHolidayToday() {
+    public function isHolidayToday() {
         $currentDay = date('Y-m-d');
-    	return self::$holidays->isHoliday(new \DateTime('2024-12-25'));
+    	return $this->holidays->isHoliday(new \DateTime('2024-12-25'));
     }
 
 }

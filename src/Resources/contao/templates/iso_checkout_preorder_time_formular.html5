@@ -2,9 +2,9 @@
 
 use RobinDort\PreorderTimer\Widget\Frontend\PreorderFormular;
 
-PreorderFormular::initHolidaysForYear();
-$isHoliday = PreorderFormular::isHolidayToday();
-$endTime = PreorderFormular::isHolidayToday() ? "22:00" : "21:00";
+$preorderFormular = new PreorderFormular();
+$isHoliday = $preorderFormular->isHolidayToday();
+$endTime = $preorderFormular->isHolidayToday() ? "22:00" : "21:00";
 ?>
 
 <?php $this->extend('form_row'); ?>
