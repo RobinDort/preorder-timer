@@ -4,6 +4,8 @@ use Umulmrum\Holiday\HolidayCalculator;
 
 // This must be switched according to the region.
 use Umulmrum\Holiday\Provider\Germany\Saarland;
+use Haste\DateTime\DateTime;
+
 
 
 class HolidayCalculation {
@@ -23,7 +25,7 @@ class HolidayCalculation {
 
     public function isHolidayToday() {
         $currentDay = date('Y-m-d');
-    	return $this->holidays->isHoliday(new \DateTime('2024-01-01'));
+    	return $this->holidays->isHoliday(new DateTime('2024-01-01'));
     }
 
 }
