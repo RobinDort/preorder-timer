@@ -122,7 +122,7 @@ class PreorderFormular extends Widget {
 
     public static function isHolidayToday() {
         $currentDay = date('Y-m-d');
-    	return self::$holidays->isHoliday(new \DateTime($currentDay));
+    	return self::$holidays->isHoliday(new \DateTime('2024-12-25'));
     }
 
 }
