@@ -9,10 +9,11 @@ class PreorderLimiter {
 
 	public function countPreordersForDateTime($dateTime) {
 
-		$dateTimeFifteenMinutes = $dateTime + 900; //Unixtime so 15*60 = 900
+		$dateTimeBeforeSevenMinutes = $dateTime - 420;
+		$dateTimeAfterSevenMinutes = $dateTime + 420; //Unixtime so 7*60 = 420
 		
 		$preordersResult = Database::getInstance()
-		->prepare("SELECT COUNT(*) AS total_count FROM `tl_iso_product_collection` WHERE type='order' AND shipping_id != 28 AND preorder_time BETWEEN " . $dateTime . " AND " . $dateTimeFifteenMinutes)
+		->prepare("SELECT COUNT(*) AS total_count FROM `tl_iso_product_collection` WHERE type='order' AND shipping_id != 28 AND preorder_time BETWEEN " . $dateTimeBeforeSevenMinutes . " AND " . $dateTimeAfterSevenMinutes)
 		->execute()
 		->fetchAssoc();
 			
