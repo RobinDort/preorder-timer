@@ -4,7 +4,6 @@ namespace RobinDort\PreorderTimer\Backend\Validation;
 use Isotope\Model\Order;
 use Contao\Database;
 
-
 class PreorderLimiter {
 
 	/**
@@ -15,6 +14,7 @@ class PreorderLimiter {
 	private const FIRST_SHOP_CLOSING_END_TIME_DECIMAL = 17; // e.g 17:00 PM 
 	private const SECOND_SHOP_CLOSING_START_TIME_DECIMAL = 21; // e.g 21:00 PM
 	private const SECOND_SHOP_CLOSING_END_TIME_DECIMAL = 12; // e.g 12:00 PM THE NEXT DAY
+	private const CLOSING_SHOP_DAY = 1; // the shop is closed on mondays. Numbers are used to present the days e.g 1 = monday, 2=tuesday...0=sunday
 
 
 	public function countPreordersForDateTime($dateTime) {
@@ -53,6 +53,14 @@ class PreorderLimiter {
 		if ($decimalTime > self::SECOND_SHOP_CLOSING_START_TIME_DECIMAL || $decimalTime < self::SECOND_SHOP_CLOSING_END_TIME_DECIMAL) {
 			// Set the time to 12:00 on the next day
 			$fifteenMinutesAfter = strtotime('+1 day', strtotime(date('Y-m-d', $fifteenMinutesAfter) . ' 12:00'));
+
+			// Get the date in "Y-m-d" format
+			$newDate = date('Y-m-d', $fifteenMinutesAfter);
+
+			// check if the new date is a holiday or a monday. (shop is closed on mondays).
+			if (date("N", $fifteenMinutesAfter) === 1) {
+				$fifteenMinutesAfter = strtotime('+1 day', $fifteenMinutesAfter);
+			}
 		}
 
 		$amountPreorders = $this->countPreordersForDateTime($fifteenMinutesAfter);
