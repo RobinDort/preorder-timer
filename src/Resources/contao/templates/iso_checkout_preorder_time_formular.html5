@@ -116,7 +116,7 @@ flatpickr(timePicker, {
             // Clear the input if not valid
             instance.clear();
             console.log('allowedRange', allowedRange);
-            if (dayOfWeek === 0 || dayOfWeek === 6 || isHoliday) {
+            if (dayOfWeek === 0 || dayOfWeek === 6 || allowedRange.length === 1) {
                 alert('Bitte wählen Sie einen Zeitraum zwischen 17:30 - 22:00 Uhr.');
             } else {
                 alert('Bitte wählen Sie einen Zeitraum zwischen 12:00 - 14:00 Uhr oder einen Zeitraum zwischen 17:30 - 21:00 Uhr.');
