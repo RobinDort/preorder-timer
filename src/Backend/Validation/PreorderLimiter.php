@@ -57,13 +57,12 @@ class PreorderLimiter {
 			// Get the date in "Y-m-d" format
 			$newDate = date('Y-m-d', $fifteenMinutesAfter);
 
-			\System::log("new Date " . $newDate,__METHOD__,TL_ERROR,);
-			\System::log("new Date " . date("w", $fifteenMinutesAfter),__METHOD__,TL_ERROR,);
-
-			throw new Exception("newDate: " . $newDate);
-
 			// check if the new date is a holiday or a monday. (shop is closed on mondays).
 			if (date("w", $fifteenMinutesAfter) === self::CLOSING_SHOP_DAY) {
+				\System::log("new Date " . $newDate,__METHOD__,TL_ERROR,);
+				\System::log("new Date " . date("w", $fifteenMinutesAfter),__METHOD__,TL_ERROR,);
+
+				throw new Exception("newDate: " . $newDate);
 				$fifteenMinutesAfter = strtotime('+1 day', $fifteenMinutesAfter);
 			}
 		}
