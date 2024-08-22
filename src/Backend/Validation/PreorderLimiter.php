@@ -58,7 +58,7 @@ class PreorderLimiter {
 			$newDate = date('Y-m-d', $fifteenMinutesAfter);
 
 			// check if the new date is a holiday or a monday. (shop is closed on mondays).
-			if (date("w", $fifteenMinutesAfter) === self::CLOSING_SHOP_DAY) {
+			if ((int)date("w", $fifteenMinutesAfter) === self::CLOSING_SHOP_DAY) {
 				\System::log("new Date " . $newDate,__METHOD__,TL_ERROR,);
 				\System::log("new Date " . date("w", $fifteenMinutesAfter),__METHOD__,TL_ERROR,);
 
