@@ -34,7 +34,7 @@ class PreorderLimiter {
 	public function findNextAvailableBookingTime($dateTime) {
 		$fifteenMinutesAfter = $dateTime + 900;
 
-		// check if the new unixtime is in range of the order time. If not set the timestamp to the next available order time of the shop.
+		// check if the new unixtime is in range of the shops order time. If not set the timestamp to the next available order time of the shop.
 
 		// Get the hour and minute of the new time
 		$hour = (int) date('H', $fifteenMinutesAfter);
@@ -56,6 +56,9 @@ class PreorderLimiter {
 
 			// Get the date in "Y-m-d" format
 			$newDate = date('Y-m-d', $fifteenMinutesAfter);
+
+			\System::log("new Date " . $newDate,__METHOD__,TL_ERROR,);
+			throw new \Exception("newDate: " . $newDate);
 
 			// check if the new date is a holiday or a monday. (shop is closed on mondays).
 			if (date("w", $fifteenMinutesAfter) === self::CLOSING_SHOP_DAY) {
