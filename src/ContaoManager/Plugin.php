@@ -10,7 +10,7 @@ use Symfony\Component\Config\Loader\LoaderResolverInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use RobinDort\PreorderTimer\RobinDortPreorderTimerBundle;
 
-class Plugin implements BundlePluginInterface {
+class Plugin implements BundlePluginInterface, RoutingPluginInterface {
     public function getBundles(ParserInterface $parser): array {
         return [
             BundleConfig::create(RobinDortPreorderTimerBundle::class)
