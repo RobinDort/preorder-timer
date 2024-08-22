@@ -47,73 +47,73 @@ const date = new Date();
 let allowedRange;
 
 flatpickr(dateInput, {
-dateFormat: "d.m.Y",
-locale: "de",
-minDate: "today",
-maxDate: new Date().fp_incr(28),
-onClose: function(selectedDates, dateStr, instance) {
-    const [day, month, year] = dateStr.split('.').map(Number);
-    const convertedDate = new Date(year, month - 1, day);
-    const formattedDate = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-    const dayOfWeek = convertedDate.getDay();
-    sendHolidayRequest(formattedDate).then((resp) => {
-        //isHoliday = resp.isHoliday;
-        console.log('resp', resp);
-        console.log('resp.isHoliday', resp.isHoliday);
-    });
+    dateFormat: "d.m.Y",
+    locale: "de",
+    minDate: "today",
+    maxDate: new Date().fp_incr(28),
+    onClose: function(selectedDates, dateStr, instance) {
+        const [day, month, year] = dateStr.split('.').map(Number);
+        const convertedDate = new Date(year, month - 1, day);
+        const formattedDate = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        const dayOfWeek = convertedDate.getDay();
+        sendHolidayRequest(formattedDate).then((resp) => {
+            //isHoliday = resp.isHoliday;
+            console.log('resp', resp);
+            console.log('resp.isHoliday', resp.isHoliday);
+        });
 
-    if (dayOfWeek === "0" || dayOfWeek === "6" || isHoliday) {
-        allowedRange = [{ start: "17:30", end: "22:00"}];
-    } else {
-        allowedRange = [{ start: "12:00", end: "14:00" },{ start: "17:30", end: "21:00"}];
-    }
-},
-disable: [
-    function(date) {
-        // Disable all Mondays
-        return date.getDay() === 1;
+        if (dayOfWeek === "0" || dayOfWeek === "6" || isHoliday) {
+            allowedRange = [{ start: "17:30", end: "22:00"}];
+        } else {
+            allowedRange = [{ start: "12:00", end: "14:00" },{ start: "17:30", end: "21:00"}];
+        }
     },
-    function(date) {
-        // Disable 25th December and 26th December for any year
-        const day = date.getDate();
-        const month = date.getMonth() + 1; // getMonth() is zero-based
-        return (day === 25 && month === 12) || (day === 26 && month === 12);
-    }
-]
+    disable: [
+        function(date) {
+            // Disable all Mondays
+            return date.getDay() === 1;
+        },
+        function(date) {
+            // Disable 25th December and 26th December for any year
+            const day = date.getDate();
+            const month = date.getMonth() + 1; // getMonth() is zero-based
+            return (day === 25 && month === 12) || (day === 26 && month === 12);
+        }
+    ]
 });
 
 flatpickr(timePicker, {
-enableTime: true,
-noCalendar: true,
-locale: "de",
-dateFormat: "H:i",
-minuteIncrement: 15, // Optional: set to adjust the minute increments
-allowInput: false,
-onClose: function(selectedDates, dateStr, instance) {
+    enableTime: true,
+    noCalendar: true,
+    locale: "de",
+    dateFormat: "H:i",
+    minuteIncrement: 15, // Optional: set to adjust the minute increments
+    allowInput: false,
+    onClose: function(selectedDates, dateStr, instance) {
 
-const allowedRanges = allowedRange;
+        const allowedRanges = allowedRange;
 
-// Check if the selected time is within any of the allowed ranges
-const timeSelected = dateStr;
-let isValid = false;
+        // Check if the selected time is within any of the allowed ranges
+        const timeSelected = dateStr;
+        let isValid = false;
 
-for (const range of allowedRanges) {
-if (timeInRange(timeSelected, range.start, range.end)) {
-isValid = true;
-break;
-}
-}
+        for (const range of allowedRanges) {
+            if (timeInRange(timeSelected, range.start, range.end)) {
+                isValid = true;
+                break;
+            }
+        }
 
-if (!isValid) {
-// Clear the input if not valid
-instance.clear();
-if (dayOfWeek === 0 || dayOfWeek === 6 || isHoliday === 1) {
-alert('Bitte wählen Sie einen Zeitraum zwischen 17:30 - 22:00 Uhr.');
-} else {
-alert('Bitte wählen Sie einen Zeitraum zwischen 12:00 - 14:00 Uhr oder einen Zeitraum zwischen 17:30 - 21:00 Uhr.');
-}
-}
-}
+        if (!isValid) {
+            // Clear the input if not valid
+            instance.clear();
+            if (dayOfWeek === 0 || dayOfWeek === 6 || isHoliday === 1) {
+                alert('Bitte wählen Sie einen Zeitraum zwischen 17:30 - 22:00 Uhr.');
+            } else {
+                alert('Bitte wählen Sie einen Zeitraum zwischen 12:00 - 14:00 Uhr oder einen Zeitraum zwischen 17:30 - 21:00 Uhr.');
+            }
+        }
+    }
 });
 
 function sendHolidayRequest(selectedDate) {
