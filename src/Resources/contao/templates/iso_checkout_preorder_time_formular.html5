@@ -58,7 +58,10 @@ flatpickr(dateInput, {
         const formattedDate = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
         dayOfWeek = convertedDate.getDay();
         sendHolidayRequest(formattedDate).then((resp) => {
+            console.log('resp', resp);
+            console.log('resp.isHoliday', resp.isHoliday);
             isHoliday = resp.isHoliday;
+            console.log('isHoliday', isHoliday)
         });
 
         if (dayOfWeek === 0 || dayOfWeek === 6 || isHoliday) {
