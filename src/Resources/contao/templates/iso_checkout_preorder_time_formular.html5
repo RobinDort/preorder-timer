@@ -115,6 +115,7 @@ alert('Bitte wählen Sie einen Zeitraum zwischen 12:00 - 14:00 Uhr oder einen Ze
 });
 
 function sendHolidayRequest(selectedDate) {
+    console.log('selectedDate', selectedDate)
     const requestData = {
         date: JSON.stringify(selectedDate) 
     };
