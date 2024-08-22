@@ -3,6 +3,8 @@ namespace RobinDort\PreorderTimer\Backend\Validation;
 
 use Isotope\Model\Order;
 use Contao\Database;
+use RobinDort\PreorderTimer\Widget\Frontend\Helper\HolidayCalculation;
+
 
 class PreorderLimiter {
 
@@ -13,6 +15,7 @@ class PreorderLimiter {
 	private const FIRST_SHOP_CLOSING_START_TIME_DECIMAL = 14; // e.g 14:00 PM
 	private const FIRST_SHOP_CLOSING_END_TIME_DECIMAL = 17; // e.g 17:00 PM 
 	private const SECOND_SHOP_CLOSING_START_TIME_DECIMAL = 21; // e.g 21:00 PM
+	private const SECOND_SHOP_CLOSING_START_TIME_HOLIDAY_DECIMAL = 22; // e.g 22:00 PM
 	private const SECOND_SHOP_CLOSING_END_TIME_DECIMAL = 12; // e.g 12:00 PM THE NEXT DAY
 	private const CLOSING_SHOP_DAY = 1; // the shop is closed on mondays. Numbers are used to present the days e.g 1 = monday, 2=tuesday...0=sunday
 
@@ -40,6 +43,16 @@ class PreorderLimiter {
 		$hour = (int) date('H', $nextPossibleBookingSlot);
 		$minute = (int) date('i', $nextPossibleBookingSlot);
 
+		// check for possible holidays because in this case the shops closing time changes depending on that.
+		$holidayHelper = new HolidayCalculation();
+		$selectedDate = date("Y-m-d", $dateTime);
+		$shopClosingTime = self::SECOND_SHOP_CLOSING_START_TIME_DECIMAL;
+
+		if ($holidayHelper->isHolidayForDate($dateTime) || (int)date("w", $dateTime) === 0 || (int)date("w", $dateTime) === 6) {
+			$shopClosingTime = self::SECOND_SHOP_CLOSING_START_TIME_HOLIDAY_DECIMAL;
+		}
+		
+
 		// Convert the time into a decimal hour (e.g., 14:30 becomes 14.5)
 		$decimalTime = $hour + $minute / 60;
 
@@ -49,8 +62,8 @@ class PreorderLimiter {
 			$nextPossibleBookingSlot = strtotime(date('Y-m-d', $nextPossibleBookingSlot) . ' 17:00');
 		}
 
-		// Check if the time falls within the range 21:01 to the next day 11:50 (second time shop is closed)
-		if ($decimalTime > self::SECOND_SHOP_CLOSING_START_TIME_DECIMAL || $decimalTime < self::SECOND_SHOP_CLOSING_END_TIME_DECIMAL) {
+		// Check if the time falls within the range 21:01 (or 22:01 on holidays, sundays and saturdays) to the next day 11:50 (second time shop is closed)
+		if ($decimalTime > $shopClosingTime || $decimalTime < self::SECOND_SHOP_CLOSING_END_TIME_DECIMAL) {
 			// Set the time to 12:00 on the next day
 			$nextPossibleBookingSlot = strtotime('+1 day', strtotime(date('Y-m-d', $nextPossibleBookingSlot) . ' 12:00'));
 

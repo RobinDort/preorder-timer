@@ -26,6 +26,10 @@ class HolidayCalculation {
         return $this->holidays->isHoliday(new \DateTime($currentDay));
     }
 
+    public function isHolidayForDate($date) {
+        return $this->holidays->isHoliday(new \DateTime($date));
+    }
+
     public function getHolidays() {
         return $this->holidays;
     }
