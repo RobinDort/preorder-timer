@@ -57,7 +57,8 @@ onClose: function(selectedDates, dateStr, instance) {
     const formattedDate = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
     const dayOfWeek = convertedDate.getDay();
     sendHolidayRequest(formattedDate).then((resp) => {
-        isHoliday = resp.isHoliday;
+        //isHoliday = resp.isHoliday;
+        console.log('resp', resp);
     });
 
     if (dayOfWeek === "0" || dayOfWeek === "6" || isHoliday) {
@@ -122,7 +123,7 @@ function sendHolidayRequest(selectedDate) {
     return new Promise(function(resolve,reject) {
         $.ajax({
             type: "POST",
-            url: "../../../Widget/Frontend/Helper/HolidayRequest.php",
+            url: "/holidayRequest",
             dataType: "json",
             encode: true,
             data: requestData,

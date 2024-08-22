@@ -1,0 +1,18 @@
+<?php
+namespace RobinDort\PreorderTimer\Controller;
+use RobinDort\PreorderTimer\Widget\Frontend\Helper\HolidayCalculation;
+
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+#[Route('/holidayRequest', name: HolidayRequestController::class)]
+class HolidayRequestController
+{
+    public function __invoke(Request $request): Response
+    {
+        return new Response('Hello World!');
+    }
+}
+
+?>
