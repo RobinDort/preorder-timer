@@ -11,7 +11,8 @@ class HolidayRequestController
 {
     public function __invoke(Request $request): Response
     {
-        return new Response('Hello World!');
+
+        return new Response($request);
     }
 }
 
