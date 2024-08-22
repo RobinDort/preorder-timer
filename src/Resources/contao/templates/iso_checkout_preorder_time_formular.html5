@@ -55,7 +55,6 @@ flatpickr(dateInput, {
     onClose: function(selectedDates, dateStr, instance) {
         const [day, month, year] = dateStr.split('.').map(Number);
         const convertedDate = new Date(year, month - 1, day);
-        console.log(convertedDate);
         const formattedDate = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
         dayOfWeek = convertedDate.getDay();
         sendHolidayRequest(formattedDate).then((resp) => {
@@ -109,7 +108,7 @@ flatpickr(timePicker, {
         if (!isValid) {
             // Clear the input if not valid
             instance.clear();
-            if (dayOfWeek === 0 || dayOfWeek === 6 || isHoliday === 1) {
+            if (dayOfWeek === 0 || dayOfWeek === 6 || isHoliday) {
                 alert('Bitte wählen Sie einen Zeitraum zwischen 17:30 - 22:00 Uhr.');
             } else {
                 alert('Bitte wählen Sie einen Zeitraum zwischen 12:00 - 14:00 Uhr oder einen Zeitraum zwischen 17:30 - 21:00 Uhr.');
