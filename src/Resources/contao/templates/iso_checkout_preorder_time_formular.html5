@@ -71,8 +71,6 @@ flatpickr(dateInput, {
                 allowedRange = [{ start: "12:00", end: "14:00" }, { start: "17:30", end: "21:00" }];
             }
             
-            // Refresh the flatpickr instance to apply the new allowedRange
-            instance.set('enable', allowedRange);
 
         } catch (error) {
             console.error('Error during holiday request:', error);
