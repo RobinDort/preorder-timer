@@ -42,6 +42,7 @@ const dateInput = document.getElementById("preorder-formular-date");
 const timePicker = document.getElementById("preorder-formular-time");
 let isHoliday = false;
 const date = new Date();
+let dayOfWeek = "";
 //const dayOfWeek = date.getDay();
 //const allowedRange = dayOfWeek === "0" || dayOfWeek === "6" || isHoliday === 1 ? [{ start: "17:30", end: "22:00"}] :[{ start: "12:00", end: "14:00" },{ start: "17:30", end: "21:00"}];
 let allowedRange;
@@ -56,7 +57,7 @@ flatpickr(dateInput, {
         const convertedDate = new Date(year, month - 1, day);
         console.log(convertedDate);
         const formattedDate = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-        const dayOfWeek = convertedDate.getDay();
+        dayOfWeek = convertedDate.getDay();
         sendHolidayRequest(formattedDate).then((resp) => {
             isHoliday = resp.isHoliday;
             console.log('resp', resp);
