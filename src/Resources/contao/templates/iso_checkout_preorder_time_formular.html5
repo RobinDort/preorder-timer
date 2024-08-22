@@ -63,7 +63,7 @@ flatpickr(dateInput, {
             console.log('resp.isHoliday', resp.isHoliday);
         });
 
-        if (dayOfWeek === "0" || dayOfWeek === "6" || isHoliday) {
+        if (dayOfWeek === 0 || dayOfWeek === 6 || isHoliday) {
             allowedRange = [{ start: "17:30", end: "22:00"}];
         } else {
             allowedRange = [{ start: "12:00", end: "14:00" },{ start: "17:30", end: "21:00"}];
