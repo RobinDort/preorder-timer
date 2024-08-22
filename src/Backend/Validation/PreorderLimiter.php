@@ -32,13 +32,13 @@ class PreorderLimiter {
 	}
 
 	public function findNextAvailableBookingTime($dateTime) {
-		$fifteenMinutesAfter = $dateTime + 900;
+		$nextPossibleBookingSlot = $dateTime + 900;
 
 		// check if the new unixtime is in range of the shops order time. If not set the timestamp to the next available order time of the shop.
 
 		// Get the hour and minute of the new time
-		$hour = (int) date('H', $fifteenMinutesAfter);
-		$minute = (int) date('i', $fifteenMinutesAfter);
+		$hour = (int) date('H', $nextPossibleBookingSlot);
+		$minute = (int) date('i', $nextPossibleBookingSlot);
 
 		// Convert the time into a decimal hour (e.g., 14:30 becomes 14.5)
 		$decimalTime = $hour + $minute / 60;
@@ -46,29 +46,29 @@ class PreorderLimiter {
 		// Check if the time falls within the range 14:01 to 16:59 (first time shop is closed).
 		if ($decimalTime > self::FIRST_SHOP_CLOSING_START_TIME_DECIMAL && $decimalTime < self::FIRST_SHOP_CLOSING_END_TIME_DECIMAL) {
 			// Set the time to 17:00 on the same day
-			$fifteenMinutesAfter = strtotime(date('Y-m-d', $fifteenMinutesAfter) . ' 17:00');
+			$nextPossibleBookingSlot = strtotime(date('Y-m-d', $nextPossibleBookingSlot) . ' 17:00');
 		}
 
 		// Check if the time falls within the range 21:01 to the next day 11:50 (second time shop is closed)
 		if ($decimalTime > self::SECOND_SHOP_CLOSING_START_TIME_DECIMAL || $decimalTime < self::SECOND_SHOP_CLOSING_END_TIME_DECIMAL) {
 			// Set the time to 12:00 on the next day
-			$fifteenMinutesAfter = strtotime('+1 day', strtotime(date('Y-m-d', $fifteenMinutesAfter) . ' 12:00'));
+			$nextPossibleBookingSlot = strtotime('+1 day', strtotime(date('Y-m-d', $nextPossibleBookingSlot) . ' 12:00'));
 
 			// Get the date in "Y-m-d" format
-			$newDate = date('Y-m-d', $fifteenMinutesAfter);
+			$newDate = date('Y-m-d', $nextPossibleBookingSlot);
 
 			// check if the new date is a holiday or a monday. (shop is closed on mondays).
-			if ((int)date("w", $fifteenMinutesAfter) === self::CLOSING_SHOP_DAY) {
-				$fifteenMinutesAfter = strtotime('+1 day', $fifteenMinutesAfter);
+			if ((int)date("w", $nextPossibleBookingSlot) === self::CLOSING_SHOP_DAY) {
+				$nextPossibleBookingSlot = strtotime('+1 day', $nextPossibleBookingSlot);
 			}
 		}
 
-		$amountPreorders = $this->countPreordersForDateTime($fifteenMinutesAfter);
+		$amountPreorders = $this->countPreordersForDateTime($nextPossibleBookingSlot);
 		if ($amountPreorders > 1) {
-			return $this->findNextAvailableBookingTime($fifteenMinutesAfter);
+			return $this->findNextAvailableBookingTime($nextPossibleBookingSlot);
 		}
 		
-		return $fifteenMinutesAfter;
+		return $nextPossibleBookingSlot;
 	}
 }
 ?>
