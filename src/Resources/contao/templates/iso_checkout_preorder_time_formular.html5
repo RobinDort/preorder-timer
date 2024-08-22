@@ -4,7 +4,6 @@ use RobinDort\PreorderTimer\Widget\Frontend\Helper\HolidayCalculation;
 
 $holidayCalculator = new HolidayCalculation();
 $isHoliday = $holidayCalculator->isHolidayToday();
-$endTime = $holidayCalculator->isHolidayToday() ? "22:00" : "21:00";
 ?>
 
 <?php $this->extend('form_row'); ?>
@@ -41,17 +40,33 @@ value="<?= htmlspecialchars($this->value['time'] ?? '') ?>"
 document.addEventListener('DOMContentLoaded', function() {
 const dateInput = document.getElementById("preorder-formular-date");
 const timePicker = document.getElementById("preorder-formular-time");
-const dynamicEndTime = "<?= $endTime; ?>";
-const isHoliday = "<?= $isHoliday; ?>";
-const date = new Date();
-const dayOfWeek = date.getDay();
-const allowedRange = dayOfWeek === "0" || dayOfWeek === "6" || isHoliday === 1 ? [{ start: "17:30", end: "22:00"}] :[{ start: "12:00", end: "14:00" },{ start: "17:30", end: "21:00"}];
+//const isHoliday = "<?= $isHoliday; ?>";
+const isHoliday = false;
+//const date = new Date();
+//const dayOfWeek = date.getDay();
+//const allowedRange = dayOfWeek === "0" || dayOfWeek === "6" || isHoliday === 1 ? [{ start: "17:30", end: "22:00"}] :[{ start: "12:00", end: "14:00" },{ start: "17:30", end: "21:00"}];
+let allowedRange;
 
 flatpickr(dateInput, {
 dateFormat: "d.m.Y",
 locale: "de",
 minDate: "today",
 maxDate: new Date().fp_incr(28),
+onClose: function(selectedDates, dateStr, instance) {
+    const [day, month, year] = dateStr.split('.').map(Number);
+    const date = new Date(year, month - 1, day);
+    const formattedDate = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+    const dayOfWeek = date.getDay();
+    sendHolidayRequest(formattedDate).then((resp) => {
+        isHoliday = resp.isHoliday;
+    });
+
+    if (dayOfWeek === "0" || dayOfWeek === "6" || isHoliday) {
+        allowedRange = [{ start: "17:30", end: "22:00"}];
+    } else {
+        allowedRange = [{ start: "12:00", end: "14:00" },{ start: "17:30", end: "21:00"}];
+    }
+}
 disable: [
 function(date) {
 // Disable all Mondays
@@ -99,6 +114,29 @@ alert('Bitte wählen Sie einen Zeitraum zwischen 12:00 - 14:00 Uhr oder einen Ze
 }
 }
 });
+
+function sendHolidayRequest(selectedDate) {
+    const requestData = {
+        date: JSON.stringify(selectedDate) 
+    };
+    return new Promise(function(resolve,reject) {
+        $.ajax({
+            type: "POST",
+            url: "../../../Widget/Frontend/Helper/HolidayRequest.php",
+            dataType: "json",
+            encode: true,
+            data: requestData,
+            success: function(response) {
+                resolve(response);
+            },
+            error: function(error) {
+                console.log(error);
+                reject(error);
+            }
+        })
+   });
+
+}
 
 function timeInRange(time, start, end) {
 const timeObj = new Date(`1970-01-01T${time}:00`);
