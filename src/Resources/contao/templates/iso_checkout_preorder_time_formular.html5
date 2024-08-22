@@ -40,9 +40,8 @@ value="<?= htmlspecialchars($this->value['time'] ?? '') ?>"
 document.addEventListener('DOMContentLoaded', function() {
 const dateInput = document.getElementById("preorder-formular-date");
 const timePicker = document.getElementById("preorder-formular-time");
-//const isHoliday = "<?= $isHoliday; ?>";
 const isHoliday = false;
-//const date = new Date();
+const date = new Date();
 //const dayOfWeek = date.getDay();
 //const allowedRange = dayOfWeek === "0" || dayOfWeek === "6" || isHoliday === 1 ? [{ start: "17:30", end: "22:00"}] :[{ start: "12:00", end: "14:00" },{ start: "17:30", end: "21:00"}];
 let allowedRange;
@@ -54,9 +53,9 @@ minDate: "today",
 maxDate: new Date().fp_incr(28),
 onClose: function(selectedDates, dateStr, instance) {
     const [day, month, year] = dateStr.split('.').map(Number);
-    const date = new Date(year, month - 1, day);
+    const convertedDate = new Date(year, month - 1, day);
     const formattedDate = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-    const dayOfWeek = date.getDay();
+    const dayOfWeek = convertedDate.getDay();
     sendHolidayRequest(formattedDate).then((resp) => {
         isHoliday = resp.isHoliday;
     });
@@ -68,16 +67,16 @@ onClose: function(selectedDates, dateStr, instance) {
     }
 }
 disable: [
-function(date) {
-// Disable all Mondays
-return date.getDay() === 1;
-},
-function(date) {
-// Disable 25th December and 26th December for any year
-const day = date.getDate();
-const month = date.getMonth() + 1; // getMonth() is zero-based
-return (day === 25 && month === 12) || (day === 26 && month === 12);
-}
+    function(date) {
+        // Disable all Mondays
+        return date.getDay() === 1;
+    },
+    function(date) {
+        // Disable 25th December and 26th December for any year
+        const day = date.getDate();
+        const month = date.getMonth() + 1; // getMonth() is zero-based
+        return (day === 25 && month === 12) || (day === 26 && month === 12);
+    }
 ]
 });
 
