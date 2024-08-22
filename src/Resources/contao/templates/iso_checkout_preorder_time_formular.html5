@@ -52,22 +52,30 @@ flatpickr(dateInput, {
     locale: "de",
     minDate: "today",
     maxDate: new Date().fp_incr(42),
-    onClose: function(selectedDates, dateStr, instance) {
+    onClose: async function(selectedDates, dateStr, instance) {
         const [day, month, year] = dateStr.split('.').map(Number);
         const convertedDate = new Date(year, month - 1, day);
         const formattedDate = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-        dayOfWeek = convertedDate.getDay();
-        sendHolidayRequest(formattedDate).then((resp) => {
+        const dayOfWeek = convertedDate.getDay();
+
+        try {
+            const resp = await sendHolidayRequest(formattedDate);
             console.log('resp', resp);
             console.log('resp.isHoliday', resp.isHoliday);
-            isHoliday = resp.isHoliday;
-            console.log('isHoliday', isHoliday)
-        });
+            const isHoliday = resp.isHoliday;
+            console.log('isHoliday', isHoliday);
 
-        if (dayOfWeek === 0 || dayOfWeek === 6 || isHoliday) {
-            allowedRange = [{ start: "17:30", end: "22:00"}];
-        } else {
-            allowedRange = [{ start: "12:00", end: "14:00" },{ start: "17:30", end: "21:00"}];
+            if (dayOfWeek === 0 || dayOfWeek === 6 || isHoliday) {
+                allowedRange = [{ start: "17:30", end: "22:00" }];
+            } else {
+                allowedRange = [{ start: "12:00", end: "14:00" }, { start: "17:30", end: "21:00" }];
+            }
+            
+            // Refresh the flatpickr instance to apply the new allowedRange
+            instance.set('enable', allowedRange);
+
+        } catch (error) {
+            console.error('Error during holiday request:', error);
         }
     },
     disable: [
