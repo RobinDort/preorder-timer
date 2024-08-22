@@ -11,8 +11,9 @@ class HolidayRequestController
 {
     public function __invoke(Request $request): Response
     {
+        $extractedDate = $request->request->get('date');
 
-        return new Response($request);
+        return new Response($extractedDate);
     }
 }
 
