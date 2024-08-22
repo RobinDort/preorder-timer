@@ -11,7 +11,7 @@ class HolidayRequestController
 {
     public function __invoke(Request $request): JsonResponse
     {
-        $extractedDate = $request->request->get('date');
+        $extractedDate = trim($request->request->get('date'), '"');
         $holidayHelper = new HolidayCalculation();
         $response = ["isHoliday"=>false];
 
