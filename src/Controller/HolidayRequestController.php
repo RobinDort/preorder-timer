@@ -12,8 +12,14 @@ class HolidayRequestController
     public function __invoke(Request $request): Response
     {
         $extractedDate = $request->request->get('date');
+        $holidayHelper = new HolidayCalculation();
+        $response = ["isHoliday"=>false];
 
-        return new Response($extractedDate);
+        if ($holidayHelper->isHolidayForDate($extractedDate) === 1) {
+            $response["isHoliday"] = true;
+        }
+
+        return new Response($response);
     }
 }
 

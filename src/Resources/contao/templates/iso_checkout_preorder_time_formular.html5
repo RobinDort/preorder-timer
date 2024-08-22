@@ -59,6 +59,7 @@ onClose: function(selectedDates, dateStr, instance) {
     sendHolidayRequest(formattedDate).then((resp) => {
         //isHoliday = resp.isHoliday;
         console.log('resp', resp);
+        console.log('resp.isHoliday', resp.isHoliday);
     });
 
     if (dayOfWeek === "0" || dayOfWeek === "6" || isHoliday) {
