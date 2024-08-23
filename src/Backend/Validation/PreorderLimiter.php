@@ -76,6 +76,11 @@ class PreorderLimiter {
 
 			// Get the date in "Y-m-d" format
 			$newDate = date('Y-m-d', $nextPossibleBookingSlot);
+		
+			// check if the new date is a saturday or sunday so the shop in only open at 17:30.  
+			if ((int)date("w", $nextPossibleBookingSlot) === 0 || (int)date("w", $nextPossibleBookingSlot) === 6) { // 0 = Sunday, 6 = Saturday
+				$nextPossibleBookingSlot = strtotime(date('Y-m-d', $nextPossibleBookingSlot) . ' 17:30');
+			}
 
 			// check if the new date is a holiday or a monday. (shop is closed on mondays).
 			if ((int)date("w", $nextPossibleBookingSlot) === self::CLOSING_SHOP_DAY) {
