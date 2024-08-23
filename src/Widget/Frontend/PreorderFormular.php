@@ -99,7 +99,7 @@ class PreorderFormular extends Widget {
 
         $ship_Id = $this->shippingId;
 
-            \System::log("shippingId global: " . $shippingId,__METHOD__,TL_ERROR);
+            \System::log("shippingId global: " . $this->shippingId,__METHOD__,TL_ERROR);
             \System::log("shippingId local: " . $ship_Id,__METHOD__,TL_ERROR);
 
             throw new \Exception("shipID: " . $ship_Id);
