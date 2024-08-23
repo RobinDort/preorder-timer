@@ -34,6 +34,9 @@ class PreorderLimiter {
 		} else {
 			$statement = $pickupStmt;
 		}
+
+		\System::log("statement: " . $statement,__METHOD__,TL_ERROR);
+		throw new \Exception("statement: ". $statement);
 		
 		$preordersResult = Database::getInstance()->execute($statement)->fetchAssoc();
 			
