@@ -20,7 +20,7 @@ class PreorderLimiter {
 	private const CLOSING_SHOP_DAY = 1; // the shop is closed on mondays. Numbers are used to present the days e.g 1 = monday, 2=tuesday...0=sunday
 
 
-	public function countPreordersForDateTime($dateTime, $isShippingOrder=true) {
+	public function countPreordersForDateTime($dateTime, $isShippingOrder) {
 
 		$dateTimeBeforeSevenMinutes = $dateTime - 420;
 		$dateTimeAfterSevenMinutes = $dateTime + 420; //Unixtime so 7*60 = 420
