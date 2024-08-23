@@ -20,22 +20,22 @@ class PreorderLimiter {
 	private const CLOSING_SHOP_DAY = 1; // the shop is closed on mondays. Numbers are used to present the days e.g 1 = monday, 2=tuesday...0=sunday
 
 
-	public function countPreordersForDateTime($dateTime, $isShippingOrder) {
+	public function countPreordersForDateTime($dateTime, $isShippingOrder=true) {
 
 		$dateTimeBeforeSevenMinutes = $dateTime - 420;
 		$dateTimeAfterSevenMinutes = $dateTime + 420; //Unixtime so 7*60 = 420
 
 		$shippingStmt = "SELECT COUNT(*) AS total_count FROM `tl_iso_product_collection` WHERE type='order' AND shipping_id != 28 AND preorder_time BETWEEN " . $dateTimeBeforeSevenMinutes . " AND " . $dateTimeAfterSevenMinutes;
 		$pickupStmt = "SELECT COUNT(*) AS total_count FROM `tl_iso_product_collection` WHERE type='order' AND shipping_id = 28 AND preorder_time BETWEEN " . $dateTimeBeforeSevenMinutes . " AND " . $dateTimeAfterSevenMinutes;
-		$preordersResult = Database::getInstance();
+		$statement = null;
 
 		if ($isShippingOrder) {
-			$preordersResult->prepare($shippingStmt);
+			$statement = $shippingStmt;
 		} else {
-			$preordersResult->prepare($pickupStmt);
+			$statement = $pickupStmt;
 		}
 		
-		$preordersResult->execute()->fetchAssoc();
+		$preordersResult = Database::getInstance()->execute($statement)->fetchAssoc();
 			
 		// Return 0 if no result is found
 		return (int) $preordersResult['total_count'];
