@@ -30,7 +30,10 @@ class PreorderFormular extends Widget {
     private const MAX_AMOUNT_SHIPPING_ORDERS = 2;
     private const MAX_AMOUNT_PICK_UP_ORDERS = 3;
 
-    public function __construct() {
+    public function __construct($arrAttributes = null) {
+        parent::__construct($arrAttributes);
+        
+        $this->shippingId = $arrAttributes['shippingId'] ?? null;
 		$this->preorderLimiter = new PreorderLimiter();
 	}
 
