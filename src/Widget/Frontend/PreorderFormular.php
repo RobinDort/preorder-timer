@@ -83,7 +83,7 @@ class PreorderFormular extends Widget {
             \System::log("shippingId global: " . $shippingId,__METHOD__,TL_ERROR);
             \System::log("shippingId local: " . $ship_Id,__METHOD__,TL_ERROR);
 
-            throw new Exception("shipID: " . $ship_Id);
+            throw new \Exception("shipID: " . $ship_Id);
 
             $preorderShippingCountForDateTime = $this->preorderLimiter->countPreordersForDateTime($dateTimeTimestamp, true);
             $preorderPickupCountForDateTime = $this->preorderLimiter->countPreordersForDateTime($dateTimeTimestamp, false);
