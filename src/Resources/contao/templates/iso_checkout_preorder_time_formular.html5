@@ -92,6 +92,8 @@ flatpickr(timePicker, {
     dateFormat: "H:i",
     minuteIncrement: 15, // Optional: set to adjust the minute increments
     allowInput: false,
+    defaultHour: 12,
+    defaultMinute: 30,
     onClose: function(selectedDates, dateStr, instance) {
 
         const allowedRanges = allowedRange;
