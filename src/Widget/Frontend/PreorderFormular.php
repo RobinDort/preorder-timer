@@ -32,7 +32,7 @@ class PreorderFormular extends Widget {
 
     public function __construct($arrAttributes = null) {
         parent::__construct($arrAttributes);
-        
+
         $this->shippingId = $arrAttributes['shippingId'] ?? null;
 		$this->preorderLimiter = new PreorderLimiter();
 	}
@@ -81,16 +81,26 @@ class PreorderFormular extends Widget {
             $this->addError($errorMessage);
         } else {
 
-            $preorderShippingCountForDateTime = $this->preorderLimiter->countPreordersForDateTime($dateTimeTimestamp, true);
-            $preorderPickupCountForDateTime = $this->preorderLimiter->countPreordersForDateTime($dateTimeTimestamp, false);
+            if ($this->shippingId !== null && $this->shippingId !== 28) { // shipping ID 28 is a pickup order
+                $preorderShippingCountForDateTime = $this->preorderLimiter->countPreordersForDateTime($dateTimeTimestamp, true);
 
-            if($preorderShippingCountForDateTime >= self::MAX_AMOUNT_SHIPPING_ORDERS || $preorderPickupCountForDateTime >= self::MAX_AMOUNT_PICK_UP_ORDERS) {
+                if($preorderShippingCountForDateTime >= self::MAX_AMOUNT_SHIPPING_ORDERS) {
                 
-                $nextPossibleBookingTime =  $this->preorderLimiter->findNextAvailableBookingTime($dateTimeTimestamp, true);
-                $formatedBookingTime = date('d.m.Y H:i', $nextPossibleBookingTime);
-                $errorMessage = "Wir bedauern, Ihnen mitteilen zu müssen, dass für den von Ihnen gewünschten Zeitraum bereits zu viele Vorbestellungen eingegangen sind. Wir bitten Sie daher einen anderen Zeitraum für Ihre Bestellung auszuwählen. Der nächstmögliche Bestellzeitraum ist: " . $formatedBookingTime;
-                $this->addError($errorMessage);
-            }
+                    $nextPossibleBookingTime =  $this->preorderLimiter->findNextAvailableBookingTime($dateTimeTimestamp, true);
+                    $formatedBookingTime = date('d.m.Y H:i', $nextPossibleBookingTime);
+                    $errorMessage = "Wir bedauern, Ihnen mitteilen zu müssen, dass für den von Ihnen gewünschten Zeitraum bereits zu viele Vorbestellungen zur Lieferung eingegangen sind. Wir bitten Sie daher einen anderen Zeitraum für Ihre Bestellung auszuwählen. Der nächstmögliche Bestellzeitraum ist: " . $formatedBookingTime;
+                    $this->addError($errorMessage);
+                }
+            } else if ($this->shippingId !== null && $this->shippingId === 28) // pickup order
+                $preorderPickupCountForDateTime = $this->preorderLimiter->countPreordersForDateTime($dateTimeTimestamp, false);
+
+                if($preorderPickupCountForDateTime >= self::MAX_AMOUNT_PICK_UP_ORDERS) {
+                    
+                    $nextPossibleBookingTime =  $this->preorderLimiter->findNextAvailableBookingTime($dateTimeTimestamp, false);
+                    $formatedBookingTime = date('d.m.Y H:i', $nextPossibleBookingTime);
+                    $errorMessage = "Wir bedauern, Ihnen mitteilen zu müssen, dass für den von Ihnen gewünschten Zeitraum bereits zu viele Vorbestellungen zur Abholung eingegangen sind. Wir bitten Sie daher einen anderen Zeitraum für Ihre Bestellung auszuwählen. Der nächstmögliche Bestellzeitraum ist: " . $formatedBookingTime;
+                    $this->addError($errorMessage);
+                }
         }
 
         return $dateTime->getTimestamp();
@@ -99,13 +109,6 @@ class PreorderFormular extends Widget {
 
     public function validate()
     {
-
-        $ship_Id = $this->shippingId;
-
-            \System::log("shippingId global: " . $this->shippingId,__METHOD__,TL_ERROR);
-            \System::log("shippingId local: " . $ship_Id,__METHOD__,TL_ERROR);
-
-            throw new \Exception("shipID: " . $ship_Id);
        
         $dateValue = $this->getPost("date-input");
         $timeValue = $this->getPost("time-input");
