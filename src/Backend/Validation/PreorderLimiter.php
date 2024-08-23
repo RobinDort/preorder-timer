@@ -29,7 +29,7 @@ class PreorderLimiter {
 		$pickupStmt = "SELECT COUNT(*) AS total_count FROM `tl_iso_product_collection` WHERE type='order' AND shipping_id = 28 AND preorder_time BETWEEN " . $dateTimeBeforeSevenMinutes . " AND " . $dateTimeAfterSevenMinutes;
 		$statement = null;
 
-		if ($isShippingOrder) {
+		if ($isShippingOrder === true) {
 			$statement = $shippingStmt;
 		} else {
 			$statement = $pickupStmt;

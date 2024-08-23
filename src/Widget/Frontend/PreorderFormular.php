@@ -91,7 +91,9 @@ class PreorderFormular extends Widget {
                     $errorMessage = "Wir bedauern, Ihnen mitteilen zu müssen, dass für den von Ihnen gewünschten Zeitraum bereits zu viele Vorbestellungen zur Lieferung eingegangen sind. Wir bitten Sie daher einen anderen Zeitraum für Ihre Bestellung auszuwählen. Der nächstmögliche Bestellzeitraum ist: " . $formatedBookingTime;
                     $this->addError($errorMessage);
                 }
-            } else if ($this->shippingId !== null && $this->shippingId === 28) // pickup order
+            } 
+            
+            if ($this->shippingId !== null && $this->shippingId === 28) // pickup order
                 $preorderPickupCountForDateTime = $this->preorderLimiter->countPreordersForDateTime($dateTimeTimestamp, false);
                 \System::log("preorderPickupCountForDateTime: " . $preorderPickupCountForDateTime,__METHOD__,TL_ERROR);
                 throw new \Exception("preorderPickupCountForDateTime: ". $preorderPickupCountForDateTime);
