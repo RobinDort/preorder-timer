@@ -78,13 +78,6 @@ class PreorderFormular extends Widget {
             $this->addError($errorMessage);
         } else {
 
-            $ship_Id = $this->shippingId;
-
-            \System::log("shippingId global: " . $shippingId,__METHOD__,TL_ERROR);
-            \System::log("shippingId local: " . $ship_Id,__METHOD__,TL_ERROR);
-
-            throw new \Exception("shipID: " . $ship_Id);
-
             $preorderShippingCountForDateTime = $this->preorderLimiter->countPreordersForDateTime($dateTimeTimestamp, true);
             $preorderPickupCountForDateTime = $this->preorderLimiter->countPreordersForDateTime($dateTimeTimestamp, false);
 
@@ -103,6 +96,13 @@ class PreorderFormular extends Widget {
 
     public function validate()
     {
+
+        $ship_Id = $this->shippingId;
+
+            \System::log("shippingId global: " . $shippingId,__METHOD__,TL_ERROR);
+            \System::log("shippingId local: " . $ship_Id,__METHOD__,TL_ERROR);
+
+            throw new \Exception("shipID: " . $ship_Id);
        
         $dateValue = $this->getPost("date-input");
         $timeValue = $this->getPost("time-input");
