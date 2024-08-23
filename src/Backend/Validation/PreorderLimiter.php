@@ -20,21 +20,28 @@ class PreorderLimiter {
 	private const CLOSING_SHOP_DAY = 1; // the shop is closed on mondays. Numbers are used to present the days e.g 1 = monday, 2=tuesday...0=sunday
 
 
-	public function countPreordersForDateTime($dateTime) {
+	public function countPreordersForDateTime($dateTime, $isShippingOrder) {
 
 		$dateTimeBeforeSevenMinutes = $dateTime - 420;
 		$dateTimeAfterSevenMinutes = $dateTime + 420; //Unixtime so 7*60 = 420
+
+		$shippingStmt = "SELECT COUNT(*) AS total_count FROM `tl_iso_product_collection` WHERE type='order' AND shipping_id != 28 AND preorder_time BETWEEN " . $dateTimeBeforeSevenMinutes . " AND " . $dateTimeAfterSevenMinutes;
+		$pickupStmt = "SELECT COUNT(*) AS total_count FROM `tl_iso_product_collection` WHERE type='order' AND shipping_id = 28 AND preorder_time BETWEEN " . $dateTimeBeforeSevenMinutes . " AND " . $dateTimeAfterSevenMinutes;
+		$preordersResult = Database::getInstance();
+
+		if ($isShippingOrder) {
+			$preordersResult->prepare($shippingStmt);
+		} else {
+			$preordersResult->prepare($pickupStmt);
+		}
 		
-		$preordersResult = Database::getInstance()
-		->prepare("SELECT COUNT(*) AS total_count FROM `tl_iso_product_collection` WHERE type='order' AND shipping_id != 28 AND preorder_time BETWEEN " . $dateTimeBeforeSevenMinutes . " AND " . $dateTimeAfterSevenMinutes)
-		->execute()
-		->fetchAssoc();
+		$preordersResult->execute()->fetchAssoc();
 			
 		// Return 0 if no result is found
 		return (int) $preordersResult['total_count'];
 	}
 
-	public function findNextAvailableBookingTime($dateTime) {
+	public function findNextAvailableBookingTime($dateTime, $isShippingOrder) {
 		$nextPossibleBookingSlot = $dateTime + 900;
 
 		// check if the new unixtime is in range of the shops order time. If not set the timestamp to the next available order time of the shop.
@@ -76,9 +83,21 @@ class PreorderLimiter {
 			}
 		}
 
-		$amountPreorders = $this->countPreordersForDateTime($nextPossibleBookingSlot);
-		if ($amountPreorders > 1) {
-			return $this->findNextAvailableBookingTime($nextPossibleBookingSlot);
+		$amountPreorders = 0;
+
+		if ($isShippingOrder) {
+			$amountPreorders = $this->countPreordersForDateTime($nextPossibleBookingSlot, true);
+
+			if ($amountPreorders > 1) {
+				return $this->findNextAvailableBookingTime($nextPossibleBookingSlot, true);
+			}
+
+		} else {
+			$amountPreorders = $this->countPreordersForDateTime($nextPossibleBookingSlot, false);
+
+			if ($amountPreorders > 2) {
+				return $this->findNextAvailableBookingTime($nextPossibleBookingSlot, false);
+			}
 		}
 		
 		return $nextPossibleBookingSlot;

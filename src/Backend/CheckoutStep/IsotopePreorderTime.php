@@ -53,6 +53,7 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
             'storeValues'   => TRUE,
             'tableless'     => TRUE,
             'rgxp'          => 'date', // This ensures the date format is validated
+            'shippingId'    => \Isotope::getCart()->shipping_id, // Pass the shipping ID
         ]);
 
         $dateValue = "";

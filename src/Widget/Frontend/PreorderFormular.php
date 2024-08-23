@@ -15,6 +15,8 @@ class PreorderFormular extends Widget {
     protected $strPrefix = 'widget widget-preorder-formular';
     protected $strName;
 
+    public $shippingId;
+
 
     private $preorderLimiter;
 
@@ -26,6 +28,7 @@ class PreorderFormular extends Widget {
 	protected $varValue;
 
     private const MAX_AMOUNT_SHIPPING_ORDERS = 2;
+    private const MAX_AMOUNT_PICK_UP_ORDERS = 3;
 
     public function __construct() {
 		$this->preorderLimiter = new PreorderLimiter();
@@ -75,10 +78,19 @@ class PreorderFormular extends Widget {
             $this->addError($errorMessage);
         } else {
 
-            $preorderCountForDateTime = $this->preorderLimiter->countPreordersForDateTime($dateTimeTimestamp);
+            $ship_Id = $this->shippingId;
 
-            if($preorderCountForDateTime >= self::MAX_AMOUNT_SHIPPING_ORDERS) {
-                $nextPossibleBookingTime =  $this->preorderLimiter->findNextAvailableBookingTime($dateTimeTimestamp);
+            \System::log("shippingId global: " . $shippingId,__METHOD__,TL_ERROR);
+            \System::log("shippingId local: " . $ship_Id,__METHOD__,TL_ERROR);
+
+            throw new Exception("shipID: " . $ship_Id);
+
+            $preorderShippingCountForDateTime = $this->preorderLimiter->countPreordersForDateTime($dateTimeTimestamp, true);
+            $preorderPickupCountForDateTime = $this->preorderLimiter->countPreordersForDateTime($dateTimeTimestamp, false);
+
+            if($preorderShippingCountForDateTime >= self::MAX_AMOUNT_SHIPPING_ORDERS || $preorderPickupCountForDateTime >= self::MAX_AMOUNT_PICK_UP_ORDERS) {
+                
+                $nextPossibleBookingTime =  $this->preorderLimiter->findNextAvailableBookingTime($dateTimeTimestamp, true);
                 $formatedBookingTime = date('d.m.Y H:i', $nextPossibleBookingTime);
                 $errorMessage = "Wir bedauern, Ihnen mitteilen zu müssen, dass für den von Ihnen gewünschten Zeitraum bereits zu viele Vorbestellungen eingegangen sind. Wir bitten Sie daher einen anderen Zeitraum für Ihre Bestellung auszuwählen. Der nächstmögliche Bestellzeitraum ist: " . $formatedBookingTime;
                 $this->addError($errorMessage);
