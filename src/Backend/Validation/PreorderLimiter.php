@@ -59,13 +59,13 @@ class PreorderLimiter {
 		// Check if the time falls within the range 14:01 to 16:59 (first time shop is closed).
 		if ($decimalTime > self::FIRST_SHOP_CLOSING_START_TIME_DECIMAL && $decimalTime < self::FIRST_SHOP_CLOSING_END_TIME_DECIMAL) {
 			// Set the time to 17:00 on the same day
-			$nextPossibleBookingSlot = strtotime(date('Y-m-d', $nextPossibleBookingSlot) . ' 17:00');
+			$nextPossibleBookingSlot = strtotime(date('Y-m-d', $nextPossibleBookingSlot) . ' 17:30');
 		}
 
 		// Check if the time falls within the range 21:01 (or 21:31 on holidays, sundays and saturdays) to the next day 11:59 (second time shop is closed)
 		if ($decimalTime > $shopClosingTime || $decimalTime < self::SECOND_SHOP_CLOSING_END_TIME_DECIMAL) {
 			// Set the time to 12:00 on the next day
-			$nextPossibleBookingSlot = strtotime('+1 day', strtotime(date('Y-m-d', $nextPossibleBookingSlot) . ' 12:00'));
+			$nextPossibleBookingSlot = strtotime('+1 day', strtotime(date('Y-m-d', $nextPossibleBookingSlot) . ' 12:30'));
 
 			// Get the date in "Y-m-d" format
 			$newDate = date('Y-m-d', $nextPossibleBookingSlot);
