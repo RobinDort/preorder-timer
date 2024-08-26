@@ -43,13 +43,15 @@ document.addEventListener('DOMContentLoaded', async function() {
     const date = new Date();
     let isHoliday = false;
     let dayOfWeek = -1;
-    let allowedRange;
+    let allowedRange = [];
 
     // First check if there is already a value inside the dateInput and if so validate it to set the allowed range.
     if (dateInput.value !== null && dateInput.value !== "") {
-        const {range, weekday} = setAllowedRange(dateInput.value);
+        const {range, weekday} = await setAllowedRange(dateInput.value);
         dayOfWeek = weekday;
         allowedRange = range;
+
+        console.log(allowedRange);
 
         for (const range of allowedRange) {
             if (timeInRange(timeSelected, range.start, range.end)) {
@@ -77,7 +79,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         minDate: "today",
         maxDate: new Date().fp_incr(7),
         onClose: async function(selectedDates, dateStr, instance) {
-            const {range, weekday} = setAllowedRange(dateStr);
+            const {range, weekday} = await setAllowedRange(dateStr);
             dayOfWeek = weekday;
             allowedRange = range;
         },
