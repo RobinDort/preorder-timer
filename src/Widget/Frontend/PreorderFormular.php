@@ -121,7 +121,7 @@ class PreorderFormular extends Widget {
             return;
         }
 
-       // try {
+        try {
             // Call the validator to perform validation and store the result
             $varValue = $this->validator($combinedValue);
     
@@ -133,11 +133,11 @@ class PreorderFormular extends Widget {
                 // Set the validated value
                 $this->varValue = $varValue;
             }
-     //   } catch (\Exception $e) {
+        } catch (\Exception $e) {
             // Log the exception and prevent form submission
-       //     $this->blnSubmitInput = false;
-         //   $this->class = 'error';
-        //}
+            $this->blnSubmitInput = false;
+            $this->class = 'error';
+        }
     }
 }
 ?>
