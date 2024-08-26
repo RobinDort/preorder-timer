@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
 
     // Also check for the time picker value
-    if (timePicker.value !== null) {
+    if (timePicker.value !== null && timePicker.value !== "") {
         const timeSelected = timePicker.value;
         let isValid = false;
         for (const range of allowedRange) {
