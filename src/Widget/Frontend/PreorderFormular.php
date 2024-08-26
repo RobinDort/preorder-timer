@@ -81,11 +81,12 @@ class PreorderFormular extends Widget {
             $errorMessage = "Um die Effizienz der von Ihnen getätigten Vorbestellungen zu optimieren, bitten wir Sie, einen Zeitraum zu wählen, welcher mindestens eine Stunde nach dem aktuellen Zeitpunkt liegt.";
             $this->addError($errorMessage);
         } else {
-
-            \System::log("shippingid first if: " . $this->shippingId,__METHOD__,TL_ERROR);
-            throw new \Exception("shippingid: ". $this->shippingId);
         
             if ($this->shippingId !== null && $this->shippingId !== 28) { // shipping ID 28 is a pickup order
+                \System::log("shippingid first if: " . $this->shippingId,__METHOD__,TL_ERROR);
+                throw new \Exception("shippingid: ". $this->shippingId);
+
+
                 $preorderShippingCountForDateTime = $this->preorderLimiter->countPreordersForDateTime($dateTimeTimestamp, true);
                 \System::log("shippingid: " . $this->shippingId,__METHOD__,TL_ERROR);
                 throw new \Exception("shippingid: ". $this->shippingId);
@@ -99,10 +100,10 @@ class PreorderFormular extends Widget {
                 }
             }
 
-            \System::log("shippingid second if: " . $this->shippingId,__METHOD__,TL_ERROR);
-		    throw new \Exception("shippingid: ". $this->shippingId);
             
             if ($this->shippingId === 28) { // pickup order
+                \System::log("shippingid second if: " . $this->shippingId,__METHOD__,TL_ERROR);
+                throw new \Exception("shippingid: ". $this->shippingId);
                 $preorderPickupCountForDateTime = $this->preorderLimiter->countPreordersForDateTime($dateTimeTimestamp, false);
 
                 if($preorderPickupCountForDateTime >= self::MAX_AMOUNT_PICK_UP_ORDERS) {
