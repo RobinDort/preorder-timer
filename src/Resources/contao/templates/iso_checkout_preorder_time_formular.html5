@@ -50,9 +50,12 @@ document.addEventListener('DOMContentLoaded', async function() {
         const {range, weekday} = await setAllowedRange(dateInput.value);
         dayOfWeek = weekday;
         allowedRange = range;
+    }
 
-        console.log(allowedRange);
-
+    // Also check for the time picker value
+    if (timePicker.value !== null) {
+        const timeSelected = timePicker.value;
+        let isValid = false;
         for (const range of allowedRange) {
             if (timeInRange(timeSelected, range.start, range.end)) {
                 isValid = true;
