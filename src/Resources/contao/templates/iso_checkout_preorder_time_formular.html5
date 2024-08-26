@@ -37,20 +37,29 @@ value="<?= htmlspecialchars($this->value['time'] ?? '') ?>"
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
 const dateInput = document.getElementById("preorder-formular-date");
 const timePicker = document.getElementById("preorder-formular-time");
-let isHoliday = false;
 const date = new Date();
+let isHoliday = false;
 let dayOfWeek = "";
 let allowedRange;
-console.log(dateInput);
+
+// First check if there is already a value inside the dateInput and if so validate it to set the allowed range.
+if (dateInput.value !== null && dateInput.value !== "") {
+    const {convertedDate, formattedDate} = getCorrectlyFormattedDateFromString(dateInput.value);
+    const dayOfSelectedDate = convertedDate.getDay();
+    const selectedDayIsHoliday = await checkDateForHoliday(correctlyFormattedDate);
+    allowedRange = dayOfSelectedDate === 0 || dayOfSelectedDate === 6 || selectedDayIsHoliday ? [{ start: "17:30", end: "21:30" }] : [{ start: "12:30", end: "14:00" }, { start: "17:30", end: "21:00" }];
+}
+
+
 
 flatpickr(dateInput, {
     dateFormat: "d.m.Y",
     locale: "de",
     minDate: "today",
-    maxDate: new Date().fp_incr(42),
+    maxDate: new Date().fp_incr(7),
     onClose: async function(selectedDates, dateStr, instance) {
         const [day, month, year] = dateStr.split('.').map(Number);
         const convertedDate = new Date(year, month - 1, day);
@@ -146,10 +155,32 @@ function sendHolidayRequest(selectedDate) {
 }
 
 function timeInRange(time, start, end) {
-const timeObj = new Date(`1970-01-01T${time}:00`);
-const startObj = new Date(`1970-01-01T${start}:00`);
-const endObj = new Date(`1970-01-01T${end}:00`);
-return timeObj >= startObj && timeObj <= endObj;
+    const timeObj = new Date(`1970-01-01T${time}:00`);
+    const startObj = new Date(`1970-01-01T${start}:00`);
+    const endObj = new Date(`1970-01-01T${end}:00`);
+    return timeObj >= startObj && timeObj <= endObj;
+}
+
+function getCorrectlyFormattedDateFromString(dateStr) {
+    const [day, month, year] = dateStr.split('.').map(Number);
+    const convertedDate = new Date(year, month - 1, day);
+    const formattedDate = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+
+    return {
+        convertedDate: convertedDate,
+        formattedDate: formattedDate
+    }
+}
+
+async function checkDateForHoliday(date) {
+    try {
+        const resp = await sendHolidayRequest(formattedDate);
+        const isHoliday = resp.isHoliday;
+
+        return isHoliday;
+    }  catch (error) {
+            console.error('Error during holiday request:', error);
+    }
 }
 });
 </script>
