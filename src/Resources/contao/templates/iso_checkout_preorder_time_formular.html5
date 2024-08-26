@@ -38,60 +38,20 @@ value="<?= htmlspecialchars($this->value['time'] ?? '') ?>"
 
 <script>
 document.addEventListener('DOMContentLoaded', async function() {
-const dateInput = document.getElementById("preorder-formular-date");
-const timePicker = document.getElementById("preorder-formular-time");
-const date = new Date();
-let isHoliday = false;
-let dayOfWeek = "";
-let allowedRange;
+    const dateInput = document.getElementById("preorder-formular-date");
+    const timePicker = document.getElementById("preorder-formular-time");
+    const date = new Date();
+    let isHoliday = false;
+    let dayOfWeek = -1;
+    let allowedRange;
 
-// First check if there is already a value inside the dateInput and if so validate it to set the allowed range.
-if (dateInput.value !== null && dateInput.value !== "") {
-    allowedRange = setAllowedRange(dateInput.value);
-}
+    // First check if there is already a value inside the dateInput and if so validate it to set the allowed range.
+    if (dateInput.value !== null && dateInput.value !== "") {
+        const {range, weekday} = setAllowedRange(dateInput.value);
+        dayOfWeek = weekday;
+        allowedRange = range;
 
-
-
-flatpickr(dateInput, {
-    dateFormat: "d.m.Y",
-    locale: "de",
-    minDate: "today",
-    maxDate: new Date().fp_incr(7),
-    onClose: async function(selectedDates, dateStr, instance) {
-        allowedRange = setAllowedRange(dateStr);
-    },
-    disable: [
-        function(date) {
-            // Disable all Mondays
-            return date.getDay() === 1;
-        },
-        function(date) {
-            // Disable 25th December and 26th December for any year
-            const day = date.getDate();
-            const month = date.getMonth() + 1; // getMonth() is zero-based
-            return (day === 25 && month === 12) || (day === 26 && month === 12);
-        }
-    ]
-});
-
-flatpickr(timePicker, {
-    enableTime: true,
-    noCalendar: true,
-    locale: "de",
-    dateFormat: "H:i",
-    minuteIncrement: 15, // Optional: set to adjust the minute increments
-    allowInput: false,
-    defaultHour: 12,
-    defaultMinute: 30,
-    onClose: function(selectedDates, dateStr, instance) {
-
-        const allowedRanges = allowedRange;
-
-        // Check if the selected time is within any of the allowed ranges
-        const timeSelected = dateStr;
-        let isValid = false;
-
-        for (const range of allowedRanges) {
+        for (const range of allowedRange) {
             if (timeInRange(timeSelected, range.start, range.end)) {
                 isValid = true;
                 break;
@@ -108,67 +68,129 @@ flatpickr(timePicker, {
             }
         }
     }
-});
 
-function sendHolidayRequest(selectedDate) {
-    const requestData = {
-        date: JSON.stringify(selectedDate) 
-    };
-    return new Promise(function(resolve,reject) {
-        $.ajax({
-            type: "POST",
-            url: "/holidayRequest",
-            dataType: "json",
-            encode: true,
-            data: requestData,
-            success: function(response) {
-                resolve(response);
+
+
+    flatpickr(dateInput, {
+        dateFormat: "d.m.Y",
+        locale: "de",
+        minDate: "today",
+        maxDate: new Date().fp_incr(7),
+        onClose: async function(selectedDates, dateStr, instance) {
+            const {range, weekday} = setAllowedRange(dateStr);
+            dayOfWeek = weekday;
+            allowedRange = range;
+        },
+        disable: [
+            function(date) {
+                // Disable all Mondays
+                return date.getDay() === 1;
             },
-            error: function(error) {
-                console.log(error);
-                reject(error);
+            function(date) {
+                // Disable 25th December and 26th December for any year
+                const day = date.getDate();
+                const month = date.getMonth() + 1; // getMonth() is zero-based
+                return (day === 25 && month === 12) || (day === 26 && month === 12);
             }
-        })
-   });
+        ]
+    });
 
-}
+    flatpickr(timePicker, {
+        enableTime: true,
+        noCalendar: true,
+        locale: "de",
+        dateFormat: "H:i",
+        minuteIncrement: 15, // Optional: set to adjust the minute increments
+        allowInput: false,
+        defaultHour: 12,
+        defaultMinute: 30,
+        onClose: function(selectedDates, dateStr, instance) {
 
-function timeInRange(time, start, end) {
-    const timeObj = new Date(`1970-01-01T${time}:00`);
-    const startObj = new Date(`1970-01-01T${start}:00`);
-    const endObj = new Date(`1970-01-01T${end}:00`);
-    return timeObj >= startObj && timeObj <= endObj;
-}
+            // Check if the selected time is within any of the allowed ranges
+            const timeSelected = dateStr;
+            let isValid = false;
 
-function getCorrectlyFormattedDateFromString(dateStr) {
-    const [day, month, year] = dateStr.split('.').map(Number);
-    const convertedDate = new Date(year, month - 1, day);
-    const formattedDate = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+            for (const range of allowedRange) {
+                if (timeInRange(timeSelected, range.start, range.end)) {
+                    isValid = true;
+                    break;
+                }
+            }
 
-    return {
-        convertedDate: convertedDate,
-        formattedDate: formattedDate
+            if (!isValid) {
+                // Clear the input if not valid
+                instance.clear();
+                if (dayOfWeek === 0 || dayOfWeek === 6 || allowedRange.length === 1) {
+                    alert('Bitte wählen Sie einen Zeitraum zwischen 17:30 - 21:30 Uhr.');
+                } else {
+                    alert('Bitte wählen Sie einen Zeitraum zwischen 12:30 - 14:00 Uhr oder einen Zeitraum zwischen 17:30 - 21:00 Uhr.');
+                }
+            }
+        }
+    });
+
+    function sendHolidayRequest(selectedDate) {
+        const requestData = {
+            date: JSON.stringify(selectedDate) 
+        };
+        return new Promise(function(resolve,reject) {
+            $.ajax({
+                type: "POST",
+                url: "/holidayRequest",
+                dataType: "json",
+                encode: true,
+                data: requestData,
+                success: function(response) {
+                    resolve(response);
+                },
+                error: function(error) {
+                    console.log(error);
+                    reject(error);
+                }
+            })
+    });
+
     }
-}
 
-async function checkDateForHoliday(date) {
-    try {
-        const resp = await sendHolidayRequest(date);
-        const isHoliday = resp.isHoliday;
-
-        return isHoliday;
-    }  catch (error) {
-            console.error('Error during holiday request:', error);
+    function timeInRange(time, start, end) {
+        const timeObj = new Date(`1970-01-01T${time}:00`);
+        const startObj = new Date(`1970-01-01T${start}:00`);
+        const endObj = new Date(`1970-01-01T${end}:00`);
+        return timeObj >= startObj && timeObj <= endObj;
     }
-}
 
-async function setAllowedRange(dateInput) {
-    const {convertedDate, formattedDate} = getCorrectlyFormattedDateFromString(dateInput);
-    const dayOfSelectedDate = convertedDate.getDay();
-    const selectedDayIsHoliday = await checkDateForHoliday(formattedDate);
-    allowedRange = dayOfSelectedDate === 0 || dayOfSelectedDate === 6 || selectedDayIsHoliday ? [{ start: "17:30", end: "21:30" }] : [{ start: "12:30", end: "14:00" }, { start: "17:30", end: "21:00" }];
-    return allowedRange;
-}
+    function getCorrectlyFormattedDateFromString(dateStr) {
+        const [day, month, year] = dateStr.split('.').map(Number);
+        const convertedDate = new Date(year, month - 1, day);
+        const formattedDate = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+
+        return {
+            convertedDate: convertedDate,
+            formattedDate: formattedDate
+        }
+    }
+
+    async function checkDateForHoliday(date) {
+        try {
+            const resp = await sendHolidayRequest(date);
+            const isHoliday = resp.isHoliday;
+
+            return isHoliday;
+        }  catch (error) {
+                console.error('Error during holiday request:', error);
+        }
+    }
+
+    async function setAllowedRange(dateInput) {
+        const {convertedDate, formattedDate} = getCorrectlyFormattedDateFromString(dateInput);
+        const dayOfSelectedDate = convertedDate.getDay();
+        const selectedDayIsHoliday = await checkDateForHoliday(formattedDate);
+        allowedRange = dayOfSelectedDate === 0 || dayOfSelectedDate === 6 || selectedDayIsHoliday ? [{ start: "17:30", end: "21:30" }] : [{ start: "12:30", end: "14:00" }, { start: "17:30", end: "21:00" }];
+        return {
+            range: allowedRange,
+            weekday: dayOfSelectedDate
+        };
+    }
 });
 </script>
 
