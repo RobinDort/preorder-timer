@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         dateFormat: "d.m.Y",
         locale: "de",
         minDate: "today",
-        maxDate: new Date().fp_incr(7),
+        maxDate: new Date().fp_incr(14),
         onClose: async function(selectedDates, dateStr, instance) {
             const {range, weekday} = await setAllowedRange(dateStr);
             dayOfWeek = weekday;
