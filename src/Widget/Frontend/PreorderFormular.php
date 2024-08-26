@@ -14,7 +14,6 @@ class PreorderFormular extends Widget {
     protected $strTemplate = 'iso_checkout_preorder_time_formular';
     protected $strPrefix = 'widget widget-preorder-formular';
     protected $strName;
-    protected $required;
 
     public $shippingId;
 
@@ -35,7 +34,7 @@ class PreorderFormular extends Widget {
         parent::__construct($arrAttributes);
 
         $this->shippingId = $arrAttributes['shippingId'] ?? null;
-        $this->mandatory = $arrAttributes["mandatory"] ?? null;
+        $this->mandatory = $arrAttributes["mandatory"] ?? false;
 		$this->preorderLimiter = new PreorderLimiter();
 	}
 
