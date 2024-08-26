@@ -56,7 +56,9 @@ class PreorderFormular extends Widget {
        
         if ($varInput === null || $varInput === "" || empty($varInput || !isset($varInput))) {
             // If the input is empty, return immediately without validation
-            return $varInput;
+            $errorMessage = "Für einen reibungslosen Ablauf unserer Shop-Bestellungen, bitten wir Sie, Ihre gewünschte Bestellzeit (Datum und Uhrzeit) anzugeben.";
+            $this->addError($errorMessage);
+            return;
         }
 
         $expectedFormat = 'd.m.Y H:i';
@@ -117,10 +119,6 @@ class PreorderFormular extends Widget {
         $dateValue = $this->getPost("date-input");
         $timeValue = $this->getPost("time-input");
         $combinedValue = $dateValue . ' ' . $timeValue;
-        if ($combinedValue === "" || $combinedValue === null) {
-            $this->varValue = "";
-            return;
-        }
 
         try {
             // Call the validator to perform validation and store the result
