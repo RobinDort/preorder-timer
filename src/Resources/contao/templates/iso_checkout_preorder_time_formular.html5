@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         if (!isValid) {
             // Clear the input if not valid
-            instance.clear();
+            timePicker.value = "";
             if (dayOfWeek === 0 || dayOfWeek === 6 || allowedRange.length === 1) {
                 alert('Bitte wählen Sie einen Zeitraum zwischen 17:30 - 21:30 Uhr.');
             } else {
