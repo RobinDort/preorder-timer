@@ -53,7 +53,8 @@ class PreorderFormular extends Widget {
      */
     protected function validator($varInput) {
 
-       
+        \System::log("var input: " . $varInput,__METHOD__,TL_ERROR);
+        throw new Exception("var input: " . $varInput);
         if ($varInput === null || $varInput === "" || empty($varInput || !isset($varInput))) {
             // If the input is empty, return immediately without validation
             $errorMessage = "Für einen reibungslosen Ablauf unserer Shop-Bestellungen, bitten wir Sie, Ihre gewünschte Bestellzeit (Datum und Uhrzeit) anzugeben.";
@@ -120,7 +121,7 @@ class PreorderFormular extends Widget {
         $timeValue = $this->getPost("time-input");
         $combinedValue = $dateValue . ' ' . $timeValue;
 
-        try {
+       // try {
             // Call the validator to perform validation and store the result
             $varValue = $this->validator($combinedValue);
     
@@ -132,10 +133,10 @@ class PreorderFormular extends Widget {
                 // Set the validated value
                 $this->varValue = $varValue;
             }
-        } catch (\Exception $e) {
+       // } catch (\Exception $e) {
             // Log the exception and prevent form submission
-            $this->blnSubmitInput = false;
-            $this->class = 'error';
+         //   $this->blnSubmitInput = false;
+           // $this->class = 'error';
         }
     }
 }
