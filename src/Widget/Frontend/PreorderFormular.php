@@ -82,7 +82,7 @@ class PreorderFormular extends Widget {
             $this->addError($errorMessage);
         } else {
 
-            \System::log("shippingid: " . $this->shippingId,__METHOD__,TL_ERROR);
+            \System::log("shippingid first if: " . $this->shippingId,__METHOD__,TL_ERROR);
             throw new \Exception("shippingid: ". $this->shippingId);
         
             if ($this->shippingId !== null && $this->shippingId !== 28) { // shipping ID 28 is a pickup order
@@ -99,7 +99,7 @@ class PreorderFormular extends Widget {
                 }
             }
 
-            \System::log("shippingid: " . $this->shippingId,__METHOD__,TL_ERROR);
+            \System::log("shippingid second if: " . $this->shippingId,__METHOD__,TL_ERROR);
 		    throw new \Exception("shippingid: ". $this->shippingId);
             
             if ($this->shippingId === 28) { // pickup order
@@ -130,8 +130,6 @@ class PreorderFormular extends Widget {
         }
 
        // try {
-            \System::log("shippingid: " . $this->shippingId,__METHOD__,TL_ERROR);
-            throw new \Exception("shippingid: ". $this->shippingId);
             // Call the validator to perform validation and store the result
             $varValue = $this->validator($combinedValue);
     
