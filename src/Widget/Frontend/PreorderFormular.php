@@ -80,6 +80,9 @@ class PreorderFormular extends Widget {
             $errorMessage = "Um die Effizienz der von Ihnen getätigten Vorbestellungen zu optimieren, bitten wir Sie, einen Zeitraum zu wählen, welcher mindestens eine Stunde nach dem aktuellen Zeitpunkt liegt.";
             $this->addError($errorMessage);
         } else {
+
+            \System::log("shippingid: " . $this->shippingId,__METHOD__,TL_ERROR);
+            throw new \Exception("shippingid: ". $this->shippingId);
         
             if ($this->shippingId !== null && $this->shippingId !== 28) { // shipping ID 28 is a pickup order
                 $preorderShippingCountForDateTime = $this->preorderLimiter->countPreordersForDateTime($dateTimeTimestamp, true);
