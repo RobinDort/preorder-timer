@@ -47,10 +47,7 @@ let allowedRange;
 
 // First check if there is already a value inside the dateInput and if so validate it to set the allowed range.
 if (dateInput.value !== null && dateInput.value !== "") {
-    const {convertedDate, formattedDate} = getCorrectlyFormattedDateFromString(dateInput.value);
-    const dayOfSelectedDate = convertedDate.getDay();
-    const selectedDayIsHoliday = await checkDateForHoliday(formattedDate);
-    allowedRange = dayOfSelectedDate === 0 || dayOfSelectedDate === 6 || selectedDayIsHoliday ? [{ start: "17:30", end: "21:30" }] : [{ start: "12:30", end: "14:00" }, { start: "17:30", end: "21:00" }];
+    allowedRange = setAllowedRange(dateInput.value);
 }
 
 
@@ -61,25 +58,7 @@ flatpickr(dateInput, {
     minDate: "today",
     maxDate: new Date().fp_incr(7),
     onClose: async function(selectedDates, dateStr, instance) {
-        const [day, month, year] = dateStr.split('.').map(Number);
-        const convertedDate = new Date(year, month - 1, day);
-        const formattedDate = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-        const dayOfWeek = convertedDate.getDay();
-
-        try {
-            const resp = await sendHolidayRequest(formattedDate);
-            const isHoliday = resp.isHoliday;
-
-            if (dayOfWeek === 0 || dayOfWeek === 6 || isHoliday) {
-                allowedRange = [{ start: "17:30", end: "21:30" }];
-            } else {
-                allowedRange = [{ start: "12:30", end: "14:00" }, { start: "17:30", end: "21:00" }];
-            }
-            
-
-        } catch (error) {
-            console.error('Error during holiday request:', error);
-        }
+        allowedRange = setAllowedRange(dateStr);
     },
     disable: [
         function(date) {
@@ -181,6 +160,14 @@ async function checkDateForHoliday(date) {
     }  catch (error) {
             console.error('Error during holiday request:', error);
     }
+}
+
+async function setAllowedRange(dateInput) {
+    const {convertedDate, formattedDate} = getCorrectlyFormattedDateFromString(dateInput);
+    const dayOfSelectedDate = convertedDate.getDay();
+    const selectedDayIsHoliday = await checkDateForHoliday(formattedDate);
+    allowedRange = dayOfSelectedDate === 0 || dayOfSelectedDate === 6 || selectedDayIsHoliday ? [{ start: "17:30", end: "21:30" }] : [{ start: "12:30", end: "14:00" }, { start: "17:30", end: "21:00" }];
+    return allowedRange;
 }
 });
 </script>
