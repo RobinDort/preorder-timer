@@ -102,11 +102,13 @@ class PreorderFormular extends Widget {
 
             
             if ($this->shippingId === 28) { // pickup order
-                \System::log("shippingid second if: " . $this->shippingId,__METHOD__,TL_ERROR);
-                throw new \Exception("shippingid: ". $this->shippingId);
                 $preorderPickupCountForDateTime = $this->preorderLimiter->countPreordersForDateTime($dateTimeTimestamp, false);
 
                 if($preorderPickupCountForDateTime >= self::MAX_AMOUNT_PICK_UP_ORDERS) {
+                    \System::log("shippingid second if: " . $this->shippingId,__METHOD__,TL_ERROR);
+                    \System::log("preorderPickupCountForDateTime: " . $preorderPickupCountForDateTime,__METHOD__,TL_ERROR);
+
+                    throw new \Exception("shippingid: ". $this->shippingId);
                     
                     $nextPossibleBookingTime =  $this->preorderLimiter->findNextAvailableBookingTime($dateTimeTimestamp, false);
                     $formatedBookingTime = date('d.m.Y H:i', $nextPossibleBookingTime);
