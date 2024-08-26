@@ -35,6 +35,7 @@ class PreorderFormular extends Widget {
         parent::__construct($arrAttributes);
 
         $this->shippingId = $arrAttributes['shippingId'] ?? null;
+        $this->mandatory = $arrAttributes["mandatory"] ?? null;
 		$this->preorderLimiter = new PreorderLimiter();
 	}
 
