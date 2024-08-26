@@ -119,10 +119,7 @@ class PreorderFormular extends Widget {
 
 
     public function validate()
-    {
-        \System::log("shippingid: " . $this->shippingId,__METHOD__,TL_ERROR);
-        throw new \Exception("shippingid: ". $this->shippingId);
-       
+    {  
         $dateValue = $this->getPost("date-input");
         $timeValue = $this->getPost("time-input");
         $combinedValue = $dateValue . ' ' . $timeValue;
@@ -130,6 +127,9 @@ class PreorderFormular extends Widget {
             $this->varValue = "";
             return;
         }
+
+        \System::log("shippingid: " . $this->shippingId,__METHOD__,TL_ERROR);
+        throw new \Exception("shippingid: ". $this->shippingId);
 
         try {
             // Call the validator to perform validation and store the result
