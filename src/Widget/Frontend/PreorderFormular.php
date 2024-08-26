@@ -100,8 +100,6 @@ class PreorderFormular extends Widget {
 
                 if($preorderPickupCountForDateTime >= self::MAX_AMOUNT_PICK_UP_ORDERS) {
                     $nextPossibleBookingTime =  $this->preorderLimiter->findNextAvailableBookingTime($dateTimeTimestamp, false);
-                    \System::log("nextPossibleBookingTime: " . $nextPossibleBookingTime,__METHOD__,TL_ERROR);
-                    throw new \Exception("nextPossibleBookingTime: ". $nextPossibleBookingTime);
                     $formatedBookingTime = date('d.m.Y H:i', $nextPossibleBookingTime);
                     $errorMessage = "Wir bedauern, Ihnen mitteilen zu müssen, dass für den von Ihnen gewünschten Zeitraum bereits zu viele Vorbestellungen zur Abholung eingegangen sind. Wir bitten Sie daher einen anderen Zeitraum für Ihre Bestellung auszuwählen. Der nächstmögliche Bestellzeitraum ist: " . $formatedBookingTime;
                     $this->addError($errorMessage);

@@ -55,7 +55,7 @@ class PreorderLimiter {
 		$selectedDate = date("Y-m-d", $dateTime);
 		$shopClosingTime = self::SECOND_SHOP_CLOSING_START_TIME_DECIMAL;
 
-		if ($holidayHelper->isHolidayForDate($dateTime) || (int)date("w", $dateTime) === 0 || (int)date("w", $dateTime) === 6) {
+		if ($holidayHelper->isHolidayForDate($selectedDate) || (int)date("w", $dateTime) === 0 || (int)date("w", $dateTime) === 6) {
 			$shopClosingTime = self::SECOND_SHOP_CLOSING_START_TIME_HOLIDAY_DECIMAL;
 		}
 		
@@ -75,15 +75,16 @@ class PreorderLimiter {
 			$nextPossibleBookingSlot = strtotime('+1 day', strtotime(date('Y-m-d', $nextPossibleBookingSlot) . ' 12:30'));
 
 			// Get the date in "Y-m-d" format
-			$newDate = date('Y-m-d', $nextPossibleBookingSlot);
+			$newDateDay = (int)date("d", $nextPossibleBookingSlot);
+			$newDateMonth = (int)date("m", $nextPossibleBookingSlot);
 		
 			// check if the new date is a saturday or sunday so the shop in only open at 17:30.  
 			if ((int)date("w", $nextPossibleBookingSlot) === 0 || (int)date("w", $nextPossibleBookingSlot) === 6) { // 0 = Sunday, 6 = Saturday
 				$nextPossibleBookingSlot = strtotime(date('Y-m-d', $nextPossibleBookingSlot) . ' 17:30');
 			}
 
-			// check if the new date is a holiday or a monday. (shop is closed on mondays).
-			if ((int)date("w", $nextPossibleBookingSlot) === self::CLOSING_SHOP_DAY) {
+			// check if the new date is a holiday (25 / 26.12) or a monday. (shop is closed on mondays).
+			if ((int)date("w", $nextPossibleBookingSlot) === self::CLOSING_SHOP_DAY || $newDateDay === 25 && $newDateMonth === 12 || $newDateDay === 26 && $newDateMonth === 12 ) {
 				$nextPossibleBookingSlot = strtotime('+1 day', $nextPossibleBookingSlot);
 			}
 		}
