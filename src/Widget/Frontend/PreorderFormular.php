@@ -129,7 +129,7 @@ class PreorderFormular extends Widget {
             return;
         }
 
-        try {
+       // try {
             \System::log("shippingid: " . $this->shippingId,__METHOD__,TL_ERROR);
             throw new \Exception("shippingid: ". $this->shippingId);
             // Call the validator to perform validation and store the result
@@ -143,11 +143,11 @@ class PreorderFormular extends Widget {
                 // Set the validated value
                 $this->varValue = $varValue;
             }
-        } catch (\Exception $e) {
+     //   } catch (\Exception $e) {
             // Log the exception and prevent form submission
-            $this->blnSubmitInput = false;
-            $this->class = 'error';
-        }
+       //     $this->blnSubmitInput = false;
+         //   $this->class = 'error';
+        //}
     }
 }
 ?>
