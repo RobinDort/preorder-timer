@@ -44,6 +44,7 @@ let isHoliday = false;
 const date = new Date();
 let dayOfWeek = "";
 let allowedRange;
+console.log(dateInput);
 
 flatpickr(dateInput, {
     dateFormat: "d.m.Y",
