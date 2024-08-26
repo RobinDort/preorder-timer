@@ -93,7 +93,7 @@ class PreorderFormular extends Widget {
                 }
             } 
             
-            if ($this->shippingId !== null && $this->shippingId === 28) { // pickup order
+            if ($this->shippingId === 28) { // pickup order
                 $preorderPickupCountForDateTime = $this->preorderLimiter->countPreordersForDateTime($dateTimeTimestamp, false);
 
                 if($preorderPickupCountForDateTime >= self::MAX_AMOUNT_PICK_UP_ORDERS) {
