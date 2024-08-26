@@ -52,9 +52,6 @@ class PreorderFormular extends Widget {
      */
     protected function validator($varInput) {
 
-        \System::log("shippingid: " . $this->shippingId,__METHOD__,TL_ERROR);
-        throw new \Exception("shippingid: ". $this->shippingId);
-
        
         if ($varInput === null || $varInput === "" || empty($varInput || !isset($varInput))) {
             // If the input is empty, return immediately without validation
@@ -133,6 +130,8 @@ class PreorderFormular extends Widget {
         }
 
         try {
+            \System::log("shippingid: " . $this->shippingId,__METHOD__,TL_ERROR);
+            throw new \Exception("shippingid: ". $this->shippingId);
             // Call the validator to perform validation and store the result
             $varValue = $this->validator($combinedValue);
     
