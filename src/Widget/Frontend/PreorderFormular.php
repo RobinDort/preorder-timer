@@ -83,6 +83,8 @@ class PreorderFormular extends Widget {
         
             if ($this->shippingId !== null && $this->shippingId !== 28) { // shipping ID 28 is a pickup order
                 $preorderShippingCountForDateTime = $this->preorderLimiter->countPreordersForDateTime($dateTimeTimestamp, true);
+                \System::log("shippingid: " . $this->shippingId,__METHOD__,TL_ERROR);
+                throw new \Exception("shippingid: ". $this->shippingId);
 
                 if($preorderShippingCountForDateTime >= self::MAX_AMOUNT_SHIPPING_ORDERS) {
                 
