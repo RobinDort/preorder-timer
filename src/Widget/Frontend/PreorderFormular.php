@@ -54,8 +54,6 @@ class PreorderFormular extends Widget {
     protected function validator($varInput) {
 
         if ($varInput === null || $varInput === "" || empty($varInput || !isset($varInput))) {
-            \System::log("var input: " . $varInput,__METHOD__,TL_ERROR);
-            throw new Exception("var input: " . $varInput);
             // If the input is empty, return immediately without validation
             $errorMessage = "Für einen reibungslosen Ablauf unserer Shop-Bestellungen, bitten wir Sie, Ihre gewünschte Bestellzeit (Datum und Uhrzeit) anzugeben.";
             $this->addError($errorMessage);
