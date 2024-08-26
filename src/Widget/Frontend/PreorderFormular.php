@@ -14,7 +14,7 @@ class PreorderFormular extends Widget {
     protected $strTemplate = 'iso_checkout_preorder_time_formular';
     protected $strPrefix = 'widget widget-preorder-formular';
     protected $strName;
-    protected $mandatory;
+    protected $required;
 
     public $shippingId;
 
