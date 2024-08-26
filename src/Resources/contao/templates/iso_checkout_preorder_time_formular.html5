@@ -49,7 +49,7 @@ let allowedRange;
 if (dateInput.value !== null && dateInput.value !== "") {
     const {convertedDate, formattedDate} = getCorrectlyFormattedDateFromString(dateInput.value);
     const dayOfSelectedDate = convertedDate.getDay();
-    const selectedDayIsHoliday = await checkDateForHoliday(correctlyFormattedDate);
+    const selectedDayIsHoliday = await checkDateForHoliday(formattedDate);
     allowedRange = dayOfSelectedDate === 0 || dayOfSelectedDate === 6 || selectedDayIsHoliday ? [{ start: "17:30", end: "21:30" }] : [{ start: "12:30", end: "14:00" }, { start: "17:30", end: "21:00" }];
 }
 
@@ -174,7 +174,7 @@ function getCorrectlyFormattedDateFromString(dateStr) {
 
 async function checkDateForHoliday(date) {
     try {
-        const resp = await sendHolidayRequest(formattedDate);
+        const resp = await sendHolidayRequest(date);
         const isHoliday = resp.isHoliday;
 
         return isHoliday;
