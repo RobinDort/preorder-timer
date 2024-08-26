@@ -137,7 +137,7 @@ class PreorderFormular extends Widget {
             // Log the exception and prevent form submission
          //   $this->blnSubmitInput = false;
            // $this->class = 'error';
-        }
+       // }
     }
 }
 ?>
