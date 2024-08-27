@@ -14,9 +14,6 @@ $GLOBALS['TL_JAVASCRIPT'][] = "bundles/robindortpreordertimer/js/flatpickr.js|st
 $GLOBALS['TL_JAVASCRIPT'][] = "bundles/robindortpreordertimer/js/flatpickr_de.js|static";
 
 
-// Load the custom frontend module for the order details.
-$GLOBALS['FE_MOD']['isotope']['iso_orderdetails'] = 'RobinDort\PreorderTimer\Module\OrderDetails';
-
 // Init the widgets class for the preorder formular. 
 $GLOBALS['TL_FFL']['preorder_formular'] = PreorderFormular::class;
 
