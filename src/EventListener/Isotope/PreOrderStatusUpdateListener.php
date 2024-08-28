@@ -16,9 +16,10 @@ class PreOrderStatusUpdateListener
         if ($order->preorder_time) {
             // Find the "Vorbestellung" order status
             $preorderStatus = OrderStatus::findOneBy('name', self::PRE_ORDER_OBJ_STATUS_NAME);
+            $isManualUpdate = !empty($updates['isManual']);
         
             
-            if ($preorderStatus !== null && $order->preorder_time) {
+            if ($preorderStatus !== null && $order->preorder_time && !$isManualUpdate) {
                 // Update the order status
                 $order->order_status = $preorderStatus->id;
                 $order->save();
