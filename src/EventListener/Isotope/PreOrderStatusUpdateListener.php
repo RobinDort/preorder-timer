@@ -8,13 +8,12 @@ use Isotope\Model\OrderStatus;
 class PreOrderStatusUpdateListener
 {
     const PRE_ORDER_OBJ_STATUS_NAME = "Vorbestellung";
+    const PENDING_ORDER_OBJ_STATUS_NAME = "Ausstehend";
  
     public function __invoke(Order $order, OrderStatus $newStatus, array $updates): bool
     {
 
-        \System::log("new status name: " . $newStatus->name,__METHOD__,TL_ERROR);
-        \System::log("new status id: " . $newStatus->id,__METHOD__,TL_ERROR);
-        throw new \Exception("newStatus:" .$newStatus);
+        $pendingOrderStatus = OrderStatus::findOneBy('name', self::PENDING_ORDER_OBJ_STATUS_NAME);
 
         // Check if preorder_time is set
         if ($order->preorder_time) {
@@ -23,8 +22,8 @@ class PreOrderStatusUpdateListener
             
             if ($preorderStatus !== null && $order->preorder_time) {
 
-                if ($newStatus->id === $preorderStatus->id) {
-                    // Update the order status to "Vorbestellung"
+                if ($newStatus->id === $pendingOrderStatus->id) {
+                    // Update the order status to "Vorbestellung" when preorder time is set.
                     $order->order_status = $preorderStatus->id;
                 } else {
                     // Update the order status to the new selected status
