@@ -16,10 +16,20 @@ class CollectionLabelCallback extends Callback {
         $objOrder = Order::findByPk($row['id']);
         $labelMarkup = '<span style="display: block; text-align: center;"><img src="system/themes/flexible/icons/ICONNAME.svg" width="16" height="16"></span>';
         if (!empty($objOrder->preorder_time && $objOrder->preorder_time !== NULL)) {
-            $timezone = new \DateTimeZone('Europe/Berlin');
-            $date = \DateTime::createFromFormat('d.m.Y H:i', $combinedValue, $timezone);
+            // Create a DateTime object from the Unix timestamp
+            $date = new \DateTime('@' . $objOrder->preorder_time);
+
+            // Set the timezone to Germany (Berlin)
+            $date->setTimezone(new \DateTimeZone('Europe/Berlin'));
+
+            // Add 2 hours to the DateTime object to get UTC+2
+            $date->modify('+2 hours');
+
+            // Format the date to 'd.m.Y H:i'
+            $formattedDate = $date->format('d.m.Y H:i');
+            
             //$args[] = str_replace('ICONNAME', 'ok', $labelMarkup);
-            $args[] = $date;
+            $args[] = $formattedDate;
         }
         else {
             $args[] = str_replace('ICONNAME', 'delete', $labelMarkup);
