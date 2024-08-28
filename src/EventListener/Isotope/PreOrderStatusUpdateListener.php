@@ -12,23 +12,26 @@ class PreOrderStatusUpdateListener
     public function __invoke(Order $order, OrderStatus $newStatus, array $updates): bool
     {
 
-        foreach ($updates as $key => $value) {
-            \System::log("Updates array - Key: $key, Value: " . var_export($value, true), __METHOD__, TL_ERROR);
-        }
-        throw new \Exception("updates: " .$updates);
+        \System::log("new status name: " . $newStatus->name);
+        \System::log("new status id: " . $newStatus->id);
+        throw new \Exception("newStatus:" .$newStatus);
 
         // Check if preorder_time is set
         if ($order->preorder_time) {
             // Find the "Vorbestellung" order status
-            $preorderStatus = OrderStatus::findOneBy('name', self::PRE_ORDER_OBJ_STATUS_NAME);
-            $isManualUpdate = !empty($updates['isManual']);
-        
+            $preorderStatus = OrderStatus::findOneBy('name', self::PRE_ORDER_OBJ_STATUS_NAME);        
             
-            if ($preorderStatus !== null && $order->preorder_time && !$isManualUpdate) {
-                // Update the order status
-                $order->order_status = $preorderStatus->id;
-                $order->save();
+            if ($preorderStatus !== null && $order->preorder_time) {
 
+                if ($newStatus->id === $preorderStatus->id) {
+                    // Update the order status to "Vorbestellung"
+                    $order->order_status = $preorderStatus->id;
+                } else {
+                    // Update the order status to the new selected status
+                    $order->order_status = $newStatus->id;
+                }
+                
+                $order->save();
                 return true;
             } 
 
