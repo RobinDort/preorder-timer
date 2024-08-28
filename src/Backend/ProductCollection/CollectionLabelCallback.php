@@ -22,12 +22,9 @@ class CollectionLabelCallback extends Callback {
             // Set the timezone to Germany (Berlin)
             $date->setTimezone(new \DateTimeZone('Europe/Berlin'));
 
-            // Add 2 hours to the DateTime object to get UTC+2
-            $date->modify('+2 hours');
-
             // Format the date to 'd.m.Y H:i'
             $formattedDate = $date->format('d.m.Y H:i');
-            
+
             //$args[] = str_replace('ICONNAME', 'ok', $labelMarkup);
             $args[] = $formattedDate;
         }
