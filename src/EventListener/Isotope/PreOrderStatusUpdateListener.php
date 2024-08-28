@@ -12,7 +12,9 @@ class PreOrderStatusUpdateListener
     public function __invoke(Order $order, OrderStatus $newStatus, array $updates): bool
     {
 
-        \System::log("Updates array: " . $updates,__METHOD__,TL_ERROR);
+        foreach ($updates as $key => $value) {
+            \System::log("Updates array - Key: $key, Value: " . var_export($value, true), __METHOD__, TL_ERROR);
+        }
         throw new \Exception("updates: " .$updates);
 
         // Check if preorder_time is set
