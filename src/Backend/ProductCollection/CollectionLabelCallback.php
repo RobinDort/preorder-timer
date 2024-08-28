@@ -16,9 +16,10 @@ class CollectionLabelCallback extends Callback {
         $objOrder = Order::findByPk($row['id']);
         $labelMarkup = '<span style="display: block; text-align: center;"><img src="system/themes/flexible/icons/ICONNAME.svg" width="16" height="16"></span>';
         if (!empty($objOrder->preorder_time && $objOrder->preorder_time !== NULL)) {
-            \System::log("preorder time: " . $objOrder->preorder_time,__METHOD__,TL_ERROR);
-            throw new \Exception("objOrderTime: " . $objOrder->preorder_time);
-            $args[] = str_replace('ICONNAME', 'ok', $labelMarkup);
+            $timezone = new \DateTimeZone('Europe/Berlin');
+            $date = \DateTime::createFromFormat('d.m.Y H:i', $combinedValue, $timezone);
+            //$args[] = str_replace('ICONNAME', 'ok', $labelMarkup);
+            $args[] = $date;
         }
         else {
             $args[] = str_replace('ICONNAME', 'delete', $labelMarkup);
