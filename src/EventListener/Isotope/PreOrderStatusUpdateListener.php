@@ -12,8 +12,8 @@ class PreOrderStatusUpdateListener
     public function __invoke(Order $order, OrderStatus $newStatus, array $updates): bool
     {
 
-        \System::log("new status name: " . $newStatus->name);
-        \System::log("new status id: " . $newStatus->id);
+        \System::log("new status name: " . $newStatus->name,__METHOD__,TL_ERROR);
+        \System::log("new status id: " . $newStatus->id,__METHOD__,TL_ERROR);
         throw new \Exception("newStatus:" .$newStatus);
 
         // Check if preorder_time is set
