@@ -80,7 +80,7 @@ class PreorderFormular extends Widget {
         $oneHourLater = $currentTimestamp + 900;  //15 minutes later (900 seconds)
 
         if ($dateTimeTimestamp < $oneHourLater) {
-            $errorMessage = "Um die Effizienz der von Ihnen getätigten Vorbestellungen zu optimieren, bitten wir Sie, einen Zeitraum zu wählen, welcher mindestens eine Stunde nach dem aktuellen Zeitpunkt liegt.";
+            $errorMessage = "Um die Effizienz der von Ihnen getätigten Vorbestellungen zu optimieren, bitten wir Sie, einen Zeitraum zu wählen, welcher mindestens 15 Minuten nach dem aktuellen Zeitpunkt liegt.";
             $this->addError($errorMessage);
         } else {
         
