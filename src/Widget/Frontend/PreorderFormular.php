@@ -75,9 +75,9 @@ class PreorderFormular extends Widget {
         //datetime is in valid format
         $dateTimeTimestamp = $dateTime->getTimestamp();
 
-        // Check if the selected time is at least one hour away from now to prevent the preorder from being exactly the same time.
+        // Check if the selected time is at least 15 minutes away from now to prevent the preorder from being exactly the same time.
         $currentTimestamp = time();
-        $oneHourLater = $currentTimestamp + 3600;  // 1 hour later (3600 seconds)
+        $oneHourLater = $currentTimestamp + 900;  //15 minutes later (900 seconds)
 
         if ($dateTimeTimestamp < $oneHourLater) {
             $errorMessage = "Um die Effizienz der von Ihnen getätigten Vorbestellungen zu optimieren, bitten wir Sie, einen Zeitraum zu wählen, welcher mindestens eine Stunde nach dem aktuellen Zeitpunkt liegt.";
