@@ -39,3 +39,14 @@
 .steps {
 	counter-reset: step;
 }
+
+// mobile view
+@media (max-width: 1023px) {
+	#preorder-formular-date {
+		width: 60% !important;
+	}
+
+	#preorder-formular-time {
+		width: 40%;
+	}
+}
