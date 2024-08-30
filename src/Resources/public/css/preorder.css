@@ -34,35 +34,3 @@
 .steps {
 	counter-reset: step;
 }
-
-//Desktop
-@media (min-width: 1367px) {
-	#preorder-formular-date {
-		width: 20% !important;
-	}
-
-	#preorder-formular-time {
-		width: 10%;
-	}
-}
-
-@media (min-width: 1024px) and (max-width: 1366px) {
-	#preorder-formular-date {
-		width: 30% !important;
-	}
-
-	#preorder-formular-time {
-		width: 20%;
-	}
-}
-
-// mobile view
-@media (max-width: 1023px) {
-	#preorder-formular-date {
-		width: 50% !important;
-	}
-
-	#preorder-formular-time {
-		width: 40%;
-	}
-}
