@@ -43,7 +43,7 @@
 // mobile view
 @media (max-width: 1023px) {
 	#preorder-formular-date {
-		width: 60% !important;
+		width: 50% !important;
 	}
 
 	#preorder-formular-time {
