@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     let isHoliday = false;
     let dayOfWeek = -1;
     let allowedRange = [];
+    let isValidTime = false;
 
     // First check if there is already a value inside the dateInput and if so validate it to set the allowed range.
     if (dateInput.value !== null && dateInput.value !== "") {
@@ -108,23 +109,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         defaultHour: 12,
         defaultMinute: 15,
         onClose: function(selectedDates, dateStr, instance) {
-            console.log(dateStr);
-
-            // Check if the selected time is within any of the allowed ranges
-            const timeSelected = dateStr;
-            let isValid = false;
-
-            for (const range of allowedRange) {
-                console.log(`Checking range: ${range.start} - ${range.end}`);
-                if (timeInRange(timeSelected, range.start, range.end)) {
-                    isValid = true;
-                    break;
-                }
-            }
-
-            console.log('isValid:', isValid);
-
-            if (!isValid) {
+            if (!isValidTime) {
                 // Clear the input if not valid
                 instance.clear();
 
@@ -139,7 +124,18 @@ document.addEventListener('DOMContentLoaded', async function() {
             }
         },
         onChange: function(selectedDates, dateStr, instance) {
-            return;
+            console.log(dateStr);
+
+            // Check if the selected time is within any of the allowed ranges
+            const timeSelected = dateStr;
+            for (const range of allowedRange) {
+                console.log(`Checking range: ${range.start} - ${range.end}`);
+                if (timeInRange(timeSelected, range.start, range.end)) {
+                    isValidTime = true;
+                } else {
+                    isValidTime = false;
+                }
+            }
         }
     });
 
