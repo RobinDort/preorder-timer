@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                     timePicker.value = "";
                     displayWrongTimeAlert(allowedRange, instance);
                 }
-            }, 3000);
+            }, 1500);
         },
         // No action on open
         onOpen: function(selectedDates, dateStr, instance) {
