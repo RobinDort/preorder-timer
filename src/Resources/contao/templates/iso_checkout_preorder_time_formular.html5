@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     let isHoliday = false;
     let dayOfWeek = -1;
     let allowedRange = [];
+    let validationTimeout;
 
     // First check if there is already a value inside the dateInput and if so validate it to set the allowed range.
     if (dateInput.value !== null && dateInput.value !== "") {
@@ -126,7 +127,6 @@ document.addEventListener('DOMContentLoaded', async function() {
                 url: "/holidayRequest",
                 dataType: "json",
                 encode: true,
-                data: requestData,
                 success: function(response) {
                     resolve(response);
                 },
