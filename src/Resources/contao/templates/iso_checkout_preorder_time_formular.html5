@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             }
         },
         onChange: function(selectedDates, dateStr, instance) {
-            console.log("change triggered");
+            return;
         }
     });
 
