@@ -113,6 +113,18 @@ document.addEventListener('DOMContentLoaded', async function() {
         onClose: function(selectedDates, dateStr, instance) {
             console.log('dateStr', dateStr);
             console.log('selectedDates', selectedDates)
+
+            // Check if the selected time is within any of the allowed ranges
+            const timeSelected = dateStr;
+            for (const range of allowedRange) {
+                console.log(`Checking range: ${range.start} - ${range.end}`);
+                if (timeInRange(timeSelected, range.start, range.end)) {
+                    isValidTime = true;
+                } else {
+                    isValidTime = false;
+                }
+            }
+
             if (!isValidTime) {
                 // Clear the input if not valid
                 instance.clear();
@@ -124,20 +136,6 @@ document.addEventListener('DOMContentLoaded', async function() {
                     alert('Bitte wählen Sie einen Zeitraum zwischen 17:15 - 21:45 Uhr.');
                 } else {
                     alert('Bitte wählen Sie einen Zeitraum zwischen 12:15 - 14:15 Uhr oder einen Zeitraum zwischen 17:15 - 21:15 Uhr.');
-                }
-            }
-        },
-        onChange: function(selectedDates, dateStr, instance) {
-            console.log(dateStr);
-
-            // Check if the selected time is within any of the allowed ranges
-            const timeSelected = dateStr;
-            for (const range of allowedRange) {
-                console.log(`Checking range: ${range.start} - ${range.end}`);
-                if (timeInRange(timeSelected, range.start, range.end)) {
-                    isValidTime = true;
-                } else {
-                    isValidTime = false;
                 }
             }
         }
