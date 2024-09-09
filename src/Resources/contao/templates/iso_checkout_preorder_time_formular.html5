@@ -100,16 +100,19 @@ document.addEventListener('DOMContentLoaded', async function() {
         defaultHour: 12,
         defaultMinute: 15,
         onClose: function(selectedDates, dateStr, instance) {
-            console.log('dateStr', dateStr);
+            clearTimeout(validationTimeout);
+            validationTimeout = setTimeout(function() {
+                console.log('dateStr', dateStr);
 
-            // Check if the selected time is within any of the allowed ranges
-            const timeSelected = dateStr;
-            const validTime = checkTimeValidity(timeSelected, allowedRange);
+                // Check if the selected time is within any of the allowed ranges
+                const timeSelected = dateStr;
+                const validTime = checkTimeValidity(timeSelected, allowedRange);
 
-            if (!validTime) {
-                timePicker.value = "";
-                displayWrongTimeAlert(allowedRange);
-            }
+                if (!validTime) {
+                    timePicker.value = "";
+                    displayWrongTimeAlert(allowedRange);
+                }
+            }, 3000);
         }
     });
 
