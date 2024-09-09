@@ -114,7 +114,18 @@ document.addEventListener('DOMContentLoaded', async function() {
                     displayWrongTimeAlert(allowedRange);
                 }
             }, 3000);
-        }
+        },
+        // No action on open
+        onOpen: function(selectedDates, dateStr, instance) {
+            // Intentionally empty - Do nothing
+            return;
+        },
+
+        // No action on change
+        onChange: function(selectedDates, dateStr, instance) {
+            // Intentionally empty - Do nothing
+            return;
+        },
     });
 
     function sendHolidayRequest(selectedDate) {
