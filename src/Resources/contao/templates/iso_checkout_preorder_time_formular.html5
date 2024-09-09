@@ -130,9 +130,9 @@ document.addEventListener('DOMContentLoaded', async function() {
                 // Clear the input if not valid
                 instance.clear();
 
-                // Refocus the input field to allow re-selection
-                instance.input.focus();
-                
+                instance.setDate(null); // Clear the date picker selection
+                instance.redraw();
+
                 if (dayOfWeek === 0 || dayOfWeek === 6 || allowedRange.length === 1) {
                     alert('Bitte wählen Sie einen Zeitraum zwischen 17:15 - 21:45 Uhr.');
                 } else {
