@@ -54,18 +54,15 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     // Also check for the time picker value
     if (timePicker.value !== null && timePicker.value !== "") {
-        console.log(timePicker.value);
         const timeSelected = timePicker.value;
         let isValid = false;
         for (const range of allowedRange) {
-            console.log(`Checking range: ${range.start} - ${range.end}`);
             if (timeInRange(timeSelected, range.start, range.end)) {
                 isValid = true;
                 break;
             }
         }
 
-        console.log('isValid:', isValid);
         if (!isValid) {
             // Clear the input if not valid
             timePicker.value = "";
@@ -109,7 +106,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         locale: "de",
         dateFormat: "H:i",
         minuteIncrement: 15, // Optional: set to adjust the minute increments
-        allowInput: true,
+        allowInput: false,
         defaultHour: 12,
         defaultMinute: 15,
         onClose: function(selectedDates, dateStr, instance) {
@@ -132,6 +129,10 @@ document.addEventListener('DOMContentLoaded', async function() {
             if (!isValid) {
                 // Clear the input if not valid
                 instance.clear();
+
+                // Refocus the input field to allow re-selection
+                instance.input.focus();
+                
                 if (dayOfWeek === 0 || dayOfWeek === 6 || allowedRange.length === 1) {
                     alert('Bitte wählen Sie einen Zeitraum zwischen 17:15 - 21:45 Uhr.');
                 } else {
