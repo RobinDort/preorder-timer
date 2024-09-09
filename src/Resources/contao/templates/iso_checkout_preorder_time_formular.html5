@@ -44,7 +44,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     let isHoliday = false;
     let dayOfWeek = -1;
     let allowedRange = [];
-    let isValidTime = false;
 
     // First check if there is already a value inside the dateInput and if so validate it to set the allowed range.
     if (dateInput.value !== null && dateInput.value !== "") {
@@ -57,22 +56,12 @@ document.addEventListener('DOMContentLoaded', async function() {
     
     if (timePicker.value !== null && timePicker.value !== "") {
         const timeSelected = timePicker.value;
-        let isValid = false;
-        for (const range of allowedRange) {
-            if (timeInRange(timeSelected, range.start, range.end)) {
-                isValid = true;
-                break;
-            }
-        }
+        const isValid = checkTimeValidity(timeSelected, allowedRange);
 
         if (!isValid) {
             // Clear the input if not valid
             timePicker.value = "";
-            if (dayOfWeek === 0 || dayOfWeek === 6 || allowedRange.length === 1) {
-                alert('Bitte wählen Sie einen Zeitraum zwischen 17:30 - 21:30 Uhr.');
-            } else {
-                alert('Bitte wählen Sie einen Zeitraum zwischen 12:30 - 14:00 Uhr oder einen Zeitraum zwischen 17:30 - 21:00 Uhr.');
-            }
+            displayWrongTimeAlert(allowedRange);
         }
     }
     
@@ -112,31 +101,14 @@ document.addEventListener('DOMContentLoaded', async function() {
         defaultMinute: 15,
         onClose: function(selectedDates, dateStr, instance) {
             console.log('dateStr', dateStr);
-            console.log('selectedDates', selectedDates)
 
             // Check if the selected time is within any of the allowed ranges
             const timeSelected = dateStr;
-            for (const range of allowedRange) {
-                console.log(`Checking range: ${range.start} - ${range.end}`);
-                if (timeInRange(timeSelected, range.start, range.end)) {
-                    isValidTime = true;
-                } else {
-                    isValidTime = false;
-                }
-            }
+            const validTime = checkTimeValidity(timeSelected, allowedRange);
 
-            if (!isValidTime) {
-                // Clear the input if not valid
-                instance.clear();
-
-                instance.setDate(null); // Clear the date picker selection
-                instance.redraw();
-
-                if (dayOfWeek === 0 || dayOfWeek === 6 || allowedRange.length === 1) {
-                    alert('Bitte wählen Sie einen Zeitraum zwischen 17:15 - 21:45 Uhr.');
-                } else {
-                    alert('Bitte wählen Sie einen Zeitraum zwischen 12:15 - 14:15 Uhr oder einen Zeitraum zwischen 17:15 - 21:15 Uhr.');
-                }
+            if (!validTime) {
+                timePicker.value = "";
+                displayWrongTimeAlert(allowedRange);
             }
         }
     });
@@ -179,6 +151,26 @@ document.addEventListener('DOMContentLoaded', async function() {
         return {
             convertedDate: convertedDate,
             formattedDate: formattedDate
+        }
+    }
+
+    function checkTimeValidity(timeStr, allowedRange) {
+        let isValidTime = false;
+
+        for (const range of allowedRange) {
+                if (timeInRange(timeStr, range.start, range.end)) {
+                    isValidTime = true;
+                } 
+            }
+
+        return isValidTime;
+    }
+
+    function displayWrongTimeAlert(allowedRange) {
+        if (dayOfWeek === 0 || dayOfWeek === 6 || allowedRange.length === 1) {
+            alert('Bitte wählen Sie einen Zeitraum zwischen 17:15 - 21:45 Uhr.');
+        } else {
+            alert('Bitte wählen Sie einen Zeitraum zwischen 12:15 - 14:15 Uhr oder einen Zeitraum zwischen 17:15 - 21:15 Uhr.');
         }
     }
 
