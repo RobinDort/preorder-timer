@@ -74,8 +74,6 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
     }
 
-    timePicker.removeEventListener('change', yourChangeHandler);
-
     flatpickr(dateInput, {
         dateFormat: "d.m.Y",
         locale: "de",
@@ -139,6 +137,9 @@ document.addEventListener('DOMContentLoaded', async function() {
                     alert('Bitte wählen Sie einen Zeitraum zwischen 12:15 - 14:15 Uhr oder einen Zeitraum zwischen 17:15 - 21:15 Uhr.');
                 }
             }
+        },
+        onChange: function(selectedDates, dateStr, instance) {
+            console.log("change triggered");
         }
     });
 
