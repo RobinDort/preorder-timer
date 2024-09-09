@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
 
     // Also check for the time picker value
-    /** 
+    
     if (timePicker.value !== null && timePicker.value !== "") {
         const timeSelected = timePicker.value;
         let isValid = false;
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             }
         }
     }
-    */
+    
 
     flatpickr(dateInput, {
         dateFormat: "d.m.Y",
@@ -111,6 +111,8 @@ document.addEventListener('DOMContentLoaded', async function() {
         defaultHour: 12,
         defaultMinute: 15,
         onClose: function(selectedDates, dateStr, instance) {
+            console.log('dateStr', dateStr);
+            console.log('selectedDates', selectedDates)
             if (!isValidTime) {
                 // Clear the input if not valid
                 instance.clear();
