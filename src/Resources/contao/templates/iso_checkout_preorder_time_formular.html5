@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         locale: "de",
         dateFormat: "H:i",
         minuteIncrement: 15, // Optional: set to adjust the minute increments
-        allowInput: false,
+        allowInput: true,
         defaultHour: 12,
         defaultMinute: 15,
         onClose: function(selectedDates, dateStr, instance) {
