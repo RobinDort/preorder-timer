@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
     }
 
-
+    timePicker.removeEventListener('change', yourChangeHandler);
 
     flatpickr(dateInput, {
         dateFormat: "d.m.Y",
