@@ -25,8 +25,8 @@ class PreorderLimiter {
 		$dateTimeBeforeSevenMinutes = $dateTime - 420;
 		$dateTimeAfterSevenMinutes = $dateTime + 420; //Unixtime so 7*60 = 420
 
-		$shippingStmt = "SELECT COUNT(*) AS total_count FROM `tl_iso_product_collection` WHERE type='order' AND order_status != 6 AND shipping_id != 28 AND preorder_time BETWEEN " . $dateTimeBeforeSevenMinutes . " AND " . $dateTimeAfterSevenMinutes;
-		$pickupStmt = "SELECT COUNT(*) AS total_count FROM `tl_iso_product_collection` WHERE type='order' AND order_status != 6 AND shipping_id = 28 AND preorder_time BETWEEN " . $dateTimeBeforeSevenMinutes . " AND " . $dateTimeAfterSevenMinutes;
+		$shippingStmt = "SELECT COUNT(*) AS total_count FROM `tl_iso_product_collection` WHERE type='order' AND order_status NOT IN (6, 0) AND shipping_id != 28 AND preorder_time BETWEEN " . $dateTimeBeforeSevenMinutes . " AND " . $dateTimeAfterSevenMinutes;
+		$pickupStmt = "SELECT COUNT(*) AS total_count FROM `tl_iso_product_collection` WHERE type='order' AND order_status NOT IN (6, 0) AND shipping_id = 28 AND preorder_time BETWEEN " . $dateTimeBeforeSevenMinutes . " AND " . $dateTimeAfterSevenMinutes;
 		$statement = null;
 
 		if ($isShippingOrder === true) {
