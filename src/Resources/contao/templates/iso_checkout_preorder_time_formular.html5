@@ -184,9 +184,9 @@ document.addEventListener('DOMContentLoaded', async function() {
             instance.clear();
         }
         if (dayOfWeek === 0 || dayOfWeek === 6 || allowedRange.length === 1) {
-            alert('Bitte wählen Sie einen Zeitraum zwischen 17:15 - 21:45 Uhr.');
+            alert('Bitte wählen Sie einen Zeitraum zwischen 17:30 - 21:45 Uhr.');
         } else {
-            alert('Bitte wählen Sie einen Zeitraum zwischen 12:15 - 14:15 Uhr oder einen Zeitraum zwischen 17:15 - 21:15 Uhr.');
+            alert('Bitte wählen Sie einen Zeitraum zwischen 12:30 - 14:15 Uhr oder einen Zeitraum zwischen 17:30 - 21:15 Uhr.');
         }
     }
 
@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         const {convertedDate, formattedDate} = getCorrectlyFormattedDateFromString(dateInput);
         const dayOfSelectedDate = convertedDate.getDay();
         const selectedDayIsHoliday = await checkDateForHoliday(formattedDate);
-        allowedRange = dayOfSelectedDate === 0 || dayOfSelectedDate === 6 || selectedDayIsHoliday ? [{ start: "17:15", end: "21:45" }] : [{ start: "12:15", end: "14:15" }, { start: "17:15", end: "21:15" }];
+        allowedRange = dayOfSelectedDate === 0 || dayOfSelectedDate === 6 || selectedDayIsHoliday ? [{ start: "17:30", end: "21:45" }] : [{ start: "12:30", end: "14:15" }, { start: "17:30", end: "21:15" }];
         return {
             range: allowedRange,
             weekday: dayOfSelectedDate
