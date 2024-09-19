@@ -27,8 +27,8 @@ class PreorderFormular extends Widget {
 	 */
 	protected $varValue;
 
-    private const MAX_AMOUNT_SHIPPING_ORDERS = 2;
-    private const MAX_AMOUNT_PICK_UP_ORDERS = 3;
+    private const MAX_AMOUNT_SHIPPING_ORDERS = 1;
+    private const MAX_AMOUNT_PICK_UP_ORDERS = 2;
 
     public function __construct($arrAttributes = null) {
         parent::__construct($arrAttributes);
@@ -75,12 +75,12 @@ class PreorderFormular extends Widget {
         //datetime is in valid format
         $dateTimeTimestamp = $dateTime->getTimestamp();
 
-        // Check if the selected time is at least 15 minutes away from now to prevent the preorder from being exactly the same time.
+        // Check if the selected time is at least 30 minutes away from now to prevent the preorder from being exactly the same time.
         $currentTimestamp = time();
-        $oneHourLater = $currentTimestamp + 900;  //15 minutes later (900 seconds)
+        $thirtyMinutesLater = $currentTimestamp + 1800;  //30 minutes later (900 seconds)
 
-        if ($dateTimeTimestamp < $oneHourLater) {
-            $errorMessage = "Um die Effizienz der von Ihnen getätigten Vorbestellungen zu optimieren, bitten wir Sie, einen Zeitraum zu wählen, welcher mindestens 15 Minuten nach dem aktuellen Zeitpunkt liegt.";
+        if ($dateTimeTimestamp < $thirtyMinutesLater) {
+            $errorMessage = "Um die Effizienz der von Ihnen getätigten Vorbestellungen zu optimieren, bitten wir Sie, einen Zeitraum zu wählen, welcher mindestens 30 Minuten nach dem aktuellen Zeitpunkt liegt.";
             $this->addError($errorMessage);
         } else {
         

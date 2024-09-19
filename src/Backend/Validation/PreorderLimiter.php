@@ -94,14 +94,14 @@ class PreorderLimiter {
 		if ($isShippingOrder) {
 			$amountPreorders = $this->countPreordersForDateTime($nextPossibleBookingSlot, true);
 
-			if ($amountPreorders > 1) {
+			if ($amountPreorders >= 1) {
 				return $this->findNextAvailableBookingTime($nextPossibleBookingSlot, true);
 			}
 
 		} else {
 			$amountPreorders = $this->countPreordersForDateTime($nextPossibleBookingSlot, false);
 
-			if ($amountPreorders > 2) {
+			if ($amountPreorders >= 2) {
 				return $this->findNextAvailableBookingTime($nextPossibleBookingSlot, false);
 			}
 		}
