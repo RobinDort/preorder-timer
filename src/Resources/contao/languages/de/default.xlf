@@ -11,7 +11,7 @@
             </trans-unit>
             <trans-unit id="MSC.preorder_time_message">
                 <source>Dear customer, in order to ensure a smooth and efficient ordering process, we kindly ask you to inform us of the desired time at which you would like to receive your food in the fields provided. Please note that a valid reservation time requires both details (date including time).</source>
-                <target>Sehr geehrter Kunde, um Ihnen eine reibungslose und effiziente Bestellung zu gewährleisten, bitten wir Sie, uns durch die Eingabe des Zeitpunkts in die bereitgestellten Felder, zu dem Sie Ihre Speisen erhalten möchten, mitzuteilen. Bitte beachten Sie dass eine gültige Vorbstellungszeit beide Angaben (Datum inklusive Zeit) benötigt.</target>
+                <target>Sehr geehrter Kunde, um Ihnen eine reibungslose und effiziente Bestellung zu gewährleisten, bitten wir Sie, uns die Eingabe des Zeitpunkts über Eingabe in die bereitgestellten Felder, zu dem Sie Ihre Speisen erhalten möchten, mitzuteilen. Bitte beachten Sie dass eine gültige Vorbstellungszeit beide Angaben (Datum inklusive Zeit) benötigt.</target>
             </trans-unit>
             <trans-unit id="MSC.preorder_status">
             <source>Preorder</source>
