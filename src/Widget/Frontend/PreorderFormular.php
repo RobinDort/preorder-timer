@@ -77,7 +77,7 @@ class PreorderFormular extends Widget {
 
         // Check if the selected time is at least 30 minutes away from now to prevent the preorder from being exactly the same time.
         $currentTimestamp = time();
-        $thirtyMinutesLater = $currentTimestamp + 1800;  //30 minutes later (900 seconds)
+        $thirtyMinutesLater = $currentTimestamp + 1800;  //30 minutes later (1800 seconds)
 
         if ($dateTimeTimestamp < $thirtyMinutesLater) {
             $errorMessage = "Um die Effizienz der von Ihnen getätigten Vorbestellungen zu optimieren, bitten wir Sie, einen Zeitraum zu wählen, welcher mindestens 30 Minuten nach dem aktuellen Zeitpunkt liegt.";

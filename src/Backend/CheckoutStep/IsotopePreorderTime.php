@@ -87,6 +87,7 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
 
         $this->Template->headline = $GLOBALS['TL_LANG']['MSC']['preorder_time'];
         $this->Template->message = $GLOBALS['TL_LANG']['MSC']['preorder_time_message'];
+        $this->Template->order_deviation = $GLOBALS['TL_LANG']['MSC']['preorder_time_order_deviation'];
         $this->Template->form = $objWidget->parse();
 
         return $this->Template->parse();
