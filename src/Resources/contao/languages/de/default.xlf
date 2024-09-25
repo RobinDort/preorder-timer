@@ -14,8 +14,8 @@
                 <target>Sehr geehrter Kunde, um Ihnen eine reibungslose und effiziente Bestellung zu gewährleisten, bitten wir Sie, uns die Eingabe des Zeitpunkts über Eingabe in die bereitgestellten Felder, zu dem Sie Ihre Speisen erhalten möchten, mitzuteilen. Bitte beachten Sie dass eine gültige Vorbstellungszeit beide Angaben (Datum inklusive Zeit) benötigt.</target>
             </trans-unit>
             <trans-unit id="MSC.preorder_time_order_deviation">
-                <source>Please note that the delivery times shown are approximate and may be affected by traffic and capacity utilisation conditions. <br> Thank you for your understanding. <br> Your Dorji Sushi To Go Team</source>
-                <target>Bitte beachten Sie, dass es sich bei den eingetragenen Lieferzeiten um Näherungszeiten handelt, die durch Verkehrs- und Auslastungsbedingungen beeinflusst werden können.<br>Vielen Dank für Ihr Verständnis.<br>Ihr Dorji Sushi To Go Team</target>
+                <source>Please note that the delivery times shown are approximate and may be affected by traffic and capacity utilisation conditions. Thank you for your understanding. Your Dorji Sushi To Go Team</source>
+                <target>Bitte beachten Sie, dass es sich bei den eingetragenen Lieferzeiten um Näherungszeiten handelt, die durch Verkehrs- und Auslastungsbedingungen beeinflusst werden können. Vielen Dank für Ihr Verständnis. Ihr Dorji Sushi To Go Team</target>
             </trans-unit>
             <trans-unit id="MSC.preorder_status">
             <source>Preorder</source>
