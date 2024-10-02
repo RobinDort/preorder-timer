@@ -20,7 +20,7 @@ $GLOBALS['TL_DCA']['tl_iso_product_collection']['fields']['preorder_time'] = [
     'inputType'   => 'text', // Using text as it’s non-interactive
     'eval'        => [
         'rgxp'=>'digit',
-        'readonly'=>true,
+        'readonly'=>false,
         'tl_class'=>'clr',
         'helpwizard'=>false,
     ],
