@@ -128,25 +128,34 @@ document.addEventListener('DOMContentLoaded', async function() {
     });
 
     function sendHolidayRequest(selectedDate) {
-        const requestData = {
-            date: JSON.stringify(selectedDate) 
-        };
-        console.log(requestData);
-        return new Promise(function(resolve,reject) {
-            $.ajax({
-                type: "POST",
-                url: "/holidayRequest",
-                dataType: "json",
-                encode: true,
-                success: function(response) {
-                    resolve(response);
-                },
-                error: function(error) {
-                    console.log(error);
-                    reject(error);
-                }
-            })
-    });
+        try {
+            const stringifiedDate = JSON.stringify(selectedDate);
+            if (!stringifiedDate) {
+                throw new Exception("Date could not be stringified!");
+                return;
+            }
+            const requestData = {
+                date: stringifiedDate
+            };
+            console.log(requestData);
+            return new Promise(function(resolve,reject) {
+                $.ajax({
+                    type: "POST",
+                    url: "/holidayRequest",
+                    dataType: "json",
+                    encode: true,
+                    success: function(response) {
+                        resolve(response);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                        reject(error);
+                    }
+                })
+            });
+        } catch (error) {
+            console.error(error);
+        }
 
     }
 
@@ -195,8 +204,11 @@ document.addEventListener('DOMContentLoaded', async function() {
         try {
             console.log(date);
             const resp = await sendHolidayRequest(date);
-            const isHoliday = resp.isHoliday;
+            if (!resp.isHoliday) {
+                return false;
+            }
 
+            const isHoliday = resp.isHoliday;
             return isHoliday;
         }  catch (error) {
                 console.error('Error during holiday request:', error);

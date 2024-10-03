@@ -15,7 +15,7 @@ class HolidayRequestController
         $holidayHelper = new HolidayCalculation();
         $response = ["isHoliday"=>false];
 
-        if ($extractedDate && $holidayHelper->isHolidayForDate($extractedDate)) {
+        if ($holidayHelper->isHolidayForDate($extractedDate)) {
             $response["isHoliday"] = true;
         }
 

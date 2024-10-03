@@ -19,8 +19,8 @@ $GLOBALS['TL_DCA']['tl_iso_product_collection']['fields']['preorder_time'] = [
     'exclude'     => TRUE,
     'inputType'   => 'text', // Using text as it’s non-interactive
     'eval'        => [
-        'rgxp'=>'datim',
-        'readonly'=>false,
+        'rgxp'=>'digit',
+        'readonly'=>true,
         'tl_class'=>'clr',
         'helpwizard'=>false,
     ],
