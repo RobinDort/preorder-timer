@@ -34,3 +34,10 @@
 .steps {
 	counter-reset: step;
 }
+
+.order-deviation {
+	background: linear-gradient(45deg, #e95208, #f59b00);
+	border-radius: 10px;
+	padding: 10px;
+	color: #fff;
+}
