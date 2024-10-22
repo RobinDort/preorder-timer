@@ -1,4 +1,5 @@
 <?php if($this->preorder_time): ?>
     <p><strong>Ihre Bestellung ist für den folgenden Zeitpunkt vorbestellt:</strong></p>
+    <p><strong>Bitte beachten Sie, dass es sich bei den angegebenen Zeiten um Näherungszeiten handelt, welche je nach Verkehrs- und Auslastungssituation ca. 15 - 30 Minuten abweichen können.</strong></p>
     <p><strong>##preorder_time##</strong></p>
 <?php endif; ?>
