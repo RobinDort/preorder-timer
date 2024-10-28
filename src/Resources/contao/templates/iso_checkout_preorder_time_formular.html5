@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     // First check if there is already a value inside the dateInput and if so validate it to set the allowed range.
     if (dateInput.value !== null && dateInput.value !== "") {
         const todaysDate = new Date();
-        const dateAsString = todaysDate.toLocalDateString();
+        const dateAsString = todaysDate.toLocaleDateString();
         console.log(dateAsString);
 
 
