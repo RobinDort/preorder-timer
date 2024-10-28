@@ -18,20 +18,20 @@ class CountPreorderRequestController
         $extractedTime = trim($request->request->get('time'), '"');
         $extractedIsShippingOrder = trim($request->request->get('isShippingOrder'), '"');
 
-        $preorderLimiter = new PreorderLimiter();
-        $preorderCount = $preorderLimiter->countPreordersForDateTime($extractedTime, $extractedIsShippingOrder);
+        // $preorderLimiter = new PreorderLimiter();
+        // $preorderCount = $preorderLimiter->countPreordersForDateTime($extractedTime, $extractedIsShippingOrder);
 
         $response = ["availablePreorderTime"=>$extractedTime];
 
-        if ($extractedIsShippingOrder === true && $preorderCount >= self::MAX_AMOUNT_SHIPPING_ORDERS) {
-            $newAvailablePreorderTime = $preorderLimiter->findNextAvailableBookingTime($extractedTime, $extractedIsShippingOrder);
-            $response["availablePreorderTime"] = $newAvailablePreorderTime;
+        // if ($extractedIsShippingOrder === true && $preorderCount >= self::MAX_AMOUNT_SHIPPING_ORDERS) {
+        //     $newAvailablePreorderTime = $preorderLimiter->findNextAvailableBookingTime($extractedTime, $extractedIsShippingOrder);
+        //     $response["availablePreorderTime"] = $newAvailablePreorderTime;
 
 
-        } else if ($extractedIsShippingOrder === false && $preorderCount >= self::MAX_AMOUNT_PICK_UP_ORDERS) {
-            $newAvailablePreorderTime = $preorderLimiter->findNextAvailableBookingTime($extractedTime, $extractedIsShippingOrder);
-            $response["availablePreorderTime"] = $newAvailablePreorderTime;
-        }
+        // } else if ($extractedIsShippingOrder === false && $preorderCount >= self::MAX_AMOUNT_PICK_UP_ORDERS) {
+        //     $newAvailablePreorderTime = $preorderLimiter->findNextAvailableBookingTime($extractedTime, $extractedIsShippingOrder);
+        //     $response["availablePreorderTime"] = $newAvailablePreorderTime;
+        // }
 
         return new JsonResponse($response);
     }
