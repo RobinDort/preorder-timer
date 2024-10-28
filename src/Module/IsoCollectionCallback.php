@@ -13,7 +13,7 @@ class IsoCollectionCallback extends Backend {
             System::log($value, __METHOD__, 'ERROR');
             System::log($dateTime, __METHOD__, 'ERROR');
 
-            throw new Exception("Test exception backend");
+            throw new \Exception("Test exception backend");
             
             // Check if the DateTime object was created successfully
             if ($dateTime) {
