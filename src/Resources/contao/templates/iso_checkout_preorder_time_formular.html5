@@ -202,7 +202,6 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     async function checkDateForHoliday(date) {
         try {
-            console.log(date);
             const resp = await sendHolidayRequest(date);
             if (!resp.isHoliday) {
                 return false;
@@ -219,7 +218,6 @@ document.addEventListener('DOMContentLoaded', async function() {
         const {convertedDate, formattedDate} = getCorrectlyFormattedDateFromString(dateInput);
         const dayOfSelectedDate = convertedDate.getDay();
         const selectedDayIsHoliday = await checkDateForHoliday(formattedDate);
-        console.log(selectedDayIsHoliday);
         allowedRange = dayOfSelectedDate === 0 || dayOfSelectedDate === 6 || selectedDayIsHoliday ? [{ start: "17:30", end: "21:45" }] : [{ start: "12:30", end: "14:15" }, { start: "17:30", end: "21:15" }];
         return {
             range: allowedRange,

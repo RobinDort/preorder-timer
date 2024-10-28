@@ -71,7 +71,7 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
 
                 $timezone = new \DateTimeZone('Europe/Berlin');
                 $date = \DateTime::createFromFormat('d.m.Y H:i', $combinedValue, $timezone);
-                Isotope::getCart()->preorder_time = $date ? $date->setTimezone(new \DateTimeZone('UTC'))->getTimestamp() : null;
+                Isotope::getCart()->preorder_time = $date ? $date->getTimestamp() : null;
                 Isotope::getCart()->save();
                 $this->addNoteToOrder();
 
