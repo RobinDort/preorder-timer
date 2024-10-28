@@ -209,6 +209,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 $.ajax({
                     type: "POST",
                     url: "/countPreorderRequest",
+                    data: requestData,
                     dataType: "json",
                     encode: true,
                     success: function(response) {
