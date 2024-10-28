@@ -66,8 +66,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         dayOfWeek = weekday;
         allowedRange = range;
 
-        console.log(dayOfWeek);
-        console.log(allowedRange);
+        dateInput.value = dateAsString;
     }
 
     // Also check for the time picker value
