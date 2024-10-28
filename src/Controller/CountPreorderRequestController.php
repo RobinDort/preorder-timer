@@ -1,6 +1,6 @@
 <?php
 namespace RobinDort\PreorderTimer\Controller;
-use RobinDort\PreorderTimer\Widget\Backend\Validation\PreorderLimiter;
+use RobinDort\PreorderTimer\Backend\Validation\PreorderLimiter;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -11,7 +11,6 @@ class CountPreorderRequestController
 {
     private const MAX_AMOUNT_SHIPPING_ORDERS = 1;
     private const MAX_AMOUNT_PICK_UP_ORDERS = 2;
-
 
     public function __invoke(Request $request): JsonResponse
     {
