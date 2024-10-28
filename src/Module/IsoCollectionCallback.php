@@ -12,6 +12,9 @@ class IsoCollectionCallback extends Backend {
             
             // Check if the DateTime object was created successfully
             if ($dateTime) {
+                // Add 2 hours to the time to account for Germany's timezone (UTC+2)
+                $dateTime->modify('+1 hours');
+                
                 // Return the formatted date and time
                 return $dateTime->format('d.m.Y H:i');
             } else {
