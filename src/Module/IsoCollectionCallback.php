@@ -8,7 +8,7 @@ class IsoCollectionCallback extends Backend {
     {
         if ($value) {
             // Create a DateTime object from the timestamp
-            $dateTime = \DateTime::createFromFormat('U', $value, new \DateTimeZone('Europe/Berlin'));
+            $dateTime = \DateTime::createFromFormat('U', $value);
 
             \System::log($value, __METHOD__, 'ERROR');
             \System::log("Attempted division by zero. dateTime: {$dateTime->format('d.m.Y H:i')} in " . __METHOD__, __METHOD__, 'ERROR');
