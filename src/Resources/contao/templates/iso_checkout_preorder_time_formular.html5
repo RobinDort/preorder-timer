@@ -84,6 +84,9 @@ document.addEventListener('DOMContentLoaded', async function() {
             now.setHours(12, 30, 0, 0); // Set hours, minutes, seconds, milliseconds
         }
 
+        // At least 30 minutes away from the current time to place the order.
+        now.setMinutes(now.getMinutes() + 30);
+
        // Get the Unix timestamp (in seconds)
         const unixTimestamp = Math.floor(now.getTime() / 1000);
 

@@ -18,8 +18,8 @@ class CountPreorderRequestController
         $extractedTime = trim($request->request->get('time'), '"');
         $extractedIsShippingOrder = trim($request->request->get('isShippingOrder'), '"');
 
-        // $preorderLimiter = new PreorderLimiter();
-        // $preorderCount = $preorderLimiter->countPreordersForDateTime($extractedTime, $extractedIsShippingOrder);
+        $preorderLimiter = new PreorderLimiter();
+        $preorderCount = $preorderLimiter->countPreordersForDateTime($extractedTime, $extractedIsShippingOrder);
 
         $response = ["availablePreorderTime"=>$extractedTime];
 
