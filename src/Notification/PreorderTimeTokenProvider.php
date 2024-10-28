@@ -9,7 +9,8 @@ class PreorderTimeTokenProvider {
         // Assuming the preorder_time is stored as a timestamp in the order
         if ($order->preorder_time && !empty($order->preorder_time)) {
             // Create a DateTime object from the timestamp in UTC
-            $dateTime = \DateTime::createFromFormat('U', $order->preorder_time, new \DateTimeZone('Europe/Berlin'));
+            $dateTime = \DateTime::createFromFormat('U', $order->preorder_time, new \DateTimeZone('UTC'));
+            $dateTime->setTimezone(new \DateTimeZone('Europe/Berlin'));
 
             // Adjust to German timezone (Europe/Berlin) by adding 2 hours
             // $dateTime->modify('+2 hours');
