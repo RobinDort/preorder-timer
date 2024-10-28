@@ -45,6 +45,9 @@ document.addEventListener('DOMContentLoaded', async function() {
     let dayOfWeek = -1;
     let allowedRange = [];
     let validationTimeout;
+    let shippingId = <?php echo $this->shippingId?>;
+
+    console.log(shippingId);
 
     // First check if there is already a value inside the dateInput and if so empty it and set the new date to todays date and validate it to set the allowed range.
     //if (dateInput.value !== null && dateInput.value !== "") {
@@ -171,6 +174,10 @@ document.addEventListener('DOMContentLoaded', async function() {
         } catch (error) {
             console.error(error);
         }
+
+    }
+
+    sendCountPreorderRequest(selectedTime) {
 
     }
 
