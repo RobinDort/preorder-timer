@@ -10,8 +10,8 @@ class IsoCollectionCallback extends Backend {
             // Create a DateTime object from the timestamp
             $dateTime = \DateTime::createFromFormat('U', $value, new \DateTimeZone('Europe/Berlin'));
 
-            System::log($value, __METHOD__, 'ERROR');
-            System::log($dateTime, __METHOD__, 'ERROR');
+            \System::log($value, __METHOD__, 'ERROR');
+            \System::log($dateTime, __METHOD__, 'ERROR');
 
             throw new \Exception("Test exception backend");
             
