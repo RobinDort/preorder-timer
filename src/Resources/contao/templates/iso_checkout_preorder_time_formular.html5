@@ -137,7 +137,6 @@ document.addEventListener('DOMContentLoaded', async function() {
             const requestData = {
                 date: stringifiedDate
             };
-            console.log(requestData);
             return new Promise(function(resolve,reject) {
                 $.ajax({
                     type: "POST",
