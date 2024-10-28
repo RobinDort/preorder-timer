@@ -19,9 +19,9 @@ class CountPreorderRequestController
         $extractedIsShippingOrder = trim($request->request->get('isShippingOrder'), '"');
 
         $preorderLimiter = new PreorderLimiter();
-        $preorderCount = $preorderLimiter->countPreordersForDateTime($extractedTime, $extractedIsShippingOrder);
+        //$preorderCount = $preorderLimiter->countPreordersForDateTime($extractedTime, $extractedIsShippingOrder);
 
-        $response = ["availablePreorderTime"=>$extractedTime];
+        $response = ["availablePreorderTime"=>$extractedTime, "isShippingOrder"=>$extractedIsShippingOrder];
 
         // if ($extractedIsShippingOrder === true && $preorderCount >= self::MAX_AMOUNT_SHIPPING_ORDERS) {
         //     $newAvailablePreorderTime = $preorderLimiter->findNextAvailableBookingTime($extractedTime, $extractedIsShippingOrder);
