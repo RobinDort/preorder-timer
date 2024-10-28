@@ -11,7 +11,7 @@ class IsoCollectionCallback extends Backend {
             $dateTime = \DateTime::createFromFormat('U', $value, new \DateTimeZone('Europe/Berlin'));
 
             \System::log($value, __METHOD__, 'ERROR');
-            \System::log($dateTime, __METHOD__, 'ERROR');
+            \System::log("Attempted division by zero. dateTime: {$dateTime->format('d.m.Y H:i')} in " . __METHOD__, __METHOD__, 'ERROR');
 
             throw new \Exception("Test exception backend");
             
