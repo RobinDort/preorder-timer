@@ -177,10 +177,6 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     }
 
-    sendCountPreorderRequest(selectedTime) {
-
-    }
-
     function timeInRange(time, start, end) {
         const timeObj = new Date(`1970-01-01T${time}:00`);
         const startObj = new Date(`1970-01-01T${start}:00`);
