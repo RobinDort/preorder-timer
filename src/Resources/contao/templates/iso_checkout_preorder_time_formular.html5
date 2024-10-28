@@ -61,12 +61,13 @@ document.addEventListener('DOMContentLoaded', async function() {
             todaysDate.setDate(27);
         }
         const dateAsString = todaysDate.toLocaleDateString();
-        console.log(dateAsString);
 
-
-        const {range, weekday} = await setAllowedRange(dateInput.value);
+        const {range, weekday} = await setAllowedRange(dateAsString);
         dayOfWeek = weekday;
         allowedRange = range;
+
+        console.log(dayOfWeek);
+        console.log(allowedRange);
     }
 
     // Also check for the time picker value
