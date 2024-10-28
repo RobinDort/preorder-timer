@@ -45,54 +45,18 @@ document.addEventListener('DOMContentLoaded', async function() {
     let dayOfWeek = -1;
     let allowedRange = [];
     let validationTimeout;
-    let shippingId = <?php echo $this->shippingId?>;
-
+    
     // First check if there is already a value inside the dateInput and if so empty it and set the new date to todays date and validate it to set the allowed range.
-    //if (dateInput.value !== null && dateInput.value !== "") {
-    dateInput.value = "";
+    if (dateInput.value !== null && dateInput.value !== "") {
 
-    const todaysDate = new Date();
-    // Monday not allowed so set to tuesday
-    if (todaysDate.getDay() === 1) {
-        todaysDate.setDate(todaysDate.getDate() + 1);
-
-    // 25 and 26.12 not allowed so set to 27. Month 11 = december because the months start with 0 = january.
-    } else if ((todaysDate.getDate() === 25 && todaysDate.getMonth() === 11) || (todaysDate.getDate() === 26 && todaysDate.getMonth() === 11)) {
-        todaysDate.setMonth(11);
-        todaysDate.setDate(27);
+        const {range, weekday} = await setAllowedRange(dateInput.value);
+        dayOfWeek = weekday;
+        allowedRange = range;
     }
-    const dateAsString = todaysDate.toLocaleDateString();
-
-    const {range, weekday} = await setAllowedRange(dateAsString);
-    dayOfWeek = weekday;
-    allowedRange = range;
-
-    dateInput.value = dateAsString;
-   // }
 
     // Also check for the time picker value
     
     if (timePicker.value !== null && timePicker.value !== "") {
-        // reset the time picker value
-        timePicker.value = "";
-
-        const now = new Date();
-
-        // Check if the current time is before 12:30
-        if (now.getHours() < 12 || (now.getHours() === 12 && now.getMinutes() < 30)) {
-            // Set the time to 12:30
-            now.setHours(12, 30, 0, 0); // Set hours, minutes, seconds, milliseconds
-        }
-
-        // At least 30 minutes away from the current time to place the order.
-        now.setMinutes(now.getMinutes() + 30);
-
-       // Get the Unix timestamp (in seconds)
-        const unixTimestamp = Math.floor(now.getTime() / 1000);
-
-        const nextAvailablePreorderTime = await sendCountPreorderRequest(unixTimestamp, shippingId);
-        console.log(nextAvailablePreorderTime);
-
 
         const timeSelected = timePicker.value;
         const isValid = checkTimeValidity(timeSelected, allowedRange);
@@ -194,39 +158,6 @@ document.addEventListener('DOMContentLoaded', async function() {
             console.error(error);
         }
 
-    }
-
-    function sendCountPreorderRequest(selectedTime, shippingID) {
-        const isShippingOrder = shippingID !== null && shippingID !== 28 ? true : false;
-        try {
-            const stringifiedTime = JSON.stringify(selectedTime);
-            if (!stringifiedTime) {
-                throw new Exception("Time could not be stringified!");
-                return;
-            }
-            const requestData = {
-                time: stringifiedTime,
-                isShippingOrder: isShippingOrder
-            };
-            return new Promise(function(resolve,reject) {
-                $.ajax({
-                    type: "POST",
-                    url: "/countPreorderRequest",
-                    data: requestData,
-                    dataType: "json",
-                    encode: true,
-                    success: function(response) {
-                        resolve(response);
-                    },
-                    error: function(error) {
-                        console.log(error);
-                        reject(error);
-                    }
-                })
-            });
-        } catch (error) {
-            console.error(error);
-        }
     }
 
     function timeInRange(time, start, end) {
