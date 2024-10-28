@@ -48,6 +48,11 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     // First check if there is already a value inside the dateInput and if so validate it to set the allowed range.
     if (dateInput.value !== null && dateInput.value !== "") {
+        const todaysDate = new Date();
+        const dateAsString = todaysDate.toLocalDateString;
+        console.log(dateAsString);
+
+        
         const {range, weekday} = await setAllowedRange(dateInput.value);
         dayOfWeek = weekday;
         allowedRange = range;
