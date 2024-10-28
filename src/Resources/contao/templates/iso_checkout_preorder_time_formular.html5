@@ -47,8 +47,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     let validationTimeout;
     let shippingId = <?php echo $this->shippingId?>;
 
-    console.log(shippingId);
-
     // First check if there is already a value inside the dateInput and if so empty it and set the new date to todays date and validate it to set the allowed range.
     //if (dateInput.value !== null && dateInput.value !== "") {
     dateInput.value = "";
@@ -75,6 +73,24 @@ document.addEventListener('DOMContentLoaded', async function() {
     // Also check for the time picker value
     
     if (timePicker.value !== null && timePicker.value !== "") {
+        // reset the time picker value
+        timePicker.value = "";
+
+        const now = new Date();
+
+        // Check if the current time is before 12:30
+        if (now.getHours() < 12 || (now.getHours() === 12 && now.getMinutes() < 30)) {
+            // Set the time to 12:30
+            now.setHours(12, 30, 0, 0); // Set hours, minutes, seconds, milliseconds
+        }
+
+       // Get the Unix timestamp (in seconds)
+        const unixTimestamp = Math.floor(now.getTime() / 1000);
+
+        const nextAvailablePreorderTime = await sendCountPreorderRequest(unixTimestamp, shippingId);
+        console.log(nextAvailablePreorderTime);
+
+
         const timeSelected = timePicker.value;
         const isValid = checkTimeValidity(timeSelected, allowedRange);
 
@@ -177,6 +193,38 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     }
 
+    function sendCountPreorderRequest(selectedTime, shippingID) {
+        const isShippingOrder = shippingID !== null && shippingID !== 28 ? true : false;
+        try {
+            const stringifiedTime = JSON.stringify(selectedTime);
+            if (!stringifiedTime) {
+                throw new Exception("Time could not be stringified!");
+                return;
+            }
+            const requestData = {
+                time: stringifiedTime,
+                isShippingOrder: isShippingOrder
+            };
+            return new Promise(function(resolve,reject) {
+                $.ajax({
+                    type: "POST",
+                    url: "/countPreorderRequest",
+                    dataType: "json",
+                    encode: true,
+                    success: function(response) {
+                        resolve(response);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                        reject(error);
+                    }
+                })
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     function timeInRange(time, start, end) {
         const timeObj = new Date(`1970-01-01T${time}:00`);
         const startObj = new Date(`1970-01-01T${start}:00`);
@@ -231,6 +279,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 console.error('Error during holiday request:', error);
         }
     }
+
 
     async function setAllowedRange(dateInput) {
         const {convertedDate, formattedDate} = getCorrectlyFormattedDateFromString(dateInput);
