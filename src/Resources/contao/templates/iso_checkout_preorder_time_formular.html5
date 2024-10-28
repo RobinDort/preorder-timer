@@ -46,9 +46,20 @@ document.addEventListener('DOMContentLoaded', async function() {
     let allowedRange = [];
     let validationTimeout;
 
-    // First check if there is already a value inside the dateInput and if so validate it to set the allowed range.
+    // First check if there is already a value inside the dateInput and if so empty it and set the new date to todays date and validate it to set the allowed range.
     if (dateInput.value !== null && dateInput.value !== "") {
+        dateInput.value = "";
+
         const todaysDate = new Date();
+        // Monday not allowed so set to tuesday
+        if (todaysDate.getDay() === 1) {
+            todaysDate.setDate(todaysDate.getDate() + 1);
+
+        // 25 and 26.12 not allowed so set to 27. Month 11 = december because the months start with 0 = january.
+        } else if ((todaysDate.getDate() === 25 && todaysDate.getMonth() === 11) || (todaysDate.getDate() === 26 && todaysDate.getMonth() === 11)) {
+            todaysDate.setMonth(11);
+            todaysDate.setDate(27);
+        }
         const dateAsString = todaysDate.toLocaleDateString();
         console.log(dateAsString);
 
