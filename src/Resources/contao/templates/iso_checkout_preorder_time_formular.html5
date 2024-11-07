@@ -52,29 +52,30 @@ document.addEventListener('DOMContentLoaded', async function() {
         submitNextBtn.disabled = true;
     }
 
-    // First check if there is already a value inside the dateInput and if so empty it and set the new date to todays date and validate it to set the allowed range.
+    // First check if there is already a value inside the dateInput and if so empty it.
     if (dateInput.value !== null && dateInput.value !== "") {
 
-        const {range, weekday} = await setAllowedRange(dateInput.value);
-        dayOfWeek = weekday;
-        allowedRange = range;
+        dateInput.value = "";
+
+        // const {range, weekday} = await setAllowedRange(dateInput.value);
+        // dayOfWeek = weekday;
+        // allowedRange = range;
     }
 
     // Also check for the time picker value
     
     if (timePicker.value !== null && timePicker.value !== "") {
 
-        const timeSelected = timePicker.value;
-        const isValid = checkTimeValidity(timeSelected, allowedRange);
+        timePicker.value = "";
 
-        if (!isValid) {
-            // Clear the input if not valid
-            timePicker.value = "";
-            displayWrongTimeAlert(allowedRange);
-        } else {
-            // enable next button again 
-            submitNextBtn.disabled = false;
-        }
+        // const timeSelected = timePicker.value;
+        // const isValid = checkTimeValidity(timeSelected, allowedRange);
+
+        // if (!isValid) {
+        //     // Clear the input if not valid
+        //     timePicker.value = "";
+        //     displayWrongTimeAlert(allowedRange);
+        // }
     }
     
 
@@ -122,6 +123,9 @@ document.addEventListener('DOMContentLoaded', async function() {
                 if (!validTime) {
                     timePicker.value = "";
                     displayWrongTimeAlert(allowedRange, instance);
+                } else {
+                    // enable the next button again
+                    submitNextBtn.disabled = false;
                 }
             }, 1500);
         },
