@@ -47,7 +47,10 @@ document.addEventListener('DOMContentLoaded', async function() {
     let validationTimeout;
 
     const submitNextBtn = document.querySelector("input.submit.next.button");
-    console.log(submitNextBtn);
+    // disable next button until a valid time has been placed.
+    if (submitNextBtn) {
+        submitNextBtn.disabled = true;
+    }
 
     // First check if there is already a value inside the dateInput and if so empty it and set the new date to todays date and validate it to set the allowed range.
     if (dateInput.value !== null && dateInput.value !== "") {
@@ -68,6 +71,9 @@ document.addEventListener('DOMContentLoaded', async function() {
             // Clear the input if not valid
             timePicker.value = "";
             displayWrongTimeAlert(allowedRange);
+        } else {
+            // enable next button again 
+            submitNextBtn.disabled = false;
         }
     }
     
