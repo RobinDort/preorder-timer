@@ -46,6 +46,9 @@ document.addEventListener('DOMContentLoaded', async function() {
     let allowedRange = [];
     let validationTimeout;
 
+    const submitNextBtn = document.querySelector("input.submit.next.button");
+    console.log(submitNextBtn);
+
     // First check if there is already a value inside the dateInput and if so empty it and set the new date to todays date and validate it to set the allowed range.
     if (dateInput.value !== null && dateInput.value !== "") {
 
