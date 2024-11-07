@@ -122,6 +122,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
                 if (!validTime) {
                     timePicker.value = "";
+                    submitNextBtn.disabled = true;
                     displayWrongTimeAlert(allowedRange, instance);
                 } else {
                     // enable the next button again
