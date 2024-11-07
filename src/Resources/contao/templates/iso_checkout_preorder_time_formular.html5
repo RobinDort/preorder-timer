@@ -218,8 +218,14 @@ document.addEventListener('DOMContentLoaded', async function() {
     async function setAllowedRange(dateInput) {
         const {convertedDate, formattedDate} = getCorrectlyFormattedDateFromString(dateInput);
         const dayOfSelectedDate = convertedDate.getDay();
+        const dateOfDay = String(convertedDate.getDate()).padStart(2, '0');
+        const monthNumber = String(convertedDate.getMonth() + 1).padStart(2, '0');
+        const yearNumber = convertedDate.getFullYear();
+
         const selectedDayIsHoliday = await checkDateForHoliday(formattedDate);
-        allowedRange = dayOfSelectedDate === 0 || dayOfSelectedDate === 6 || selectedDayIsHoliday ? [{ start: "17:30", end: "21:45" }] : [{ start: "12:30", end: "14:15" }, { start: "17:30", end: "21:15" }];
+
+        // Add new condition for specific date coming on 13.11.24
+        allowedRange = dateOfDay === "13" && monthNumber === "11" && yearNumber === 2024 || dayOfSelectedDate === 0 || dayOfSelectedDate === 6 || selectedDayIsHoliday ? [{ start: "17:30", end: "21:45" }] : [{ start: "12:30", end: "14:15" }, { start: "17:30", end: "21:15" }];
         return {
             range: allowedRange,
             weekday: dayOfSelectedDate
