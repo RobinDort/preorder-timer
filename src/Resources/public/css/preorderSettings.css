@@ -1,3 +1,16 @@
-.preorder-settings-fieldset {
-	padding: 20px;
+.settings_widget {
+	position: relative;
+	margin: 15px;
+}
+
+.settings_widget p {
+	background: #ccc;
+	padding: 15px;
+	margin: 15px 0;
+}
+
+.settings_label strong {
+	font-size: 1.2rem;
+	font-weight: 700;
+	color: #ff8800;
 }
