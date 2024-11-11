@@ -20,8 +20,8 @@
                     <!-- Select Input for Status -->
                     <div class="settings_widget">
                         <p>Geben Sie an, ob der Shop am gewählten Datum ganztägig oder halbtags geschlossen ist.</p>
-                        <label class="settings_label" for="ctrl_preorder_status"><strong>2</strong>Geschlossene Shopzeit:</label>
-                        <select name="preorder_status" id="ctrl_preorder_status" class="tl_select">
+                        <label class="settings_label" for="preorder_status"><strong>2</strong>Geschlossene Shopzeit:</label>
+                        <select name="preorder_status" id="preorder_status" class="tl_select">
                             <option value="1">Ganztägig geschlossen</option>
                             <option value="2">Morgens geschlossen</option>
                             <option value="3">Nachmittags/Abends geschlossen</option>
