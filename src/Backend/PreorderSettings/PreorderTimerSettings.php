@@ -6,7 +6,7 @@ use Contao\BackendModule;
 use Contao\BackendTemplate;
 use Contao\Input;
 use Contao\Database;
-use Contao\System;
+use Contao\Message;
 
 
 class PreorderTimerSettings extends BackendModule {
@@ -40,7 +40,7 @@ class PreorderTimerSettings extends BackendModule {
                                    ->execute($preorderDate);
 
             // Add a success flash message
-            System::setFlashMessage(
+            Message::addInfo(
                 'Datum wurde erfolgreich gesichert.'
             );
         }
