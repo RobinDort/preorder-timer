@@ -7,8 +7,6 @@ use Contao\BackendTemplate;
 use Contao\Input;
 use Contao\Database;
 
-use Symfony\Component\Security\Core\Security;
-
 
 class PreorderTimerSettings extends BackendModule {
 
@@ -28,7 +26,7 @@ class PreorderTimerSettings extends BackendModule {
 
     public function generate() {
          // Validate the form submission and the CSRF token
-         if (Input::post('FORM_SUBMIT') === 'tl_preorder_settings_form' && !Input::post('REQUEST_TOKEN') || !Security::isValidToken(Input::post('REQUEST_TOKEN'))) {
+         if (Input::post('FORM_SUBMIT') === 'tl_preorder_settings_form' && !Input::post('REQUEST_TOKEN')) {
             // CSRF Token failed or missing
             throw new Exception('Invalid CSRF Token');
         }
