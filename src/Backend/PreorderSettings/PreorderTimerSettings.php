@@ -18,6 +18,12 @@ class PreorderTimerSettings extends BackendModule {
 		parent::__construct();
 	}
 
+
+    /**
+     * {@inheritDoc}
+     */
+    public function compile() {}
+
     public function generate() {
         if (Input::post('FORM_SUBMIT') === 'tl_preorder_settings_form') {
             $preorderDate = Input::post('preorder_date_shop_closed');
@@ -29,7 +35,7 @@ class PreorderTimerSettings extends BackendModule {
 
         $this->Template = new BackendTemplate($this->strTemplate);
         $this->compile();
-        
+
         return $this->Template->parse();
     }
 }
