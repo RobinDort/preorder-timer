@@ -10,7 +10,7 @@ use Contao\Database;
 
 class PreorderTimerSettings extends Backend {
 
-    public function __invoke() {
+    public function generate() {
         if (Input::post('FORM_SUBMIT') === 'tl_preorder_settings_form') {
             $preorderDate = Input::post('preorder_date_shop_closed');
 
