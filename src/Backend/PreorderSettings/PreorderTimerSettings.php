@@ -7,6 +7,8 @@ use Contao\BackendTemplate;
 use Contao\Input;
 use Contao\Database;
 
+use Symfony\Component\Security\Core\Security;
+
 
 class PreorderTimerSettings extends BackendModule {
 
