@@ -36,7 +36,7 @@ class PreorderTimerSettings extends BackendModule {
             $preorderDate = Input::post('preorder_date_shop_closed');
 
             // Save the entered date into the new table
-            Database::getInstance()->prepare("INSERT INTO tl_preorder_settings (preorder_closed_shop_date) VALUES (?)")
+            Database::getInstance()->prepare("INSERT INTO tl_preorder_settings (shop_closed_date) VALUES (?)")
                                    ->execute($preorderDate);
 
             // Add a success flash message
