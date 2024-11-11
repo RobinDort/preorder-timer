@@ -6,6 +6,7 @@ use Contao\BackendModule;
 use Contao\BackendTemplate;
 use Contao\Input;
 use Contao\Database;
+use Contao\System;
 
 
 class PreorderTimerSettings extends BackendModule {
@@ -37,6 +38,11 @@ class PreorderTimerSettings extends BackendModule {
             // Save the entered date into the new table
             Database::getInstance()->prepare("INSERT INTO tl_preorder_settings (preorder_closed_shop_date) VALUES (?)")
                                    ->execute($preorderDate);
+
+            // Add a success flash message
+            System::setFlashMessage(
+                'Datum wurde erfolgreich gesichert.'
+            );
         }
 
         $this->Template = new BackendTemplate($this->strTemplate);
