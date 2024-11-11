@@ -1,35 +1,41 @@
+<?php $this->extend('be_main'); ?>
+
 <div class="tl_formbody_edit">
     
-    <h1 id="main_headline">Shop Konfiguration Vorbestellungen</h1>
+    <?php $this->block('title') ?>
+        <h1>Shop Konfiguration Vorbestellungen</h1>
+    <?php $this->endblock(); ?>
     
-    <form action="<?php echo ampersand(\Environment::get('request')); ?>" method="post">
-        <input type="hidden" name="FORM_SUBMIT" value="tl_preorder_settings_form">
+    <?php $this->block('main'); ?>
+        <form action="<?php echo ampersand(\Environment::get('request')); ?>" method="post">
+            <input type="hidden" name="FORM_SUBMIT" value="tl_preorder_settings_form">
 
-        <div class="content">
-            <!-- Date Input -->
-            <div class="widget">
-                <p>Hier das gewünschte Datum eintragen, an dem der Shop von seinen normalen Geschäftszeiten abweicht. Das Formular "Vorbestellungen",
-                welches im Kassenmodul vorhanden ist, wird dieses Datum berücksichtigen und die verfügbaren Zeiten dementsprechend anpassen.</p>
+            <div class="content">
+                <!-- Date Input -->
+                <div class="widget">
+                    <p>Hier das gewünschte Datum eintragen, an dem der Shop von seinen normalen Geschäftszeiten abweicht. Das Formular "Vorbestellungen",
+                    welches im Kassenmodul vorhanden ist, wird dieses Datum berücksichtigen und die verfügbaren Zeiten dementsprechend anpassen.</p>
 
-                <label for="preorder_date_shop_closed"><strong>1: </strong>Shop geschlossen am:</label>
-                <input type="text" name="preorder_date_shop_closed" id="preorder_date_shop_closed" class="tl_text" value="">
-                <img src="assets/datepicker.svg" onclick="Backend.getScrollOffset();return Calendar.load(this,'preorder_date_shop_closed','datim')" style="cursor:pointer">
+                    <label for="preorder_date_shop_closed"><strong>1: </strong>Shop geschlossen am:</label>
+                    <input type="text" name="preorder_date_shop_closed" id="preorder_date_shop_closed" class="tl_text" value="">
+                    <img src="assets/datepicker.svg" onclick="Backend.getScrollOffset();return Calendar.load(this,'preorder_date_shop_closed','datim')" style="cursor:pointer">
+                </div>
+                
+                <!-- Select Input for Status -->
+                <div class="widget">
+                    <p>Geben Sie an, ob der Shop am gewählten Datum ganztägig oder halbtags geschlossen ist.</p>
+                    <label for="ctrl_preorder_status"><strong>2: </strong>Geschlossene Shopzeit:</label>
+                    <select name="preorder_status" id="ctrl_preorder_status" class="tl_select">
+                        <option value="1">Ganztägig geschlossen</option>
+                        <option value="2">Morgens geschlossen</option>
+                        <option value="3">Nachmittags/Abends geschlossen</option>
+                    </select>
+                </div>
+                
+                <div class="tl_submit_container">
+                    <input type="submit" name="submit" class="tl_submit" value="Speichern">
+                </div>
             </div>
-            
-            <!-- Select Input for Status -->
-            <div class="widget">
-                <p>Geben Sie an, ob der Shop am gewählten Datum ganztägig oder halbtags geschlossen ist.</p>
-                <label for="ctrl_preorder_status"><strong>2: </strong>Geschlossene Shopzeit:</label>
-                <select name="preorder_status" id="ctrl_preorder_status" class="tl_select">
-                    <option value="1">Ganztägig geschlossen</option>
-                    <option value="2">Morgens geschlossen</option>
-                    <option value="3">Nachmittags/Abends geschlossen</option>
-                </select>
-            </div>
-            
-            <div class="tl_submit_container">
-                <input type="submit" name="submit" class="tl_submit" value="Speichern">
-            </div>
-        </div>
-    </form>
+        </form>
+    <?php $this->endblock(); ?>
 </div>
