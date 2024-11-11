@@ -2,7 +2,7 @@
     <form action="<?php echo ampersand(\Environment::get('request')); ?>" method="post">
         <input type="hidden" name="FORM_SUBMIT" value="tl_preorder_settings_form">
         <fieldset>
-            <legend>Shopkonfiguration Vorbestellungen</legend>
+            <legend>Shop Konfiguration Vorbestellungen</legend>
             
             <!-- Date Input -->
             <div class="widget">
