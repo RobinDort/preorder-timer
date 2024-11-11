@@ -14,6 +14,11 @@ $GLOBALS['TL_JAVASCRIPT'][] = "bundles/robindortpreordertimer/js/flatpickr.js|st
 $GLOBALS['TL_JAVASCRIPT'][] = "bundles/robindortpreordertimer/js/flatpickr_de.js|static";
 
 
+
+/**
+ *********** Frontend ***********  
+ */
+
 // Init the widgets class for the preorder formular. 
 $GLOBALS['TL_FFL']['preorder_formular'] = PreorderFormular::class;
 
@@ -48,4 +53,14 @@ $GLOBALS['ISO_HOOKS']['preOrderStatusUpdate'][] = [PreOrderStatusUpdateListener:
 
 // Init a new notification center token that provides the preorder_time so it can be attached to the billings.
 $GLOBALS['ISO_HOOKS']['getOrderNotificationTokens'][] = [PreorderTimeTokenProvider::class,'__invoke'];
+
+
+/**
+ *********** Backend ***********  
+ */
+
+$GLOBALS['BE_MOD']['shop_configuration_preorders']['preorder_settings'] = [
+    'tables'    => ['tl_preorder_settings'],
+    'callback'  => 'RobinDort\Backend\PreorderSettings\PreorderTimerSettings',
+];
 ?>

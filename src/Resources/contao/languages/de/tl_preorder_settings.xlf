@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2">
+    <file source-language="en" datatype="plaintext" original="tl_preorder_settings">
+        <body>
+            <!-- Labels for fields -->
+            <trans-unit id="preorder_closed_shop_date.label">
+                <source>preorder_closed_shop_date</source>
+            </trans-unit>
+            <trans-unit id="preorder_closed_shop_date.description">
+                <source>Datum gibt an wann Shop außerhalb der natürlichen Öffnungszeiten geschlossen ist</source>
+            </trans-unit>
+            
+            <trans-unit id="preorder_closed_shop_time_status.label">
+                <source>preorder_closed_shop_time_status</source>
+            </trans-unit>
+            <trans-unit id="preorder_closed_shop_time_status.description">
+                <source>Status gibt an ob der Shop ganztägig oder halbtags geschlossen ist</source>
+            </trans-unit>
+
+            <!-- Options for select field -->
+            <trans-unit id="preorder_closed_shop_time_status_option.1">
+                <source>Ganztägig geschlossen</source>
+            </trans-unit>
+            <trans-unit id="preorder_closed_shop_time_status_option.2">
+                <source>Morgens geschlossen</source>
+            </trans-unit>
+            <trans-unit id="preorder_closed_shop_time_status_option.3">
+                <source>Nachmittags/Abends geschlossen</source>
+            </trans-unit>
+
+            <!-- Labels for operations -->
+            <trans-unit id="edit.label">
+                <source>Eintrag bearbeiten</source>
+            </trans-unit>
+            <trans-unit id="delete.label">
+                <source>Eintrag löschen</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
