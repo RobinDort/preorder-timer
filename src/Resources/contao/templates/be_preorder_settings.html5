@@ -1,4 +1,6 @@
     
+<?= \Contao\Message::generate(); ?>
+
 <?php $this->block('main'); ?>
     <h1 class="settings_headline">Shop Konfiguration Vorbestellungen</h1>
 
