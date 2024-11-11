@@ -2,13 +2,21 @@
 
 namespace RobinDort\PreorderTimer\Backend\PreorderSettings;
 
-use Contao\Backend;
+use Contao\BackendModule;
 use Contao\BackendTemplate;
 use Contao\Input;
 use Contao\Database;
 
 
-class PreorderTimerSettings extends Backend {
+class PreorderTimerSettings extends BackendModule {
+
+    protected $strTemplate = "be_preorder_settings";
+
+
+    public function __construct()
+	{
+		parent::__construct();
+	}
 
     public function generate() {
         if (Input::post('FORM_SUBMIT') === 'tl_preorder_settings_form') {
@@ -19,8 +27,10 @@ class PreorderTimerSettings extends Backend {
                                    ->execute($preorderDate);
         }
 
-        $this->Template = new BackendTemplate('be_preorder_settings');
+        $this->Template = new BackendTemplate($this->strTemplate);
+        $this->compile();
+        
         return $this->Template->parse();
     }
 }
-?>
+?>  
