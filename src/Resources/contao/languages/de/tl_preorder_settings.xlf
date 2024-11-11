@@ -3,28 +3,28 @@
     <file source-language="de" datatype="plaintext" original="tl_preorder_settings">
         <body>
             <!-- Labels for fields -->
-            <trans-unit id="preorder_closed_shop_date.label">
-                <source>preorder_closed_shop_date</source>
+            <trans-unit id="shop_closed_date.label">
+                <source>shop_closed_date</source>
             </trans-unit>
-            <trans-unit id="preorder_closed_shop_date.description">
+            <trans-unit id="shop_closed_date.description">
                 <source>Datum gibt an wann Shop außerhalb der natürlichen Öffnungszeiten geschlossen ist</source>
             </trans-unit>
             
-            <trans-unit id="preorder_closed_shop_time_status.label">
-                <source>preorder_closed_shop_time_status</source>
+            <trans-unit id="shop_closed_status.label">
+                <source>shop_closed_status</source>
             </trans-unit>
-            <trans-unit id="preorder_closed_shop_time_status.description">
+            <trans-unit id="shop_closed_status.description">
                 <source>Status gibt an ob der Shop ganztägig oder halbtags geschlossen ist</source>
             </trans-unit>
 
             <!-- Options for select field -->
-            <trans-unit id="preorder_closed_shop_time_status_option.1">
+            <trans-unit id="shop_closed_status_option.1">
                 <source>Ganztägig geschlossen</source>
             </trans-unit>
-            <trans-unit id="preorder_closed_shop_time_status_option.2">
+            <trans-unit id="shop_closed_status_option.2">
                 <source>Morgens geschlossen</source>
             </trans-unit>
-            <trans-unit id="preorder_closed_shop_time_status_option.3">
+            <trans-unit id="shop_closed_status_option.3">
                 <source>Nachmittags/Abends geschlossen</source>
             </trans-unit>
 
