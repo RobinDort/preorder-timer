@@ -1,3 +1,7 @@
+.settings_headline {
+	margin: 15px;
+}
+
 .settings_widget {
 	position: relative;
 	margin: 15px;
@@ -13,4 +17,5 @@
 	font-size: 1.2rem;
 	font-weight: 700;
 	color: #ff8800;
+	margin-right: 5px;
 }

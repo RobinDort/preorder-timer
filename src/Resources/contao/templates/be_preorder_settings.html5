@@ -1,6 +1,6 @@
     
 <?php $this->block('main'); ?>
-    <h1>Shop Konfiguration Vorbestellungen</h1>
+    <h1 class="settings_headline">Shop Konfiguration Vorbestellungen</h1>
 
     <div class="tl_formbody_edit">
             <form action="<?php echo ampersand(\Environment::get('request')); ?>" method="post">
