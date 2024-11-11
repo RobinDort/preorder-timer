@@ -5,6 +5,7 @@
     <div class="tl_formbody_edit">
             <form action="<?php echo ampersand(\Environment::get('request')); ?>" method="post">
                 <input type="hidden" name="FORM_SUBMIT" value="tl_preorder_settings_form">
+                <input type="hidden" name="REQUEST_TOKEN" value="<?=REQUEST_TOKEN?>"> <!-- CSRF Token -->
 
                 <div class="content">
                     <!-- Date Input -->
