@@ -35,6 +35,10 @@ $GLOBALS['TL_DCA']['tl_preorder_settings'] = [
         'id' => [
             'sql' => "int(10) unsigned NOT NULL auto_increment",
         ],
+        'tstamp' => [
+            'label'     => &$GLOBALS['TL_LANG']['MSC']['tstamp'],
+            'sql'       => "int(10) unsigned NOT NULL default '0'",
+        ],
         'preorder_closed_shop_date' => [
             'label'     => &$GLOBALS['TL_LANG']['tl_preorder_settings']['preorder_closed_shop_date'],
             'inputType' => 'text',

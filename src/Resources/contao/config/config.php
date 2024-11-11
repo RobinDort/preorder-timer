@@ -59,7 +59,7 @@ $GLOBALS['ISO_HOOKS']['getOrderNotificationTokens'][] = [PreorderTimeTokenProvid
  *********** Backend ***********  
  */
 
-$GLOBALS['BE_MOD']['Shop Konfiguration Vorbestellungen']['Shopzeiten'] = [
+$GLOBALS['BE_MOD']['Vorbestellungen Konfiguration']['Shopzeiten'] = [
     'tables'    => ['tl_preorder_settings'],
     'callback'  => 'RobinDort\Backend\PreorderSettings\PreorderTimerSettings',
 ];
