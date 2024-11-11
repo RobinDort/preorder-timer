@@ -1,4 +1,7 @@
     
+<script type="text/javascript" src="assets/contao/js/contao.js"></script>
+<script type="text/javascript" src="assets/contao/js/calendar.js"></script>
+
 <?php $this->block('main'); ?>
     <h1 class="settings_headline">Shop Konfiguration Vorbestellungen</h1>
 
