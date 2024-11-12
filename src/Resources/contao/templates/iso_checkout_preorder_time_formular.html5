@@ -241,11 +241,11 @@ document.addEventListener('DOMContentLoaded', async function() {
         const yearNumber = convertedDate.getFullYear();
         const selectedDayIsHoliday = await checkDateForHoliday(formattedDate);
 
-        const specialDayClosedMorning = specialClosedDays['closedAtMorning'];
-        const specialDayClosedEvening = specialClosedDays['closedAtEvening'];
+        const specialDaysClosedMorning = specialClosedDays['closedAtMorning'];
+        const specialDaysClosedEvening = specialClosedDays['closedAtEvening'];
 
         let selectedDayRange = [];
-        if ( dateOfDay === "13" && monthNumber === "11" && yearNumber === 2024 || dayOfSelectedDate === 0 || dayOfSelectedDate === 6 || selectedDayIsHoliday) {
+        if ( dateOfDay === "13" && monthNumber === "11" && yearNumber === 2024 || dayOfSelectedDate === 0 || dayOfSelectedDate === 6 || selectedDayIsHoliday || specialDaysClosedMorning.include(dateInput)) {
             selectedDayRange.push({ start: "17:30", end: "21:45" });
         } else {
             selectedDayRange.push({ start: "12:30", end: "14:15" }, { start: "17:30", end: "21:15" });
