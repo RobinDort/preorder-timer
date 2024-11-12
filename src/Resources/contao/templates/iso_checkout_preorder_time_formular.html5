@@ -47,6 +47,8 @@ document.addEventListener('DOMContentLoaded', async function() {
     let allowedRange = [];
     let validationTimeout;
 
+    console.log(Array.isArray(specialClosedDays));
+
     const submitNextBtn = document.querySelector("input.submit.next.button");
     // disable next button until a valid time has been placed.
     if (submitNextBtn) {
@@ -105,7 +107,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 const convertedSpecialDays = specialClosedDays.map(date => {
                     const [day, month, year] = date.split('.');
                     return `20${year}-${month}-${day}`;
-                })
+                });
                 const dateString = date.toISOString().split('T')[0]; // Convert to 'Y-m-d' format
                 return convertedSpecialDays.includes(dateString);
             }
