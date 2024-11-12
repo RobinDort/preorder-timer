@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     const dateInput = document.getElementById("preorder-formular-date");
     const timePicker = document.getElementById("preorder-formular-time");
     const date = new Date();
-    const specialClosedDays = <?php echo $this->specialClosedDays; ?>;
+    const specialClosedDays = <?php echo json_encode($this->specialClosedDays); ?>;
     let isHoliday = false;
     let dayOfWeek = -1;
     let allowedRange = [];

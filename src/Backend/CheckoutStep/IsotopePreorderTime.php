@@ -148,9 +148,6 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
                 $specialDays['closedAtEvening'][] = $date;
             }
         }
-
-        \System::log("specialDaysArray: " . json_encode($specialDays), __METHOD__, "TL_ERROR");
-        throw new \Exception("DEBUG");
         
         return $specialDays;
     }
