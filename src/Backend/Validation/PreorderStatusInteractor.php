@@ -19,7 +19,7 @@ class PreorderStatusInteractor {
             ];
         }
 
-        $splittedSpecialDays = splitSpecialClosedDays($entries);
+        $splittedSpecialDays = $this->splitSpecialClosedDays($entries);
         return $splittedSpecialDays;
     }
 
