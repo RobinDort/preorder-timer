@@ -216,10 +216,12 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         } else if (dayOfWeek === 0 || dayOfWeek === 6 || allowedRange === { start: "17:30", end: "21:45" }) {
             alert('Bitte wählen Sie einen Zeitraum zwischen 17:30 - 21:45 Uhr.');
-            
+
         } else {
             alert('Bitte wählen Sie einen Zeitraum zwischen 12:30 - 14:15 Uhr oder einen Zeitraum zwischen 17:30 - 21:15 Uhr.');
         }
+
+        console.log(allowedRange);
     }
 
     async function checkDateForHoliday(date) {
