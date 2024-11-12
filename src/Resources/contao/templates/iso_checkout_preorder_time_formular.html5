@@ -253,6 +253,11 @@ document.addEventListener('DOMContentLoaded', async function() {
         const monthNumber = String(convertedDate.getMonth() + 1).padStart(2, '0');
         const yearNumber = convertedDate.getFullYear();
 
+        const specialDayClosedMorning = specialClosedDays['closedAtMorning'];
+        const specialDayClosedEvening = specialClosedDays['closedAtEvening'];
+
+        console.log(specialDayClosedMorning);
+        console.log(specialDayClosedEvening);
         const selectedDayIsHoliday = await checkDateForHoliday(formattedDate);
 
         // Add new condition for specific date coming on 13.11.24
