@@ -106,6 +106,8 @@ document.addEventListener('DOMContentLoaded', async function() {
                     const [day, month, year] = date.split('.');
                     return `20${year}-${month}-${day}`;
                 });
+                console.log(convertedSpecialDays);
+                console.log(date);
                 const dateString = date.toISOString().split('T')[0]; // Convert to 'Y-m-d' format
                 return convertedSpecialDays.includes(dateString);
             }
