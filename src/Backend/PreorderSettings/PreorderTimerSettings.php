@@ -2,6 +2,8 @@
 
 namespace RobinDort\PreorderTimer\Backend\PreorderSettings;
 
+use RobinDort\PreorderTimer\Backend\Validation\PreorderStatusInteractor;
+
 use Contao\BackendModule;
 use Contao\BackendTemplate;
 use Contao\Input;
@@ -47,7 +49,13 @@ class PreorderTimerSettings extends BackendModule {
             );
         }
 
+
+        // Get the already saved special closed days
+        $preorderStatusInteractor = new PreorderStatusInteractor();
+        $specialClosedDays =  $preorderStatusInteractor->extractSpecialClosedDays();
+
         $this->Template = new BackendTemplate($this->strTemplate);
+        $this->Template->specialClosedDays =  $specialClosedDays;
         $this->compile();
 
         return $this->Template->parse();
