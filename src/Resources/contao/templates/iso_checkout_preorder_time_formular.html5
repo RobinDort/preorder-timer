@@ -223,7 +223,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         console.log(JSON.stringify(allowedRange));
         console.log(JSON.stringify({ start: "12:30", end: "14:15" }));
-        console.log(JSON.stringify(allowedRange) === JSON.stringify({ start: "12:30", end: "14:15" }));
+        console.log(JSON.stringify(allowedRange) === JSON.stringify([{ start: "12:30", end: "14:15" }]));
     }
 
     async function checkDateForHoliday(date) {
