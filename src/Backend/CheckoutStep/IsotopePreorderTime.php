@@ -40,7 +40,7 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
 
     public function generate() {
         $strClass = $GLOBALS['TL_FFL']['preorder_formular'];
-        $shopClosedSpecialDays = extractSpecialClosingDays();
+        $shopClosedSpecialDays = $this->extractSpecialClosingDays();
 
         /** @var \Contao\FormText $objWidget */
         $objWidget = new $strClass([
