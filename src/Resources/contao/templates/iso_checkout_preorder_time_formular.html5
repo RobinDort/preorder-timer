@@ -211,8 +211,12 @@ document.addEventListener('DOMContentLoaded', async function() {
         if (instance) {
             instance.clear();
         }
-        if (dayOfWeek === 0 || dayOfWeek === 6 || allowedRange.length === 1) {
+        if (allowedRange === { start: "12:30", end: "14:15" }) {
+            alert('Bitte wählen Sie einen Zeitraum zwischen 12:30 - 14:15 Uhr.');
+
+        } else if (dayOfWeek === 0 || dayOfWeek === 6 || allowedRange === { start: "17:30", end: "21:45" }) {
             alert('Bitte wählen Sie einen Zeitraum zwischen 17:30 - 21:45 Uhr.');
+            
         } else {
             alert('Bitte wählen Sie einen Zeitraum zwischen 12:30 - 14:15 Uhr oder einen Zeitraum zwischen 17:30 - 21:15 Uhr.');
         }
@@ -250,12 +254,10 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         } else if (specialDaysClosedEvening.includes(dateInput)) {
             selectedDayRange.push({ start: "12:30", end: "14:15" });
-            
+
         } else {
             selectedDayRange.push({ start: "12:30", end: "14:15" }, { start: "17:30", end: "21:15" });
         }
-
-        console.log(selectedDayRange);
 
         // Add new condition for specific date coming on 13.11.24
         allowedRange = selectedDayRange;
