@@ -122,34 +122,11 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
     }
 
     private function extractSpecialClosingDays() {
-        $specialDays = [
-            'fullyClosed' => [],
-            'closedAtMorning' => [],
-            'closedAtEvening' => []
-        ];
 
         $preorderStatusInteractor = new PreorderStatusInteractor();
         $extractedSpecialDays = $preorderStatusInteractor->extractSpecialClosedDays();
-
-        foreach ($extractedSpecialDays as $entry) {
-            $date = $entry['date'];
-            $status = $entry['status'];
-
-            // shop is closed the whole day
-            if ($status === '1') {
-                $specialDays['fullyClosed'][] = $date;
-
-            // shop is closed at morning
-            } else if ($status === '2') {
-                $specialDays['closedAtMorning'][] = $date;
-
-            // shop is closed at evening 
-            } else if ($status === '3') {
-                $specialDays['closedAtEvening'][] = $date;
-            }
-        }
         
-        return $specialDays;
+        return $extractedSpecialDays;
     }
 }
 

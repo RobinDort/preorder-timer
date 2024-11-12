@@ -1,6 +1,14 @@
     
 <?= \Contao\Message::generate(); ?>
 
+<?php
+$statusLabels = [
+    'fullyClosed' => 'Ganztägig',
+    'closedMorning' => 'Morgens geschlossen',
+    'closedEvening' => 'Abends/Nachmittags geschlossen'
+];
+?>
+
 <?php $this->block('main'); ?>
     <h1 class="settings_headline">Shop Konfiguration Vorbestellungen</h1>
 
@@ -36,6 +44,20 @@
                 </div>
             </form>
     </div>
+
+    <!--
+    <div class="content">
+        <table id="days-closed-table">
+            <thead>
+                <tr>
+                    <th>Shop geschlossen</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>-->
 <?php $this->endblock(); ?>
 
 <script>
