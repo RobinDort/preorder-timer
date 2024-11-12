@@ -104,7 +104,8 @@ document.addEventListener('DOMContentLoaded', async function() {
             function(date) {
                 const convertedSpecialDays = specialClosedDays['fullyClosed'].map(date => {
                     const [day, month, year] = date.split('.');
-                    return `${year}-${month}-${day-1}`;
+                    const castedDay = parseInt(day);
+                    return `${year}-${month}-${castedDay-1}`;
                 });
                 console.log(convertedSpecialDays);
                 const dateString = date.toISOString().split('T')[0]; // Convert to 'Y-m-d' format
