@@ -47,8 +47,6 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     const eveningWeekendHolidayRange = { start: "17:30", end: "21:45" };
     const eveningRange = {start: "17:30", end: "21:15"};
-
-    const fullDayRange = { start: "12:30", end: "14:15" }, { start: "17:30", end: "21:15" };
     
     let isHoliday = false;
     let dayOfWeek = -1;
@@ -278,7 +276,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             if (dayOfSelectedDate === 0 || dayOfSelectedDate === 6 || selectedDayIsHoliday) {
                 selectedDayRange.push(eveningWeekendHolidayRange);
             } else {
-                selectedDayRange.push(fullDayRange);
+                selectedDayRange.push(morningRange, eveningRange);
             }
         }
 
