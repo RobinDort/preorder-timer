@@ -47,6 +47,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     let allowedRange = [];
     let validationTimeout;
 
+    console.log(specialClosedDays);
     console.log(Array.isArray(specialClosedDays));
 
     const submitNextBtn = document.querySelector("input.submit.next.button");
