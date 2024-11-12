@@ -211,19 +211,15 @@ document.addEventListener('DOMContentLoaded', async function() {
         if (instance) {
             instance.clear();
         }
-        if (JSON.stringify(allowedRange) === JSON.stringify({ start: "12:30", end: "14:15" })) {
+        if (JSON.stringify(allowedRange) === JSON.stringify([{ start: "12:30", end: "14:15" }])) {
             alert('Bitte wählen Sie einen Zeitraum zwischen 12:30 - 14:15 Uhr.');
 
-        } else if (dayOfWeek === 0 || dayOfWeek === 6 || JSON.stringify(allowedRange) === JSON.stringify({ start: "17:30", end: "21:45" })) {
+        } else if (dayOfWeek === 0 || dayOfWeek === 6 || JSON.stringify(allowedRange) === JSON.stringify([{ start: "17:30", end: "21:45" }])) {
             alert('Bitte wählen Sie einen Zeitraum zwischen 17:30 - 21:45 Uhr.');
 
         } else {
             alert('Bitte wählen Sie einen Zeitraum zwischen 12:30 - 14:15 Uhr oder einen Zeitraum zwischen 17:30 - 21:15 Uhr.');
         }
-
-        console.log(JSON.stringify(allowedRange));
-        console.log(JSON.stringify({ start: "12:30", end: "14:15" }));
-        console.log(JSON.stringify(allowedRange) === JSON.stringify([{ start: "12:30", end: "14:15" }]));
     }
 
     async function checkDateForHoliday(date) {
