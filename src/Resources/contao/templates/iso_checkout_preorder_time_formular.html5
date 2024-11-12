@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             alert('Bitte wählen Sie einen Zeitraum zwischen 12:30 - 14:15 Uhr oder einen Zeitraum zwischen 17:30 - 21:15 Uhr.');
         }
 
-        console.log(allowedRange);
+        console.log(JSON.stringify(allowedRange) === JSON.stringify({ start: "12:30", end: "14:15" }));
     }
 
     async function checkDateForHoliday(date) {
