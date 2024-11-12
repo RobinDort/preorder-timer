@@ -247,6 +247,10 @@ document.addEventListener('DOMContentLoaded', async function() {
         let selectedDayRange = [];
         if ( dateOfDay === "13" && monthNumber === "11" && yearNumber === 2024 || dayOfSelectedDate === 0 || dayOfSelectedDate === 6 || selectedDayIsHoliday || specialDaysClosedMorning.includes(dateInput)) {
             selectedDayRange.push({ start: "17:30", end: "21:45" });
+
+        } else if (specialDaysClosedEvening.includes(dateInput)) {
+            selectedDayRange.push({ start: "12:30", end: "14:15" });
+            
         } else {
             selectedDayRange.push({ start: "12:30", end: "14:15" }, { start: "17:30", end: "21:15" });
         }
