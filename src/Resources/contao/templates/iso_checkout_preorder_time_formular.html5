@@ -42,8 +42,12 @@ document.addEventListener('DOMContentLoaded', async function() {
     const timePicker = document.getElementById("preorder-formular-time");
     const date = new Date();
     const specialClosedDays = <?php echo json_encode($this->specialClosedDays); ?>;
+
     const morningRange = { start: "12:30", end: "14:15" };
-    const eveningRange = { start: "17:30", end: "21:45" };
+
+    const eveningWeekendHolidayRange = { start: "17:30", end: "21:45" };
+    const eveningRange = {start: "17:30", end: "21:15"};
+
     const fullDayRange = { start: "12:30", end: "14:15" }, { start: "17:30", end: "21:15" };
     
     let isHoliday = false;
@@ -217,8 +221,11 @@ document.addEventListener('DOMContentLoaded', async function() {
         if (JSON.stringify(allowedRange) === JSON.stringify([morningRange])) {
             alert('Bitte wählen Sie einen Zeitraum zwischen 12:30 - 14:15 Uhr.');
 
-        } else if (dayOfWeek === 0 || dayOfWeek === 6 || JSON.stringify(allowedRange) === JSON.stringify([eveningRange])) {
+        } else if (dayOfWeek === 0 || dayOfWeek === 6 || JSON.stringify(allowedRange) === JSON.stringify([eveningWeekendHolidayRange])) {
             alert('Bitte wählen Sie einen Zeitraum zwischen 17:30 - 21:45 Uhr.');
+
+        } else if(JSON.stringify(allowedRange) === JSON.stringify([eveningRange])) {
+            alert('Bitte wählen Sie einen Zeitraum zwischen 17:30 - 21:15 Uhr.')
 
         } else {
             alert('Bitte wählen Sie einen Zeitraum zwischen 12:30 - 14:15 Uhr oder einen Zeitraum zwischen 17:30 - 21:15 Uhr.');
@@ -252,15 +259,39 @@ document.addEventListener('DOMContentLoaded', async function() {
         const specialDaysClosedEvening = specialClosedDays['closedAtEvening'];
 
         let selectedDayRange = [];
-        if ( dayOfSelectedDate === 0 || dayOfSelectedDate === 6 || selectedDayIsHoliday || specialDaysClosedMorning.includes(dateInput)) {
-            selectedDayRange.push(eveningRange);
 
+        // Selected date is a day where the shop is closed at mornings for specific reasons.
+        if ( specialDaysClosedMorning.includes(dateInput)) {
+            // check if day is weekend or holiday
+            if (dayOfSelectedDate === 0 || dayOfSelectedDate === 6 || selectedDayIsHoliday) {
+                selectedDayRange.push(eveningWeekendHolidayRange);
+            } else {
+                selectedDayRange.push(eveningRange);
+            }
+
+        // Selected date is a day where the shop is closed at evenings for specific reasons.
         } else if (specialDaysClosedEvening.includes(dateInput)) {
-            selectedDayRange.push(morningRange);
+                selectedDayRange.push(morningRange);
 
+        // Normal date. Shop is open to usual times. 
         } else {
-            selectedDayRange.push(fullDayRange);
+            if (dayOfSelectedDate === 0 || dayOfSelectedDate === 6 || selectedDayIsHoliday) {
+                selectedDayRange.push(eveningWeekendHolidayRange);
+            } else {
+                selectedDayRange.push(fullDayRange);
+            }
         }
+
+
+        // if ( dayOfSelectedDate === 0 || dayOfSelectedDate === 6 || selectedDayIsHoliday || specialDaysClosedMorning.includes(dateInput)) {
+        //     selectedDayRange.push(eveningRange);
+
+        // } else if (specialDaysClosedEvening.includes(dateInput)) {
+        //     selectedDayRange.push(morningRange);
+
+        // } else {
+        //     selectedDayRange.push({ start: "12:30", end: "14:15" }, { start: "17:30", end: "21:15" });
+        // }
 
         allowedRange = selectedDayRange;
         return {
