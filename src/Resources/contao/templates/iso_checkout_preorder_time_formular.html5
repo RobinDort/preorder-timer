@@ -280,17 +280,6 @@ document.addEventListener('DOMContentLoaded', async function() {
             }
         }
 
-
-        // if ( dayOfSelectedDate === 0 || dayOfSelectedDate === 6 || selectedDayIsHoliday || specialDaysClosedMorning.includes(dateInput)) {
-        //     selectedDayRange.push(eveningRange);
-
-        // } else if (specialDaysClosedEvening.includes(dateInput)) {
-        //     selectedDayRange.push(morningRange);
-
-        // } else {
-        //     selectedDayRange.push({ start: "12:30", end: "14:15" }, { start: "17:30", end: "21:15" });
-        // }
-
         allowedRange = selectedDayRange;
         return {
             range: allowedRange,
