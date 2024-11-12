@@ -42,6 +42,9 @@ document.addEventListener('DOMContentLoaded', async function() {
     const timePicker = document.getElementById("preorder-formular-time");
     const date = new Date();
     const specialClosedDays = <?php echo json_encode($this->specialClosedDays); ?>;
+    const morningRange = { start: "12:30", end: "14:15" };
+    const eveningRange = { start: "17:30", end: "21:45" };
+    const fullDayRange = { start: "12:30", end: "14:15" }, { start: "17:30", end: "21:15" };
     
     let isHoliday = false;
     let dayOfWeek = -1;
@@ -211,10 +214,10 @@ document.addEventListener('DOMContentLoaded', async function() {
         if (instance) {
             instance.clear();
         }
-        if (JSON.stringify(allowedRange) === JSON.stringify([{ start: "12:30", end: "14:15" }])) {
+        if (JSON.stringify(allowedRange) === JSON.stringify([morningRange])) {
             alert('Bitte wählen Sie einen Zeitraum zwischen 12:30 - 14:15 Uhr.');
 
-        } else if (dayOfWeek === 0 || dayOfWeek === 6 || JSON.stringify(allowedRange) === JSON.stringify([{ start: "17:30", end: "21:45" }])) {
+        } else if (dayOfWeek === 0 || dayOfWeek === 6 || JSON.stringify(allowedRange) === JSON.stringify([eveningRange])) {
             alert('Bitte wählen Sie einen Zeitraum zwischen 17:30 - 21:45 Uhr.');
 
         } else {
@@ -250,13 +253,13 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         let selectedDayRange = [];
         if ( dayOfSelectedDate === 0 || dayOfSelectedDate === 6 || selectedDayIsHoliday || specialDaysClosedMorning.includes(dateInput)) {
-            selectedDayRange.push({ start: "17:30", end: "21:45" });
+            selectedDayRange.push(eveningRange);
 
         } else if (specialDaysClosedEvening.includes(dateInput)) {
-            selectedDayRange.push({ start: "12:30", end: "14:15" });
+            selectedDayRange.push(morningRange);
 
         } else {
-            selectedDayRange.push({ start: "12:30", end: "14:15" }, { start: "17:30", end: "21:15" });
+            selectedDayRange.push(fullDayRange);
         }
 
         allowedRange = selectedDayRange;
