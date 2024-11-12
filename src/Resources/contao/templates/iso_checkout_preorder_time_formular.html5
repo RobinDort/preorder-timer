@@ -109,6 +109,10 @@ document.addEventListener('DOMContentLoaded', async function() {
                 console.log(convertedSpecialDays);
                 const dateString = date.toISOString().split('T')[0]; // Convert to 'Y-m-d' format
                 console.log(dateString);
+                if (convertedSpecialDays.includes(dateString)) {
+                    console.log("true includes: " , convertedSpecialDays);
+                    console.log("and: ", dateString);
+                }
                 return convertedSpecialDays.includes(dateString);
             }
         ]
