@@ -4,8 +4,8 @@
 <?php
 $statusLabels = [
     'fullyClosed' => 'Ganztägig',
-    'closedMorning' => 'Morgens geschlossen',
-    'closedEvening' => 'Abends/Nachmittags geschlossen'
+    'closedAtMorning' => 'Morgens geschlossen',
+    'closedAtEvening' => 'Abends/Nachmittags geschlossen'
 ];
 ?>
 
