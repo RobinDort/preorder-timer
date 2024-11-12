@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             function(date) {
                 const convertedSpecialDays = specialClosedDays['fullyClosed'].map(date => {
                     const [day, month, year] = date.split('.');
-                    return `20${year}-${month}-${day}`;
+                    return `${year}-${month}-${day}`;
                 });
                 console.log(convertedSpecialDays);
                 console.log(date);
