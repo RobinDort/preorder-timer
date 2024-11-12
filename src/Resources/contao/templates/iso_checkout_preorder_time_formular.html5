@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     const timePicker = document.getElementById("preorder-formular-time");
     const date = new Date();
     const specialClosedDays = <?php echo json_encode($this->specialClosedDays); ?>;
+    
     let isHoliday = false;
     let dayOfWeek = -1;
     let allowedRange = [];
@@ -57,26 +58,12 @@ document.addEventListener('DOMContentLoaded', async function() {
     if (dateInput.value !== null && dateInput.value !== "") {
 
         dateInput.value = "";
-
-        // const {range, weekday} = await setAllowedRange(dateInput.value);
-        // dayOfWeek = weekday;
-        // allowedRange = range;
     }
 
     // Also check for the time picker value
-    
     if (timePicker.value !== null && timePicker.value !== "") {
 
         timePicker.value = "";
-
-        // const timeSelected = timePicker.value;
-        // const isValid = checkTimeValidity(timeSelected, allowedRange);
-
-        // if (!isValid) {
-        //     // Clear the input if not valid
-        //     timePicker.value = "";
-        //     displayWrongTimeAlert(allowedRange);
-        // }
     }
     
 
@@ -252,16 +239,20 @@ document.addEventListener('DOMContentLoaded', async function() {
         const dateOfDay = String(convertedDate.getDate()).padStart(2, '0');
         const monthNumber = String(convertedDate.getMonth() + 1).padStart(2, '0');
         const yearNumber = convertedDate.getFullYear();
+        const selectedDayIsHoliday = await checkDateForHoliday(formattedDate);
 
         const specialDayClosedMorning = specialClosedDays['closedAtMorning'];
         const specialDayClosedEvening = specialClosedDays['closedAtEvening'];
 
-        console.log(specialDayClosedMorning);
-        console.log(specialDayClosedEvening);
-        const selectedDayIsHoliday = await checkDateForHoliday(formattedDate);
+        let selectedDayRange = [];
+        if ( dateOfDay === "13" && monthNumber === "11" && yearNumber === 2024 || dayOfSelectedDate === 0 || dayOfSelectedDate === 6 || selectedDayIsHoliday) {
+            selectedDayRange.push({ start: "17:30", end: "21:45" });
+        } else {
+            selectedDayRange.push({ start: "12:30", end: "14:15" }, { start: "17:30", end: "21:15" });
+        }
 
         // Add new condition for specific date coming on 13.11.24
-        allowedRange = dateOfDay === "13" && monthNumber === "11" && yearNumber === 2024 || dayOfSelectedDate === 0 || dayOfSelectedDate === 6 || selectedDayIsHoliday ? [{ start: "17:30", end: "21:45" }] : [{ start: "12:30", end: "14:15" }, { start: "17:30", end: "21:15" }];
+        allowedRange = selectedDayRange;
         return {
             range: allowedRange,
             weekday: dayOfSelectedDate
