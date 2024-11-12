@@ -18,10 +18,6 @@ class PreorderStatusInteractor {
                 'status' => $row['shop_closed_status']
             ];
         }
-
-        \System::log("entries: " . json_encode($entries), __METHOD__, "TL_ERROR");
-        throw new \Exception("DEBUG");
-
         return $entries;
     }
 }
