@@ -41,10 +41,13 @@ document.addEventListener('DOMContentLoaded', async function() {
     const dateInput = document.getElementById("preorder-formular-date");
     const timePicker = document.getElementById("preorder-formular-time");
     const date = new Date();
+    const specialClosedDays = <?php $this->specialClosedDays ?>;
     let isHoliday = false;
     let dayOfWeek = -1;
     let allowedRange = [];
     let validationTimeout;
+
+    console.log("special days: ", specialClosedDays);
 
     const submitNextBtn = document.querySelector("input.submit.next.button");
     // disable next button until a valid time has been placed.

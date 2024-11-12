@@ -9,6 +9,8 @@ use Isotope\CheckoutStep\CheckoutStep;
 use Isotope\Interfaces\IsotopeProductCollection;
 use Isotope\Module\Checkout;
 
+use RobinDort\PreorderTimer\Backend\Validation\PreorderStatusDays;
+
 class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
 
     protected $Template;
@@ -38,6 +40,7 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
 
     public function generate() {
         $strClass = $GLOBALS['TL_FFL']['preorder_formular'];
+        $shopClosedSpecialDays = extractSpecialClosingDays();
 
         /** @var \Contao\FormText $objWidget */
         $objWidget = new $strClass([
@@ -50,10 +53,11 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
                 'time' => Isotope::getCart()->preorder_time ?
                 (new \DateTime('@' . Isotope::getCart()->preorder_time, new \DateTimeZone('Europe/Berlin')))->format('H:i') : ''
             ],
-            'storeValues'   => TRUE,
-            'tableless'     => TRUE,
-            'rgxp'          => 'date', // This ensures the date format is validated
-            'shippingId'    => Isotope::getCart()->shipping_id, // Pass the shipping ID
+            'storeValues'       => TRUE,
+            'tableless'         => TRUE,
+            'rgxp'              => 'date', // This ensures the date format is validated
+            'shippingId'        => Isotope::getCart()->shipping_id, // Pass the shipping ID
+            'specialClosedDays' => $shopClosedSpecialDays, // Pass the special days on which the shop is also closed
         ]);
 
         $dateValue = "";
@@ -115,6 +119,37 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
         if (!empty($preorderTime) && $draftOrder instanceof IsotopeProductCollection) {
             $draftOrder->preorder_time = $preorderTime;
         }
+    }
+
+    private function extractSpecialClosingDays() {
+        $specialDays = [
+            'fullyClosed' => [],
+            'closedAtMorning' => [],
+            'closedAtEvening' => []
+        ];
+
+        $preorderStatusInteractor = new PreorderStatusInteractor();
+        $extractedSpecialDays = $preorderStatusInteractor->extractSpecialClosedDays();
+
+        foreach ($extractedSpecialDays as $entry) {
+            $date = $entry['date'];
+            $status = $entry['status'];
+
+            // shop is closed the whole day
+            if ($status === '1') {
+                $specialDays['fullyClosed'][] = $date;
+
+            // shop is closed at morning
+            } else if ($status === '2') {
+                $specialDays['closedAtMorning'][] = $date;
+
+            // shop is closed at evening 
+            } else if ($status === '3') {
+                $specialDays['closedAtEvening'][] = $date;
+            }
+        }
+        
+        return $specialDays;
     }
 }
 
