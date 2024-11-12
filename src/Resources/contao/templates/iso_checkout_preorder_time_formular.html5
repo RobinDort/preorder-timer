@@ -105,15 +105,19 @@ document.addEventListener('DOMContentLoaded', async function() {
                 const convertedSpecialDays = specialClosedDays['fullyClosed'].map(date => {
                     const [day, month, year] = date.split('.');
                     const castedDay = parseInt(day);
+
+                    // ATTENTION: Due to some mismatch between the two date strings while comparing, the day of this needs to be substracted by 1
+                    // For example: If 2024-11-13 should be disabled the function needs to return 2024-11-12.
                     return `${year}-${month}-${castedDay-1}`;
                 });
-                console.log(convertedSpecialDays);
                 const dateString = date.toISOString().split('T')[0]; // Convert to 'Y-m-d' format
-                console.log(dateString);
         
                 return convertedSpecialDays.includes(dateString);
             }
-        ]
+        ],
+        "locale": {
+            "firstDayOfWeek": 1 // start week on Monday
+        }
     });
 
     flatpickr(timePicker, {
