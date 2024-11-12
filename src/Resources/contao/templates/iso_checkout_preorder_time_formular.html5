@@ -47,9 +47,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     let allowedRange = [];
     let validationTimeout;
 
-    console.log(specialClosedDays);
-    console.log(Array.isArray(specialClosedDays));
-
     const submitNextBtn = document.querySelector("input.submit.next.button");
     // disable next button until a valid time has been placed.
     if (submitNextBtn) {
@@ -105,7 +102,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 return (day === 25 && month === 12) || (day === 26 && month === 12);
             },
             function(date) {
-                const convertedSpecialDays = specialClosedDays.map(date => {
+                const convertedSpecialDays = specialClosedDays['fullyClosed'].map(date => {
                     const [day, month, year] = date.split('.');
                     return `20${year}-${month}-${day}`;
                 });
