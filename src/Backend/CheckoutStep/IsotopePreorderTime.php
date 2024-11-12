@@ -9,7 +9,7 @@ use Isotope\CheckoutStep\CheckoutStep;
 use Isotope\Interfaces\IsotopeProductCollection;
 use Isotope\Module\Checkout;
 
-use RobinDort\PreorderTimer\Backend\Validation\PreorderStatusDays;
+use RobinDort\PreorderTimer\Backend\Validation\PreorderStatusInteractor;
 
 class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
 
