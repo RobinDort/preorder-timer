@@ -25,7 +25,7 @@ class PreorderTimerSettings extends BackendModule {
 
         // Get the already saved special closed days
         $this->preorderStatusInteractor = new PreorderStatusInteractor();
-        $this->specialClosedDays = $preorderStatusInteractor->extractSpecialClosedDays();
+        $this->specialClosedDays = $this->preorderStatusInteractor->extractSpecialClosedDays();
 	}
 
 
