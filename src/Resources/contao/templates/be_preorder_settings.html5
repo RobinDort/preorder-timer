@@ -13,9 +13,6 @@ $statusLabels = [
     <h1 class="settings_headline">Shop Konfiguration Vorbestellungen</h1>
 
     <div class="tl_formbody_edit">
-            <form action="<?php echo ampersand(\Environment::get('request')); ?>" method="post">
-                <input type="hidden" name="FORM_SUBMIT" value="tl_preorder_settings_form">
-                <input type="hidden" name="REQUEST_TOKEN" value="<?=REQUEST_TOKEN?>"> <!-- CSRF Token -->
 
                 <div class="content">
                     <!-- Date Input -->
@@ -39,10 +36,9 @@ $statusLabels = [
                     </div>
                     
                     <div class="tl_submit_container">
-                        <input type="submit" name="submit" class="tl_submit" value="Speichern" onSubmit="submitForm()">
+                        <button name="submit" class="tl_submit" value="Speichern" onSubmit="submitForm()">
                     </div>
                 </div>
-            </form>
     </div>
     
     <div class="content">
