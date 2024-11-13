@@ -99,7 +99,7 @@ $statusLabels = [
                     method: 'post',
                     data: dataObj,
                     onSuccess: function(response) {
-                        
+                        console.log(response);
                     },
                     onFailure: function(error) {
                         console.error(error);
