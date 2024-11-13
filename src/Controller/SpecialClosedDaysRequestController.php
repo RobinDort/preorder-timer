@@ -9,6 +9,8 @@ use RobinDort\PreorderTimer\Backend\Validation\PreorderStatusInteractor;
 
 #[Route('/removeClosedDayEntry', name: SpecialClosedDaysRequestController::class, defaults: ['_token_check' => true, '_scope' => 'backend'],  methods: ['POST'])]
 class SpecialClosedDaysRequestController {
+
+
     public function __invoke(Request $request): JsonResponse {
         $entryDate = $request->request->get('entryDate');
         $entryStatus = $request->request->get('entryStatus');
