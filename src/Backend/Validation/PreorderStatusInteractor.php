@@ -24,7 +24,14 @@ class PreorderStatusInteractor {
     }
 
     public function deleteSpecialClosedDay($date, $status) {
-        $stmt = "DELETE FROM tl_preorder_settings WHERE shop_closed_date='" . $date . "' AND shop_closed_status='" . $status . "'";
+        $statusConvert = [
+            'fullyClosed'       => '1',
+            'closedAtMorning'   => '2',
+            'closedAtEvening'   => '3'
+        ];
+        $convertedStatus =  $statusConvert[$status];
+
+        $stmt = "DELETE FROM tl_preorder_settings WHERE shop_closed_date='" . $date . "' AND shop_closed_status='" . $convertedStatus . "'";
         $result = Database::getInstance()->execute($stmt);
 
         // Check how many rows were affected

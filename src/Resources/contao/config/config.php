@@ -64,7 +64,6 @@ $GLOBALS['ISO_HOOKS']['getOrderNotificationTokens'][] = [PreorderTimeTokenProvid
 
 $GLOBALS['BE_MOD']['Vorbestellungen Konfiguration']['Shopzeiten'] = [
     'tables'    => ['tl_preorder_settings'],
-    'icon'      => 'system/themes/flexible/icons/wrench.svg',
     'callback'  => PreorderTimerSettings::class,
 ];
 ?>
