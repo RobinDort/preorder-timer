@@ -7,11 +7,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 use RobinDort\PreorderTimer\Backend\Validation\PreorderStatusInteractor;
 
-#[Route('/removeClosedDayEntry', name: SpecialClosedDaysRequestController::class, defaults: ['_token_check' => true, '_scope' => 'backend'],  methods: ['POST'])]
 class SpecialClosedDaysRequestController {
 
-
-    public function __invoke(Request $request): JsonResponse {
+    #[Route('/removeClosedDayEntry', name: 'remove_closed_day_entry', defaults: ['_token_check' => true, '_scope' => 'backend'],  methods: ['POST'])]
+    public function removeClosedDayEntry(Request $request): JsonResponse {
         $entryDate = $request->request->get('entryDate');
         $entryStatus = $request->request->get('entryStatus');
 
@@ -29,6 +28,19 @@ class SpecialClosedDaysRequestController {
             return new JsonResponse(['status' => 'success', 'message' => 'Row successfully deleted']);
         }
 
+    }
+
+    #[Route('/addClosedDayEntry', name: 'add_closed_day_entry', defaults: ['_token_check' => true, '_scope' => 'backend'],  methods: ['POST'])]
+    public function addClosedDayEntry(Request $request): JsonResponse {
+        $date = $request->request->get('date');
+        $status = $request->request->get('status');
+
+         // Check if the parameters are set
+         if (!$date || !$status) {
+            return new JsonResponse(['status' => 'error', 'message' => 'Invalid data provided'], 400);
+        }
+
+        return new JsonResponse(['status' => 'success', 'message' => 'Row successfully inserted']);
     }
 }
 ?>

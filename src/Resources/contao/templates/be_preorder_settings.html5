@@ -113,7 +113,31 @@ $statusLabels = [
     }
 
     function submitForm(form) {
-        console.log(form.preorder_date_shop_closed);
+        const date = form.preorder_date_shop_closed.value;
+        const status = form.preorder_status.value
+
+        if (!date || !status) return;
+
+        const dataObj = {
+            date,
+            status
+        }
+
+        try {
+            return new Request.JSON({
+                url: "/addClosedDayEntry",
+                method: "post",
+                data: dataObj,
+                onSuccess: function(response) {
+                    window.location.reload();
+                },
+                onFailure: function(error) {
+                    console.error(error);
+                }
+            })
+        } catch (error) {
+            console.error(error);
+        }
     }
 </script>
 
