@@ -41,7 +41,7 @@ class SpecialClosedDaysRequestController {
             return new JsonResponse(['status' => 'error', 'message' => 'Invalid data provided'], 400);
         }
 
-        try {
+       // try {
             $preorderStatusInteractor = new PreorderStatusInteractor();
 
             $response = $preorderStatusInteractor->insertSpecialClosedDay($time,$date,$status);
@@ -52,9 +52,9 @@ class SpecialClosedDaysRequestController {
                     return new JsonResponse(['status' => 'error', 'message' => $response["message"]]);
                 }
 
-        } catch (\Exception $e) {
-            \System::log($e->getMessage(),__METHOD__,"TL_ERROR");
-        }
+        // } catch (\Exception $e) {
+        //     \System::log($e->getMessage(),__METHOD__,"TL_ERROR");
+        // }
     }
 }
 ?>
