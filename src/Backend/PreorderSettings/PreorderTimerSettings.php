@@ -55,12 +55,14 @@ class PreorderTimerSettings extends BackendModule {
                     Message::addInfo(
                         $response["message"]
                     );
+
+                    // Redirect to the same page to refresh the form and prevent resubmission
+                    \Controller::redirect(\Environment::get('request'));
                 } else {
                     Message::addError($response["message"]);
                 }
 
-                // Redirect to the same page to refresh the form and prevent resubmission
-                \Controller::redirect(\Environment::get('request'));
+                
                 
            } catch (\Exception $e) {
                \System::log($e->getMessage(),__METHOD__,"TL_ERROR");
