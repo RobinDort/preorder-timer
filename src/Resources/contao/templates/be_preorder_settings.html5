@@ -94,21 +94,17 @@ $statusLabels = [
 
         if (confirm(`Möchten Sie den Eintrag wirklich löschen?`)) {
             try {
-                return new Promise(function(resolve,reject) {
-                    $.ajax({
-                        type: "POST",
-                        url: "/removeClosedDayEntry",
-                        dataType: "json",
-                        data: dataObj,
-                        encode: true,
-                        success: function(response) {
-                            resolve(response);
-                        },
-                        error: function(error) {
-                            reject(error);
-                        }
-                    })
-                });
+                return new Request.JSON({
+                    url: "/removeClosedDayEntry",
+                    method: 'post',
+                    data: dataObj,
+                    onSuccess: function(response) {
+                        
+                    },
+                    onFailure: function(error) {
+                        console.error(error);
+                    }
+                }).send();
 
             } catch (error) {
                 console.error(error);
