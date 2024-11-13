@@ -34,6 +34,8 @@ class PreorderStatusInteractor {
             'message' => ""
         ];
 
+        \System::log("result: " . $selectResult,__METHOD__,"TL_ERROR");
+        throw new \Exception("DEBUG");
         if ($selectResult) {
             $id = $result['id'];
             $updateStmt = `UPDATE tl_preorder_settings SET shop_closed_date=$date, shop_closed_status=$status WHERE id=$id`;
@@ -41,9 +43,9 @@ class PreorderStatusInteractor {
 
             if ($updateResult->affectedRows > 0) {
                 $response['success'] = true;
-                $response['message'] = `Successfully updated existing row with id: $id and date: $date and status: $status`;
+                $response['message'] = `Row mit id: $id, Datum: $date und Status: $status wurde erfolgreich geupdated.`;
             } else {
-                $response['message'] = `Error while trying to update id: $id`;
+                $response['message'] = `Fehler während des Versuchs Row mit id: $id zu überschreiben!`;
             }
         } else {
             $insertStmt = `INSERT INTO tl_preorder_settings (tstamp, shop_closed_date, shop_closed_status) VALUES ($time,$date,$status)`;
@@ -51,9 +53,9 @@ class PreorderStatusInteractor {
 
             if ($insertResult->affectedRows > 0) {
                 $response['success'] = true;
-                $response['message'] = `Successfully inserted new row with date: $date and status: $status`;
+                $response['message'] = `Row mit Datum: $date und Status: $status wurde erfolgreich gespeichert`;
             } else {
-                $response['message'] = `Error while trying to insert row with date: $date and status: $status`;
+                $response['message'] = `Fehler während des Versuchs Row mit Datum: $date und Status: $status zu überschreiben!`;
             }
         }
         return $response;

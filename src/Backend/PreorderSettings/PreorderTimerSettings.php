@@ -55,7 +55,7 @@ class PreorderTimerSettings extends BackendModule {
 
                     // Add a success flash message
                     Message::addInfo(
-                        'Datum wurde erfolgreich gesichert.'
+                        $response["message"]
                     );
                 } else {
                     Message::addError($response["message"]);
