@@ -59,7 +59,7 @@ class PreorderTimerSettings extends BackendModule {
                     );
 
                     // Redirect to the same page to refresh the form and prevent resubmission
-                    Controller::redirect(Environment::get('request'));
+                    Controller::reload();
                 } else {
                     Message::addError($response["message"]);
                 }
