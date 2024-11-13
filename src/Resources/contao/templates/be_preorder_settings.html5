@@ -36,7 +36,7 @@ $statusLabels = [
                     </div>
                     
                     <div class="tl_submit_container">
-                        <button name="submit" class="tl_submit" value="Speichern" onSubmit="submitForm()">
+                        <button name="submit" class="tl_submit" value="Speichern" onClick="submitForm()">
                     </div>
                 </div>
     </div>
