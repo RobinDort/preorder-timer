@@ -51,6 +51,7 @@ $statusLabels = [
                 <tr>
                     <th>Shop geschlossen</th>
                     <th>Status</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
