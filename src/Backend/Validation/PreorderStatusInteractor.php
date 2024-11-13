@@ -34,28 +34,26 @@ class PreorderStatusInteractor {
             'message' => ""
         ];
 
-        \System::log("result: " . $selectResult,__METHOD__,"TL_ERROR");
-        throw new \Exception("DEBUG");
         if ($selectResult) {
             $id = $result['id'];
-            $updateStmt = `UPDATE tl_preorder_settings SET shop_closed_date=$date, shop_closed_status=$status WHERE id=$id`;
+            $updateStmt = "UPDATE tl_preorder_settings SET shop_closed_date='" . $date . "', shop_closed_status='" . $status . "' WHERE id=" . $id;
             $updateResult = Database::getInstance()->execute($updateStmt);
 
             if ($updateResult->affectedRows > 0) {
                 $response['success'] = true;
-                $response['message'] = `Row mit id: $id, Datum: $date und Status: $status wurde erfolgreich geupdated.`;
+                $response['message'] = "Row mit id: " . $id . ", Datum: " . $date . " und Status: " . $status . " wurde erfolgreich geupdated.";
             } else {
-                $response['message'] = `Fehler während des Versuchs Row mit id: $id zu überschreiben!`;
+                $response['message'] = "Fehler während des Versuchs Row mit id: " . $id . " zu überschreiben!";
             }
         } else {
-            $insertStmt = `INSERT INTO tl_preorder_settings (tstamp, shop_closed_date, shop_closed_status) VALUES ($time,$date,$status)`;
+            $insertStmt = "INSERT INTO tl_preorder_settings (tstamp, shop_closed_date, shop_closed_status) VALUES (" . $time . "," . $date . "," . $status . ")";
             $insertResult = Database::getInstance()->execute($insertStmt);
 
             if ($insertResult->affectedRows > 0) {
                 $response['success'] = true;
-                $response['message'] = `Row mit Datum: $date und Status: $status wurde erfolgreich gespeichert`;
+                $response['message'] = "Row mit Datum: " . $date . " und Status: " . $status . " wurde erfolgreich gespeichert";
             } else {
-                $response['message'] = `Fehler während des Versuchs Row mit Datum: $date und Status: $status zu überschreiben!`;
+                $response['message'] = "Fehler während des Versuchs Row mit Datum: " . $date . " und Status: " . $status . " zu überschreiben!";
             }
         }
         return $response;
