@@ -133,7 +133,7 @@ $statusLabels = [
                 onFailure: function(error) {
                     console.error(error);
                 }
-            })
+            }).send();
         } catch (error) {
             console.error(error);
         }
