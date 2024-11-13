@@ -23,6 +23,20 @@ class PreorderStatusInteractor {
         return $splittedSpecialDays;
     }
 
+    public function deleteSpecialClosedDay($date, $status) {
+        $stmt = "DELETE FROM tl_preorder_settings WHERE shop_closed_date='" . $date . "' AND shop_closed_status='" . $status . "'";
+        $result = Database::getInstance()->execute($stmt);
+
+        // Check how many rows were affected
+        if ($result->affectedRows > 0) {
+            // Rows were deleted
+            return 1;
+        } else {
+            // No rows were deleted
+            return 0;
+        }
+    }
+
 
     private function splitSpecialClosedDays($entries) {
         $specialDays = [
