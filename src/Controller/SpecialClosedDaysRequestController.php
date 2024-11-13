@@ -34,13 +34,27 @@ class SpecialClosedDaysRequestController {
     public function addClosedDayEntry(Request $request): JsonResponse {
         $date = $request->request->get('date');
         $status = $request->request->get('status');
+        $time = time();
 
          // Check if the parameters are set
          if (!$date || !$status) {
             return new JsonResponse(['status' => 'error', 'message' => 'Invalid data provided'], 400);
         }
 
-        return new JsonResponse(['status' => 'success', 'message' => 'Row successfully inserted']);
+        try {
+            $preorderStatusInteractor = new PreorderStatusInteractor();
+
+            $response = $preorderStatusInteractor->insertSpecialClosedDay($time,$date,$status);
+                if ($response["success"] === true) {
+                    return new JsonResponse(['status' => 'success', 'message' => $response["message"]]);
+                    
+                } else {
+                    return new JsonResponse(['status' => 'error', 'message' => $response["message"]]);
+                }
+
+        } catch (\Exception $e) {
+            \System::log($e->getMessage(),__METHOD__,"TL_ERROR");
+        }
     }
 }
 ?>

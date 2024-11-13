@@ -99,7 +99,11 @@ $statusLabels = [
                     method: 'post',
                     data: dataObj,
                     onSuccess: function(response) {
-                        window.location.reload();
+                        if (response.status === "success") {
+                            window.location.reload();
+                        } else {
+                            console.error(response.message);
+                        }
                     },
                     onFailure: function(error) {
                         console.error(error);
