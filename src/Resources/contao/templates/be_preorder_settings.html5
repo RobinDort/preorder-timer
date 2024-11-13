@@ -59,6 +59,9 @@ $statusLabels = [
                         <tr>
                             <td><?php echo htmlspecialchars($date); ?></td>
                             <td><?php echo htmlspecialchars($statusLabels[$status]); ?></td>
+                            <td>
+                                <button class="delete-btn" onClick="removeClosedDayEntry(this)" data-date="<?php echo $date?>" data-status="<?php echo $status?>"></button>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 <?php endforeach; ?>
@@ -75,5 +78,10 @@ $statusLabels = [
         locale: "de",
         minDate: "today",
     });
+
+
+    function removeClosedDayEntry() {
+        
+    }
 </script>
 
