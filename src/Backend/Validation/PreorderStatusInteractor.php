@@ -35,7 +35,7 @@ class PreorderStatusInteractor {
         ];
 
         if ($selectResult) {
-            $id = $result['id'];
+            $id = $selectResult['id'];
             $updateStmt = "UPDATE tl_preorder_settings SET shop_closed_date='" . $date . "', shop_closed_status='" . $status . "' WHERE id=" . $id;
             $updateResult = Database::getInstance()->execute($updateStmt);
 
@@ -46,7 +46,7 @@ class PreorderStatusInteractor {
                 $response['message'] = "Fehler während des Versuchs Row mit id: " . $id . " zu überschreiben!";
             }
         } else {
-            $insertStmt = "INSERT INTO tl_preorder_settings (tstamp, shop_closed_date, shop_closed_status) VALUES (" . $time . "," . $date . "," . $status . ")";
+            $insertStmt = "INSERT INTO tl_preorder_settings (tstamp, shop_closed_date, shop_closed_status) VALUES ('" . $time . "','" . $date . "','" . $status . "')";
             $insertResult = Database::getInstance()->execute($insertStmt);
 
             if ($insertResult->affectedRows > 0) {
