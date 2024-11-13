@@ -13,7 +13,7 @@ $statusLabels = [
     <h1 class="settings_headline">Shop Konfiguration Vorbestellungen</h1>
 
     <div class="tl_formbody_edit">
-            <form action="<?php echo ampersand(\Environment::get('request')); ?>" method="post">
+            <form action="<?php echo ampersand(\Environment::get('request')); ?>" method="post" onsubmit="submitForm(this)">
                 <input type="hidden" name="FORM_SUBMIT" value="tl_preorder_settings_form">
                 <input type="hidden" name="REQUEST_TOKEN" value="<?=REQUEST_TOKEN?>"> <!-- CSRF Token -->
 
@@ -110,6 +110,10 @@ $statusLabels = [
                 console.error(error);
             }
         }
+    }
+
+    function submitForm(form) {
+        console.log(form);
     }
 </script>
 
