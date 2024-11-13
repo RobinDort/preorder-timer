@@ -13,32 +13,33 @@ $statusLabels = [
     <h1 class="settings_headline">Shop Konfiguration Vorbestellungen</h1>
 
     <div class="tl_formbody_edit">
-        <form method="post" onsubmit="submitForm()">>
-                <div class="content">
-                    <!-- Date Input -->
-                    <div class="settings_widget">
-                        <p>Hier das gewünschte Datum eintragen, an dem der Shop von seinen normalen Geschäftszeiten abweicht. Das Formular "Vorbestellungen",
-                        welches im Kassenmodul vorhanden ist, wird dieses Datum berücksichtigen und die verfügbaren Zeiten dementsprechend anpassen.</p>
+        <form method="post" onsubmit="submitForm()">
+            <input type="hidden" name="REQUEST_TOKEN" value="<?=REQUEST_TOKEN?>"> <!-- CSRF Token -->
+            <div class="content">
+                <!-- Date Input -->
+                <div class="settings_widget">
+                    <p>Hier das gewünschte Datum eintragen, an dem der Shop von seinen normalen Geschäftszeiten abweicht. Das Formular "Vorbestellungen",
+                    welches im Kassenmodul vorhanden ist, wird dieses Datum berücksichtigen und die verfügbaren Zeiten dementsprechend anpassen.</p>
 
-                        <label class="settings_label" for="preorder_date_shop_closed"><strong>1</strong>Shop geschlossen am:</label>
-                        <input type="text" name="preorder_date_shop_closed" id="preorder_date_shop_closed" class="tl_text" value="">
-                    </div>
-                    
-                    <!-- Select Input for Status -->
-                    <div class="settings_widget">
-                        <p>Geben Sie an, ob der Shop am gewählten Datum ganztägig oder halbtags geschlossen ist.</p>
-                        <label class="settings_label" for="preorder_status"><strong>2</strong>Geschlossene Shopzeit:</label>
-                        <select name="preorder_status" id="preorder_status" class="tl_select">
-                            <option value="1">Ganztägig geschlossen</option>
-                            <option value="2">Morgens geschlossen</option>
-                            <option value="3">Nachmittags/Abends geschlossen</option>
-                        </select>
-                    </div>
-                    
-                    <div class="tl_submit_container">
-                        <input type="submit" name="submit" class="tl_submit" value="Speichern"/>
-                    </div>
+                    <label class="settings_label" for="preorder_date_shop_closed"><strong>1</strong>Shop geschlossen am:</label>
+                    <input type="text" name="preorder_date_shop_closed" id="preorder_date_shop_closed" class="tl_text" value="">
                 </div>
+                
+                <!-- Select Input for Status -->
+                <div class="settings_widget">
+                    <p>Geben Sie an, ob der Shop am gewählten Datum ganztägig oder halbtags geschlossen ist.</p>
+                    <label class="settings_label" for="preorder_status"><strong>2</strong>Geschlossene Shopzeit:</label>
+                    <select name="preorder_status" id="preorder_status" class="tl_select">
+                        <option value="1">Ganztägig geschlossen</option>
+                        <option value="2">Morgens geschlossen</option>
+                        <option value="3">Nachmittags/Abends geschlossen</option>
+                    </select>
+                </div>
+                
+                <div class="tl_submit_container">
+                    <input type="submit" name="submit" class="tl_submit" value="Speichern"/>
+                </div>
+            </div>
         </form>
     </div>
     
