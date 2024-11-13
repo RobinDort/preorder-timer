@@ -113,7 +113,7 @@ $statusLabels = [
     }
 
     function submitForm(form) {
-        console.log(form);
+        console.log(form.preorder_date_shop_closed);
     }
 </script>
 
