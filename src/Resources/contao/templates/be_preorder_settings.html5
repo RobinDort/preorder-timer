@@ -112,7 +112,7 @@ $statusLabels = [
         }
     }
 
-    function submitForm(form) {
+    async function submitForm(form) {
         const date = form.preorder_date_shop_closed.value;
         const status = form.preorder_status.value
         console.log(date);
@@ -126,7 +126,7 @@ $statusLabels = [
         }
 
         try {
-            return new Request.JSON({
+            const req = await new Request.JSON({
                 url: "/addClosedDayEntry",
                 method: "post",
                 data: dataObj,
@@ -140,6 +140,8 @@ $statusLabels = [
                     console.error(error);
                 }
             })
+
+            return req;
         } catch (error) {
             console.error(error);
         }
