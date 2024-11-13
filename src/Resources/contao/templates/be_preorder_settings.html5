@@ -83,8 +83,37 @@ $statusLabels = [
     });
 
 
-    function removeClosedDayEntry() {
+    function removeClosedDayEntry(entry) {
+        const entryDate = entry.getAttribute('data-date');
+        const entryStatus = entry.getAttribute('data-status');
 
+        const dataObj = {
+            entryDate,
+            entryStatus
+        };
+
+        if (confirm(`Möchten Sie den Eintrag wirklich löschen?`)) {
+            try {
+                return new Promise((resolve,reject) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/removeClosedDayEntry",
+                        dataType: "json",
+                        data: dataObj,
+                        encode: true,
+                        success: function(response) {
+                            resolve(response);
+                        },
+                        error: function(error) {
+                            reject(error);
+                        }
+                    })
+                });
+
+            } catch (error) {
+                console.error(error);
+            }
+        }
     }
 </script>
 
