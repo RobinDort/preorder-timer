@@ -9,6 +9,8 @@ use Contao\BackendTemplate;
 use Contao\Input;
 use Contao\Database;
 use Contao\Message;
+use Contao\Controller;
+use Contao\Environment;
 
 
 class PreorderTimerSettings extends BackendModule {
@@ -57,7 +59,7 @@ class PreorderTimerSettings extends BackendModule {
                     );
 
                     // Redirect to the same page to refresh the form and prevent resubmission
-                    \Controller::redirect(\Environment::get('request'));
+                    Controller::redirect(Environment::get('request'));
                 } else {
                     Message::addError($response["message"]);
                 }
