@@ -115,6 +115,8 @@ $statusLabels = [
     function submitForm(form) {
         const date = form.preorder_date_shop_closed.value;
         const status = form.preorder_status.value
+        console.log(date);
+        console.log(status);
 
         if (!date || !status) return;
 
