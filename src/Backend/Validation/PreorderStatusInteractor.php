@@ -23,6 +23,42 @@ class PreorderStatusInteractor {
         return $splittedSpecialDays;
     }
 
+    public function insertSpecialClosedDay($time, $date, $status) {
+        $selectStmt = `SELECT id FROM tl_preorder_settings WHERE shop_closed_date=$date AND shop_closed_status=$status`;
+       
+        // Check if entry with date and status exists. Update when existent.
+        $selectResult = Database::getInstance()->execute($selectStmt)->fetchAssoc();
+
+        $response = [
+            'success' => false,
+            'message' => ""
+        ];
+
+        if ($selectResult) {
+            $id = $result['id'];
+            $updateStmt = `UPDATE tl_preorder_settings SET shop_closed_date=$date, shop_closed_status=$status WHERE id=$id`;
+            $updateResult = Database::getInstance()->execute($updateStmt);
+
+            if ($updateResult->affectedRows > 0) {
+                $response['success'] = true;
+                $response['message'] = `Successfully updated existing row with id: $id and date: $date and status: $status`;
+            } else {
+                $response['message'] = `Error while trying to update id: $id`;
+            }
+        } else {
+            $insertStmt = `INSERT INTO tl_preorder_settings (tstamp, shop_closed_date, shop_closed_status) VALUES ($time,$date,$status)`;
+            $insertResult = Database::getInstance()->execute($insertStmt);
+
+            if ($insertResult->affectedRows > 0) {
+                $response['success'] = true;
+                $response['message'] = `Successfully inserted new row with date: $date and status: $status`;
+            } else {
+                $response['message'] = `Error while trying to insert row with date: $date and status: $status`;
+            }
+        }
+        return $response;
+    }
+
     public function deleteSpecialClosedDay($date, $status) {
         $statusConvert = [
             'fullyClosed'       => '1',
