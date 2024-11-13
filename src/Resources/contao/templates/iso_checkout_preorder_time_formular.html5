@@ -269,7 +269,13 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         // Selected date is a day where the shop is closed at evenings for specific reasons.
         } else if (specialDaysClosedEvening.includes(dateInput)) {
-                selectedDayRange.push(morningRange);
+                // check if day is weekend or holiday
+                if (dayOfSelectedDate === 0 || dayOfSelectedDate === 6 || selectedDayIsHoliday) {
+                    // Day is weekend or holiday. Close for the day.
+                    specialClosedDays['fullyClosed'].push(dateInput);
+                } else {
+                    selectedDayRange.push(morningRange);
+                }
 
         // Normal date. Shop is open to usual times. 
         } else {
