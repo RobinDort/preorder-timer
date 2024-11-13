@@ -50,7 +50,7 @@ class PreorderTimerSettings extends BackendModule {
                 // Database::getInstance()->prepare("INSERT INTO tl_preorder_settings (tstamp, shop_closed_date, shop_closed_status) VALUES (?,?,?)")
                 //                     ->execute($time, $preorderDate, $preorderStatus);
 
-                $response = $preorderStatusInteractor->insertSpecialClosedDay($time,$preorderDate,$preorderStatus);
+                $response = $this->preorderStatusInteractor->insertSpecialClosedDay($time,$preorderDate,$preorderStatus);
                 if ($response["success"] === true) {
 
                     // Add a success flash message
