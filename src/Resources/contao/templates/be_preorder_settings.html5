@@ -44,8 +44,6 @@ $statusLabels = [
                 </div>
             </form>
     </div>
-
-    <?php $this->extend('form_row'); ?>
     
     <div class="content">
         <table id="days-closed-table">
