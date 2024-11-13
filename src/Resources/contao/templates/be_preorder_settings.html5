@@ -13,7 +13,7 @@ $statusLabels = [
     <h1 class="settings_headline">Shop Konfiguration Vorbestellungen</h1>
 
     <div class="tl_formbody_edit">
-
+        <form method="post" onsubmit="submitForm()">>
                 <div class="content">
                     <!-- Date Input -->
                     <div class="settings_widget">
@@ -36,9 +36,10 @@ $statusLabels = [
                     </div>
                     
                     <div class="tl_submit_container">
-                        <button name="submit" class="tl_submit" onClick="submitForm()">Speichern</button>
+                        <input type="submit" name="submit" class="tl_submit" value="Speichern"/>
                     </div>
                 </div>
+        </form>
     </div>
     
     <div class="content">
