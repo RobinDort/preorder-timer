@@ -24,7 +24,7 @@ class PreorderStatusInteractor {
     }
 
     public function insertSpecialClosedDay($time, $date, $status) {
-        $selectStmt = `SELECT id FROM tl_preorder_settings WHERE shop_closed_date=$date AND shop_closed_status=$status`;
+        $selectStmt = "SELECT id FROM tl_preorder_settings WHERE shop_closed_date='" . $date . "' AND shop_closed_status='" . $status . "'";
        
         // Check if entry with date and status exists. Update when existent.
         $selectResult = Database::getInstance()->execute($selectStmt)->fetchAssoc();
