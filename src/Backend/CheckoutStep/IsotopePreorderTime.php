@@ -69,9 +69,9 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
 
             $objWidget->validate();
 
-            if (!$objWidget->hasErrors() && $objWidget->varValue !== null) {
+            if (!$objWidget->hasErrors() && $objWidget->getValidatedValue() !== null) {
 
-                $validatedTime = $objWidget->varValue;
+                $validatedTime = $objWidget->getValidatedValue();
 
                 //$combinedValue = $dateValue . ' ' . $timeValue;
 

@@ -19,6 +19,7 @@ class PreorderFormular extends Widget {
 
 
     private $preorderLimiter;
+    private $validatedValue;
 
 
 	/**
@@ -137,12 +138,18 @@ class PreorderFormular extends Widget {
             } else {
                 // Set the validated value
                 $this->varValue = $varValue;
+                $this->validatedValue = $varValue;
             }
        // } catch (\Exception $e) {
             // Log the exception and prevent form submission
          //   $this->blnSubmitInput = false;
            // $this->class = 'error';
        // }
+    }
+
+
+    public function getValidatedValue() {
+        return $this->validatedValue;
     }
 }
 ?>
