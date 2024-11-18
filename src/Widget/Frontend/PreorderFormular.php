@@ -69,7 +69,7 @@ class PreorderFormular extends Widget {
         if ($dateTime === false || ($errors !== false && ($errors['warning_count'] > 0 || $errors['error_count'] > 0))) {
             $errorMessage = 'Invalides Datum oder Zeitformat. Bitte geben Sie sowohl ein gültiges Datum als auch eine gültige Zeit an.';
             $this->addError($errorMessage);
-            return null;
+            return;
         }
          
 
@@ -83,7 +83,7 @@ class PreorderFormular extends Widget {
         if ($dateTimeTimestamp < $thirtyMinutesLater) {
             $errorMessage = "Um die Effizienz der von Ihnen getätigten Vorbestellungen zu optimieren, bitten wir Sie, einen Zeitraum zu wählen, welcher mindestens 30 Minuten nach dem aktuellen Zeitpunkt liegt.";
             $this->addError($errorMessage);
-            return null;
+            return;
         } else {
         
             if ($this->shippingId !== null && $this->shippingId !== 28) { // shipping ID 28 is a pickup order
@@ -95,6 +95,7 @@ class PreorderFormular extends Widget {
                     $formatedBookingTime = date('d.m.Y H:i', $nextPossibleBookingTime);
                     $errorMessage = "Wir bedauern, Ihnen mitteilen zu müssen, dass für den von Ihnen gewünschten Zeitraum bereits zu viele Vorbestellungen zur Lieferung eingegangen sind. Wir bitten Sie daher einen anderen Zeitraum für Ihre Bestellung auszuwählen. Der nächstmögliche Bestellzeitraum ist: " . $formatedBookingTime;
                     $this->addError($errorMessage);
+                    return;
                 }
             }
 
@@ -107,6 +108,7 @@ class PreorderFormular extends Widget {
                     $formatedBookingTime = date('d.m.Y H:i', $nextPossibleBookingTime);
                     $errorMessage = "Wir bedauern, Ihnen mitteilen zu müssen, dass für den von Ihnen gewünschten Zeitraum bereits zu viele Vorbestellungen zur Abholung eingegangen sind. Wir bitten Sie daher einen anderen Zeitraum für Ihre Bestellung auszuwählen. Der nächstmögliche Bestellzeitraum ist: " . $formatedBookingTime;
                     $this->addError($errorMessage);
+                    return;
                 }
             }
         }
