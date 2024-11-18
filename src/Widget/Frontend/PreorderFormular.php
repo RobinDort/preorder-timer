@@ -66,7 +66,7 @@ class PreorderFormular extends Widget {
         $dateTime = \DateTime::createFromFormat($expectedFormat, $varInput, $timezone);
         $errors = \DateTime::getLastErrors();
 
-        if ($dateTime === false || $errors['warning_count'] > 0 || $errors['error_count'] > 0) {
+        if ($dateTime === false || ($errors !== false && ($errors['warning_count'] > 0 || $errors['error_count'] > 0))) {
             $errorMessage = 'Invalides Datum oder Zeitformat. Bitte geben Sie sowohl ein gültiges Datum als auch eine gültige Zeit an.';
             $this->addError($errorMessage);
             return null;
