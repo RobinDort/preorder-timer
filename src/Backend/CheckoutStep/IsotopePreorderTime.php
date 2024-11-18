@@ -87,8 +87,8 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
                     $this->blnError = true;
                   //  throw new \Exception($objWidget->getErrorsAsString());
               //  } catch (\Exception $e) {
-                    \System::log("Exception: " .$e->getMessage(), __METHOD__, "TL_ERROR");
-                    $objWidget->addError($e->getMessage());
+                    \System::log("Exception: " .$objWidget->getErrorsAsString(), __METHOD__, "TL_ERROR");
+                    $objWidget->addError($objWidget->getErrorsAsString());
                 //}
             }
         }
