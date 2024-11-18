@@ -53,7 +53,7 @@ class PreorderFormular extends Widget {
      */
     protected function validator($varInput) {
 
-        if ($varInput === null || $varInput === "" || empty($varInput || !isset($varInput))) {
+        if ($varInput === null || $varInput === "" || empty($varInput) || !isset($varInput)) {
             // If the input is empty, return immediately without validation
             $errorMessage = "Für einen reibungslosen Ablauf unserer Shop-Bestellungen, bitten wir Sie, Ihre gewünschte Bestellzeit (Datum und Uhrzeit) anzugeben.";
             $this->addError($errorMessage);
@@ -62,15 +62,16 @@ class PreorderFormular extends Widget {
 
         $expectedFormat = 'd.m.Y H:i';
 
-        $dateTime = \DateTime::createFromFormat($expectedFormat, $varInput);
+        $timezone = new \DateTimeZone('Europe/Berlin');
+        $dateTime = \DateTime::createFromFormat($expectedFormat, $varInput, $timezone);
         $errors = \DateTime::getLastErrors();
 
-        if ($errors !== false) { // ensures the function did not return false and thus an error of errors
-            if ($dateTime === false || $errors['warning_count'] > 0 || $errors['error_count'] > 0) {
-                $errorMessage = 'Invalid date or time format. Please use the format: ' . $expectedFormat;
-                throw new \Exception($errorMessage);
-            }
-        }   
+        if ($dateTime === false || $errors['warning_count'] > 0 || $errors['error_count'] > 0) {
+            $errorMessage = 'Invalides Datum oder Zeitformat. Bitte geben Sie sowohl ein gültiges Datum als auch eine gültige Zeit an.';
+            $this->addError($errorMessage);
+            return null;
+        }
+         
 
         //datetime is in valid format
         $dateTimeTimestamp = $dateTime->getTimestamp();
@@ -82,6 +83,7 @@ class PreorderFormular extends Widget {
         if ($dateTimeTimestamp < $thirtyMinutesLater) {
             $errorMessage = "Um die Effizienz der von Ihnen getätigten Vorbestellungen zu optimieren, bitten wir Sie, einen Zeitraum zu wählen, welcher mindestens 30 Minuten nach dem aktuellen Zeitpunkt liegt.";
             $this->addError($errorMessage);
+            return null;
         } else {
         
             if ($this->shippingId !== null && $this->shippingId !== 28) { // shipping ID 28 is a pickup order
@@ -127,7 +129,7 @@ class PreorderFormular extends Widget {
             $varValue = $this->validator($combinedValue);
     
             // If there are any errors, handle them
-            if ($this->hasErrors()) {
+            if ($varValue === null || $this->hasErrors()) {
                 $this->blnSubmitInput = false;
                 $this->class = 'error';
             } else {

@@ -69,13 +69,16 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
 
             $objWidget->validate();
 
-            if (!$objWidget->hasErrors()) {
+            if (!$objWidget->hasErrors() && $objWidget->varValue !== null) {
 
-                $combinedValue = $dateValue . ' ' . $timeValue;
+                $validatedTime = $objWidget->varValue;
 
-                $timezone = new \DateTimeZone('Europe/Berlin');
-                $date = \DateTime::createFromFormat('d.m.Y H:i', $combinedValue, $timezone);
-                Isotope::getCart()->preorder_time = $date ? $date->getTimestamp() : null;
+                //$combinedValue = $dateValue . ' ' . $timeValue;
+
+                //$timezone = new \DateTimeZone('Europe/Berlin');
+                //$date = \DateTime::createFromFormat('d.m.Y H:i', $combinedValue, $timezone);
+                //Isotope::getCart()->preorder_time = $date->getTimestamp();
+                Isotope::getCart()->preorder_time = $validatedTime;
                 Isotope::getCart()->save();
                 $this->addNoteToOrder();
 
@@ -84,6 +87,7 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
                     $this->blnError = true;
                     throw new \Exception($objWidget->getErrorsAsString());
                 } catch (\Exception $e) {
+                    \System::log("Exception: " .$e->getMessage(), __METHOD__, "TL_ERROR");
                     $objWidget->addError($e->getMessage());
                 }
             }
