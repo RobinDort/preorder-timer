@@ -83,13 +83,12 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
                 $this->addNoteToOrder();
 
             } else {
-                //try {
+                try {
                     $this->blnError = true;
-                    \System::log("Exception varValue: " . print_r(get_object_vars($objWidget)), __METHOD__, "TL_ERROR");
-                    throw new \Exception(print_r(get_object_vars($objWidget)));
-              //  } catch (\Exception $e) {
-                    $objWidget->addError($objWidget->getErrorsAsString());
-                //}
+                } catch (\Exception $e) {
+                    \System::log("Exception: " . $e->getErrorMessage(), __METHOD__, "TL_ERROR");
+                    $objWidget->addError($e->getErrorMessage());
+                }
             }
         }
 
