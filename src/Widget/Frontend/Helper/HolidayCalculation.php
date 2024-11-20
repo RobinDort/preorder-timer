@@ -4,6 +4,9 @@ use Umulmrum\Holiday\HolidayCalculator;
 
 // This must be switched according to the region.
 use Umulmrum\Holiday\Provider\Germany\Saarland;
+use Umulmrum\Holiday\Filter\IncludeTypeFilter;
+use Umulmrum\Holiday\Constant\HolidayType;
+
 
 
 class HolidayCalculation {
@@ -18,6 +21,7 @@ class HolidayCalculation {
         $currentYear = (int) date('Y');
     	$holidayCalculator = new HolidayCalculator();
 		$this->holidays = $holidayCalculator->calculate(Saarland::class, $currentYear);
+        $this->holidays = $this->holidays->filter(new IncludeTypeFilter(HolidayType::DAY_OFF));
     }
     
 
