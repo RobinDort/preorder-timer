@@ -124,7 +124,8 @@ document.addEventListener('DOMContentLoaded', async function() {
         disableMobile: true,
         // No action on open
         onOpen: function(selectedDates, dateStr, instance) {
-            // Intentionally empty - Do nothing     
+            // Intentionally empty - Do nothing
+            return;
         },
 
         // No action on change
@@ -136,27 +137,27 @@ document.addEventListener('DOMContentLoaded', async function() {
         onClose: function(selectedDates, dateStr, instance) {
             // Ensure the picker is genuinely closed
 
-            if (instance.isMobile) {
-                instance.config.disableMobile = true;
+            // if (instance.isMobile) {
+            //     instance.config.disableMobile = true;
 
-                if (instance.isOpen) return;
-                clearTimeout(validationTimeout);
-                validationTimeout = setTimeout(function() {
+            //     if (instance.isOpen) return;
+            //     clearTimeout(validationTimeout);
+            //     validationTimeout = setTimeout(function() {
 
-                    // Check if the selected time is within any of the allowed ranges
-                    const timeSelected = dateStr;
-                    const validTime = checkTimeValidity(timeSelected, allowedRange);
+            //         // Check if the selected time is within any of the allowed ranges
+            //         const timeSelected = dateStr;
+            //         const validTime = checkTimeValidity(timeSelected, allowedRange);
 
-                    if (!validTime) {
-                        timePicker.value = "";
-                        submitNextBtn.disabled = true;
-                        displayWrongTimeAlert(allowedRange, instance);
-                    } else {
-                        // enable the next button again
-                        submitNextBtn.disabled = false;
-                    }
-                }, 1000);  
-            } else {  
+            //         if (!validTime) {
+            //             timePicker.value = "";
+            //             submitNextBtn.disabled = true;
+            //             displayWrongTimeAlert(allowedRange, instance);
+            //         } else {
+            //             // enable the next button again
+            //             submitNextBtn.disabled = false;
+            //         }
+            //     }, 1000);  
+            //} else {  
                 // Check if the selected time is within any of the allowed ranges
                 const timeSelected = dateStr;
                 const validTime = checkTimeValidity(timeSelected, allowedRange);
@@ -169,7 +170,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                     // enable the next button again
                     submitNextBtn.disabled = false;
                 }
-            }            
+          //  }            
         },
     });
 
