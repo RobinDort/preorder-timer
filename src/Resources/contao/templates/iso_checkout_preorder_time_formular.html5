@@ -121,11 +121,13 @@ document.addEventListener('DOMContentLoaded', async function() {
         minuteIncrement: 15, // Optional: set to adjust the minute increments
         allowInput: false,
         defaultHour: 12,
-        defaultMinute: 15,
+        defaultMinute: 30,
         // No action on open
         onOpen: function(selectedDates, dateStr, instance) {
             // Intentionally empty - Do nothing
-            return;
+            if (instance.isOpen) {
+                console.log(instance);
+            }
         },
 
         // No action on change
