@@ -122,6 +122,17 @@ document.addEventListener('DOMContentLoaded', async function() {
         allowInput: false,
         defaultHour: 12,
         defaultMinute: 15,
+        // No action on open
+        onOpen: function(selectedDates, dateStr, instance) {
+            // Intentionally empty - Do nothing
+            isTimePickerOpen = true;
+        },
+
+        // No action on change
+        onChange: function(selectedDates, dateStr, instance) {
+            // Intentionally empty - Do nothing
+        },
+        
         onClose: function(selectedDates, dateStr, instance) {
             // Ensure the picker is genuinely closed
             setTimeout(() => {
@@ -147,16 +158,6 @@ document.addEventListener('DOMContentLoaded', async function() {
                   //  }, 1500);
                 
             }, 300)
-        },
-        // No action on open
-        onOpen: function(selectedDates, dateStr, instance) {
-            // Intentionally empty - Do nothing
-            isTimePickerOpen = true;
-        },
-
-        // No action on change
-        onChange: function(selectedDates, dateStr, instance) {
-            // Intentionally empty - Do nothing
         },
     });
 
