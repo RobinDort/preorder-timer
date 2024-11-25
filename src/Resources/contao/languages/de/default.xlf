@@ -11,7 +11,7 @@
             </trans-unit>
             <trans-unit id="MSC.preorder_time_message">
                 <source>Dear customer, in order to ensure a smooth and efficient ordering process, we kindly ask you to inform us of the desired time at which you would like to receive your food in the fields provided. Please note that a valid reservation time requires both details (date including time).</source>
-                <target>Sehr geehrter Kunde, um Ihnen eine reibungslose und effiziente Bestellung zu gewährleisten, bitten wir Sie, uns die Eingabe des Zeitpunkts über Eingabe in die bereitgestellten Felder, zu dem Sie Ihre Speisen erhalten möchten, mitzuteilen. Bitte beachten Sie dass eine gültige Vorbstellungszeit beide Angaben (Datum inklusive Zeit) benötigt.</target>
+                <target>Sehr geehrter Kunde, um Ihnen eine reibungslose und effiziente Bestellung zu gewährleisten, bitten wir Sie, uns den Zeitpunkt, zu dem Sie Ihre Speisen erhalten möchten, über Eingabe in die bereitgestellten Felder, mitzuteilen. Bitte beachten Sie dass eine gültige Vorbstellungszeit beide Angaben (Datum inklusive Zeit) benötigt.</target>
             </trans-unit>
             <trans-unit id="MSC.preorder_time_order_deviation">
                 <source>Please note that the times stated are approximate and may vary by up to 30 minutes depending on the traffic and capacity utilization situation for a desired delivery by our drivers. However, we always endeavor to adhere to the delivery times requested by you. Thank you for your understanding. Your Dorji Sushi To Go Team</source>
