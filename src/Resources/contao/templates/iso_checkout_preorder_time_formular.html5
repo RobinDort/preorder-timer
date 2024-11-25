@@ -33,6 +33,7 @@ name="time-input"
 id="preorder-formular-time"
 class="text"
 value="<?= htmlspecialchars($this->value['time'] ?? '') ?>"
+readonly
 >
 </div>
 
