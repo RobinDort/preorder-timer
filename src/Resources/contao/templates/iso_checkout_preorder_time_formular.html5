@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         onClose: function(selectedDates, dateStr, instance) {
             // Ensure the picker is genuinely closed
             if (instance.isOpen) return;
-            
+
                 // Picker is truly closed; proceed with validation
                 clearTimeout(validationTimeout);
                 validationTimeout = setTimeout(function() {
@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                     // enable the next button again
                     submitNextBtn.disabled = false;
                 }
-            }, 1500);                
+            }, 1000);                
         },
     });
 
