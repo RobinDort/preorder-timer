@@ -121,7 +121,6 @@ document.addEventListener('DOMContentLoaded', async function() {
         allowInput: false,
         defaultHour: 12,
         defaultMinute: 15,
-        disableMobile: "true"
         // No action on open
         onOpen: function(selectedDates, dateStr, instance) {
             // Intentionally empty - Do nothing
