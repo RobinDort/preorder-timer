@@ -136,6 +136,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         onClose: function(selectedDates, dateStr, instance) {
             // Ensure the picker is genuinely closed
+            console.log(instance.isOpen);
             if (instance.isOpen) return;
 
                 // Picker is truly closed; proceed with validation
