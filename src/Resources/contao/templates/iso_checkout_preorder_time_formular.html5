@@ -125,11 +125,13 @@ document.addEventListener('DOMContentLoaded', async function() {
         // No action on open
         onOpen: function(selectedDates, dateStr, instance) {
             // Intentionally empty - Do nothing
+            return;
         },
 
         // No action on change
         onChange: function(selectedDates, dateStr, instance) {
             // Intentionally empty - Do nothing
+            return;
         },
 
         onClose: function(selectedDates, dateStr, instance) {
