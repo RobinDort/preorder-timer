@@ -133,12 +133,11 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         onClose: function(selectedDates, dateStr, instance) {
             // Ensure the picker is genuinely closed
-            // setTimeout(() => {
-                console.log("close event: ", instance);
+            if (instance.isMobile === true) {
                 if (instance.isOpen) return;
-                // Picker is truly closed; proceed with validation
-                    //clearTimeout(validationTimeout);
-                   // validationTimeout = setTimeout(function() {
+                    // Picker is truly closed; proceed with validation
+                    clearTimeout(validationTimeout);
+                    validationTimeout = setTimeout(function() {
 
                     // Check if the selected time is within any of the allowed ranges
                     const timeSelected = dateStr;
@@ -152,9 +151,21 @@ document.addEventListener('DOMContentLoaded', async function() {
                         // enable the next button again
                         submitNextBtn.disabled = false;
                     }
-                  //  }, 1500);
-                
-            // }, 300)
+                }, 2000);                
+            } else {
+                    // Check if the selected time is within any of the allowed ranges
+                    const timeSelected = dateStr;
+                    const validTime = checkTimeValidity(timeSelected, allowedRange);
+
+                    if (!validTime) {
+                        timePicker.value = "";
+                        submitNextBtn.disabled = true;
+                        displayWrongTimeAlert(allowedRange, instance);
+                    } else {
+                        // enable the next button again
+                        submitNextBtn.disabled = false;
+                    }
+            }
         },
     });
 
