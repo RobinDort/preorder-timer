@@ -52,7 +52,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     let dayOfWeek = -1;
     let allowedRange = [];
     let validationTimeout;
-    let isTimePickerOpen = false;
 
     const submitNextBtn = document.querySelector("input.submit.next.button");
     // disable next button until a valid time has been placed.
@@ -125,8 +124,6 @@ document.addEventListener('DOMContentLoaded', async function() {
         // No action on open
         onOpen: function(selectedDates, dateStr, instance) {
             // Intentionally empty - Do nothing
-            isTimePickerOpen = true;
-            console.log(instance);
         },
 
         // No action on change
@@ -138,9 +135,8 @@ document.addEventListener('DOMContentLoaded', async function() {
             // Ensure the picker is genuinely closed
             setTimeout(() => {
                 console.log(document.activeElement);
-                if (!isTimePickerOpen) return;
+                if (instance.isOpen) return;
                 // Picker is truly closed; proceed with validation
-                isTimePickerOpen = false;
                     //clearTimeout(validationTimeout);
                    // validationTimeout = setTimeout(function() {
 
