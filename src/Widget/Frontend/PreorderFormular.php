@@ -127,24 +127,18 @@ class PreorderFormular extends Widget {
             $combinedValue = $dateValue . ' ' . $timeValue;
         }
 
-       // try {
-            // Call the validator to perform validation and store the result
-            $varValue = $this->validator($combinedValue);
-    
-            // If there are any errors, handle them
-            if ($varValue === null || $this->hasErrors()) {
-                $this->blnSubmitInput = false;
-                $this->class = 'error';
-            } else {
-                // Set the validated value
-                $this->varValue = $varValue;
-                $this->validatedValue = $varValue;
-            }
-       // } catch (\Exception $e) {
-            // Log the exception and prevent form submission
-         //   $this->blnSubmitInput = false;
-           // $this->class = 'error';
-       // }
+        // Call the validator to perform validation and store the result
+        $varValue = $this->validator($combinedValue);
+
+        // If there are any errors, handle them
+        if ($varValue === null || $this->hasErrors()) {
+            $this->blnSubmitInput = false;
+            $this->class = 'error';
+        } else {
+            // Set the validated value
+            $this->varValue = $varValue;
+            $this->validatedValue = $varValue;
+        }
     }
 
 

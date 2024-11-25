@@ -116,6 +116,7 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
         $draftOrder = Isotope::getCart()->getDraftOrder();
         if (!empty($preorderTime) && $draftOrder instanceof IsotopeProductCollection) {
             $draftOrder->preorder_time = $preorderTime;
+            $draftOrder->save();
         }
     }
 
