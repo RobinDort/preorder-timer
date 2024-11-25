@@ -127,22 +127,22 @@ document.addEventListener('DOMContentLoaded', async function() {
                 console.log(document.activeElement);
                 if (document.activeElement !== timePicker) {
                     // Picker is truly closed; proceed with validation
-                    clearTimeout(validationTimeout);
-                    validationTimeout = setTimeout(function() {
+                    //clearTimeout(validationTimeout);
+                   // validationTimeout = setTimeout(function() {
 
-                        // Check if the selected time is within any of the allowed ranges
-                        const timeSelected = dateStr;
-                        const validTime = checkTimeValidity(timeSelected, allowedRange);
+                    // Check if the selected time is within any of the allowed ranges
+                    const timeSelected = dateStr;
+                    const validTime = checkTimeValidity(timeSelected, allowedRange);
 
-                        if (!validTime) {
-                            timePicker.value = "";
-                            submitNextBtn.disabled = true;
-                            displayWrongTimeAlert(allowedRange, instance);
-                        } else {
-                            // enable the next button again
-                            submitNextBtn.disabled = false;
-                        }
-                    }, 1500);
+                    if (!validTime) {
+                        timePicker.value = "";
+                        submitNextBtn.disabled = true;
+                        displayWrongTimeAlert(allowedRange, instance);
+                    } else {
+                        // enable the next button again
+                        submitNextBtn.disabled = false;
+                    }
+                  //  }, 1500);
                 }
             }, 300)
         },
