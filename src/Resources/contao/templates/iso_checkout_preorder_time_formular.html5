@@ -124,6 +124,9 @@ document.addEventListener('DOMContentLoaded', async function() {
         // No action on open
         onOpen: function(selectedDates, dateStr, instance) {
             // Intentionally empty - Do nothing
+            if(instance.isMobile) {
+                instance.config.disableMobile = true;
+            }
         },
 
         // No action on change
