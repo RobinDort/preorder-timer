@@ -137,6 +137,8 @@ document.addEventListener('DOMContentLoaded', async function() {
 
             if (instance.isMobile) {
                 console.log(instance.config.disableMobile);
+                instance.config.disableMobile = true;
+                console.log(instance.config.disableMobile);
             }   
             
             if (!instance.isOpen) {
