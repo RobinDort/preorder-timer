@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             // Ensure the picker is genuinely closed
 
             if (instance.isMobile) {
-                console.log(instance.config);
+                console.log(instance.config.disableMobile);
             }   
             
             if (!instance.isOpen) {
