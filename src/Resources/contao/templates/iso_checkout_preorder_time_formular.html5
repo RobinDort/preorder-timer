@@ -155,6 +155,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         // No action on change
         onChange: function(selectedDates, dateStr, instance) {
             // Intentionally empty - Do nothing
+            instance.input.addEventListener('change', (e) => e.preventDefault());
         },
     });
 
