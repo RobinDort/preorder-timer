@@ -126,13 +126,14 @@ document.addEventListener('DOMContentLoaded', async function() {
         onOpen: function(selectedDates, dateStr, instance) {
             // Intentionally empty - Do nothing
             isTimePickerOpen = true;
+            console.log(instance);
         },
 
         // No action on change
         onChange: function(selectedDates, dateStr, instance) {
             // Intentionally empty - Do nothing
         },
-        
+
         onClose: function(selectedDates, dateStr, instance) {
             // Ensure the picker is genuinely closed
             setTimeout(() => {
