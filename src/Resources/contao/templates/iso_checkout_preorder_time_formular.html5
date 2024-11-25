@@ -125,9 +125,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         // No action on open
         onOpen: function(selectedDates, dateStr, instance) {
             // Intentionally empty - Do nothing
-            if (instance.isOpen) {
-                console.log(instance);
-            }
+           return;
         },
 
         // No action on change
@@ -139,25 +137,25 @@ document.addEventListener('DOMContentLoaded', async function() {
         onClose: function(selectedDates, dateStr, instance) {
             // Ensure the picker is genuinely closed
             console.log(instance.isOpen);
-            if (instance.isOpen) return;
-
+            if (!instance.isOpen) {
                 // Picker is truly closed; proceed with validation
                 clearTimeout(validationTimeout);
                 validationTimeout = setTimeout(function() {
 
-                // Check if the selected time is within any of the allowed ranges
-                const timeSelected = dateStr;
-                const validTime = checkTimeValidity(timeSelected, allowedRange);
+                    // Check if the selected time is within any of the allowed ranges
+                    const timeSelected = dateStr;
+                    const validTime = checkTimeValidity(timeSelected, allowedRange);
 
-                if (!validTime) {
-                    timePicker.value = "";
-                    submitNextBtn.disabled = true;
-                    displayWrongTimeAlert(allowedRange, instance);
-                } else {
-                    // enable the next button again
-                    submitNextBtn.disabled = false;
-                }
-            }, 1000);                
+                    if (!validTime) {
+                        timePicker.value = "";
+                        submitNextBtn.disabled = true;
+                        displayWrongTimeAlert(allowedRange, instance);
+                    } else {
+                        // enable the next button again
+                        submitNextBtn.disabled = false;
+                    }
+                }, 1000);  
+            }              
         },
     });
 
