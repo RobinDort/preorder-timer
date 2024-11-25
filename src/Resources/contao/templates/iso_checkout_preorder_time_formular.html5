@@ -124,20 +124,16 @@ document.addEventListener('DOMContentLoaded', async function() {
         // No action on open
         onOpen: function(selectedDates, dateStr, instance) {
             // Intentionally empty - Do nothing
-            if(instance.isMobile) {
-                instance.config.disableMobile = true;
-            }
         },
 
         // No action on change
         onChange: function(selectedDates, dateStr, instance) {
             // Intentionally empty - Do nothing
-            console.log("change event: ", instance);
         },
 
         onClose: function(selectedDates, dateStr, instance) {
             // Ensure the picker is genuinely closed
-            setTimeout(() => {
+            // setTimeout(() => {
                 console.log("close event: ", instance);
                 if (instance.isOpen) return;
                 // Picker is truly closed; proceed with validation
@@ -158,7 +154,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                     }
                   //  }, 1500);
                 
-            }, 300)
+            // }, 300)
         },
     });
 
