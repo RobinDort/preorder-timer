@@ -142,20 +142,20 @@ document.addEventListener('DOMContentLoaded', async function() {
                 clearTimeout(validationTimeout);
                 validationTimeout = setTimeout(function() {
 
-                // Check if the selected time is within any of the allowed ranges
-                const timeSelected = dateStr;
-                const validTime = checkTimeValidity(timeSelected, allowedRange);
+                    // Check if the selected time is within any of the allowed ranges
+                    const timeSelected = dateStr;
+                    const validTime = checkTimeValidity(timeSelected, allowedRange);
 
-                if (!validTime) {
-                    timePicker.value = "";
-                    submitNextBtn.disabled = true;
-                    displayWrongTimeAlert(allowedRange, instance);
-                } else {
-                    // enable the next button again
-                    submitNextBtn.disabled = false;
-                }
+                    if (!validTime) {
+                        timePicker.value = "";
+                        submitNextBtn.disabled = true;
+                        displayWrongTimeAlert(allowedRange, instance);
+                    } else {
+                        // enable the next button again
+                        submitNextBtn.disabled = false;
+                    }
                 }, 1000);  
-            } else {
+            } else {  
                 // Check if the selected time is within any of the allowed ranges
                 const timeSelected = dateStr;
                 const validTime = checkTimeValidity(timeSelected, allowedRange);
@@ -168,8 +168,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                     // enable the next button again
                     submitNextBtn.disabled = false;
                 }
-            }   
-            }              
+            }            
         },
     });
 
