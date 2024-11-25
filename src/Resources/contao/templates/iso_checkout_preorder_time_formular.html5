@@ -123,10 +123,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         defaultMinute: 30,
         // No action on open
         onOpen: function(selectedDates, dateStr, instance) {
-            // Intentionally empty - Do nothing
-            if (instance.isMobile) {
-                console.log(instance.config);
-            }        
+            // Intentionally empty - Do nothing     
         },
 
         // No action on change
@@ -137,6 +134,10 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         onClose: function(selectedDates, dateStr, instance) {
             // Ensure the picker is genuinely closed
+
+            if (instance.isMobile) {
+                console.log(instance.config);
+            }   
             
             if (!instance.isOpen) {
                 // Picker is truly closed; proceed with validation
