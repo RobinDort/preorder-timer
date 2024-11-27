@@ -20,7 +20,7 @@ $statusLabels = [
 
                 <!-- Date Input -->
                 <div class="settings_widget">
-                    <p>Hier das gewünschte Datum eintragen, an dem der Shop von seinen <strong>normalen</strong> Geschäftszeiten abweicht. Das Formular "Vorbestellungen",
+                    <p>Hier das gewünschte Datum auswählen, an dem der Shop von seinen <strong>normalen</strong> Geschäftszeiten abweicht. Das Formular "Vorbestellungen",
                     welches im Kassenmodul vorhanden ist, wird dieses Datum berücksichtigen und die verfügbaren Zeiten dementsprechend anpassen.</p>
 
                     <label class="settings_label" for="preorder_date_shop_closed"><strong>1</strong>Shop geschlossen am:</label>
@@ -79,7 +79,7 @@ $statusLabels = [
                 <h2>Spezielle Geschäftszeiten</h2>
 
                 <div class="settings_widget">
-                    <p>Hier das gewünschte Datum eintragen, an dem der Shop zu <strong>speziellen</strong> Geschäftszeiten geschlossen/geöffnet ist. Das Formular "Vorbestellungen",
+                    <p>Hier das gewünschte Datum auswählen, an dem der Shop zu <strong>speziellen</strong> Geschäftszeiten geschlossen/geöffnet ist. Das Formular "Vorbestellungen",
                         welches im Kassenmodul vorhanden ist, wird dieses Datum berücksichtigen und die verfügbaren Zeiten dementsprechend anpassen.
                     </p>
                     <label class="settings_label" for="preorder_special_shop_date"><strong>1</strong>Spezielle Öffnungszeit am:</label>
@@ -91,11 +91,13 @@ $statusLabels = [
                     <label class="settings_label" for="preorder_special_shop_time"><strong>2</strong>Shop geöffnet von bis:</label>
                     <input name="preorder_special_shop_time" id="preorder_special_shop_time" class="tl_text"/>
                 </div>
-            </div>
 
-            <div class="tl_submit_container">
+                <div class="tl_submit_container">
                     <button name="submit" class="tl_submit" onClick="submitSpecialClosedDays()">Speichern</button>
                 </div>
+            </div>
+
+            
         </div>
     </div>
 <?php $this->endblock(); ?>
