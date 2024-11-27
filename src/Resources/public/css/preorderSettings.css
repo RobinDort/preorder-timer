@@ -43,3 +43,7 @@
 #days-closed-table tbody tr:nth-child(even) {
 	background-color: #f9f9f9;
 }
+
+.shop-time-configuration h2 {
+	padding: 10px 0 0 15px;
+}
