@@ -12,80 +12,86 @@ $statusLabels = [
 <?php $this->block('main'); ?>
     <h1 class="settings_headline">Shop Konfiguration Vorbestellungen</h1>
 
-    <div class="tl_formbody_edit">
+    <div class="shop-time-configuration">
+        <div class="tl_formbody_edit">
+            <div class="content">
+                <h2>Normale Geschäftszeiten</h2>
+
+
+                <!-- Date Input -->
+                <div class="settings_widget">
+                    <p>Hier das gewünschte Datum eintragen, an dem der Shop von seinen <strong>normalen</strong> Geschäftszeiten abweicht. Das Formular "Vorbestellungen",
+                    welches im Kassenmodul vorhanden ist, wird dieses Datum berücksichtigen und die verfügbaren Zeiten dementsprechend anpassen.</p>
+
+                    <label class="settings_label" for="preorder_date_shop_closed"><strong>1</strong>Shop geschlossen am:</label>
+                    <input type="text" name="preorder_date_shop_closed" id="preorder_date_shop_closed" class="tl_text" value="">
+                </div>
+                
+                <!-- Select Input for Status -->
+                <div class="settings_widget">
+                    <p>Geben Sie an, ob der Shop am gewählten Datum ganztägig oder halbtags geschlossen ist.</p>
+                    <label class="settings_label" for="preorder_status"><strong>2</strong>Geschlossene Shopzeit:</label>
+                    <select name="preorder_status" id="preorder_status" class="tl_select">
+                        <option value="1">Ganztägig geschlossen</option>
+                        <option value="2">Morgens geschlossen</option>
+                        <option value="3">Nachmittags/Abends geschlossen</option>
+                    </select>
+                </div>
+                
+                <div class="tl_submit_container">
+                    <button name="submit" class="tl_submit" onClick="submitForm()">Speichern</button>
+                </div>
+            </div>
+        </div>
+        
         <div class="content">
-            <h2>Normale Geschäftszeiten</h2>
-
-
-            <!-- Date Input -->
-            <div class="settings_widget">
-                <p>Hier das gewünschte Datum eintragen, an dem der Shop von seinen <strong>normalen</strong> Geschäftszeiten abweicht. Das Formular "Vorbestellungen",
-                welches im Kassenmodul vorhanden ist, wird dieses Datum berücksichtigen und die verfügbaren Zeiten dementsprechend anpassen.</p>
-
-                <label class="settings_label" for="preorder_date_shop_closed"><strong>1</strong>Shop geschlossen am:</label>
-                <input type="text" name="preorder_date_shop_closed" id="preorder_date_shop_closed" class="tl_text" value="">
-            </div>
-            
-            <!-- Select Input for Status -->
-            <div class="settings_widget">
-                <p>Geben Sie an, ob der Shop am gewählten Datum ganztägig oder halbtags geschlossen ist.</p>
-                <label class="settings_label" for="preorder_status"><strong>2</strong>Geschlossene Shopzeit:</label>
-                <select name="preorder_status" id="preorder_status" class="tl_select">
-                    <option value="1">Ganztägig geschlossen</option>
-                    <option value="2">Morgens geschlossen</option>
-                    <option value="3">Nachmittags/Abends geschlossen</option>
-                </select>
-            </div>
-            
-            <div class="tl_submit_container">
-                <button name="submit" class="tl_submit" onClick="submitForm()">Speichern</button>
-            </div>
-        </div>
-    </div>
-    
-    <div class="content">
-        <table id="days-closed-table">
-            <thead>
-                <tr>
-                    <th>Shop geschlossen</th>
-                    <th>Status</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-		        <?php foreach ($this->specialClosedDays as $status => $dates): ?>
-                    <?php foreach ($dates as $date): ?>
-                        <tr>
-                            <td><?php echo htmlspecialchars($date); ?></td>
-                            <td><?php echo htmlspecialchars($statusLabels[$status]); ?></td>
-                            <td>
-                                <button class="delete-btn" onClick="removeClosedDayEntry(this)" data-date="<?php echo $date?>" data-status="<?php echo $status?>">
-                                    <img src="system/themes/flexible/icons/delete.svg"/>
-                                </button>
-                            </td>
-                        </tr>
+            <table id="days-closed-table">
+                <thead>
+                    <tr>
+                        <th>Shop geschlossen</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($this->specialClosedDays as $status => $dates): ?>
+                        <?php foreach ($dates as $date): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($date); ?></td>
+                                <td><?php echo htmlspecialchars($statusLabels[$status]); ?></td>
+                                <td>
+                                    <button class="delete-btn" onClick="removeClosedDayEntry(this)" data-date="<?php echo $date?>" data-status="<?php echo $status?>">
+                                        <img src="system/themes/flexible/icons/delete.svg"/>
+                                    </button>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
                     <?php endforeach; ?>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
 
 
-    <div class="content">
-        <h2>Spezielle Geschäftszeiten</h2>
+    <div class="shop-time-configuration">
+        <div class="tl_formbody_edit">
+            <div class="content">
+                <h2>Spezielle Geschäftszeiten</h2>
 
-        <div class="settings_widget">
-            <p>Hier das gewünschte Datum eintragen, an dem der Shop zu <strong>speziellen</strong> Geschäftszeiten geschlossen/geöffnet ist. Das Formular "Vorbestellungen",
-                welches im Kassenmodul vorhanden ist, wird dieses Datum berücksichtigen und die verfügbaren Zeiten dementsprechend anpassen.
-            </p>
-            <label class="settings_label" for="preorder_special_shop_date"><strong>1</strong>Spezielle Öffnungszeit am:</label>
-            <input type="text" name="preorder_special_shop_date" id="preorder_special_shop_date" class="tl_text" value="">
-        </div>
+                <div class="settings_widget">
+                    <p>Hier das gewünschte Datum eintragen, an dem der Shop zu <strong>speziellen</strong> Geschäftszeiten geschlossen/geöffnet ist. Das Formular "Vorbestellungen",
+                        welches im Kassenmodul vorhanden ist, wird dieses Datum berücksichtigen und die verfügbaren Zeiten dementsprechend anpassen.
+                    </p>
+                    <label class="settings_label" for="preorder_special_shop_date"><strong>1</strong>Spezielle Öffnungszeit am:</label>
+                    <input type="text" name="preorder_special_shop_date" id="preorder_special_shop_date" class="tl_text" value="">
+                </div>
 
-        <div class="settings_widget">
-            <p>Geben Sie hier die Zeitspanne an, zu der der Shop an diesem tag geöffnet ist. Bsp.: 13:00 - 15:30, 18:00-22:00</p>
-            <label class="settings_label" for="preorder_special_shop_time"><strong>2</strong>Geschlossene Shopzeit:</label>
-            <input name="preorder_special_shop_time" id="preorder_special_shop_time" class="tl_text"/>
+                <div class="settings_widget">
+                    <p>Geben Sie hier die Zeitspanne an, zu der der Shop an diesem tag geöffnet ist. Bsp.: 13:00 - 15:30, 18:00-22:00</p>
+                    <label class="settings_label" for="preorder_special_shop_time"><strong>2</strong>Geschlossene Shopzeit:</label>
+                    <input name="preorder_special_shop_time" id="preorder_special_shop_time" class="tl_text"/>
+                </div>
+            </div>
         </div>
     </div>
 <?php $this->endblock(); ?>
