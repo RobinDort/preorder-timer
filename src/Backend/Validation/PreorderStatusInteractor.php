@@ -7,15 +7,37 @@ class PreorderStatusInteractor {
 
     public function __construct() {}
 
+
+    //@TODO REMOVE LATER! OLD COLD WORKING FOR tl_preorder_settings TABLE! 
+    // public function extractShopNormalClosingDays() {
+    //     $stmt = "SELECT shop_closed_date, shop_closed_status from tl_preorder_settings;";
+    //     $rslt = Database::getInstance()->execute($stmt)->fetchAllAssoc();
+
+    //     $entries = [];
+    //     foreach ($rslt as $row) {
+    //         $entries[] = [
+    //             'date' => $row['shop_closed_date'],
+    //             'status' => $row['shop_closed_status']
+    //         ];
+    //     }
+
+    //     $splittedSpecialDays = $this->splitSpecialClosedDays($entries);
+    //     return $splittedSpecialDays;
+    // }
+
     public function extractShopNormalClosingDays() {
-        $stmt = "SELECT shop_closed_date, shop_closed_status from tl_preorder_settings;";
+        $stmt = "SELECT a.date AS closing_date,b.status AS closing_status
+                 FROM tl_shop_closed_date AS a
+                 INNER JOIN tl_shop_closed_status AS b
+                 ON a.status_id = b.id";
+
         $rslt = Database::getInstance()->execute($stmt)->fetchAllAssoc();
 
         $entries = [];
         foreach ($rslt as $row) {
             $entries[] = [
-                'date' => $row['shop_closed_date'],
-                'status' => $row['shop_closed_status']
+                'date' => $row['closing_date'],
+                'status' => $row['closing_status']
             ];
         }
 
