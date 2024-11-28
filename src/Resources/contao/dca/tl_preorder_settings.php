@@ -10,11 +10,11 @@ $GLOBALS['TL_DCA']['tl_preorder_settings'] = [
     'list' => [
         'sorting' => [
             'mode'                  => 1,
-            'fields'                => ['shop_closed_date', 'shop_closed_status'],
+            'fields'                => ['shop_closed_date', 'shop_closed_status', 'shop_closed_special_date', 'shop_closed_special_date_time'],
             'panelLayout'           => 'search,limit',
         ],
         'label' => [
-            'fields'                => ['shop_closed_date', 'shop_closed_status'],
+            'fields'                => ['shop_closed_date', 'shop_closed_status', 'shop_closed_special_date', 'shop_closed_special_date_time'],
             'format'                => '%s',
         ],
         'operations' => [
@@ -57,6 +57,18 @@ $GLOBALS['TL_DCA']['tl_preorder_settings'] = [
             'eval'      => ['mandatory' => true, 'tl_class' => 'w50'],
             'sql'       => "char(1) NOT NULL default '1'",
         ],
+        'shop_closed_special_date' => [
+            'label'     => &$GLOBALS['TL_LANG']['tl_preorder_settings']['shop_closed_special_date'],
+            'inputType' => 'text',
+            'eval'      => ['rgxp' => 'datim', 'datepicker' => true, 'tl_class' => 'w50 wizard'],
+            'sql'       => "varchar(19) NOT NULL default ''",
+        ],
+        '   ' => [
+            'label'     => &$GLOBALS['TL_LANG']['tl_preorder_settings']['shop_closed_special_date_time'],
+            'inputType' => 'text',
+            'eval'      => ['rgxp' => 'datim', 'datepicker' => true, 'tl_class' => 'w50 wizard'],
+            'sql'       => "varchar(19) NOT NULL default ''",
+        ]
     ],
 ];
 ?>

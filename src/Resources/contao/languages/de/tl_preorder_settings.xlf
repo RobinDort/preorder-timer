@@ -28,6 +28,20 @@
                 <source>Nachmittags/Abends geschlossen</source>
             </trans-unit>
 
+            <trans-unit id="shop_closed_special_date.label">
+                <source>shop_closed_special_date</source>
+            </trans-unit>
+            <trans-unit id="shop_closed_status.description">
+                <source>Datim gibt an wann Shop zu speziellen Zeiten geöffnet ist</source>
+            </trans-unit>
+
+            <trans-unit id="shop_closed_special_date_time.label">
+                <source>shop_closed_special_date_time</source>
+            </trans-unit>
+            <trans-unit id="shop_closed_status.description">
+                <source>Zeit gibt an wann Shop zu speziellen Zeiten geöffnet ist</source>
+            </trans-unit>
+
             <!-- Labels for operations -->
             <trans-unit id="edit.label">
                 <source>Eintrag bearbeiten</source>
