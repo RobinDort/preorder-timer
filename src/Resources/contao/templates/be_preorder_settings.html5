@@ -54,7 +54,7 @@ $statusLabels = [
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($this->specialClosedDays as $status => $dates): ?>
+                    <?php foreach ($this->normalShopClosingDays as $status => $dates): ?>
                         <?php foreach ($dates as $date): ?>
                             <tr>
                                 <td><?php echo htmlspecialchars($date); ?></td>

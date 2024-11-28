@@ -7,7 +7,7 @@ class PreorderStatusInteractor {
 
     public function __construct() {}
 
-    public function extractSpecialClosedDays() {
+    public function extractShopNormalClosingDays() {
         $stmt = "SELECT shop_closed_date, shop_closed_status from tl_preorder_settings;";
         $rslt = Database::getInstance()->execute($stmt)->fetchAllAssoc();
 
