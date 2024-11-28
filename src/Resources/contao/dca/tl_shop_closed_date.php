@@ -1,6 +1,6 @@
 <?php
 
-$GLOBALS['TL_DCA']['shop_closed_date'] = [
+$GLOBALS['TL_DCA']['tl_shop_closed_date'] = [
     'config' => [
         'dataContainer'    => 'Table',
         'enableVersioning' => true,
@@ -20,12 +20,12 @@ $GLOBALS['TL_DCA']['shop_closed_date'] = [
         ],
         'operations' => [
             'edit' => [
-                'label' => &$GLOBALS['TL_LANG']['shop_closed_date']['edit'],
+                'label' => &$GLOBALS['TL_LANG']['tl_shop_closed_date']['edit'],
                 'href'  => 'act=edit',
                 'icon'  => 'edit.svg',
             ],
             'delete' => [
-                'label' => &$GLOBALS['TL_LANG']['shop_closed_date']['delete'],
+                'label' => &$GLOBALS['TL_LANG']['tl_shop_closed_date']['delete'],
                 'href'  => 'act=delete',
                 'icon'  => 'delete.svg',
                 'attributes' => 'onclick="if(!confirm(\'Are you sure?\'))return false;Backend.getScrollOffset();"'
@@ -41,13 +41,13 @@ $GLOBALS['TL_DCA']['shop_closed_date'] = [
             'sql'   => "int(10) unsigned NOT NULL default '0'",
         ],
         'date' => [
-            'label'     => &$GLOBALS['TL_LANG']['shop_closed_date']['date'],
+            'label'     => &$GLOBALS['TL_LANG']['tl_shop_closed_date']['date'],
             'inputType' => 'text',
             'eval'      => ['rgxp' => 'datim', 'datepicker' => true, 'tl_class' => 'w50 wizard'],
             'sql'       => "int(10) NOT NULL default '0'",
         ],
         'status_id' => [
-            'label'     => &$GLOBALS['TL_LANG']['shop_closed_date']['status_id'],
+            'label'     => &$GLOBALS['TL_LANG']['tl_shop_closed_date']['status_id'],
             'inputType' => 'select',
             'foreignKey'=> 'shop_closed_status.id',
             'eval'      => ['mandatory' => true, 'tl_class' => 'w50'],

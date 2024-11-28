@@ -1,6 +1,6 @@
 <?php
 
-$GLOBALS['TL_DCA']['shop_closed_status'] = [
+$GLOBALS['TL_DCA']['tl_shop_closed_status'] = [
     'config' => [
         'dataContainer'    => 'Table',
         'enableVersioning' => false,
@@ -20,12 +20,12 @@ $GLOBALS['TL_DCA']['shop_closed_status'] = [
         ],
         'operations' => [
             'edit' => [
-                'label' => &$GLOBALS['TL_LANG']['shop_closed_status']['edit'],
+                'label' => &$GLOBALS['TL_LANG']['tl_shop_closed_status']['edit'],
                 'href'  => 'act=edit',
                 'icon'  => 'edit.svg',
             ],
             'delete' => [
-                'label' => &$GLOBALS['TL_LANG']['shop_closed_status']['delete'],
+                'label' => &$GLOBALS['TL_LANG']['tl_shop_closed_status']['delete'],
                 'href'  => 'act=delete',
                 'icon'  => 'delete.svg',
                 'attributes' => 'onclick="if(!confirm(\'Are you sure?\'))return false;Backend.getScrollOffset();"'
@@ -37,13 +37,13 @@ $GLOBALS['TL_DCA']['shop_closed_status'] = [
             'sql' => "int(10) unsigned NOT NULL auto_increment",
         ],
         'status' => [
-            'label'     => &$GLOBALS['TL_LANG']['shop_closed_status']['status'],
+            'label'     => &$GLOBALS['TL_LANG']['tl_shop_closed_status']['status'],
             'inputType' => 'select',
             'options'   => ['1', '2', '3'],
             'reference' => [
-                '1' => &$GLOBALS['TL_LANG']['shop_closed_status']['shop_closed_status']['option']['1'],
-                '2' => &$GLOBALS['TL_LANG']['shop_closed_status']['shop_closed_status']['option']['2'],
-                '3' => &$GLOBALS['TL_LANG']['shop_closed_status']['shop_closed_status']['option']['3'],
+                '1' => &$GLOBALS['TL_LANG']['tl_shop_closed_status']['shop_closed_status']['option']['1'],
+                '2' => &$GLOBALS['TL_LANG']['tl_shop_closed_status']['shop_closed_status']['option']['2'],
+                '3' => &$GLOBALS['TL_LANG']['tl_shop_closed_status']['shop_closed_status']['option']['3'],
             ],
             'eval'      => ['mandatory' => true, 'tl_class' => 'w50'],
             'sql'       => "char(1) NOT NULL default '1'",
