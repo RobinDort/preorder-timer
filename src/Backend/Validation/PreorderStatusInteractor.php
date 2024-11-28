@@ -47,20 +47,16 @@ class PreorderStatusInteractor {
 
 
     public function insertNormalClosedShopDay($time, $date, $status) {
-        $selectStmt = "SELECT id FROM tl_preorder_settings WHERE shop_closed_date='" . $date . "'";
-       
-        // Check if entry with date and status exists. Update when existent.
-        $selectResult = Database::getInstance()->execute($selectStmt)->fetchAssoc();
+       $closingDateExists = $this->selectNormalShopClosingDayByDate($date);
 
         $response = [
             'success' => false,
             'message' => ""
         ];
 
-        if ($selectResult) {
-            $id = $selectResult['id'];
-            $updateStmt = "UPDATE tl_preorder_settings SET shop_closed_date='" . $date . "', shop_closed_status='" . $status . "' WHERE id=" . $id;
-            $updateResult = Database::getInstance()->execute($updateStmt);
+        if ($closingDateExists) {
+            $id = $closingDateExists['id'];
+            $updateResult = updateNormalShopClosingDay($id, $date, $status);
 
             if ($updateResult->affectedRows > 0) {
                 $response['success'] = true;
@@ -69,8 +65,7 @@ class PreorderStatusInteractor {
                 $response['message'] = "Fehler während des Versuchs Row mit id: " . $id . " zu überschreiben!";
             }
         } else {
-            $insertStmt = "INSERT INTO tl_preorder_settings (tstamp, shop_closed_date, shop_closed_status) VALUES ('" . $time . "','" . $date . "','" . $status . "')";
-            $insertResult = Database::getInstance()->execute($insertStmt);
+          $insertResult = insertNormalClosedShopDayQuery($date, $status);
 
             if ($insertResult->affectedRows > 0) {
                 $response['success'] = true;
@@ -80,6 +75,33 @@ class PreorderStatusInteractor {
             }
         }
         return $response;
+    }
+
+
+    private function selectNormalShopClosingDayByDate($date) {
+        $selectStmt = "SELECT id FROM tl_shop_closed_date WHERE date='" . $date . "'";
+       
+        // Check if entry with date and status exists. Update when existent.
+        $selectResult = Database::getInstance()->execute($selectStmt)->fetchAssoc();
+
+        return $selectResult;
+
+    }
+
+    private function updateNormalShopClosingDay($id, $date, $status) {
+        $tstamp = time();
+        $updateStmt = "UPDATE tl_shop_closed_date SET tstamp='" . $tstamp . "', date='" . $date . "', status_id ='" . $status . "' WHERE id=" . $id;
+        $updateResult = Database::getInstance()->execute($updateStmt);
+
+        return $updateResult;
+    }
+
+    private function insertNormalClosedShopDayQuery($date, $status) {
+        $tstamp = time();
+        $insertStmt = "INSERT INTO tl_shop_closed_date (tstamp, date, status_id) VALUES ('" . $tstamp . "','" . $date . "','" . $status . "')";
+        $insertResult = Database::getInstance()->execute($insertStmt);
+
+        return $insertResult;
     }
 
     //@TODO REMOVE LATER! OLD COLD WORKING FOR tl_preorder_settings TABLE! 
