@@ -62,8 +62,17 @@ $GLOBALS['ISO_HOOKS']['getOrderNotificationTokens'][] = [PreorderTimeTokenProvid
  *********** Backend ***********  
  */
 
+// $GLOBALS['BE_MOD']['Vorbestellungen Konfiguration']['Shopzeiten'] = [
+//     'tables'    => ['tl_preorder_settings'],
+//     'callback'  => PreorderTimerSettings::class,
+// ];
+
 $GLOBALS['BE_MOD']['Vorbestellungen Konfiguration']['Shopzeiten'] = [
-    'tables'    => ['tl_preorder_settings'],
+    'tables'    => [
+        'shop_closed_date', 
+        'shop_closed_status', 
+        'shop_closed_special_date', 
+        'shop_closed_special_date_time'],
     'callback'  => PreorderTimerSettings::class,
 ];
 ?>
