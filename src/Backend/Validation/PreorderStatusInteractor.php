@@ -8,6 +8,31 @@ class PreorderStatusInteractor {
     public function __construct() {}
 
 
+
+    public function initTLShopClosedStatusTable() {
+        $defaultStatuses = [
+            ['id' => 1, 'status' => 1],
+            ['id' => 2, 'status' => 2],
+            ['id' => 3, 'status' => 3],
+        ];
+
+        $database = Database::getInstance();
+
+        foreach ($defaultStatuses as $status) {
+            // Check if the record already exists
+            $exists = $database->prepare("SELECT COUNT(*) AS count FROM tl_shop_closed_status WHERE id = ?")
+                                ->execute($status['id'])
+                                ->count;
+
+            // Insert if it does not exist
+            if ($exists == 0) {
+                $database->prepare("INSERT INTO tl_shop_closed_status (id, status) VALUES (?, ?)")
+                         ->execute($status['id'], $status['status']);
+            }
+        }
+    }
+
+
     //@TODO REMOVE LATER! OLD COLD WORKING FOR tl_preorder_settings TABLE! 
     // public function extractShopNormalClosingDays() {
     //     $stmt = "SELECT shop_closed_date, shop_closed_status from tl_preorder_settings;";
@@ -65,7 +90,7 @@ class PreorderStatusInteractor {
                 $response['message'] = "Fehler während des Versuchs Row mit id: " . $id . " zu überschreiben!";
             }
         } else {
-          $insertResult = insertNormalClosedShopDayQuery($date, $status);
+          $insertResult = insertNormalShopClosingDayQuery($date, $status);
 
             if ($insertResult->affectedRows > 0) {
                 $response['success'] = true;
@@ -96,7 +121,7 @@ class PreorderStatusInteractor {
         return $updateResult;
     }
 
-    private function insertNormalClosedShopDayQuery($date, $status) {
+    private function insertNormalShopClosingDayQuery($date, $status) {
         $tstamp = time();
         $insertStmt = "INSERT INTO tl_shop_closed_date (tstamp, date, status_id) VALUES ('" . $tstamp . "','" . $date . "','" . $status . "')";
         $insertResult = Database::getInstance()->execute($insertStmt);
