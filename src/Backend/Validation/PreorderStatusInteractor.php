@@ -25,7 +25,7 @@ class PreorderStatusInteractor {
     //     return $splittedSpecialDays;
     // }
 
-    public function extractShopNormalClosingDays() {
+    public function selectShopNormalClosingDays() {
         $stmt = "SELECT a.date AS closing_date,b.status AS closing_status
                  FROM tl_shop_closed_date AS a
                  INNER JOIN tl_shop_closed_status AS b
