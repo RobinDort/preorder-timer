@@ -45,7 +45,8 @@ class PreorderStatusInteractor {
         return $splittedSpecialDays;
     }
 
-    public function insertSpecialClosedDay($time, $date, $status) {
+
+    public function insertNormalClosedShopDay($time, $date, $status) {
         $selectStmt = "SELECT id FROM tl_preorder_settings WHERE shop_closed_date='" . $date . "'";
        
         // Check if entry with date and status exists. Update when existent.
@@ -80,6 +81,43 @@ class PreorderStatusInteractor {
         }
         return $response;
     }
+
+    //@TODO REMOVE LATER! OLD COLD WORKING FOR tl_preorder_settings TABLE! 
+    // public function insertSpecialClosedDay($time, $date, $status) {
+    //     $selectStmt = "SELECT id FROM tl_preorder_settings WHERE shop_closed_date='" . $date . "'";
+       
+    //     // Check if entry with date and status exists. Update when existent.
+    //     $selectResult = Database::getInstance()->execute($selectStmt)->fetchAssoc();
+
+    //     $response = [
+    //         'success' => false,
+    //         'message' => ""
+    //     ];
+
+    //     if ($selectResult) {
+    //         $id = $selectResult['id'];
+    //         $updateStmt = "UPDATE tl_preorder_settings SET shop_closed_date='" . $date . "', shop_closed_status='" . $status . "' WHERE id=" . $id;
+    //         $updateResult = Database::getInstance()->execute($updateStmt);
+
+    //         if ($updateResult->affectedRows > 0) {
+    //             $response['success'] = true;
+    //             $response['message'] = "Row mit id: " . $id . ", Datum: " . $date . " und Status: " . $status . " wurde erfolgreich geupdated.";
+    //         } else {
+    //             $response['message'] = "Fehler während des Versuchs Row mit id: " . $id . " zu überschreiben!";
+    //         }
+    //     } else {
+    //         $insertStmt = "INSERT INTO tl_preorder_settings (tstamp, shop_closed_date, shop_closed_status) VALUES ('" . $time . "','" . $date . "','" . $status . "')";
+    //         $insertResult = Database::getInstance()->execute($insertStmt);
+
+    //         if ($insertResult->affectedRows > 0) {
+    //             $response['success'] = true;
+    //             $response['message'] = "Row mit Datum: " . $date . " und Status: " . $status . " wurde erfolgreich gespeichert";
+    //         } else {
+    //             $response['message'] = "Fehler während des Versuchs Row mit Datum: " . $date . " und Status: " . $status . " zu überschreiben!";
+    //         }
+    //     }
+    //     return $response;
+    // }
 
     public function deleteSpecialClosedDay($date, $status) {
         $statusConvert = [

@@ -44,7 +44,7 @@ class SpecialClosedDaysRequestController {
        // try {
             $preorderStatusInteractor = new PreorderStatusInteractor();
 
-            $response = $preorderStatusInteractor->insertSpecialClosedDay($time,$date,$status);
+            $response = $preorderStatusInteractor->insertNormalClosedShopDay($time,$date,$status);
                 if ($response["success"] === true) {
                     return new JsonResponse(['status' => 'success', 'message' => $response["message"]]);
                     

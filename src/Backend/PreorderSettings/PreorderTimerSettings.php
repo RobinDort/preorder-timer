@@ -37,7 +37,7 @@ class PreorderTimerSettings extends BackendModule {
 
     public function generate() {
         $this->Template = new BackendTemplate($this->strTemplate);
-        $this->Template->normalShopClosingDays =  $this->normalShopClosingDays;
+        $this->Template->normalShopClosingDays = $this->normalShopClosingDays;
         $this->compile();
 
         return $this->Template->parse();
