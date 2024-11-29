@@ -107,7 +107,7 @@ $statusLabels = [
                                 </tr>
                             </tbody>
                     </table>
-                    <button name="add" class="tl_submit" onClick="">Neue Zeit hinzufügen</button>
+                    <button name="add" class="tl_submit" onClick="addNewTableRow()">Neue Zeit hinzufügen</button>
                 </div>
 
                 <div class="tl_submit_container">
@@ -198,5 +198,28 @@ $statusLabels = [
     }
 
     function submitSpecialClosedDays() {}
+
+
+    function addNewTableRow() {
+        const table = document.getElementById("special-days-closed-table");
+        if (!table) return;
+
+        const newRow = document.createElement("tr");
+        const newCellOne = document.createElement("td");
+        const newCellTwo = document.createElement("td");
+        const newCellOneInput = document.createElement("input");
+        const newCellTwoInput = document.createElement("input");
+
+        newCellOneInput.type = "text";
+        newCellOneInput.classList.add("tl_text", "table-input");
+        newCellTwoInput.type = "text";
+        newCellTwoInput.classList.add("tl_text", "table-input");
+
+        newCellOne.appendChild(newCellOneInput);
+        newCellTwo.appendChild(newCellTwoInput);
+        newRow.appendChild(newCellOne);
+        newRow.appendChild(newCellTwo);
+        table.appendChild(newRow);
+    }
 </script>
 
