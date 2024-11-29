@@ -201,6 +201,9 @@ $statusLabels = [
         const specialDate = document.getElementById("preorder_special_shop_date").value;
         const specialDateTable = document.getElementById("special-days-closed-table");
 
+        console.log(specialDate);
+        console.log(specialDateTable);
+
         if (!specialDate || !specialDateTable) return;
 
         const selectedSpecialOpeningTimes = [];
@@ -211,6 +214,9 @@ $statusLabels = [
             if (cells.length === 2) {
                 const leftCellValue = cells[0].querySelector("input").value;
                 const rightCellValue = cells[1].querySelector("input").value;
+
+                console.log(leftCellValue);
+                console.log(rightCellValue);
 
                 if (!leftCellValue || !rightCellValue) return;
                 const combinedValues = [leftCellValue, rightCellValue];
