@@ -23,6 +23,7 @@
 #days-closed-table {
 	width: 100%;
 	border-collapse: collapse;
+	margin-bottom: 2em;
 }
 
 #special-days-closed-table {
@@ -46,6 +47,10 @@
 #days-closed-table tbody td,
 #special-days-closed-table tbody td {
 	padding: 12px;
+}
+
+#days-closed-table tbody tr:nth-child(odd) {
+	background-color: #dedede;
 }
 
 #days-closed-table tbody tr:nth-child(even),
