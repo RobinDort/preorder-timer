@@ -49,7 +49,7 @@
 	padding: 12px;
 }
 
-#days-closed-table tbody tr:nth-child(odd) {
+#special-days-closed-table tbody tr:nth-child(odd) {
 	background-color: #dedede;
 }
 

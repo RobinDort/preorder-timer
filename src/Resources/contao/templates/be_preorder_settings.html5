@@ -201,7 +201,7 @@ $statusLabels = [
 
 
     function addNewTableRow() {
-        const table = document.getElementById("special-days-closed-table");
+        const tableBody = document.querySelector("#special-days-closed-table tbody");
         if (!table) return;
 
         const newRow = document.createElement("tr");
