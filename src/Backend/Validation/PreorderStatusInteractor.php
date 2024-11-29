@@ -16,18 +16,16 @@ class PreorderStatusInteractor {
             ['id' => 3, 'status' => 3],
         ];
 
-        $database = Database::getInstance();
-
         foreach ($defaultStatuses as $status) {
             // Check if the record already exists
-            $exists = $database->prepare("SELECT COUNT(*) AS count FROM tl_shop_closed_status WHERE id = ?")
-                                ->execute($status['id'])
-                                ->count;
+            $exists = "SELECT COUNT(*) AS count FROM tl_shop_closed_status WHERE id = ?";
+            $result = Database::getInstance()->execute($exists)->fetchAssoc();
+                                
 
             // Insert if it does not exist
-            if ($exists == 0) {
-                $database->prepare("INSERT INTO tl_shop_closed_status (id, status) VALUES (?, ?)")
-                         ->execute($status['id'], $status['status']);
+            if (!$result["count"]) {
+                $insertStmt = "INSERT INTO tl_shop_closed_status (id, status) VALUES (?, ?)";
+                $insertResult = Database::getInstance()->execute($insertStmt);
             }
         }
     }
