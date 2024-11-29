@@ -207,6 +207,8 @@ $statusLabels = [
         const selectedSpecialOpeningTimes = [];
         const tableRows = specialDateTable.querySelectorAll("tr");
 
+        let validationSuccessful = true;
+
         tableRows.forEach(row => {
             const cells = row.querySelectorAll("td");
             if (cells.length === 2) {
@@ -219,18 +221,19 @@ $statusLabels = [
                 const leftValueValid = validTimePattern.test(leftCellValue);
                 const rightValueValid = validTimePattern.test(rightCellValue);
 
-                console.log(leftValueValid);
-                console.log(rightValueValid);
-
-
                 if (!leftValueValid || !rightValueValid) {
                     const errorInfo = document.querySelector(".invalid-cell");
                     errorInfo.style.display = "block";
+                    validationSuccessful = false;
+                    return;
                 }
-                const combinedValues = [leftCellValue, rightCellValue];
+                const combinedValues = {start: `${leftCellValue}`, end: `${rightCellValue}`};
                 selectedSpecialOpeningTimes.push(combinedValues);
             }
         })
+
+        if (!validationSuccessful) return;
+        console.log(selectedSpecialOpeningTimes);
 
     }
 
