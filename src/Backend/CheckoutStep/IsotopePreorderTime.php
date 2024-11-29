@@ -123,7 +123,7 @@ class IsotopePreorderTime extends CheckoutStep implements IsotopeCheckoutStep {
     private function extractSpecialClosingDays() {
 
         $preorderStatusInteractor = new PreorderStatusInteractor();
-        $extractedSpecialDays = $preorderStatusInteractor->extractSpecialClosedDays();
+        $extractedSpecialDays = $preorderStatusInteractor->selectShopNormalClosingDays();
         
         return $extractedSpecialDays;
     }
