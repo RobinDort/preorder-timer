@@ -164,7 +164,8 @@ class PreorderStatusInteractor {
     //     return $response;
     // }
 
-    public function deleteSpecialClosedDay($date, $status) {
+
+    public function deleteNormalShopClosingDay($date, $status) {
         $statusConvert = [
             'fullyClosed'       => '1',
             'closedAtMorning'   => '2',
@@ -172,7 +173,7 @@ class PreorderStatusInteractor {
         ];
         $convertedStatus =  $statusConvert[$status];
 
-        $stmt = "DELETE FROM tl_preorder_settings WHERE shop_closed_date='" . $date . "' AND shop_closed_status='" . $convertedStatus . "'";
+        $stmt = "DELETE FROM tl_shop_closed_date WHERE date='" . $date . "' AND status_id='" . $convertedStatus . "'";
         $result = Database::getInstance()->execute($stmt);
 
         // Check how many rows were affected
@@ -184,6 +185,29 @@ class PreorderStatusInteractor {
             return 0;
         }
     }
+
+
+    //@TODO REMOVE LATER! OLD COLD WORKING FOR tl_preorder_settings TABLE! 
+    // public function deleteSpecialClosedDay($date, $status) {
+    //     $statusConvert = [
+    //         'fullyClosed'       => '1',
+    //         'closedAtMorning'   => '2',
+    //         'closedAtEvening'   => '3'
+    //     ];
+    //     $convertedStatus =  $statusConvert[$status];
+
+    //     $stmt = "DELETE FROM tl_preorder_settings WHERE shop_closed_date='" . $date . "' AND shop_closed_status='" . $convertedStatus . "'";
+    //     $result = Database::getInstance()->execute($stmt);
+
+    //     // Check how many rows were affected
+    //     if ($result->affectedRows > 0) {
+    //         // Rows were deleted
+    //         return 1;
+    //     } else {
+    //         // No rows were deleted
+    //         return 0;
+    //     }
+    // }
 
 
     private function splitSpecialClosedDays($entries) {

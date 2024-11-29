@@ -20,7 +20,7 @@ class SpecialClosedDaysRequestController {
         }
 
         $preorderStatusInteractor = new PreorderStatusInteractor();
-        $affectedRows = $preorderStatusInteractor->deleteSpecialClosedDay($entryDate, $entryStatus);
+        $affectedRows = $preorderStatusInteractor->deleteNormalShopClosingDay($entryDate, $entryStatus);
 
         if ($affectedRows === 0) {
             return new JsonResponse(['status' => 'failure', 'message' => 'No entry found for date: ' . $entryDate . ' and status: ' . $entryStatus]);
