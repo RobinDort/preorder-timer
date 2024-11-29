@@ -219,6 +219,10 @@ $statusLabels = [
                 const leftValueValid = validTimePattern.test(leftCellValue);
                 const rightValueValid = validTimePattern.test(rightCellValue);
 
+                console.log(leftValueValid);
+                console.log(rightValueValid);
+
+
                 if (!leftValueValid || !rightValueValid) {
                     const errorInfo = document.querySelector(".invalid-cell");
                     errorInfo.style.display = "block";
