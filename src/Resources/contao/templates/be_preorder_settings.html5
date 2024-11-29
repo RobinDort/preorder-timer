@@ -212,7 +212,7 @@ $statusLabels = [
                 const leftCellValue = cells[0].querySelector("input").value;
                 const rightCellValue = cells[1].querySelector("input").value;
 
-                if (!leftCellValue || !rightCellValue) continue;
+                if (!leftCellValue || !rightCellValue) return;
                 const combinedValues = [leftCellValue, rightCellValue];
                 selectedSpecialOpeningTimes.push(combinedValues);
             }
