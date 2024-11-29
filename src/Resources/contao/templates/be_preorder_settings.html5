@@ -220,7 +220,8 @@ $statusLabels = [
                 const rightValueValid = validTimePattern.test(rightCellValue);
 
                 if (!leftValueValid || !rightValueValid) {
-                    document.querySelector("p.invalid-cell").style.display = "block";
+                    const errorInfo = document.querySelector(".invalid-cell");
+                    errorInfo.style.display = "block";
                 }
                 const combinedValues = [leftCellValue, rightCellValue];
                 selectedSpecialOpeningTimes.push(combinedValues);
