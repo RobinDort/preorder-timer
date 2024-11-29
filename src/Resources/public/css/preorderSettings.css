@@ -65,3 +65,7 @@
 .shop-time-configuration h2 {
 	padding: 10px 0 0 15px;
 }
+
+.error {
+	color: #ff0000;
+}

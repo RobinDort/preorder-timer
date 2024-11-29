@@ -107,6 +107,7 @@ $statusLabels = [
                                 </tr>
                             </tbody>
                     </table>
+                    <p class="error" display="none">Bitte geben Sie eine gültige Uhrzeit in folgendem format an: 12:00 / 08:00</p>
                     <button name="add" class="tl_submit" onClick="addNewTableRow()">Neue Reihe hinzufügen</button>
                 </div>
 
@@ -201,9 +202,6 @@ $statusLabels = [
         const specialDate = document.getElementById("preorder_special_shop_date").value;
         const specialDateTable = document.getElementById("special-days-closed-table");
 
-        console.log(specialDate);
-        console.log(specialDateTable);
-
         if (!specialDate || !specialDateTable) return;
 
         const selectedSpecialOpeningTimes = [];
@@ -215,16 +213,20 @@ $statusLabels = [
                 const leftCellValue = cells[0].querySelector("input").value;
                 const rightCellValue = cells[1].querySelector("input").value;
 
-                console.log(leftCellValue);
-                console.log(rightCellValue);
-
                 if (!leftCellValue || !rightCellValue) return;
+
+                const validTimePattern = new RegExp('^\d{2}:\d{2}$');
+                const leftValueValid = validTimePattern.test(leftCellValue);
+                const rightValueValid = validTimePattern.test(rightCellValue);
+
+                if (!leftValueValid || !rightValueValid) {
+                    document.querySelector("p.error").display = "block";
+                }
                 const combinedValues = [leftCellValue, rightCellValue];
                 selectedSpecialOpeningTimes.push(combinedValues);
             }
         })
 
-        console.log(selectedSpecialOpeningTimes);
     }
 
 
