@@ -107,7 +107,7 @@ $statusLabels = [
                                 </tr>
                             </tbody>
                     </table>
-                    <button name="add" class="tl_submit" onClick="addNewTableRow()">Neue Zeit hinzufügen</button>
+                    <button name="add" class="tl_submit" onClick="addNewTableRow()">Neue Reihe hinzufügen</button>
                 </div>
 
                 <div class="tl_submit_container">
@@ -197,7 +197,29 @@ $statusLabels = [
         }
     }
 
-    function submitSpecialClosedDays() {}
+    function submitSpecialClosedDays() {
+        const specialDate = document.getElementById("preorder_special_shop_date").value;
+        const specialDateTable = document.getElementById("special-days-closed-table");
+
+        if (!specialDate || !specialDateTable) return;
+
+        const selectedSpecialOpeningTimes = [];
+        const tableRows = specialDateTable.querySelectorAll("tr");
+
+        tableRows.forEach(row => {
+            const cells = row.querySelectorAll("td");
+            if (cells.length === 2) {
+                const leftCellValue = cells[0].querySelector("input").value;
+                const rightCellValue = cells[1].querySelector("input").value;
+
+                if (!leftCellValue || !rightCellValue) continue;
+                const combinedValues = [leftCellValue, rightCellValue];
+                selectedSpecialOpeningTimes.push(combinedValues);
+            }
+        })
+
+        console.log(selectedSpecialOpeningTimes);
+    }
 
 
     function addNewTableRow() {
