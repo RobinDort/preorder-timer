@@ -79,7 +79,7 @@ $statusLabels = [
                 <h2>Spezielle Geschäftszeiten</h2>
 
                 <div class="settings_widget">
-                    <p>Hier das gewünschte Datum auswählen, an dem der Shop zu <strong>speziellen</strong> Geschäftszeiten geschlossen/geöffnet ist. Das Formular "Vorbestellungen",
+                    <p>Hier das gewünschte Datum auswählen, an dem der Shop zu <strong>speziellen</strong> Geschäftszeiten <strong>geöffnet</strong> ist. Das Formular "Vorbestellungen",
                         welches im Kassenmodul vorhanden ist, wird dieses Datum berücksichtigen und die verfügbaren Zeiten dementsprechend anpassen.
                     </p>
                     <label class="settings_label" for="preorder_special_shop_date"><strong>1</strong>Spezielle Öffnungszeit am:</label>
@@ -88,12 +88,25 @@ $statusLabels = [
 
                 <div class="settings_widget">
                     <p>Geben Sie hier die Zeitspanne an, zu der der Shop an diesem tag geöffnet ist. Bsp.: 13:00 - 15:30, 18:00-22:00</p>
-                    <label class="settings_label" for="preorder_special_shop_time"><strong>2</strong>Shop geöffnet von bis:</label>
-                    <input name="preorder_special_shop_time" id="preorder_special_shop_time" class="tl_text"/>
+                    <table id="special-days-closed-table">
+                            <thead>
+                                <tr>
+                                    <th>Von</th>
+                                    <th>Bis</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                    </table>
                 </div>
 
                 <div class="tl_submit_container">
-                    <button name="submit" class="tl_submit" onClick="submitSpecialClosedDays()">Speichern</button>
+                    <button name="submit" class="tl_submit" onClick="">Speichern</button>
                 </div>
             </div>
 
