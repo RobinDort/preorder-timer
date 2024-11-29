@@ -201,8 +201,8 @@ $statusLabels = [
 
 
     function addNewTableRow() {
-        const tableBody = document.querySelector("#special-days-closed-table tbody");
-        if (!table) return;
+        const tableBody = document.querySelector("#special-days-closed-table tbody")
+        if (!tableBody) return;
 
         const newRow = document.createElement("tr");
         const newCellOne = document.createElement("td");
@@ -219,7 +219,7 @@ $statusLabels = [
         newCellTwo.appendChild(newCellTwoInput);
         newRow.appendChild(newCellOne);
         newRow.appendChild(newCellTwo);
-        table.appendChild(newRow);
+        tableBody.appendChild(newRow);
     }
 </script>
 

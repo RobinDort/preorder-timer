@@ -23,12 +23,12 @@
 #days-closed-table {
 	width: 100%;
 	border-collapse: collapse;
-	margin-bottom: 2em;
 }
 
 #special-days-closed-table {
 	width: 100%;
 	border-collapse: seperate;
+	margin-bottom: 2em;
 }
 
 #days-closed-table thead th,
