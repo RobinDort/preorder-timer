@@ -103,6 +103,7 @@ $statusLabels = [
                                 </tr>
                             </tbody>
                     </table>
+                    <button name="add" class="tl_submit" onClick="">Neue Zeit hinzufügen</button>
                 </div>
 
                 <div class="tl_submit_container">
