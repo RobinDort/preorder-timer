@@ -25,22 +25,31 @@
 	border-collapse: collapse;
 }
 
-#days-closed-table thead th {
+#special-days-closed-table {
+	width: 100%;
+	border-collapse: seperate;
+}
+
+#days-closed-table thead th,
+#special-days-closed-table thead th {
 	background-color: #f4f4f4;
 	text-align: left;
 	padding: 12px;
 	border-bottom: 2px solid #ddd;
 }
 
-#days-closed-table tbody tr:not(:last-child) {
+#days-closed-table tbody tr:not(:last-child),
+#special-days-closed-table tbody tr:not(:last-child) {
 	border-bottom: 1px solid #ddd;
 }
 
-#days-closed-table tbody td {
+#days-closed-table tbody td,
+#special-days-closed-table tbody td {
 	padding: 12px;
 }
 
-#days-closed-table tbody tr:nth-child(even) {
+#days-closed-table tbody tr:nth-child(even),
+#special-days-closed-table tbody tr:nth-child(even) {
 	background-color: #f9f9f9;
 }
 

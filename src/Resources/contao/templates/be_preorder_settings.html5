@@ -98,8 +98,12 @@ $statusLabels = [
 
                             <tbody>
                                 <tr>
-                                    <td></td>
-                                    <td></td>
+                                    <td>
+                                        <input type="text" class="tl_text table-input"/>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="tl_text table-input"/>
+                                    </td>
                                 </tr>
                             </tbody>
                     </table>
