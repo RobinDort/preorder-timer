@@ -79,7 +79,7 @@ class PreorderStatusInteractor {
 
         if ($closingDateExists) {
             $id = $closingDateExists['id'];
-            $updateResult = updateNormalShopClosingDay($id, $date, $status);
+            $updateResult = $this->updateNormalShopClosingDay($id, $date, $status);
 
             if ($updateResult->affectedRows > 0) {
                 $response['success'] = true;
@@ -88,7 +88,7 @@ class PreorderStatusInteractor {
                 $response['message'] = "Fehler während des Versuchs Row mit id: " . $id . " zu überschreiben!";
             }
         } else {
-          $insertResult = insertNormalShopClosingDayQuery($date, $status);
+          $insertResult = $this->insertNormalShopClosingDayQuery($date, $status);
 
             if ($insertResult->affectedRows > 0) {
                 $response['success'] = true;
