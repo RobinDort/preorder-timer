@@ -111,7 +111,7 @@ $statusLabels = [
                 </div>
 
                 <div class="tl_submit_container">
-                    <button name="submit" class="tl_submit" onClick="">Speichern</button>
+                    <button name="submit" class="tl_submit" onClick="submitSpecialClosedDays()">Speichern</button>
                 </div>
             </div>
 
