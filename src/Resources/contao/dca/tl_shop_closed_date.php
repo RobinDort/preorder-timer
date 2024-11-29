@@ -44,7 +44,7 @@ $GLOBALS['TL_DCA']['tl_shop_closed_date'] = [
             'label'     => &$GLOBALS['TL_LANG']['tl_shop_closed_date']['date'],
             'inputType' => 'text',
             'eval'      => ['rgxp' => 'datim', 'datepicker' => true, 'tl_class' => 'w50 wizard'],
-            'sql'       => "int(10) NOT NULL default '0'",
+            'sql'       => "varchar(19) NOT NULL default ''",
         ],
         'status_id' => [
             'label'     => &$GLOBALS['TL_LANG']['tl_shop_closed_date']['status_id'],
