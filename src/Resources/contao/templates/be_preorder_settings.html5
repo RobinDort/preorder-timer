@@ -240,11 +240,20 @@ $statusLabels = [
                 const combinedValues = {start: `${leftCellValue}`, end: `${rightCellValue}`};
                 selectedSpecialOpeningTimes.push(combinedValues);
             }
+
+            // Check that each array contains times later then the previous one except the first one
+            validateSelectedTimes(selectedSpecialOpeningTimes);
         })
 
         if (!validationSuccessful) return;
         console.log(selectedSpecialOpeningTimes);
 
+    }
+
+    function validateSelectedTimes(openingTimes) {
+        for (const timeSlot of openingTimes) {
+            console.log(timeSlot);
+        }
     }
 
 
