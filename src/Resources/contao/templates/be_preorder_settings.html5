@@ -248,9 +248,10 @@ $statusLabels = [
                 const combinedValues = {start: `${leftCellValue}`, end: `${rightCellValue}`};
                 selectedSpecialOpeningTimes.push(combinedValues);
             }
+        })
 
-            // Check that each array contains times later then the previous one except the first one
-            const validTimes = selectedTimesAreValid(selectedSpecialOpeningTimes);
+          // Check that each array contains times later then the previous one except the first one
+          const validTimes = selectedTimesAreValid(selectedSpecialOpeningTimes);
            if (!validTimes) {
                 const errorInfo = document.querySelector(".invalid-cell");
                 errorInfo.innerText = "Bitte geben Sie gültige Zeitspannen an und beachten Sie, dass die Startzeit geringer als die Endzeit sein muss. Ebenfalls muss die Startzeit des nächsten Eintrages höher sein, als die Endzeit des zuvorigen.";
@@ -260,7 +261,6 @@ $statusLabels = [
                 response.success = true;
                 response.times = selectedSpecialOpeningTimes;
            }
-        })
 
         return response;
     }
