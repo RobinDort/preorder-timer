@@ -141,8 +141,6 @@ document.addEventListener('DOMContentLoaded', async function() {
             const timeSelected = dateStr;
             const validTime = checkTimeValidity(timeSelected, allowedRange);
 
-            console.log(allowedRange);
-
             if (!validTime) {
                 timePicker.value = "";
                 submitNextBtn.disabled = true;
