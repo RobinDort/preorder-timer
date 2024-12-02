@@ -264,7 +264,7 @@ $statusLabels = [
             if (startAsTime >= endAsTime) {
                 return false
             }
-            if (openingTimes.length > 1) {
+            if (openingTimes.length > 1 && i !== openingTimes.length -1) {
                 const startTimeOfNextSlot = timeToMinutes(openingTimes[i+1].start);
                 if (endAsTime > startTimeOfNextSlot) {
                     return false;
