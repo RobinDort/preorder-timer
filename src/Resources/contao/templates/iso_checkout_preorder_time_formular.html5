@@ -47,6 +47,8 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     const eveningWeekendHolidayRange = { start: "17:30", end: "21:45" };
     const eveningRange = {start: "17:30", end: "21:15"};
+
+    const specialRange = { start: "18:00", end: "21:45" };
     
     let isHoliday = false;
     let dayOfWeek = -1;
@@ -224,6 +226,9 @@ document.addEventListener('DOMContentLoaded', async function() {
         } else if(JSON.stringify(allowedRange) === JSON.stringify([eveningRange])) {
             alert('Bitte wählen Sie einen Zeitraum zwischen 17:30 - 21:15 Uhr.')
 
+        } else if(JSON.stringify(allowedRange) === JSON.stringify([specialRange])) {
+            alert("Sehr geehrter Kunde, wir haben heute Nachmittag erst ab 18:00 Uhr geöffnet. Bitte wählen Sie einen Zeitraum zwischen 12:30 - 14:15 Uhr oder einen Zeitraum zwischen 18:00 - 21:15 Uhr");
+
         } else {
             alert('Bitte wählen Sie einen Zeitraum zwischen 12:30 - 14:15 Uhr oder einen Zeitraum zwischen 17:30 - 21:15 Uhr.');
         }
@@ -280,6 +285,11 @@ document.addEventListener('DOMContentLoaded', async function() {
         } else {
             if (dayOfSelectedDate === 0 || dayOfSelectedDate === 6 || selectedDayIsHoliday) {
                 selectedDayRange.push(eveningWeekendHolidayRange);
+
+            // @TODO temporary solution. Remove Later!
+            } else if (convertedDate.getDate() === 4 && (convertedDate.getMonth() +1) === 12 && convertedDate.getFullYear() === 2024) {
+                selectedDayRange.push(morningRange, specialRange);
+
             } else {
                 selectedDayRange.push(morningRange, eveningRange);
             }
