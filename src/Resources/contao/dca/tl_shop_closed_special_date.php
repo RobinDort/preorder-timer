@@ -46,7 +46,7 @@ $GLOBALS['TL_DCA']['tl_shop_closed_special_date'] = [
             'sql'       => "int(10) unsigned NOT NULL",
         ],
         'special_closed_date_time_id' => [
-            'label'     => &$GLOBALS['TL_LANG']['tl_shop_closed_special_date']['shop_closed_date_time_id'],
+            'label'     => &$GLOBALS['TL_LANG']['tl_shop_closed_special_date']['shop_closed_date_time.id'],
             'inputType' => 'select',
             'foreignKey'=> 'tl_shop_closed_special_date_time.id', 
             'eval'      => ['mandatory' => true, 'tl_class' => 'w50'],
