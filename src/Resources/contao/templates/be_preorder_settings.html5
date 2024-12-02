@@ -260,10 +260,15 @@ $statusLabels = [
         for (let i = 0; i < openingTimes.length; i++) {
             const startAsTime = timeToMinutes(openingTimes[i].start)
             const endAsTime = timeToMinutes(openingTimes[i].end);
-            const startTimeOfNextSlot = timeToMinutes(openingTimes[i+1].start);
-
-            if (startAsTime >= endAsTime || endAsTime > startTimeOfNextSlot) {
+            
+            if (startAsTime >= endAsTime) {
                 return false
+            }
+            if (openingTimes.length > 1) {
+                const startTimeOfNextSlot = timeToMinutes(openingTimes[i+1].start);
+                if (endAsTime > startTimeOfNextSlot) {
+                    return false;
+                }
             }
         }
 
