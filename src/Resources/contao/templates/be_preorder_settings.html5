@@ -84,7 +84,7 @@ $statusLabels = [
                     </p>
                     <label class="settings_label" for="preorder_special_shop_date"><strong>1</strong>Spezielle Öffnungszeit am:</label>
                     <input type="text" name="preorder_special_shop_date" id="preorder_special_shop_date" class="tl_text" value="">
-                    <p class="error invalid-date" style="display:none;">Bitte wählen sie ein verfügbaren Datum.</p>
+                    <p class="error invalid-date" style="display:none;">Bitte wählen sie ein verfügbares Datum.</p>
                 </div>
 
                 <div class="settings_widget">
