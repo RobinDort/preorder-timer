@@ -50,8 +50,8 @@ $GLOBALS['TL_DCA']['tl_shop_closed_date'] = [
             'label'     => &$GLOBALS['TL_LANG']['tl_shop_closed_date']['status_id'],
             'inputType' => 'select',
             'foreignKey'=> 'tl_shop_closed_status.id',
-            'eval'      => ['mandatory' => true, 'tl_class' => 'w50'],
-            'sql'       => "int(10) NOT NULL default '0'",
+            'eval'      => ['mandatory' => false, 'tl_class' => 'w50'],
+            'sql'       => "int(10) unsigned null",
         ],
     ],
 ];
