@@ -202,8 +202,30 @@ $statusLabels = [
 
     function submitSpecialClosedDays() {
         const validation = validateSpecialClosedDays();
-        console.log(validation);
         if (!validation.success) return;
+
+        const dataObj = {
+            times: validation.times
+        };
+
+        try {
+            return new Request.JSON({
+                url: "/addSpecialClosedDayEntry",
+                method: "post",
+                data: dataObj,
+                onSuccess: function(response) {
+                    console.log(response.message);
+                    if (response.status === "success") {
+                        window.location.href = window.location.href
+                    }
+                },
+                onFailure: function(error) {
+                    console.error(error);
+                }
+            }).send();
+        } catch (error) {
+            console.error(error);
+        }
     }
 
 

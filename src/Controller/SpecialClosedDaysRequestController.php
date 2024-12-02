@@ -41,20 +41,29 @@ class SpecialClosedDaysRequestController {
             return new JsonResponse(['status' => 'error', 'message' => 'Invalid data provided'], 400);
         }
 
-       // try {
-            $preorderStatusInteractor = new PreorderStatusInteractor();
+        $preorderStatusInteractor = new PreorderStatusInteractor();
 
-            $response = $preorderStatusInteractor->insertNormalClosedShopDay($time,$date,$status);
-                if ($response["success"] === true) {
-                    return new JsonResponse(['status' => 'success', 'message' => $response["message"]]);
-                    
-                } else {
-                    return new JsonResponse(['status' => 'error', 'message' => $response["message"]]);
-                }
+        $response = $preorderStatusInteractor->insertNormalClosedShopDay($time,$date,$status);
+            if ($response["success"] === true) {
+                return new JsonResponse(['status' => 'success', 'message' => $response["message"]]);
+                
+            } else {
+                return new JsonResponse(['status' => 'error', 'message' => $response["message"]]);
+            }
+    }
 
-        // } catch (\Exception $e) {
-        //     \System::log($e->getMessage(),__METHOD__,"TL_ERROR");
-        // }
+    #[Route('/addSpecialClosedDayEntry', name: 'add_special_closed_day_entry', defaults: ['_token_check' => true, '_scope' => 'backend'],  methods: ['POST'])]
+    public function addSpecialClosedDayEntry(Request $request): JsonResponse {
+        $selectedTimes =  $request->request->get('times');
+        $time = time();
+
+        if (!$selectedTimes) {
+            return new JsonResponse(['status' => 'error', 'message' => 'Invalid data provided'], 400);
+        }
+
+        $preorderStatusInteractor = new PreorderStatusInteractor();
+
+        $response = $preorderStatusInteractor->insertSpecialClosedShopDay($time, $selectedTimes);
     }
 }
 ?>

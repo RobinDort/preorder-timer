@@ -101,6 +101,9 @@ class PreorderStatusInteractor {
     }
 
 
+    public function insertSpecialClosedShopDay($time, $selectedTimes) {}
+
+
     private function selectNormalShopClosingDayByDate($date) {
         $selectStmt = "SELECT id FROM tl_shop_closed_date WHERE date='" . $date . "'";
        
