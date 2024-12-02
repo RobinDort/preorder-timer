@@ -208,7 +208,7 @@ $statusLabels = [
 
         if (!specialDate) {
             const errorInfoDate = document.querySelector(".invalid-date");
-            errorInfo.style.display = "block";
+            errorInfoDate.style.display = "block";
             validationSuccessful = false;
             return;
         }
