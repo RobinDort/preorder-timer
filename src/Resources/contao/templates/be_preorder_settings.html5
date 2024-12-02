@@ -87,7 +87,8 @@ $statusLabels = [
                 </div>
 
                 <div class="settings_widget">
-                    <p class="settings_label"><strong>2</strong>Geben Sie hier die Zeitspanne an, zu der der Shop an diesem tag geöffnet ist. Bsp.: 13:00 - 15:30, 18:00-22:00</p>
+                    <p>Geben Sie hier die Zeitspanne an, zu der der Shop an diesem tag geöffnet ist. Bsp.: 13:00 - 15:30, 18:00-22:00</p>
+                    <span class="settings_label"><strong>2</strong></span>
                     <table id="special-days-closed-table">
                             <thead>
                                 <tr>
