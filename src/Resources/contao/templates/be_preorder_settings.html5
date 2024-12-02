@@ -84,6 +84,7 @@ $statusLabels = [
                     </p>
                     <label class="settings_label" for="preorder_special_shop_date"><strong>1</strong>Spezielle Öffnungszeit am:</label>
                     <input type="text" name="preorder_special_shop_date" id="preorder_special_shop_date" class="tl_text" value="">
+                    <p class="error invalid-date" style="display:none;">Bitte wählen sie ein verfügbaren Datum.</p>
                 </div>
 
                 <div class="settings_widget">
@@ -203,12 +204,20 @@ $statusLabels = [
         const specialDate = document.getElementById("preorder_special_shop_date").value;
         const specialDateTable = document.getElementById("special-days-closed-table");
 
-        if (!specialDate || !specialDateTable) return;
+        let validationSuccessful = true;
+
+        if (!specialDate) {
+            const errorInfoDate = document.querySelector(".invalid-date");
+            errorInfo.style.display = "block";
+            validationSuccessful = false;
+            return;
+        }
+
+        if (!specialDateTable) return;
 
         const selectedSpecialOpeningTimes = [];
         const tableRows = specialDateTable.querySelectorAll("tr");
 
-        let validationSuccessful = true;
 
         tableRows.forEach(row => {
             const cells = row.querySelectorAll("td");
