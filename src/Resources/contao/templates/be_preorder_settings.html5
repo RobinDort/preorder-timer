@@ -257,7 +257,7 @@ $statusLabels = [
     }
 
     function selectedTimesAreValid(openingTimes) {
-        for (let i = 0; i < openingTimes.length; i++;) {
+        for (let i = 0; i < openingTimes.length; i++) {
             const startAsTime = timeToMinutes(openingTimes[i].start)
             const endAsTime = timeToMinutes(openingTimes[i].end);
             const startTimeOfNextSlot = timeToMinutes(openingTimes[i+1].start);
