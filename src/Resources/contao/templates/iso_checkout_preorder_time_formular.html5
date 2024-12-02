@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     const eveningWeekendHolidayRange = { start: "17:30", end: "21:45" };
     const eveningRange = {start: "17:30", end: "21:15"};
 
-    const specialRange = { start: "18:00", end: "21:45" };
+    const specialRange = { start: "18:00", end: "21:15" };
     
     let isHoliday = false;
     let dayOfWeek = -1;
@@ -140,6 +140,8 @@ document.addEventListener('DOMContentLoaded', async function() {
             // Check if the selected time is within any of the allowed ranges
             const timeSelected = dateStr;
             const validTime = checkTimeValidity(timeSelected, allowedRange);
+
+            console.log(allowedRange);
 
             if (!validTime) {
                 timePicker.value = "";
