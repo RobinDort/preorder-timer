@@ -228,10 +228,10 @@ $statusLabels = [
                 if (!leftCellValue || !rightCellValue) return;
 
                 const validTimePattern = new RegExp('^(0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])$');
-                const leftValueValid = validTimePattern.test(leftCellValue);
-                const rightValueValid = validTimePattern.test(rightCellValue);
+                const leftValueValidPattern = validTimePattern.test(leftCellValue);
+                const rightValueValidPattern = validTimePattern.test(rightCellValue);
 
-                if (!leftValueValid || !rightValueValid) {
+                if (!leftValueValidPattern || !rightValueValidPattern) {
                     const errorInfo = document.querySelector(".invalid-cell");
                     errorInfo.style.display = "block";
                     validationSuccessful = false;
@@ -242,7 +242,13 @@ $statusLabels = [
             }
 
             // Check that each array contains times later then the previous one except the first one
-            validateSelectedTimes(selectedSpecialOpeningTimes);
+           if (!selectedTimesAreValid(selectedSpecialOpeningTimes)) {
+                const errorInfo = document.querySelector(".invalid-cell");
+                errorInfo.innerText = "Bitte geben Sie gültige Zeitspannen an und beachten Sie, dass die Startzeit geringer als die Endzeit sein muss. Ebenfalls muss die Startzeit des nächsten Eintrages höher sein, als die Endzeit des zuvorigen.";
+                errorInfo.style.display = "block";
+                validationSuccessful = false;
+                return;
+           }
         })
 
         if (!validationSuccessful) return;
@@ -250,10 +256,23 @@ $statusLabels = [
 
     }
 
-    function validateSelectedTimes(openingTimes) {
-        for (const timeSlot of openingTimes) {
-            console.log(timeSlot);
+    function selectedTimesAreValid(openingTimes) {
+        for (let i = 0; i < openingTimes.length; i++;) {
+            const startAsTime = timeToMinutes(openingTimes[i].start)
+            const endAsTime = timeToMinutes(openingTimes[i].end);
+            const startTimeOfNextSlot = timeToMinutes(openingTimes[i+1].start);
+
+            if (startAsTime >= endAsTime || endAsTime > startTimeOfNextSlot) {
+                return false
+            }
         }
+
+        return true;
+    }
+
+    function timeToMinutes(time) {
+        const [hours, minutes] = time.split(":").map(Number);
+        return hours * 60 + minutes;
     }
 
 
