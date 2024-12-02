@@ -217,7 +217,12 @@ document.addEventListener('DOMContentLoaded', async function() {
         if (instance) {
             instance.clear();
         }
-        if (JSON.stringify(allowedRange) === JSON.stringify([morningRange])) {
+        console.log(JSON.stringify(allowedRange));
+        console.log(JSON.stringify([specialRange]));
+        if(JSON.stringify(allowedRange) === JSON.stringify([specialRange])) {
+            alert("Sehr geehrter Kunde, wir haben heute Nachmittag erst ab 18:00 Uhr geöffnet. Bitte wählen Sie einen Zeitraum zwischen 12:30 - 14:15 Uhr oder einen Zeitraum zwischen 18:00 - 21:15 Uhr");
+
+        } else if (JSON.stringify(allowedRange) === JSON.stringify([morningRange])) {
             alert('Bitte wählen Sie einen Zeitraum zwischen 12:30 - 14:15 Uhr.');
 
         } else if (dayOfWeek === 0 || dayOfWeek === 6 || JSON.stringify(allowedRange) === JSON.stringify([eveningWeekendHolidayRange])) {
@@ -225,9 +230,6 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         } else if(JSON.stringify(allowedRange) === JSON.stringify([eveningRange])) {
             alert('Bitte wählen Sie einen Zeitraum zwischen 17:30 - 21:15 Uhr.')
-
-        } else if(JSON.stringify(allowedRange) === JSON.stringify([specialRange])) {
-            alert("Sehr geehrter Kunde, wir haben heute Nachmittag erst ab 18:00 Uhr geöffnet. Bitte wählen Sie einen Zeitraum zwischen 12:30 - 14:15 Uhr oder einen Zeitraum zwischen 18:00 - 21:15 Uhr");
 
         } else {
             alert('Bitte wählen Sie einen Zeitraum zwischen 12:30 - 14:15 Uhr oder einen Zeitraum zwischen 17:30 - 21:15 Uhr.');
