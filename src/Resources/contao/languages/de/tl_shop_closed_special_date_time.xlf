@@ -13,6 +13,11 @@
                 <target>Uhrzeit</target>
             </trans-unit>
 
+            <trans-unit id="shop_closed_special_date.id">
+                <source>shop_closed_special_date_id</source>
+                <target>Shop_Closed_Special_Date_ID</target>
+            </trans-unit>
+
             <trans-unit id="edit.label">
                 <source>Eintrag bearbeiten</source>
             </trans-unit>
