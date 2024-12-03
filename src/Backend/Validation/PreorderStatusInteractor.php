@@ -52,7 +52,7 @@ class PreorderStatusInteractor {
         $stmt = "SELECT a.date AS closing_date,b.status AS closing_status
                  FROM tl_shop_closed_date AS a
                  INNER JOIN tl_shop_closed_status AS b
-                 ON a.status_id = b.id";
+                 ON a.fk_status_id = b.id";
 
         $rslt = Database::getInstance()->execute($stmt)->fetchAllAssoc();
 
@@ -118,7 +118,7 @@ class PreorderStatusInteractor {
 
     private function updateNormalShopClosingDay($id, $date, $status) {
         $tstamp = time();
-        $updateStmt = "UPDATE tl_shop_closed_date SET tstamp='" . $tstamp . "', date='" . $date . "', status_id ='" . $status . "' WHERE id=" . $id;
+        $updateStmt = "UPDATE tl_shop_closed_date SET tstamp='" . $tstamp . "', date='" . $date . "', fk_status_id ='" . $status . "' WHERE id=" . $id;
         $updateResult = Database::getInstance()->execute($updateStmt);
 
         return $updateResult;
@@ -126,7 +126,7 @@ class PreorderStatusInteractor {
 
     private function insertNormalShopClosingDayQuery($date, $status) {
         $tstamp = time();
-        $insertStmt = "INSERT INTO tl_shop_closed_date (tstamp, date, status_id) VALUES (" . $tstamp . ",'" . $date . "','" . $status . "')";
+        $insertStmt = "INSERT INTO tl_shop_closed_date (tstamp, date, fk_status_id) VALUES (" . $tstamp . ",'" . $date . "','" . $status . "')";
         $insertResult = Database::getInstance()->execute($insertStmt);
 
         return $insertResult;
@@ -178,7 +178,7 @@ class PreorderStatusInteractor {
         ];
         $convertedStatus =  $statusConvert[$status];
 
-        $stmt = "DELETE FROM tl_shop_closed_date WHERE date='" . $date . "' AND status_id='" . $convertedStatus . "'";
+        $stmt = "DELETE FROM tl_shop_closed_date WHERE date='" . $date . "' AND fk_status_id='" . $convertedStatus . "'";
         $result = Database::getInstance()->execute($stmt);
 
         // Check how many rows were affected
