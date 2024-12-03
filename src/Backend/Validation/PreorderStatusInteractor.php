@@ -114,7 +114,7 @@ class PreorderStatusInteractor {
        if ($closingDayExists) {
             // update the closing day
             $presentDateID = $closingDayExists['id'];
-            $updateResult = $this->updateShopClosingDay($presentDateID, $date, 4);
+            $updateResult = $this->updateShopClosingDay($presentDateID, $date, '4');
 
             if ($updateResult->affectedRows > 0) {
                 $response['success'] = true;
@@ -126,7 +126,7 @@ class PreorderStatusInteractor {
        } else {
             try {
                 $db->beginTransaction();
-                $insertResult = $this->insertShopClosingDayQuery($date, 4);
+                $insertResult = $this->insertShopClosingDayQuery($date, '4');
 
                 if ($insertResult->affectedRows > 0) {
                     $dateQueryID = $insertResult->insertId;
