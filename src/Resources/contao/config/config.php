@@ -71,7 +71,6 @@ $GLOBALS['BE_MOD']['Vorbestellungen Konfiguration']['Shopzeiten'] = [
     'tables'    => [
         'tl_shop_closed_date', 
         'tl_shop_closed_status', 
-        'tl_shop_closed_special_date', 
         'tl_shop_closed_special_date_time'],   
     'callback'  => PreorderTimerSettings::class,
 ];

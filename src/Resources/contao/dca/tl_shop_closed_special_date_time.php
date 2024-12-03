@@ -5,8 +5,8 @@ $GLOBALS['TL_DCA']['tl_shop_closed_special_date_time'] = [
         'dataContainer'    => 'Table',
         'enableVersioning' => false,
         'sql' => [
-            'keys' => ['id,special_closed_date_id' => 'primary',
-            'special_closed_date_id' => 'index'],
+            'keys' => ['id,fk_closed_date_id' => 'primary',
+            'fk_closed_date_id' => 'index'],
         ],
     ],
     'list' => [
@@ -37,10 +37,10 @@ $GLOBALS['TL_DCA']['tl_shop_closed_special_date_time'] = [
         'id' => [
             'sql' => "int(10) unsigned NOT NULL",
         ],
-        'special_closed_date_id' => [
-            'label'     => &$GLOBALS['TL_LANG']['tl_shop_closed_special_date_time']['shop_closed_special_date.id'],
+        'fk_closed_date_id' => [
+            'label'     => &$GLOBALS['TL_LANG']['tl_shop_closed_special_date_time']['shop_closed_date.id'],
             'inputType' => 'select',
-            'foreignKey'=> 'tl_shop_closed_special_date.id',  // This defines the reference to the tl_shop_closed_special_date table
+            'foreignKey'=> 'tl_shop_closed_date.id',  // This defines the reference to the tl_shop_closed_date table
             'eval'      => ['mandatory' => true, 'tl_class' => 'w50'],
             'sql'       => "int(10) unsigned NOT NULL",
         ],

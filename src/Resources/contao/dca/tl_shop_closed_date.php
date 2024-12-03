@@ -5,7 +5,7 @@ $GLOBALS['TL_DCA']['tl_shop_closed_date'] = [
         'dataContainer'    => 'Table',
         'enableVersioning' => true,
         'sql' => [
-            'keys' => ['id' => 'primary', 'status_id' => 'index'],
+            'keys' => ['id' => 'primary', 'fk_status_id' => 'index'],
         ],
     ],
     'list' => [
@@ -46,7 +46,7 @@ $GLOBALS['TL_DCA']['tl_shop_closed_date'] = [
             'eval'      => ['rgxp' => 'datim', 'datepicker' => true, 'tl_class' => 'w50 wizard'],
             'sql'       => "varchar(19) NOT NULL default ''",
         ],
-        'status_id' => [
+        'fk_status_id' => [
             'label'     => &$GLOBALS['TL_LANG']['tl_shop_closed_date']['status_id'],
             'inputType' => 'select',
             'foreignKey'=> 'tl_shop_closed_status.id',

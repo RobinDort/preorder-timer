@@ -70,7 +70,7 @@ class PreorderStatusInteractor {
 
 
     public function insertNormalClosedShopDay($time, $date, $status) {
-       $closingDateExists = $this->selectNormalShopClosingDayByDate($date);
+       $closingDateExists = $this->selectShopClosingDayByDate($date);
 
         $response = [
             'success' => false,
@@ -101,10 +101,12 @@ class PreorderStatusInteractor {
     }
 
 
-    public function insertSpecialClosedShopDay($time, $selectedTimes) {}
+    public function insertSpecialClosedShopDay($time, $selectedTimes) {
+       // $specialClosingDayExists = $this->selectNormalShopClosingDayByDate();
+    }
 
 
-    private function selectNormalShopClosingDayByDate($date) {
+    private function selectShopClosingDayByDate($date) {
         $selectStmt = "SELECT id FROM tl_shop_closed_date WHERE date='" . $date . "'";
        
         // Check if entry with date and status exists. Update when existent.
