@@ -150,6 +150,7 @@ class PreorderStatusInteractor {
             } catch (\Exception $e) {
                 $db->rollbackTransaction();
                 \System::log("Transaction failed while trying to insert special date with time: " . $e->getMessage(), __METHOD__, "TL_ERROR");
+                $response['message'] = $e->getMessage();
             }
 
             return $response;
