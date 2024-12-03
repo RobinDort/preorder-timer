@@ -14,6 +14,7 @@ class PreorderStatusInteractor {
             ['id' => 1, 'status' => 1],
             ['id' => 2, 'status' => 2],
             ['id' => 3, 'status' => 3],
+            ['id' => 4, 'status' => 4]
         ];
 
         foreach ($defaultStatuses as $status) {
@@ -69,7 +70,7 @@ class PreorderStatusInteractor {
     }
 
 
-    public function insertNormalClosedShopDay($time, $date, $status) {
+    public function insertNormalClosedShopDay($date, $status) {
        $closingDateExists = $this->selectShopClosingDayByDate($date);
 
         $response = [
@@ -79,7 +80,7 @@ class PreorderStatusInteractor {
 
         if ($closingDateExists) {
             $id = $closingDateExists['id'];
-            $updateResult = $this->updateNormalShopClosingDay($id, $date, $status);
+            $updateResult = $this->updateShopClosingDay($id, $date, $status);
 
             if ($updateResult->affectedRows > 0) {
                 $response['success'] = true;
@@ -88,21 +89,72 @@ class PreorderStatusInteractor {
                 $response['message'] = "Fehler während des Versuchs Row mit id: " . $id . " zu überschreiben!";
             }
         } else {
-          $insertResult = $this->insertNormalShopClosingDayQuery($date, $status);
+            $insertResult = $this->insertShopClosingDayQuery($date, $status);
 
             if ($insertResult->affectedRows > 0) {
                 $response['success'] = true;
                 $response['message'] = "Row mit Datum: " . $date . " und Status: " . $status . " wurde erfolgreich gespeichert";
             } else {
-                $response['message'] = "Fehler während des Versuchs Row mit Datum: " . $date . " und Status: " . $status . " zu überschreiben!";
+                $response['message'] = "Fehler während des Versuchs Row mit Datum: " . $date . " und Status: " . $status . " zu speichern!";
             }
         }
         return $response;
     }
 
 
-    public function insertSpecialClosedShopDay($time, $selectedTimes) {
-       // $specialClosingDayExists = $this->selectNormalShopClosingDayByDate();
+    public function insertSpecialClosedShopDay($date, $selectedTimes) {
+       $closingDayExists = $this->selectShopClosingDayByDate($date);
+       $db = Database::getInstance();
+
+       $response = [
+        'success' => false,
+        'message' => ""
+       ];
+
+       if ($closingDayExists) {
+            // update the closing day
+            $presentDateID = $closingDayExists['id'];
+            $updateResult = $this->updateShopClosingDay($presentDateID, $date, 4);
+
+            if ($updateResult->affectedRows > 0) {
+                $response['success'] = true;
+                $response['message'] = "Row mit id: " . $presentDateID . ", Datum: " . $date . " und Status: " . 4 . " wurde erfolgreich geupdated.";
+            } else {
+                $response['message'] = "Fehler während des Versuchs Row mit id: " . $presentDateID . " zu überschreiben!";
+            }
+
+       } else {
+            try {
+                $db->beginTransaction();
+                $insertResult = $this->insertShopClosingDayQuery($date, 4);
+
+                if ($insertResult->affectedRows > 0) {
+                    $dateQueryID = $insertResult->insertId;
+                    $insertSpecialTimeResult = $this->insertShopSpecialTime($dateQueryID, $selectedTimes);
+
+                    if ($insertSpecialTimeResult->affectedRows > 0) {
+                        $response['success'] = true;
+                        $response['message'] = "Transaktion erfolgreich. Alle Rows wurden fehlerfrei eingefügt.";
+                        $db->commitTransaction();
+
+                    } else {
+                        $response['message'] = "Fehler während des Versuchs Row mit Datum: " . $date . " und Status: " . 4 . " zu speichern!";
+                        throw new \Exception("Failed to insert special date time: " . $selectedTimes . " with parent date ID: " . $dateQueryID);
+                    }
+
+                } else {
+                    $response['message'] = "Fehler während des Versuchs Row mit spezieller Zeitspanne: " . $selectedTimes . " zu speichern!";
+                    throw new \Exception("Failed to insert date: $date.");
+                }
+
+            } catch (\Exception $e) {
+                $db->rollbackTransaction();
+                \System::log("Transaction failed while trying to insert special date with time: " . $e->getMessage(), __METHOD__, "TL_ERROR");
+            }
+
+            return $response;
+       }
+
     }
 
 
@@ -116,7 +168,7 @@ class PreorderStatusInteractor {
 
     }
 
-    private function updateNormalShopClosingDay($id, $date, $status) {
+    private function updateShopClosingDay($id, $date, $status) {
         $tstamp = time();
         $updateStmt = "UPDATE tl_shop_closed_date SET tstamp='" . $tstamp . "', date='" . $date . "', fk_status_id ='" . $status . "' WHERE id=" . $id;
         $updateResult = Database::getInstance()->execute($updateStmt);
@@ -124,13 +176,22 @@ class PreorderStatusInteractor {
         return $updateResult;
     }
 
-    private function insertNormalShopClosingDayQuery($date, $status) {
+    private function insertShopClosingDayQuery($date, $status) {
         $tstamp = time();
         $insertStmt = "INSERT INTO tl_shop_closed_date (tstamp, date, fk_status_id) VALUES (" . $tstamp . ",'" . $date . "','" . $status . "')";
         $insertResult = Database::getInstance()->execute($insertStmt);
 
         return $insertResult;
     }
+
+    private function insertShopSpecialTime($dateQueryID, $specialTimes) {
+        $tstamp = time();
+        $insertStmt = "INSERT INTO tl_shop_closed_special_date_time (tstamp, time, fk_closed_date_id) VALUES (" . $tstamp . ",'" . $selectedTimes . "'," . $dateQueryID;
+        $insertResult = Database::getInstance()->execute($insertStmt);
+
+        return $insertResult;
+    }
+
 
     //@TODO REMOVE LATER! OLD COLD WORKING FOR tl_preorder_settings TABLE! 
     // public function insertSpecialClosedDay($time, $date, $status) {

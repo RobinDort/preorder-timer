@@ -11,11 +11,17 @@
              <trans-unit id="shop_closed_status.option.1">
                 <source>Ganztägig geschlossen</source>
             </trans-unit>
+
             <trans-unit id="shop_closed_status.option.2">
                 <source>Morgens geschlossen</source>
             </trans-unit>
+
             <trans-unit id="shop_closed_status.option.3">
                 <source>Nachmittags/Abends geschlossen</source>
+            </trans-unit>
+
+             <trans-unit id="shop_closed_status.option.4">
+                <source>Individuell geschlossen</source>
             </trans-unit>
 
            <trans-unit id="edit.label">

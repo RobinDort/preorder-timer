@@ -39,11 +39,12 @@ $GLOBALS['TL_DCA']['tl_shop_closed_status'] = [
         'status' => [
             'label'     => &$GLOBALS['TL_LANG']['tl_shop_closed_status']['status'],
             'inputType' => 'select',
-            'options'   => ['1', '2', '3'],
+            'options'   => ['1', '2', '3', '4'],
             'reference' => [
                 '1' => &$GLOBALS['TL_LANG']['tl_shop_closed_status']['shop_closed_status']['option']['1'],
                 '2' => &$GLOBALS['TL_LANG']['tl_shop_closed_status']['shop_closed_status']['option']['2'],
                 '3' => &$GLOBALS['TL_LANG']['tl_shop_closed_status']['shop_closed_status']['option']['3'],
+                '3' => &$GLOBALS['TL_LANG']['tl_shop_closed_status']['shop_closed_status']['option']['4'],
             ],
             'eval'      => ['mandatory' => true, 'tl_class' => 'w50'],
             'sql'       => "char(1) NOT NULL default '1'",

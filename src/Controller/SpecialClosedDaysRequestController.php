@@ -34,7 +34,6 @@ class SpecialClosedDaysRequestController {
     public function addClosedDayEntry(Request $request): JsonResponse {
         $date = $request->request->get('date');
         $status = $request->request->get('status');
-        $time = time();
 
          // Check if the parameters are set
          if (!$date || !$status) {
@@ -43,7 +42,7 @@ class SpecialClosedDaysRequestController {
 
         $preorderStatusInteractor = new PreorderStatusInteractor();
 
-        $response = $preorderStatusInteractor->insertNormalClosedShopDay($time,$date,$status);
+        $response = $preorderStatusInteractor->insertNormalClosedShopDay($date,$status);
             if ($response["success"] === true) {
                 return new JsonResponse(['status' => 'success', 'message' => $response["message"]]);
                 
@@ -55,15 +54,15 @@ class SpecialClosedDaysRequestController {
     #[Route('/addSpecialClosedDayEntry', name: 'add_special_closed_day_entry', defaults: ['_token_check' => true, '_scope' => 'backend'],  methods: ['POST'])]
     public function addSpecialClosedDayEntry(Request $request): JsonResponse {
         $selectedTimes =  $request->request->get('times');
-        $time = time();
+        $date = $request->request->get('date');
 
-        if (!$selectedTimes) {
+        if (!$selectedTimes || !$date) {
             return new JsonResponse(['status' => 'error', 'message' => 'Invalid data provided'], 400);
         }
 
         $preorderStatusInteractor = new PreorderStatusInteractor();
 
-        $response = $preorderStatusInteractor->insertSpecialClosedShopDay($time, $selectedTimes);
+        $response = $preorderStatusInteractor->insertSpecialClosedShopDay($date, $selectedTimes);
     }
 }
 ?>
