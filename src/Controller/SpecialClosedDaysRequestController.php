@@ -56,19 +56,22 @@ class SpecialClosedDaysRequestController {
         $selectedTimes =  $request->request->get('times');
         $date = $request->request->get('date');
 
-        if (!$selectedTimes || !$date) {
-            return new JsonResponse(['status' => 'error', 'message' => 'Invalid data provided'], 400);
-        }
+        return new JsonResponse(['status' => 'success', 'message' => $date], 400);
 
-        $preorderStatusInteractor = new PreorderStatusInteractor();
 
-        $response = $preorderStatusInteractor->insertSpecialClosedShopDay($date, $selectedTimes);
-        if ($response["success"] === true) {
-            return new JsonResponse(['status' => 'success', 'message' => $response["message"]]);
+        // if (!$selectedTimes || !$date) {
+        //     return new JsonResponse(['status' => 'error', 'message' => 'Invalid data provided'], 400);
+        // }
+
+        // $preorderStatusInteractor = new PreorderStatusInteractor();
+
+        // $response = $preorderStatusInteractor->insertSpecialClosedShopDay($date, $selectedTimes);
+        // if ($response["success"] === true) {
+        //     return new JsonResponse(['status' => 'success', 'message' => $response["message"]]);
             
-        } else {
-            return new JsonResponse(['status' => 'error', 'message' => $response["message"]]);
-        }
+        // } else {
+        //     return new JsonResponse(['status' => 'error', 'message' => $response["message"]]);
+        // }
     }
 }
 ?>
