@@ -190,7 +190,7 @@ class PreorderStatusInteractor {
 
     private function updateShopClosingSpecialTime($dateID, $selectedTimes) {
         $tstamp = time();
-        $updateStmt = "UPDATE tl_shop_closed_special_date_time SET tstamp ='" . $tstamp . "', time=" . $selectedTimes . " WHERE fk_closed_date_id =" . $dateID;
+        $updateStmt = "UPDATE tl_shop_closed_special_date_time SET tstamp ='" . $tstamp . "', time='" . $selectedTimes . "' WHERE fk_closed_date_id =" . $dateID;
         $updateResult = Database::getInstance()->execute($updateStmt);
 
         return $updateResult;
