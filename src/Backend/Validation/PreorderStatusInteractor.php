@@ -32,18 +32,23 @@ class PreorderStatusInteractor {
     }
 
     public function selectShopNormalClosingDays() {
-        $stmt = "SELECT a.date AS closing_date,b.status AS closing_status
-                 FROM tl_shop_closed_date AS a
-                 INNER JOIN tl_shop_closed_status AS b
-                 ON a.fk_status_id = b.id";
+        $stmt ="SELECT a.date AS closing_date, b.status AS closing_status, c.time AS special_date_time
+                FROM tl_shop_closed_date AS a
+                INNER JOIN 
+                tl_shop_closed_status AS b
+                ON a.fk_status_id = b.id
+                LEFT JOIN 
+                tl_shop_closed_special_date_time AS c
+                ON c.fk_closed_date_id = a.id;";
 
         $rslt = Database::getInstance()->execute($stmt)->fetchAllAssoc();
 
         $entries = [];
         foreach ($rslt as $row) {
             $entries[] = [
-                'date' => $row['closing_date'],
-                'status' => $row['closing_status']
+                'date'      => $row['closing_date'],
+                'status'    => $row['closing_status'],
+                'time'      => $row['special_date_time']
             ];
         }
 
@@ -228,6 +233,7 @@ class PreorderStatusInteractor {
         foreach ($entries as $entry) {
             $date = $entry['date'];
             $status = $entry['status'];
+            $time = $entry['time'];
 
             // shop is closed the whole day
             if ($status === '1') {
