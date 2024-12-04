@@ -107,51 +107,51 @@ class PreorderStatusInteractor {
        $db = Database::getInstance();
 
        $response = [
-        'success' => false,
-        'message' => ""
+        'success' => true,
+        'message' => "select successful"
        ];
 
-       if ($closingDayExists) {
-            // update the closing day
-            $presentDateID = $closingDayExists['id'];
-            $updateResult = $this->updateShopClosingDay($presentDateID, $date, '4');
+    //    if ($closingDayExists) {
+    //         // update the closing day
+    //         $presentDateID = $closingDayExists['id'];
+    //         $updateResult = $this->updateShopClosingDay($presentDateID, $date, '4');
 
-            if ($updateResult->affectedRows > 0) {
-                $response['success'] = true;
-                $response['message'] = "Row mit id: " . $presentDateID . ", Datum: " . $date . " und Status: " . 4 . " wurde erfolgreich geupdated.";
-            } else {
-                $response['message'] = "Fehler während des Versuchs Row mit id: " . $presentDateID . " zu überschreiben!";
-            }
+    //         if ($updateResult->affectedRows > 0) {
+    //             $response['success'] = true;
+    //             $response['message'] = "Row mit id: " . $presentDateID . ", Datum: " . $date . " und Status: " . 4 . " wurde erfolgreich geupdated.";
+    //         } else {
+    //             $response['message'] = "Fehler während des Versuchs Row mit id: " . $presentDateID . " zu überschreiben!";
+    //         }
 
-       } else {
-            try {
-                $db->beginTransaction();
-                $insertResult = $this->insertShopClosingDayQuery($date, '4');
+    //    } else {
+    //         try {
+    //             $db->beginTransaction();
+    //             $insertResult = $this->insertShopClosingDayQuery($date, '4');
 
-                if ($insertResult->affectedRows > 0) {
-                    $dateQueryID = $insertResult->insertId;
-                    $insertSpecialTimeResult = $this->insertShopSpecialTime($dateQueryID, $selectedTimes);
+    //             if ($insertResult->affectedRows > 0) {
+    //                 $dateQueryID = $insertResult->insertId;
+    //                 $insertSpecialTimeResult = $this->insertShopSpecialTime($dateQueryID, $selectedTimes);
 
-                    if ($insertSpecialTimeResult->affectedRows > 0) {
-                        $response['success'] = true;
-                        $response['message'] = "Transaktion erfolgreich. Alle Rows wurden fehlerfrei eingefügt.";
-                        $db->commitTransaction();
+    //                 if ($insertSpecialTimeResult->affectedRows > 0) {
+    //                     $response['success'] = true;
+    //                     $response['message'] = "Transaktion erfolgreich. Alle Rows wurden fehlerfrei eingefügt.";
+    //                     $db->commitTransaction();
 
-                    } else {
-                        $response['message'] = "Fehler während des Versuchs Row mit Datum: " . $date . " und Status: " . 4 . " zu speichern!";
-                        throw new \Exception("Failed to insert special date time: " . $selectedTimes . " with parent date ID: " . $dateQueryID);
-                    }
+    //                 } else {
+    //                     $response['message'] = "Fehler während des Versuchs Row mit Datum: " . $date . " und Status: " . 4 . " zu speichern!";
+    //                     throw new \Exception("Failed to insert special date time: " . $selectedTimes . " with parent date ID: " . $dateQueryID);
+    //                 }
 
-                } else {
-                    $response['message'] = "Fehler während des Versuchs Row mit spezieller Zeitspanne: " . $selectedTimes . " zu speichern!";
-                    throw new \Exception("Failed to insert date: $date.");
-                }
+    //             } else {
+    //                 $response['message'] = "Fehler während des Versuchs Row mit spezieller Zeitspanne: " . $selectedTimes . " zu speichern!";
+    //                 throw new \Exception("Failed to insert date: $date.");
+    //             }
 
-            } catch (\Exception $e) {
-                $db->rollbackTransaction();
-                \System::log("Transaction failed while trying to insert special date with time: " . $e->getMessage(), __METHOD__, "TL_ERROR");
-                $response['message'] = $e->getMessage();
-            }
+    //         } catch (\Exception $e) {
+    //             $db->rollbackTransaction();
+    //             \System::log("Transaction failed while trying to insert special date with time: " . $e->getMessage(), __METHOD__, "TL_ERROR");
+    //             $response['message'] = $e->getMessage();
+    //         }
 
             return $response;
        }
