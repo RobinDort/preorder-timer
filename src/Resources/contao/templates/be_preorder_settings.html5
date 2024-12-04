@@ -217,7 +217,7 @@ $statusLabels = [
                 onSuccess: function(response) {
                     console.log(response.message);
                     if (response.status === "success") {
-                        window.location.href = window.location.href
+                       // window.location.href = window.location.href
                     }
                 },
                 onFailure: function(error) {
