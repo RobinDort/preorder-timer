@@ -5,7 +5,8 @@
 $statusLabels = [
     'fullyClosed' => 'Ganztägig',
     'closedAtMorning' => 'Morgens geschlossen',
-    'closedAtEvening' => 'Abends/Nachmittags geschlossen'
+    'closedAtEvening' => 'Abends/Nachmittags geschlossen',
+    'closedIndividual' => "Individuell geschlossen"
 ];
 ?>
 
@@ -217,7 +218,7 @@ $statusLabels = [
                 onSuccess: function(response) {
                     console.log(response.message);
                     if (response.status === "success") {
-                       // window.location.href = window.location.href
+                        window.location.href = window.location.href
                     }
                 },
                 onFailure: function(error) {
