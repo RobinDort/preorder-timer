@@ -56,7 +56,7 @@ class SpecialClosedDaysRequestController {
         $selectedTimes =  $request->request->get('times');
         $date = $request->request->get('date');
 
-        return new JsonResponse(['status' => 'success', 'message' => $date], 400);
+        return new JsonResponse(['status' => 'success', 'message' => $selectedTimes], 400);
 
 
         // if (!$selectedTimes || !$date) {
