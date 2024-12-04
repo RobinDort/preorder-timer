@@ -35,7 +35,7 @@ $GLOBALS['TL_DCA']['tl_shop_closed_special_date_time'] = [
     ],
     'fields' => [
         'id' => [
-            'sql' => "int(10) unsigned NOT NULL",
+            'sql' => "int(10) unsigned NOT NULL auto_increment",
         ],
         'fk_closed_date_id' => [
             'label'     => &$GLOBALS['TL_LANG']['tl_shop_closed_special_date_time']['shop_closed_date.id'],
