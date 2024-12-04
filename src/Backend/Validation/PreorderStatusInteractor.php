@@ -107,7 +107,7 @@ class PreorderStatusInteractor {
        $db = Database::getInstance();
 
        $response = [
-        'success' => true,
+        'success' => false,
         'message' => ""
        ];
 
@@ -131,22 +131,25 @@ class PreorderStatusInteractor {
 
                 if ($insertResult->affectedRows > 0) {
                     $dateQueryID = $insertResult->insertId;
-                    $insertSpecialTimeResult = $this->insertShopSpecialTime($dateQueryID, $selectedTimes);
+                    $response["success"] = true;
+                    $response["message"] = $dateQueryID;
+                    $db->commitTransaction();
+                //     $insertSpecialTimeResult = $this->insertShopSpecialTime($dateQueryID, $selectedTimes);
 
-                    if ($insertSpecialTimeResult->affectedRows > 0) {
-                        $response['success'] = true;
-                        $response['message'] = "Transaktion erfolgreich. Alle Rows wurden fehlerfrei eingefügt.";
-                        $db->commitTransaction();
+                //     if ($insertSpecialTimeResult->affectedRows > 0) {
+                //         $response['success'] = true;
+                //         $response['message'] = "Transaktion erfolgreich. Alle Rows wurden fehlerfrei eingefügt.";
+                //         $db->commitTransaction();
 
-                    } else {
-                        $response['message'] = "Fehler während des Versuchs Row mit Datum: " . $date . " und Status: " . 4 . " zu speichern!";
-                        throw new \Exception("Failed to insert special date time: " . $selectedTimes . " with parent date ID: " . $dateQueryID);
-                    }
+                //     } else {
+                //         $response['message'] = "Fehler während des Versuchs Row mit Datum: " . $date . " und Status: " . 4 . " zu speichern!";
+                //         throw new \Exception("Failed to insert special date time: " . $selectedTimes . " with parent date ID: " . $dateQueryID);
+                //     }
 
-                } else {
-                    $response['message'] = "Fehler während des Versuchs Row mit spezieller Zeitspanne: " . $selectedTimes . " zu speichern!";
-                    throw new \Exception("Failed to insert date: $date.");
-                }
+                // } else {
+                //     $response['message'] = "Fehler während des Versuchs Row mit spezieller Zeitspanne: " . $selectedTimes . " zu speichern!";
+                //     throw new \Exception("Failed to insert date: $date.");
+                 }
 
             } catch (\Exception $e) {
                 $db->rollbackTransaction();
