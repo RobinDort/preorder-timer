@@ -103,31 +103,42 @@ class PreorderStatusInteractor {
 
 
     public function insertSpecialClosedShopDay($date, $selectedTimes) {
-       $closingDayExists = $this->selectShopClosingDayByDate($date);
-       $db = Database::getInstance();
+        $closingDayExists = $this->selectShopClosingDayByDate($date);
+        $db = Database::getInstance();
 
-       $response = [
-        'success' => false,
-        'message' => ""
-       ];
+        $response = [
+            'success' => false,
+            'message' => ""
+        ];
 
-        if ($closingDayExists) {
-            // update the closing day
-            $presentDateID = $closingDayExists['id'];
-            $updateResult = $this->updateShopClosingDay($presentDateID, $date, '4');
+       $db->beginTransaction();
 
-            if ($updateResult->affectedRows > 0) {
-                $response['success'] = true;
-                $response['message'] = "Row mit id: " . $presentDateID . ", Datum: " . $date . " und Status: " . 4 . " wurde erfolgreich geupdated.";
+        try {
+            if ($closingDayExists) {
+                // update the closing day
+                $presentDateID = $closingDayExists['id'];
+                $updateResult = $this->updateShopClosingDay($presentDateID, $date, '4');
+
+                if ($updateResult->affectedRows > 0) {
+                    // update the special date time
+                    $updateSpecialTimeResult = $this->updateShopClosingSpecialTime($presentDateID, $selectedTimes);
+
+                    if ($updateSpecialTimeResult->affectedRows > 0) {
+                        $response['success'] = true;
+                        $response['message'] = "Row mit id: " . $presentDateID . ", Datum: " . $date . " und Status: " . 4 . " wurde erfolgreich geupdated.";
+                    } else {
+                        $response['message'] = "Fehler während des Versuchs Row mit id: " . $presentDateID . " und Zeitspanne: " . $specialTimes . " zu überschreiben!";
+                        throw new \Exception("Failed to update special date time: " . $selectedTimes . " with parent date ID: " . $presentDateID);
+                    }
+
+                } else {
+                    $response['message'] = "Fehler während des Versuchs Row mit id: " . $presentDateID . " zu überschreiben!";
+                    throw new \Exception("Failed to update date: " . $date . " with id: " . $presentDateID);
+                }
+
             } else {
-                $response['message'] = "Fehler während des Versuchs Row mit id: " . $presentDateID . " zu überschreiben!";
-            }
-
-        } else {
-            try {
-                $db->beginTransaction();
                 $insertResult = $this->insertShopClosingDayQuery($date, '4');
-               
+            
 
                 if ($insertResult->affectedRows > 0) {
                     $dateQueryID = $insertResult->insertId;
@@ -146,15 +157,13 @@ class PreorderStatusInteractor {
 
                 } else {
                     $response['message'] = "Fehler während des Versuchs Row mit spezieller Zeitspanne: " . $selectedTimes . " zu speichern!";
-                    throw new \Exception("Failed to insert date: $date.");
+                    throw new \Exception("Failed to insert date: " . $date);
                 }
-
-            } catch (\Exception $e) {
-                $db->rollbackTransaction();
-                \System::log("Transaction failed while trying to insert special date with time: " . $e->getMessage(), __METHOD__, "TL_ERROR");
-                $response['message'] = $e->getMessage();
             }
-
+        } catch (\Exception $e) {
+            $db->rollbackTransaction();
+            \System::log("Transaction failed while trying to insert special date with time: " . $e->getMessage(), __METHOD__, "TL_ERROR");
+            $response['message'] = $e->getMessage();
         }
         return $response;
     }
@@ -173,6 +182,15 @@ class PreorderStatusInteractor {
     private function updateShopClosingDay($id, $date, $status) {
         $tstamp = time();
         $updateStmt = "UPDATE tl_shop_closed_date SET tstamp='" . $tstamp . "', date='" . $date . "', fk_status_id ='" . $status . "' WHERE id=" . $id;
+        $updateResult = Database::getInstance()->execute($updateStmt);
+
+        return $updateResult;
+    }
+
+
+    private function updateShopClosingSpecialTime($dateID, $selectedTimes) {
+        $tstamp = time();
+        $updateStmt = "UPDATE tl_shop_closed_special_date_time SET tstamp ='" . $tstamp . "', time=" . $selectedTimes . " WHERE fk_closed_date_id =" . $dateID;
         $updateResult = Database::getInstance()->execute($updateStmt);
 
         return $updateResult;
