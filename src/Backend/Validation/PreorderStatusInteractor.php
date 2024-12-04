@@ -111,19 +111,19 @@ class PreorderStatusInteractor {
         'message' => ""
        ];
 
-        // if ($closingDayExists) {
-        //     // update the closing day
-        //     $presentDateID = $closingDayExists['id'];
-        //     $updateResult = $this->updateShopClosingDay($presentDateID, $date, '4');
+        if ($closingDayExists) {
+            // update the closing day
+            $presentDateID = $closingDayExists['id'];
+            $updateResult = $this->updateShopClosingDay($presentDateID, $date, '4');
 
-        //     if ($updateResult->affectedRows > 0) {
-        //         $response['success'] = true;
-        //         $response['message'] = "Row mit id: " . $presentDateID . ", Datum: " . $date . " und Status: " . 4 . " wurde erfolgreich geupdated.";
-        //     } else {
-        //         $response['message'] = "Fehler während des Versuchs Row mit id: " . $presentDateID . " zu überschreiben!";
-        //     }
+            if ($updateResult->affectedRows > 0) {
+                $response['success'] = true;
+                $response['message'] = "Row mit id: " . $presentDateID . ", Datum: " . $date . " und Status: " . 4 . " wurde erfolgreich geupdated.";
+            } else {
+                $response['message'] = "Fehler während des Versuchs Row mit id: " . $presentDateID . " zu überschreiben!";
+            }
 
-        // } else {
+        } else {
             try {
                 $db->beginTransaction();
                 $insertResult = $this->insertShopClosingDayQuery($date, '4');
@@ -155,9 +155,8 @@ class PreorderStatusInteractor {
                 $response['message'] = $e->getMessage();
             }
 
-      //  }
+        }
         return $response;
-
     }
 
 
