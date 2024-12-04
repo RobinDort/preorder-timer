@@ -131,25 +131,23 @@ class PreorderStatusInteractor {
 
                 if ($insertResult->affectedRows > 0) {
                     $dateQueryID = $insertResult->insertId;
-                    $response["success"] = true;
-                    $response["message"] = $dateQueryID;
-                    $db->commitTransaction();
-                //     $insertSpecialTimeResult = $this->insertShopSpecialTime($dateQueryID, $selectedTimes);
 
-                //     if ($insertSpecialTimeResult->affectedRows > 0) {
-                //         $response['success'] = true;
-                //         $response['message'] = "Transaktion erfolgreich. Alle Rows wurden fehlerfrei eingefügt.";
-                //         $db->commitTransaction();
+                    $insertSpecialTimeResult = $this->insertShopSpecialTime($dateQueryID, $selectedTimes);
 
-                //     } else {
-                //         $response['message'] = "Fehler während des Versuchs Row mit Datum: " . $date . " und Status: " . 4 . " zu speichern!";
-                //         throw new \Exception("Failed to insert special date time: " . $selectedTimes . " with parent date ID: " . $dateQueryID);
-                //     }
+                    if ($insertSpecialTimeResult->affectedRows > 0) {
+                        $response['success'] = true;
+                        $response['message'] = "Transaktion erfolgreich. Alle Rows wurden fehlerfrei eingefügt.";
+                        $db->commitTransaction();
 
-                // } else {
-                //     $response['message'] = "Fehler während des Versuchs Row mit spezieller Zeitspanne: " . $selectedTimes . " zu speichern!";
-                //     throw new \Exception("Failed to insert date: $date.");
-                 }
+                    } else {
+                        $response['message'] = "Fehler während des Versuchs Row mit Datum: " . $date . " und Status: " . 4 . " zu speichern!";
+                        throw new \Exception("Failed to insert special date time: " . $selectedTimes . " with parent date ID: " . $dateQueryID);
+                    }
+
+                } else {
+                    $response['message'] = "Fehler während des Versuchs Row mit spezieller Zeitspanne: " . $selectedTimes . " zu speichern!";
+                    throw new \Exception("Failed to insert date: $date.");
+                }
 
             } catch (\Exception $e) {
                 $db->rollbackTransaction();
@@ -189,13 +187,13 @@ class PreorderStatusInteractor {
         return $insertResult;
     }
 
-    private function insertShopSpecialTime($dateQueryID, $specialTimes) {
-        $tstamp = time();
-        $insertStmt = "INSERT INTO tl_shop_closed_special_date_time (tstamp, time, fk_closed_date_id) VALUES (" . $tstamp . ",'" . $specialTimes . "','" . $dateQueryID . "'";
-        $insertResult = Database::getInstance()->execute($insertStmt);
+        private function insertShopSpecialTime($dateQueryID, $specialTimes) {
+            $tstamp = time();
+            $insertStmt = "INSERT INTO tl_shop_closed_special_date_time (tstamp, time, fk_closed_date_id) VALUES (" . $tstamp . ",'" . $specialTimes . "'," . $dateQueryID;
+            $insertResult = Database::getInstance()->execute($insertStmt);
 
-        return $insertResult;
-    }
+            return $insertResult;
+        }
 
 
     //@TODO REMOVE LATER! OLD COLD WORKING FOR tl_preorder_settings TABLE! 
