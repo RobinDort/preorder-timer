@@ -269,7 +269,7 @@ $statusLabels = [
                     errorInfo.style.display = "block";
                     return response;
                 }
-                const combinedValues = {start: `${leftCellValue}`, end: `${rightCellValue}`};
+                const combinedValues = {start: '`${leftCellValue}`', end: '`${rightCellValue}`'};
                 selectedSpecialOpeningTimes.push(combinedValues);
             }
         })
