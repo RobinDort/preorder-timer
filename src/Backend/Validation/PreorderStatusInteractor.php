@@ -189,7 +189,7 @@ class PreorderStatusInteractor {
 
         private function insertShopSpecialTime($dateQueryID, $specialTimes) {
             $tstamp = time();
-            $insertStmt = "INSERT INTO tl_shop_closed_special_date_time (tstamp, time, fk_closed_date_id) VALUES (" . $tstamp . ",'" . $specialTimes . "'," . $dateQueryID;
+            $insertStmt = "INSERT INTO tl_shop_closed_special_date_time (tstamp, time, fk_closed_date_id) VALUES (" . $tstamp . ",'" . $specialTimes . "'," . $dateQueryID . ")";
             $insertResult = Database::getInstance()->execute($insertStmt);
 
             return $insertResult;
