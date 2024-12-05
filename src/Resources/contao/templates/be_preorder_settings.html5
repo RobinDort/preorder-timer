@@ -175,7 +175,7 @@ $statusLabels = [
             const formattedTimeString = formatTimeString(rawTimeString);
 
             // Update the span content with the formatted time string
-            span.textContent = formattedTimeString;
+            span.innerText = formattedTimeString;
         });
     });
 
