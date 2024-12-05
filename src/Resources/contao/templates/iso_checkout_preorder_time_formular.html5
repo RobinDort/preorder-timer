@@ -215,8 +215,6 @@ document.addEventListener('DOMContentLoaded', async function() {
         if (instance) {
             instance.clear();
         }
-
-        console.log(JSON.stringify(allowedRange));
        
         // Opened only at morning range
         if (JSON.stringify(allowedRange) === JSON.stringify([morningRange])) {

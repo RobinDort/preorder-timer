@@ -171,8 +171,6 @@ $statusLabels = [
             // Get the raw time string from the data attribute
             const rawTimeString = span.dataset.times;
 
-            console.log(rawTimeString);
-
             // Format the time string
             const formattedTimeString = formatTimeString(rawTimeString);
 
