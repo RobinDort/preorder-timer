@@ -312,7 +312,6 @@ class PreorderStatusInteractor {
             
             // shop is closed to individual times
             } else if ($status === '4') {
-                $formattedTime = $this->formatTimeString($time);
                 $specialDays['closedIndividual']['dates'][] = $date;
                 $specialDays['closedIndividual']['times'][] = $time;
             } 
