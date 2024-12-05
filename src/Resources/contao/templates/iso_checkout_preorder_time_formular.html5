@@ -232,7 +232,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         // Opened to usual times
         } else if (JSON.stringify(allowedRange).includes(JSON.stringify(morningRange)) && JSON.stringify(allowedRange).includes(JSON.stringify(eveningRange))) {
-            alert('Bitte wählen Sie einen Zeitraum zwischen ' allowedRange[0].start + '-' + allowedRange[0].end + ' Uhr oder einen Zeitraum zwischen ' + allowedRange[1].start + '-' + allowedRange[1].end + ' Uhr.');
+            alert('Bitte wählen Sie einen Zeitraum zwischen ' + allowedRange[0].start + '-' + allowedRange[0].end + ' Uhr oder einen Zeitraum zwischen ' + allowedRange[1].start + '-' + allowedRange[1].end + ' Uhr.');
         }
     }
 
