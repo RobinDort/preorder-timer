@@ -216,19 +216,23 @@ document.addEventListener('DOMContentLoaded', async function() {
             instance.clear();
         }
 
-        console.log(allowedRange);
+        console.log(JSON.stringify(allowedRange));
        
+        // Opened only at morning range
         if (JSON.stringify(allowedRange) === JSON.stringify([morningRange])) {
-            alert('Lieber Kunde, unser Shop öffnet heute nicht zu unseren gewöhnlichen Öffnungszeiten. Bitte wählen Sie einen Zeitraum zwischen 12:30 - 14:15 Uhr.');
+            alert('Lieber Kunde, unser Shop öffnet heute nicht zu unseren gewöhnlichen Öffnungszeiten. Bitte wählen Sie einen Zeitraum zwischen ' + morningRange.start + '-' + morningRange.end + ' Uhr.');
 
+        // Opened only at evening weekend holiday range
         } else if (dayOfWeek === 0 || dayOfWeek === 6 || JSON.stringify(allowedRange) === JSON.stringify([eveningWeekendHolidayRange])) {
-            alert('Lieber Kunde, unser Shop öffnet heute nicht zu unseren gewöhnlichen Öffnungszeiten. Bitte wählen Sie einen Zeitraum zwischen 17:30 - 21:45 Uhr.');
+            alert('Lieber Kunde, unser Shop öffnet heute nicht zu unseren gewöhnlichen Öffnungszeiten. Bitte wählen Sie einen Zeitraum zwischen ' + eveningWeekendHolidayRange.start + '-' + eveningWeekendHolidayRange.end + ' Uhr.');
 
+        // Opened only at evening range
         } else if(JSON.stringify(allowedRange) === JSON.stringify([eveningRange])) {
-            alert('Lieber Kunde, unser Shop öffnet heute nicht zu unseren gewöhnlichen Öffnungszeiten. Bitte wählen Sie einen Zeitraum zwischen 17:30 - 21:15 Uhr.')
+            alert('Lieber Kunde, unser Shop öffnet heute nicht zu unseren gewöhnlichen Öffnungszeiten. Bitte wählen Sie einen Zeitraum zwischen ' + eveningRange.start + '-' + eveningRange.end + ' Uhr.')
 
+        // Opened to usual times
         } else {
-            alert('Lieber Kunde, unser Shop öffnet heute nicht zu unseren gewöhnlichen Öffnungszeiten. Bitte wählen Sie einen Zeitraum zwischen 12:30 - 14:15 Uhr oder einen Zeitraum zwischen 17:30 - 21:15 Uhr.');
+            alert('Bitte wählen Sie einen Zeitraum zwischen 12:30 - 14:15 Uhr oder einen Zeitraum zwischen 17:30 - 21:15 Uhr.');
         }
     }
 
