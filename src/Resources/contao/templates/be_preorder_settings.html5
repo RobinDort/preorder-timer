@@ -55,23 +55,27 @@ $statusLabels = [
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($this->normalShopClosingDays as $status => $dates): ?>
-                        <?php if ($status === 'closedIndividual'): ?>
-                            <?php foreach ($dates['dates'] as $index => $date): ?>
-                                <tr>
-                                    <td><?php echo htmlspecialchars($date); ?></td>
-                                    <td>
-                                        <?php echo htmlspecialchars($statusLabels[$status]); ?>
-                                        <br>
-                                        <span><?php echo htmlspecialchars($dates['times'][$index]); ?></span>
-                                    </td>
-                                    <td>
-                                        <button class="delete-btn" onClick="removeClosedDayEntry(this)" data-date="<?php echo $date ?>" data-status="<?php echo $status ?>">
-                                            <img src="system/themes/flexible/icons/delete.svg" />
-                                        </button>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
+            <?php foreach ($this->normalShopClosingDays as $status => $dates): ?>
+                <?php if ($status === 'closedIndividual'): ?>
+                    <?php foreach ($dates['dates'] as $index => $date): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($date); ?></td>
+                            <td>
+                                <?php echo htmlspecialchars($statusLabels[$status]); ?>
+                                <br>
+                                <span 
+                                    class="times" 
+                                    data-times="<?php echo htmlspecialchars($dates['times'][$index]); ?>">
+                                    <!-- Placeholder to be filled by JS -->
+                                </span>
+                            </td>
+                            <td>
+                                <button class="delete-btn" onClick="removeClosedDayEntry(this)" data-date="<?php echo $date ?>" data-status="<?php echo $status ?>">
+                                    <img src="system/themes/flexible/icons/delete.svg" />
+                                </button>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
                         <?php else: ?>
                             <?php foreach ($dates as $date): ?>
                                 <tr>
@@ -157,6 +161,23 @@ $statusLabels = [
         locale: "de",
         minDate: "today",
     })
+
+
+    document.addEventListener("DOMContentLoaded", () => {
+        // Find all span elements with the class "times"
+        const timeElements = document.querySelectorAll(".times");
+
+        timeElements.forEach(span => {
+            // Get the raw time string from the data attribute
+            const rawTimeString = span.dataset.times;
+
+            // Format the time string
+            const formattedTimeString = formatTimeString(rawTimeString);
+
+            // Update the span content with the formatted time string
+            span.textContent = formattedTimeString;
+        });
+    });
 
 
     function removeClosedDayEntry(entry) {
@@ -357,6 +378,29 @@ $statusLabels = [
         newRow.appendChild(newCellOne);
         newRow.appendChild(newCellTwo);
         tableBody.appendChild(newRow);
+    }
+
+
+    function formatTimeString(timeString) {
+        // Split the input string by ';' to separate entries
+        const timeEntries = timeString.split(';');
+
+        // Map over the entries to transform each one
+        const formattedEntries = timeEntries.map(entry => {
+            const matches = entry.match(/start:([\d:]+),end:([\d:]+)/);
+
+            if (matches && matches.length === 3) {
+                const startTime = matches[1];
+                const endTime = matches[2];
+
+                // Concatenate start and end times with a "-"
+                return `${startTime}-${endTime}`;
+            }
+            return ''; // Return an empty string for invalid entries
+        });
+
+        // Filter out any empty strings and join with a comma
+        return formattedEntries.filter(entry => entry).join(',');
     }
 </script>
 
