@@ -282,7 +282,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                         return null; // Invalid entries become null
                     }).filter(entry => entry !== null); // Remove null entries
 
-                    console.log("filtered array: " + filteredSpecialTimeRange);
+                    console.log(filteredSpecialTimeRange);
                 }
             }
 
