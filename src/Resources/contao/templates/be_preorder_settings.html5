@@ -391,8 +391,6 @@ $statusLabels = [
         const formattedEntries = timeEntries.map(entry => {
             const matches = entry.match(/start:([\d:]+),end:([\d:]+)/);
 
-            console.log(matches);
-
             if (matches && matches.length === 3) {
                 const startTime = matches[1];
                 const endTime = matches[2];

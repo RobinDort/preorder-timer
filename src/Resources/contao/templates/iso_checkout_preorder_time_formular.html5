@@ -224,7 +224,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         // Opened only at evening weekend holiday range
         } else if (dayOfWeek === 0 || dayOfWeek === 6 || JSON.stringify(allowedRange) === JSON.stringify([eveningWeekendHolidayRange])) {
-            alert('Lieber Kunde, unser Shop öffnet heute nicht zu unseren gewöhnlichen Öffnungszeiten. Bitte wählen Sie einen Zeitraum zwischen ' + eveningWeekendHolidayRange.start + '-' + eveningWeekendHolidayRange.end + ' Uhr.');
+            alert('Bitte wählen Sie einen Zeitraum zwischen ' + eveningWeekendHolidayRange.start + '-' + eveningWeekendHolidayRange.end + ' Uhr.');
 
         // Opened only at evening range
         } else if(JSON.stringify(allowedRange) === JSON.stringify([eveningRange])) {
@@ -233,6 +233,11 @@ document.addEventListener('DOMContentLoaded', async function() {
         // Opened to usual times
         } else if (JSON.stringify(allowedRange).includes(JSON.stringify(morningRange)) && JSON.stringify(allowedRange).includes(JSON.stringify(eveningRange))) {
             alert('Bitte wählen Sie einen Zeitraum zwischen ' + allowedRange[0].start + '-' + allowedRange[0].end + ' Uhr oder einen Zeitraum zwischen ' + allowedRange[1].start + '-' + allowedRange[1].end + ' Uhr.');
+
+        // Opened to special times
+        } else {
+            const timeRange = allowedRange.map(range => range.start + '-' + range.end).join(', ');
+            alert('Lieber Kunde, unser Shop öffnet heute nicht zu unseren gewöhnlichen Öffnungszeiten. Bitte wählen Sie eine Uhrzeit innerhalb des folgenden Zeitraums: ' + timeRange + ' Uhr.');
         }
     }
 
