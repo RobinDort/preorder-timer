@@ -63,6 +63,13 @@ class PreorderStatusInteractor {
         return $selectRslt ? $selectRslt['id'] : -1;
     }
 
+    private function selectSpecialClosingTimeByParentID($parentID) {
+        $selectStmnt = "SELECT id from tl_shop_closed_special_date_time WHERE fk_closed_date_id = " . $parentID;
+        $selectRslt = Database::getInstance()->execute($selectStmnt)->fetchAssoc();
+
+        return $selectRslt ? $selectRslt['id'] : -1;
+    }
+
 
     public function insertNormalClosedShopDay($date, $status) {
        $closingDateExists = $this->selectShopClosingDayByDate($date);
@@ -114,16 +121,37 @@ class PreorderStatusInteractor {
                 $updateResult = $this->updateShopClosingDay($presentDateID, $date, '4');
 
                 if ($updateResult->affectedRows > 0) {
-                    // update the special date time
-                    $updateSpecialTimeResult = $this->updateShopClosingSpecialTime($presentDateID, $selectedTimes);
+                    // check if a special time linked to this date is present
+                     $selectSpecialTimeResult = $this->selectSpecialClosingTimeByParentID($presentDateID);
+                    
+                    // special date time is not present: Insert a new one.
+                    if ($selectSpecialTimeResult === -1) {
+                        $insertSpecialTimeResult = $this->insertShopSpecialTime($presentDateID, $selectedTimes);
 
-                    if ($updateSpecialTimeResult->affectedRows > 0) {
-                        $response['success'] = true;
-                        $response['message'] = "Row mit id: " . $presentDateID . ", Datum: " . $date . " und Status: " . 4 . " wurde erfolgreich geupdated.";
+                        if ($insertSpecialTimeResult->affectedRows > 0) {
+                            $response['success'] = true;
+                            $response['message'] = "Transaktion erfolgreich. Alle Rows wurden fehlerfrei geupdated.";
+                            $db->commitTransaction();
+
+                        } else {
+                            throw new \Exception("Failed to insert special date time: " . $selectedTimes . " with parent date ID: " . $presentDateID);
+                        }
+                    // special date time is present: Update
                     } else {
-                        $response['message'] = "Fehler während des Versuchs Row mit id: " . $presentDateID . " und Zeitspanne: " . $specialTimes . " zu überschreiben!";
-                        throw new \Exception("Failed to update special date time: " . $selectedTimes . " with parent date ID: " . $presentDateID);
-                    }
+
+                        // update the special date time
+                        $updateSpecialTimeResult = $this->updateShopClosingSpecialTime($presentDateID, $selectedTimes);
+
+                        if ($updateSpecialTimeResult->affectedRows > 0) {
+                            $response['success'] = true;
+                            $response['message'] = "Row mit id: " . $presentDateID . ", Datum: " . $date . " und Status: " . 4 . " wurde erfolgreich geupdated.";
+                            $db->commitTransaction();
+                            
+                        } else {
+                            $response['message'] = "Fehler während des Versuchs Row mit id: " . $presentDateID . " und Zeitspanne: " . $specialTimes . " zu überschreiben!";
+                            throw new \Exception("Failed to update special date time: " . $selectedTimes . " with parent date ID: " . $presentDateID);
+                        }
+                    }   
 
                 } else {
                     $response['message'] = "Fehler während des Versuchs Row mit id: " . $presentDateID . " zu überschreiben!";
