@@ -56,6 +56,13 @@ class PreorderStatusInteractor {
         return $splittedSpecialDays;
     }
 
+    private function selectClosingShopDayID($date) {
+        $selectStmt = "SELECT id FROM tl_shop_closed_date WHERE date = '" . $date . "'";
+        $selectRslt = Database::getInstance()->execute($selectStmt)->fetchAssoc();
+
+        return $selectRslt ? $selectRslt['id'] : -1;
+    }
+
 
     public function insertNormalClosedShopDay($date, $status) {
        $closingDateExists = $this->selectShopClosingDayByDate($date);
@@ -204,20 +211,45 @@ class PreorderStatusInteractor {
         $statusConvert = [
             'fullyClosed'       => '1',
             'closedAtMorning'   => '2',
-            'closedAtEvening'   => '3'
+            'closedAtEvening'   => '3',
+            'closedIndividual'  => '4',
         ];
         $convertedStatus =  $statusConvert[$status];
 
-        $stmt = "DELETE FROM tl_shop_closed_date WHERE date='" . $date . "' AND fk_status_id='" . $convertedStatus . "'";
-        $result = Database::getInstance()->execute($stmt);
+        $db = Database::getInstance();
+        $db->beginTransaction();
 
-        // Check how many rows were affected
-        if ($result->affectedRows > 0) {
-            // Rows were deleted
-            return 1;
-        } else {
-            // No rows were deleted
-            return 0;
+        try {
+            // Check if status is individual and delete special time when true.
+            if ($convertedStatus === '4') {
+                $closingDateID = $this->selectClosingShopDayID($date);
+                // select the id
+                if ($closingDateID === -1) {
+                    throw new \Exception("Error while trying to select present ID of date: " . $date);
+                }
+                $deleteSpecialTimeStmt = "DELETE FROM tl_shop_closed_special_date_time WHERE fk_closed_date_id = " . $closingDateID;
+                $deleteSpecialTimeRslt = $db->execute($deleteSpecialTimeStmt);
+
+                if ($deleteSpecialTimeRslt->affectedRows === 0) {
+                    throw new \Exception("Error while trying to delete special date time with parent ID: " . $closingDateID);
+                }
+            }
+
+            $stmt = "DELETE FROM tl_shop_closed_date WHERE date='" . $date . "' AND fk_status_id='" . $convertedStatus . "'";
+            $result =$db->execute($stmt);
+
+            // Check how many rows were affected
+            if ($result->affectedRows > 0) {
+                // Rows were deleted
+                $db->commitTransaction();
+                return 1;
+            } else {
+                // No rows were deleted
+                throw new \Exception("Error while trying to delete closing date row");
+            }
+        } catch (\Exception $e) {
+            System::log($e->getMessage(),__METHOD__,"TL_ERROR");
+            $db->rollbackTransaction();
         }
     }
 
