@@ -146,7 +146,7 @@ class PreorderStatusInteractor {
                             $response['success'] = true;
                             $response['message'] = "Row mit id: " . $presentDateID . ", Datum: " . $date . " und Status: " . 4 . " wurde erfolgreich geupdated.";
                             $db->commitTransaction();
-                            
+
                         } else {
                             $response['message'] = "Fehler während des Versuchs Row mit id: " . $presentDateID . " und Zeitspanne: " . $specialTimes . " zu überschreiben!";
                             throw new \Exception("Failed to update special date time: " . $selectedTimes . " with parent date ID: " . $presentDateID);
@@ -309,10 +309,38 @@ class PreorderStatusInteractor {
             
             // shop is closed to individual times
             } else if ($status === '4') {
-                $specialDays['closedIndividual'][] = $date;
+                $formattedTime = $this->formatTimeString($time);
+                $specialDays['closedIndividual'][] = $date . ' (' . $formattedTime . ')';
             } 
         }
         return $specialDays;
+    }
+
+
+    private function formatTimeString($timeString) {
+        // Split the input string by ';' to separate entries
+        $timeEntries = explode(';', $timeString);
+    
+        // Map over the entries to transform each one
+        $formattedEntries = array_map(function($entry) {
+            // Extract the start and end times
+            preg_match('/start:([\d:]+),end:([\d:]+)/', $entry, $matches);
+    
+            if (count($matches) === 3) {
+                $startTime = $matches[1];
+                $endTime = $matches[2];
+    
+                // Concatenate start and end times with a "-"
+                return "$startTime-$endTime";
+            }
+            return ''; // Return an empty string for invalid entries
+        }, $timeEntries);
+    
+        // Remove any empty strings from the results
+        $formattedEntries = array_filter($formattedEntries);
+    
+        // Join all formatted entries with a comma
+        return implode(',', $formattedEntries);
     }
 }
 ?>
