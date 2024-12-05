@@ -256,7 +256,6 @@ document.addEventListener('DOMContentLoaded', async function() {
         const specialDaysClosedMorning = specialClosedDays['closedAtMorning'];
         const specialDaysClosedEvening = specialClosedDays['closedAtEvening'];
         const specialDaysClosedIndividual = specialClosedDays['closedIndividual'];
-        console.log(specialDaysClosedIndividual);
 
         let selectedDayRange = [];
 
@@ -282,7 +281,10 @@ document.addEventListener('DOMContentLoaded', async function() {
                         return null; // Invalid entries become null
                     }).filter(entry => entry !== null); // Remove null entries
 
-                    console.log(filteredSpecialTimeRange);
+                    for(const specialTime of filteredSpecialTimeRange) {
+                        selectedDayRange.push(specialTime);
+                    }
+
                 }
             }
 
