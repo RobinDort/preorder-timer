@@ -260,8 +260,34 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         let selectedDayRange = [];
 
+        // Check for special days and init selectedDayRange with given time object when present.
+        if (specialDaysClosedIndividual["dates"].includes(dateInput)) {
+            for (let i = 0; i < specialDaysClosedIndividual.length; i++) {
+                if (specialDaysClosedIndividual["dates"][i] === dateInput) {
+                    // Get the associate time for this date
+                    const specialTimeForDate = specialDaysClosedIndividual["times"][i];
+
+                    // Filter by ";" and create objects for each
+                    const filteredSpecialTimeRange = specialTimeForDate.map(entry => {
+                        // Match start and end times in the entry
+                        const matches = entry.match(/start:([\d:]+),end:([\d:]+)/);
+
+                        // If valid, return an object; otherwise, return null
+                        if (matches && matches.length === 3) {
+                            return {
+                                start: matches[1],
+                                end: matches[2]
+                            };
+                        }
+                        return null; // Invalid entries become null
+                    }).filter(entry => entry !== null); // Remove null entries
+
+                    console.log(filteredSpecialTimeRange);
+                }
+            }
+
         // Selected date is a day where the shop is closed at mornings for specific reasons.
-        if (specialDaysClosedMorning.includes(dateInput)) {
+        } else if (specialDaysClosedMorning.includes(dateInput)) {
             // check if day is weekend or holiday
             if (dayOfSelectedDate === 0 || dayOfSelectedDate === 6 || selectedDayIsHoliday) {
                 selectedDayRange.push(eveningWeekendHolidayRange);
