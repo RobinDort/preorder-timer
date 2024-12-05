@@ -6,7 +6,7 @@ $statusLabels = [
     'fullyClosed' => 'Ganztägig',
     'closedAtMorning' => 'Morgens geschlossen',
     'closedAtEvening' => 'Abends/Nachmittags geschlossen',
-    'closedIndividual' => "Individuell geschlossen"
+    'closedIndividual' => "Individuell geöffnet"
 ];
 ?>
 
