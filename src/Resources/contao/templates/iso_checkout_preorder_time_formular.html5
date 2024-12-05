@@ -268,7 +268,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                     const specialTimeForDate = specialDaysClosedIndividual["times"][i];
 
                     // Filter by ";" and create objects for each
-                    const filteredSpecialTimeRange = specialTimeForDate.map(entry => {
+                    const filteredSpecialTimeRange = specialTimeForDate.split(";").map(entry => {
                         // Match start and end times in the entry
                         const matches = entry.match(/start:([\d:]+),end:([\d:]+)/);
 
