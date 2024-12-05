@@ -262,7 +262,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         // Check for special days and init selectedDayRange with given time object when present.
         if (specialDaysClosedIndividual["dates"].includes(dateInput)) {
-            for (let i = 0; i < specialDaysClosedIndividual.length; i++) {
+            for (let i = 0; i < specialDaysClosedIndividual["dates"].length; i++) {
                 if (specialDaysClosedIndividual["dates"][i] === dateInput) {
                     // Get the associate time for this date
                     const specialTimeForDate = specialDaysClosedIndividual["times"][i];
@@ -282,7 +282,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                         return null; // Invalid entries become null
                     }).filter(entry => entry !== null); // Remove null entries
 
-                    console.log(filteredSpecialTimeRange);
+                    console.log("filtered array: " + filteredSpecialTimeRange);
                 }
             }
 
