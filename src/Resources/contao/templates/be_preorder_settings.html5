@@ -171,6 +171,8 @@ $statusLabels = [
             // Get the raw time string from the data attribute
             const rawTimeString = span.dataset.times;
 
+            console.log(rawTimeString);
+
             // Format the time string
             const formattedTimeString = formatTimeString(rawTimeString);
 
@@ -388,6 +390,8 @@ $statusLabels = [
         // Map over the entries to transform each one
         const formattedEntries = timeEntries.map(entry => {
             const matches = entry.match(/start:([\d:]+),end:([\d:]+)/);
+
+            console.log(matches);
 
             if (matches && matches.length === 3) {
                 const startTime = matches[1];
