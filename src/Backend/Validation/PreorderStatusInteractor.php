@@ -287,7 +287,10 @@ class PreorderStatusInteractor {
             'fullyClosed' => [],
             'closedAtMorning' => [],
             'closedAtEvening' => [],
-            'closedIndividual' => []
+            'closedIndividual' => [
+                'dates' => [],
+                'times' => [],
+            ]
         ];
 
         foreach ($entries as $entry) {
@@ -310,7 +313,8 @@ class PreorderStatusInteractor {
             // shop is closed to individual times
             } else if ($status === '4') {
                 $formattedTime = $this->formatTimeString($time);
-                $specialDays['closedIndividual'][] = $date . ' (' . $formattedTime . ')';
+                $specialDays['closedIndividual']['dates'][] = $date;
+                $specialDays['closedIndividual']['times'][] = $formattedTime;
             } 
         }
         return $specialDays;
