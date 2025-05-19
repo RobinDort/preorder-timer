@@ -27,37 +27,40 @@ class CityFilterShipping extends Flat {
         $postcode = $address->postal;
         $city     = $address->city;
 
+        // Parse restrictions
+        $restrictions = [];
         $validLines = array_filter(array_map('trim', preg_split('/[\n;]+/', (string) $this->postalCity)));
 
         foreach ($validLines as $line) {
             if (strpos($line, ':') !== false) {
-                [$allowedPostcode, $citiesString] = array_map('trim', explode(':', $line, 2));
+                [$pc, $citiesString] = array_map('trim', explode(':', $line, 2));
+                $restrictions[$pc] = array_map('trim', explode(',', $citiesString));
 
-                if ($allowedPostcode !== $postcode) {
-                    continue;
-                }
-
-                $allowedCities = array_map('trim', explode(',', $citiesString));
-
-                foreach ($allowedCities as $allowedCity) {
-                    if (strcasecmp($allowedCity, $city) === 0) {
-                        return true;
-                    }
-                }
-
-                // Postcode matches, but city doesn't
-                return false;
             } else {
-                // Only postcode provided, allow all cities
-                if ($line === $postcode) {
-                    return true;
-                }
+                // Allow all cities for this postcode
+                $restrictions[$line] = [];
             }
         }
 
-        return false;
-    }
+        // If postcode not mentioned → allow
+        if (!array_key_exists($postcode, $restrictions)) {
+            return true;
+        }
 
+        // If postcode is listed but no city restriction → allow all cities
+        if (empty($restrictions[$postcode])) {
+            return true;
+        }
+
+        // Postcode is listed and has city restrictions → match city
+        foreach ($restrictions[$postcode] as $allowedCity) {
+            if (strcasecmp($allowedCity, $city) === 0) {
+                return true;
+            }
+            // City didn't match
+            return false;
+        }
+    }
 }
 
 ?>
