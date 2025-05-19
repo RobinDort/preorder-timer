@@ -15,7 +15,7 @@ class CityFilterShipping extends Flat {
 
         $address = Isotope::getCart()->getShippingAddress();
 
-        if ($address->postal === null || $adress->city === null) {
+        if ($address->postal === null || $address->city === null) {
             throw new \Exception("No valid postal or city access");
         }
 
