@@ -7,6 +7,8 @@ use RobinDort\PreorderTimer\Widget\Frontend\PreorderFormular;
 use RobinDort\PreorderTimer\EventListener\Isotope\PreOrderStatusUpdateListener;
 use RobinDort\PreorderTimer\Notification\PreorderTimeTokenProvider;
 
+use Isotope\Model\Shipping;
+
 /**
  * Set all the public resources for javascript files and css files.
  */
@@ -68,7 +70,7 @@ $GLOBALS['ISO_HOOKS']['getOrderNotificationTokens'][] = [PreorderTimeTokenProvid
 //     'callback'  => PreorderTimerSettings::class,
 // ];
 
-$GLOBALS['ISO_SHIPPING']['flat'] = CityFilterShipping::class;
+Shipping::registerModelType('flat', CityFilterShipping::class);
 
 $GLOBALS['BE_MOD']['Vorbestellungen Konfiguration']['Shopzeiten'] = [
     'tables'    => [
