@@ -10,10 +10,15 @@ $GLOBALS['TL_DCA']['tl_iso_shipping']['palettes']['flat'] = str_replace(
 
 // Define new postalCity the field
 $GLOBALS['TL_DCA']['tl_iso_shipping']['fields']['postalCity'] = [
-    'label'     => &$GLOBALS['TL_LANG']['tl_iso_shipping']['postalCity'][0],
+    'label'     => &$GLOBALS['TL_LANG']['tl_iso_shipping']['postalCity'],
     'exclude'   => true,
     'inputType' => 'textarea',
-    'eval'      => ['tl_class' => 'clr', 'style' => 'height:100px', 'decodeEntities' => true],
+    'eval'      => [
+        'tl_class'     => 'clr',
+        'style'        => 'height:100px',
+        'decodeEntities' => true,
+        'helpwizard'   => true
+    ],
     'sql'       => ['type' => 'text', 'default' => '']
 ];
 
