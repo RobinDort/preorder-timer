@@ -13,11 +13,9 @@ class CityFilterShipping extends Flat {
             return false;
         }
 
-        $cart = Isotope::getCart();
-        \System::log("Cart log:" . var_dump($cart), __METHOD__, "TL_ERROR");
-        throw new \Exception("Logg:" . var_dump($cart));
-
-        $address = Isotope::getCart()->getShippingAddress();
+        $addressModel = Isotope::getCart()->getShippingAddressModel();
+        \System::log("Cart log:" . var_dump($addressModel), __METHOD__, "TL_ERROR");
+        throw new \Exception("Logg:" . var_dump($addressModel));
 
         if (!$address instanceof Address) {
             throw new \Exception("No valid shipping address");
