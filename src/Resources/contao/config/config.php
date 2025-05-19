@@ -1,6 +1,7 @@
 <?php
 use Isotope\Model\OrderStatus;
 use RobinDort\PreorderTimer\Backend\CheckoutStep\IsotopePreorderTime;
+use RobinDort\PreorderTimer\Backend\CheckoutStep\CityFilterShipping;
 use RobinDort\PreorderTimer\Backend\PreorderSettings\PreorderTimerSettings;
 use RobinDort\PreorderTimer\Widget\Frontend\PreorderFormular;
 use RobinDort\PreorderTimer\EventListener\Isotope\PreOrderStatusUpdateListener;
@@ -66,6 +67,8 @@ $GLOBALS['ISO_HOOKS']['getOrderNotificationTokens'][] = [PreorderTimeTokenProvid
 //     'tables'    => ['tl_preorder_settings'],
 //     'callback'  => PreorderTimerSettings::class,
 // ];
+
+$GLOBALS['ISO_SHIPPING']['flat'] = CityFilterShipping::class;
 
 $GLOBALS['BE_MOD']['Vorbestellungen Konfiguration']['Shopzeiten'] = [
     'tables'    => [
