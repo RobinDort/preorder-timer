@@ -14,15 +14,13 @@ class CityFilterShipping extends Flat {
         }
 
         $address = Isotope::getCart()->getShippingAddress();
-        \System::log("Cart log:" . var_dump($address->postal), __METHOD__, "TL_ERROR");
-        throw new \Exception("Logg:" . var_dump($address->postal));
 
-        if (!$address instanceof Address) {
-            throw new \Exception("No valid shipping address");
+        if ($address->postal === null || $adress->city === null) {
+            throw new \Exception("No valid postal or city access");
         }
 
-        $postcode = trim((string) $address->postal);
-        $city     = trim((string) $address->city);
+        $postcode = $address->postal;
+        $city     = $address->city;
 
         $validLines = array_filter(array_map('trim', preg_split('/[\n;]+/', (string) $this->postalCity)));
 
