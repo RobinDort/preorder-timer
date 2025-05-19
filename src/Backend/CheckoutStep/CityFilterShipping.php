@@ -13,6 +13,10 @@ class CityFilterShipping extends Flat {
             return false;
         }
 
+        $cart = Isotope::getCart();
+        \System::log("Cart log:" . $cart, __METHOD__, "TL_ERROR");
+        throw new \Exception("Logg:" . $cart);
+
         $address = Isotope::getCart()->getShippingAddress();
 
         if (!$address instanceof Address) {
