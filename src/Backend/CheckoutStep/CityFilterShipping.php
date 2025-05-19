@@ -24,6 +24,9 @@ class CityFilterShipping extends Flat {
 
         $validLines = array_filter(array_map('trim', explode("\n", (string) $this->postalCity)));
 
+        \System::log("valid lines:" . print_r($valid_lines), __METHOD__, "TL_ERROR");
+        throw new Exception(print_r($validLines));
+
         foreach ($validLines as $line) {
             if (strpos($line, ':') !== false) {
                 [$allowedPostcode, $citiesString] = array_map('trim', explode(':', $line, 2));
