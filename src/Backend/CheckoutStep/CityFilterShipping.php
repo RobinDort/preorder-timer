@@ -13,6 +13,11 @@ class CityFilterShipping extends Flat {
             return false;
         }
 
+        // No city restrictions defined — allow availability
+        if (empty($this->postalCity)) {
+            return true;
+        }
+
         $address = Isotope::getCart()->getShippingAddress();
 
         if ($address->postal === null || $address->city === null) {
