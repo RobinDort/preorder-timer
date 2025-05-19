@@ -15,6 +15,9 @@ class CityFilterShipping extends Flat {
 
         $address = Isotope::getCart()->getShippingAddress();
 
+        \System::log("system log: " . $adress, __METHOD__,"TL_ERROR");
+        throw new \Exception("Logg: " .$address);
+
         if (!$address instanceof Address || empty($address->postal) || empty($address->city)) {
             return false;
         }
