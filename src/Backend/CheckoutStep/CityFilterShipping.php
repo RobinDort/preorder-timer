@@ -14,8 +14,8 @@ class CityFilterShipping extends Flat {
         }
 
         $cart = Isotope::getCart();
-        \System::log("Cart log:" . $cart, __METHOD__, "TL_ERROR");
-        throw new \Exception("Logg:" . $cart);
+        \System::log("Cart log:" . var_dump($cart), __METHOD__, "TL_ERROR");
+        throw new \Exception("Logg:" . var_dump($cart));
 
         $address = Isotope::getCart()->getShippingAddress();
 
