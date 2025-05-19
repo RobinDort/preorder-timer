@@ -13,19 +13,19 @@ class CityFilterShipping extends Flat {
             return false;
         }
 
-        // No city restrictions defined — allow availability
+        // No city/postal restrictions defined — allow availability
         if (empty($this->postalCity)) {
             return true;
         }
 
-        $address = Isotope::getCart()->getShippingAddress();
+        $address = \Isotope\Isotope::getCart()->getShippingAddress();
 
         if ($address->postal === null || $address->city === null) {
             throw new \Exception("No valid postal or city access");
         }
 
-        $postcode = $address->postal;
-        $city     = $address->city;
+        $postcode = trim((string) $address->postal);
+        $city     = trim((string) $address->city);
 
         // Parse restrictions
         $restrictions = [];
@@ -35,31 +35,31 @@ class CityFilterShipping extends Flat {
             if (strpos($line, ':') !== false) {
                 [$pc, $citiesString] = array_map('trim', explode(':', $line, 2));
                 $restrictions[$pc] = array_map('trim', explode(',', $citiesString));
-
             } else {
-                // Allow all cities for this postcode
+                // Only postcode listed — allow all cities for this postcode
                 $restrictions[$line] = [];
             }
         }
 
-        // If postcode not mentioned → allow
+        // If postcode not listed → allow
         if (!array_key_exists($postcode, $restrictions)) {
             return true;
         }
 
-        // If postcode is listed but no city restriction → allow all cities
+        // If postcode listed but no cities specified → allow
         if (empty($restrictions[$postcode])) {
             return true;
         }
 
-        // Postcode is listed and has city restrictions → match city
+        // Postcode is listed and has city restrictions → match one
         foreach ($restrictions[$postcode] as $allowedCity) {
             if (strcasecmp($allowedCity, $city) === 0) {
                 return true;
             }
-            // City didn't match
-            return false;
         }
+
+        // No city matched
+        return false;
     }
 }
 
