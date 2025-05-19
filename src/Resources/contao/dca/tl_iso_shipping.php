@@ -1,7 +1,7 @@
 <?php
 
 // Add new field to the default palette, after 'postalCodes'
-$GLOBALS['TL_DCA']['tl_iso_shipping']['palettes']['flat_city'] = str_replace(
+$GLOBALS['TL_DCA']['tl_iso_shipping']['palettes']['flat'] = str_replace(
     'postalCodes,',
     'postalCodes,postalCity,',
     $GLOBALS['TL_DCA']['tl_iso_shipping']['palettes']['flat']

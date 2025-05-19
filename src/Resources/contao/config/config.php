@@ -70,7 +70,7 @@ $GLOBALS['ISO_HOOKS']['getOrderNotificationTokens'][] = [PreorderTimeTokenProvid
 //     'callback'  => PreorderTimerSettings::class,
 // ];
 
-Shipping::registerModelType('flat_city', CityFilterShipping::class);
+Shipping::registerModelType('flat', CityFilterShipping::class);
 
 $GLOBALS['BE_MOD']['Vorbestellungen Konfiguration']['Shopzeiten'] = [
     'tables'    => [
