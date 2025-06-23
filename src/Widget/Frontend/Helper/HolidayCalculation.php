@@ -37,7 +37,6 @@ class HolidayCalculation {
     public function getHolidays() {
         return $this->holidays;
     }
-
 }
 
 ?>
