@@ -51,7 +51,8 @@ $firstPart = array_slice($GLOBALS['ISO_CHECKOUTSTEP'], 0, $insertPosition, true)
 $secondPart = array_slice($GLOBALS['ISO_CHECKOUTSTEP'], $insertPosition, null, true);
 $preorderTime = ['preorder_time' => [IsotopePreorderTime::class]];
 
-$newCheckoutSteps = array_merge($firstPart, $preorderTime, $secondPart);
+//$newCheckoutSteps = array_merge($firstPart, $preorderTime, $secondPart);
+$newCheckoutSteps = array_merge($preorderTime, $GLOBALS['ISO_CHECKOUTSTEP']);
 $GLOBALS['ISO_CHECKOUTSTEP'] = $newCheckoutSteps;
 
 // Update the order status and call the hook to preorder when a preorder_time has been set
