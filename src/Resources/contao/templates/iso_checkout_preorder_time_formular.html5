@@ -79,6 +79,8 @@ document.addEventListener('DOMContentLoaded', async function() {
         
         onClose: async function(selectedDates, dateStr, instance) {
             const {range, weekday} = await setAllowedRange(dateStr);
+            console.log(range);
+            console.log(weekday);
             dayOfWeek = weekday;
             allowedRange = range;
         },
