@@ -47,6 +47,9 @@ if ($existingStatus === null) {
 $checkoutStepCount = count($GLOBALS['ISO_CHECKOUTSTEP']);
 $insertPosition = $checkoutStepCount - 4;
 
+\System::log("Checkout steps count: $checkoutStepCount, insert position: $insertPosition", __METHOD__, "TL_ERROR");
+\System::log("ISO_CHECKOUTSTEP:" . print_r($GLOBALS['ISO_CHECKOUTSTEP']), __METHOD__, "TL_ERROR");
+
 $firstPart = array_slice($GLOBALS['ISO_CHECKOUTSTEP'], 0, $insertPosition, true);
 $secondPart = array_slice($GLOBALS['ISO_CHECKOUTSTEP'], $insertPosition, null, true);
 $preorderTime = ['preorder_time' => [IsotopePreorderTime::class]];
@@ -54,6 +57,9 @@ $preorderTime = ['preorder_time' => [IsotopePreorderTime::class]];
 //$newCheckoutSteps = array_merge($firstPart, $preorderTime, $secondPart);
 $newCheckoutSteps = $firstPart + $preorderTime + $secondPart;
 $GLOBALS['ISO_CHECKOUTSTEP'] = $newCheckoutSteps;
+
+\System::log("ISO_CHECKOUTSTEP:" . print_r($GLOBALS['ISO_CHECKOUTSTEP']), __METHOD__, "TL_ERROR");
+
 
 // Update the order status and call the hook to preorder when a preorder_time has been set
 $GLOBALS['ISO_HOOKS']['preOrderStatusUpdate'][] = [PreOrderStatusUpdateListener::class, '__invoke'];
