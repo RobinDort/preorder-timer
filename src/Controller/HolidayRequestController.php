@@ -11,10 +11,11 @@ class HolidayRequestController
 {
     public function __invoke(Request $request): JsonResponse
     {
+        \System::log("request:" . print_r($request), "debug", "TL_ERROR");
+        throw new \Exception("request:" . print_r($request));
+
         //$extractedDate = trim($request->request->get('date'), '"');
         $extractedDate = $request->request->get('date');
-        \System::log("extractedDate" . $extractedDate, "debug", "TL_ERROR");
-        throw new \Exception("extracted Date". $extractedDate);
         $holidayHelper = new HolidayCalculation();
         $response = ["isHoliday"=>false];
 
