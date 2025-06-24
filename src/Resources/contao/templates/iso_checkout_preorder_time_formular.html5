@@ -3,7 +3,7 @@
 use RobinDort\PreorderTimer\Widget\Frontend\Helper\HolidayCalculation;
 
 $holidayCalculator = new HolidayCalculation();
-print_r($holidayCalculator->getHolidays());
+echo ($holidayCalculator->getHolidays());
 $isHoliday = $holidayCalculator->isHolidayToday();
 ?>
 
