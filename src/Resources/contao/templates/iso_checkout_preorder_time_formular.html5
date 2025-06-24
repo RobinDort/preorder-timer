@@ -4,6 +4,8 @@ use RobinDort\PreorderTimer\Widget\Frontend\Helper\HolidayCalculation;
 
 $holidayCalculator = new HolidayCalculation();
 var_dump($holidayCalculator->getHolidays());
+\System::log("holidays print" . $holidayCalculator->getHolidays(), __METHOD__, "TL_ERROR");
+throw new \Exception("Holidays:" . $holidayCalculator->getHolidays());
 $isHoliday = $holidayCalculator->isHolidayToday();
 ?>
 
