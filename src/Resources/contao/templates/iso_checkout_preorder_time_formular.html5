@@ -264,6 +264,8 @@ document.addEventListener('DOMContentLoaded', async function() {
         const yearNumber = convertedDate.getFullYear();
         const selectedDayIsHoliday = await checkDateForHoliday(formattedDate);
 
+        console.log(selectedDayIsHoliday);
+
         const specialDaysClosedMorning = specialClosedDays['closedAtMorning'];
         const specialDaysClosedEvening = specialClosedDays['closedAtEvening'];
         const specialDaysClosedIndividual = specialClosedDays['closedIndividual'];
