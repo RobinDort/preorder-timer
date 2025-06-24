@@ -14,12 +14,12 @@ class HolidayRequestController
         //$extractedDate = trim($request->request->get('date'), '"');
         $extractedDate = $request->request->get('date');
 
-         \System::log("request:" . $extractedDate, __METHOD__, "TL_ERROR");
-        throw new \Exception("request:" . $extractedDate );
-
+        
         $holidayHelper = new HolidayCalculation();
         $response = ["isHoliday"=>false];
-
+        
+        \System::log("request:" . $holidayHelper->isHolidayForDate($extractedDate), __METHOD__, "TL_ERROR");
+       throw new \Exception("request:" . $holidayHelper->isHolidayForDate($extractedDate) );
         if ($holidayHelper->isHolidayForDate($extractedDate)) {
             $response["isHoliday"] = true;
         }
