@@ -11,8 +11,8 @@ class HolidayRequestController
 {
     public function __invoke(Request $request): JsonResponse
     {
-        \System::log("request:" . print_r($request->request), __METHOD__, "TL_ERROR");
-        throw new \Exception("request:" . print_r($request->request));
+        \System::log("request:" . print_r($request->request->all(), true), __METHOD__, "TL_ERROR");
+        throw new \Exception("request:" . print_r($request->request->all(), true));
 
         //$extractedDate = trim($request->request->get('date'), '"');
         $extractedDate = $request->request->get('date');
