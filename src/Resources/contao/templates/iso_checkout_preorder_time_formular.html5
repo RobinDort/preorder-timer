@@ -166,6 +166,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 $.ajax({
                     type: "POST",
                     url: "/holidayRequest",
+                    data: requestData,
                     dataType: "json",
                     encode: true,
                     success: function(response) {
