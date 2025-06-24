@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 return;
             }
             const requestData = {
-                date: stringifiedDate
+                date: selectedDate
             };
             return new Promise(function(resolve,reject) {
                 $.ajax({
@@ -242,7 +242,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
 
     async function checkDateForHoliday(date) {
-        console.log(date);
         try {
             const resp = await sendHolidayRequest(date);
             if (!resp.isHoliday) {

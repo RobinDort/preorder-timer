@@ -12,6 +12,8 @@ class HolidayRequestController
     public function __invoke(Request $request): JsonResponse
     {
         $extractedDate = trim($request->request->get('date'), '"');
+        \System::log("extractedDate" . $extractedDate, "debug", "TL_ERROR");
+        throw new \Exception("extracted Date". $extractedDate);
         $holidayHelper = new HolidayCalculation();
         $response = ["isHoliday"=>false];
 
