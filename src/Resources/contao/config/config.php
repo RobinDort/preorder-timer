@@ -44,21 +44,26 @@ if ($existingStatus === null) {
 }
 
 // Add customer notes before the last step (review).
-$checkoutStepCount = count($GLOBALS['ISO_CHECKOUTSTEP']);
-$insertPosition = $checkoutStepCount - 4;
 
-\System::log("Checkout steps count: $checkoutStepCount, insert position: $insertPosition", "debug", "TL_ERROR");
-\System::log("ISO_CHECKOUTSTEP:" . print_r($GLOBALS['ISO_CHECKOUTSTEP']), "debug", "TL_ERROR");
+$steps = $GLOBALS['ISO_CHECKOUTSTEP'];
+$GLOBALS['ISO_CHECKOUTSTEP'] = [
+    'preorder_time' => [IsotopePreorderTime::class],
+    'address' => $steps['address'],
+    'shipping' => $steps['shipping'],
+    'payment' => $steps['payment'],
+    'customer_notes' => $steps['customer_notes'],
+    'review' => $steps['review'],
+];
 
-$firstPart = array_slice($GLOBALS['ISO_CHECKOUTSTEP'], 0, $insertPosition, true);
-$secondPart = array_slice($GLOBALS['ISO_CHECKOUTSTEP'], $insertPosition, null, true);
-$preorderTime = ['preorder_time' => [IsotopePreorderTime::class]];
+// $checkoutStepCount = count($GLOBALS['ISO_CHECKOUTSTEP']);
+// $insertPosition = $checkoutStepCount - 2;
 
-//$newCheckoutSteps = array_merge($firstPart, $preorderTime, $secondPart);
-$newCheckoutSteps = $firstPart + $preorderTime + $secondPart;
-$GLOBALS['ISO_CHECKOUTSTEP'] = $newCheckoutSteps;
+// $firstPart = array_slice($GLOBALS['ISO_CHECKOUTSTEP'], 0, $insertPosition, true);
+// $secondPart = array_slice($GLOBALS['ISO_CHECKOUTSTEP'], $insertPosition, null, true);
+// $preorderTime = ['preorder_time' => [IsotopePreorderTime::class]];
 
-\System::log("ISO_CHECKOUTSTEP:" . print_r($GLOBALS['ISO_CHECKOUTSTEP']), "debug", "TL_ERROR");
+// $newCheckoutSteps = array_merge($firstPart, $preorderTime, $secondPart);
+// $GLOBALS['ISO_CHECKOUTSTEP'] = $newCheckoutSteps;
 
 
 // Update the order status and call the hook to preorder when a preorder_time has been set
