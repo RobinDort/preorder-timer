@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', async function() {
        
         // Opened only at morning range
         if (JSON.stringify(allowedRange) === JSON.stringify([morningRange])) {
-            alert('Lieber Kunde, unser Shop öffnet heute nicht zu unseren gewöhnlichen Öffnungszeiten. Bitte wählen Sie einen Zeitraum zwischen ' + morningRange.start + '-' + morningRange.end + ' Uhr.');
+            alert('Lieber Kunde, unser Shop öffnet am ausgewähltem Tag nicht zu unseren gewöhnlichen Öffnungszeiten. Bitte wählen Sie einen Zeitraum zwischen ' + morningRange.start + '-' + morningRange.end + ' Uhr.');
 
         // Opened only at evening weekend holiday range
         } else if (dayOfWeek === 0 || dayOfWeek === 6 || JSON.stringify(allowedRange) === JSON.stringify([eveningWeekendHolidayRange])) {
@@ -229,7 +229,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         // Opened only at evening range
         } else if(JSON.stringify(allowedRange) === JSON.stringify([eveningRange])) {
-            alert('Lieber Kunde, unser Shop öffnet heute nicht zu unseren gewöhnlichen Öffnungszeiten. Bitte wählen Sie einen Zeitraum zwischen ' + eveningRange.start + '-' + eveningRange.end + ' Uhr.')
+            alert('Lieber Kunde, unser Shop öffnet am ausgewähltem Tag nicht zu unseren gewöhnlichen Öffnungszeiten. Bitte wählen Sie einen Zeitraum zwischen ' + eveningRange.start + '-' + eveningRange.end + ' Uhr.')
 
         // Opened to usual times
         } else if (JSON.stringify(allowedRange).includes(JSON.stringify(morningRange)) && JSON.stringify(allowedRange).includes(JSON.stringify(eveningRange))) {
@@ -238,7 +238,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         // Opened to special times
         } else {
             const timeRange = allowedRange.map(range => range.start + '-' + range.end).join(', ');
-            alert('Lieber Kunde, unser Shop öffnet heute nicht zu unseren gewöhnlichen Öffnungszeiten. Bitte wählen Sie eine Uhrzeit innerhalb des folgenden Zeitraums: ' + timeRange + ' Uhr.');
+            alert('Lieber Kunde, unser Shop öffnet am ausgewähltem Tag nicht zu unseren gewöhnlichen Öffnungszeiten. Bitte wählen Sie eine Uhrzeit innerhalb des folgenden Zeitraums: ' + timeRange + ' Uhr.');
         }
     }
 
