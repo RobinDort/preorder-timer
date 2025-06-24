@@ -242,6 +242,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
 
     async function checkDateForHoliday(date) {
+        console.log(date);
         try {
             const resp = await sendHolidayRequest(date);
             if (!resp.isHoliday) {
