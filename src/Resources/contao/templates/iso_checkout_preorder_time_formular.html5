@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     const date = new Date();
     const specialClosedDays = <?php echo json_encode($this->specialClosedDays); ?>;
 
+    console.log(specialClosedDays);
     const morningRange = { start: "12:30", end: "14:15" };
 
     const eveningWeekendHolidayRange = { start: "17:30", end: "21:45" };
