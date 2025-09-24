@@ -80,8 +80,6 @@ document.addEventListener('DOMContentLoaded', async function() {
         maxDate: new Date().fp_incr(14),
         onClose: async function(selectedDates, dateStr, instance) {
             const {range, weekday} = await setAllowedRange(dateStr);
-            console.log(range);
-            console.log(weekday);
             dayOfWeek = weekday;
             allowedRange = range;
         },
@@ -265,8 +263,6 @@ document.addEventListener('DOMContentLoaded', async function() {
         const monthNumber = String(convertedDate.getMonth() + 1).padStart(2, '0');
         const yearNumber = convertedDate.getFullYear();
         const selectedDayIsHoliday = await checkDateForHoliday(formattedDate);
-
-        console.log(selectedDayIsHoliday);
 
         const specialDaysClosedMorning = specialClosedDays['closedAtMorning'];
         const specialDaysClosedEvening = specialClosedDays['closedAtEvening'];
