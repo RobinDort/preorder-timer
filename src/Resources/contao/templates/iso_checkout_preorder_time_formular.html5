@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
                     // ATTENTION: Due to some mismatch between the two date strings while comparing, the day of this needs to be substracted by 1
                     // For example: If 2024-11-13 should be disabled the function needs to return 2024-11-12.
-                    return `${year}-${month}-${castedDay-1}`;
+                    return `${year}-${month}-${castedDay}`;
                 });
                 console.log(convertedSpecialDays);
                 const dateString = date.toISOString().split('T')[0]; // Convert to 'Y-m-d' format
