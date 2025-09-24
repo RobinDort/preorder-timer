@@ -103,6 +103,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                     // For example: If 2024-11-13 should be disabled the function needs to return 2024-11-12.
                     return `${year}-${month}-${castedDay-1}`;
                 });
+                console.log(convertedSpecialDays);
                 const dateString = date.toISOString().split('T')[0]; // Convert to 'Y-m-d' format
         
                 return convertedSpecialDays.includes(dateString);
