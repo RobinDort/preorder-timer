@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                     return `${year}-${monthStr}-${dayStr}`;
                 });
                 console.log(convertedSpecialDays);
-                const dateString = date.toISOString().split('T')[0]; // Convert to 'Y-m-d' format
+                const dateString = formatDateLocal(date); // Convert to 'Y-m-d' format
                 console.log(dateString);
         
                 return convertedSpecialDays.includes(dateString);
@@ -158,6 +158,13 @@ document.addEventListener('DOMContentLoaded', async function() {
             }
         },
     });
+
+    function formatDateLocal(d) {
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, "0");
+        const day = String(d.getDate()).padStart(2, "0");
+        return `${year}-${month}-${day}`;
+    }
 
     function sendHolidayRequest(selectedDate) {
         try {
