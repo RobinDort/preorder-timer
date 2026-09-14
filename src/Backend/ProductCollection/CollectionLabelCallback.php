@@ -2,7 +2,6 @@
 namespace RobinDort\PreorderTimer\Backend\ProductCollection;
 
 use Isotope\Backend\ProductCollection\Callback;
-use Isotope\Model\ProductCollection\Order;
 
 class CollectionLabelCallback extends Callback {
 
@@ -11,13 +10,19 @@ class CollectionLabelCallback extends Callback {
      */
     public function getOrderLabel($row, $label, \DataContainer $dc, $args):array {
         $args = parent::getOrderLabel($row, $label, $dc, $args);
-        array_pop($args);
+        $fields = $GLOBALS['TL_DCA'][$dc->table]['list']['label']['fields'];
+        $preorderColumn = array_search('preorder_time', $fields, true);
 
-        $objOrder = Order::findByPk($row['id']);
+        if ($preorderColumn === false) {
+            return $args;
+        }
+
+        // Use the database row supplied to the list callback, not a cached model.
+        $preorderTime = $row['preorder_time'] ?? null;
         $labelMarkup = '<span style="display: block; text-align: center;"><img src="system/themes/flexible/icons/ICONNAME.svg" width="16" height="16"></span>';
-        if (!empty($objOrder->preorder_time)) {
+        if (!empty($preorderTime)) {
             // Create a DateTime object from the Unix timestamp
-            $date = new \DateTime('@' . $objOrder->preorder_time);
+            $date = new \DateTime('@' . $preorderTime);
 
             // Set the timezone to Germany (Berlin)
             $date->setTimezone(new \DateTimeZone('Europe/Berlin'));
@@ -25,11 +30,10 @@ class CollectionLabelCallback extends Callback {
             // Format the date to 'd.m.Y H:i'
             $formattedDate = $date->format('d.m.Y H:i');
 
-            //$args[] = str_replace('ICONNAME', 'ok', $labelMarkup);
-            $args[] = $formattedDate;
+            $args[$preorderColumn] = $formattedDate;
         }
         else {
-            $args[] = str_replace('ICONNAME', 'delete', $labelMarkup);
+            $args[$preorderColumn] = str_replace('ICONNAME', 'delete', $labelMarkup);
         }
 
         return $args;
